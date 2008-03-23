@@ -36,8 +36,8 @@ CGraphApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CGraphApp initialization
 
-BOOL CGraphApp::InitInstance()
-{
+BOOL CGraphApp::InitInstance() {
+  
   // Standard initialization
   
 #ifdef _AFXDLL
