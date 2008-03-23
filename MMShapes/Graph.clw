@@ -16,8 +16,8 @@ ResourceCount=4
 Class3=CChildWnd
 Resource1=IDR_COLORBAR
 Class4=CAboutDlg
-Resource2=IDD_ABOUTBOX
-Resource3=IDR_PANEBAR
+Resource2=IDR_PANEBAR
+Resource3=IDD_ABOUTBOX
 Class5=CColorMenu
 Resource4=IDR_MAINFRAME (English (U.S.))
 
