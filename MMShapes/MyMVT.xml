@@ -1,0 +1,24 @@
+<mvtable name='MyMVTBase'>
+
+	<method name='linkPPP' dsc='Make Triangle'>
+		<arg type='Point'/>
+		<arg type='Point'/>
+		<arg type='Point'/>
+	</method>
+
+	<method name='linkPP' dsc='Make Line'>
+		<arg type='Point'/>
+		<arg type='Point'/>
+	</method>
+
+	<method name='linkPS' dsc='Make Triangle'>
+		<arg type='Point'/>
+		<arg type='Segment'/>
+	</method>
+
+	<method name='linkSS' dsc='Make Box'>
+		<arg type='Segment'/>
+		<arg type='Segment'/>
+	</method>
+
+</mvtable>
