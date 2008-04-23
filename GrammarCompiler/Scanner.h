@@ -13,6 +13,7 @@ namespace scan {
         public:
             ScannerException( const char* msg ) : message( msg ) {}
             ScannerException( const std::string& msg ) : message( msg ) {}
+            ScannerException& operator=( const ScannerException & ) {}
 
             virtual const char* what() const throw() { return message.c_str(); }
             virtual ~ScannerException() throw() {}
@@ -67,8 +68,8 @@ namespace scan {
 		string *s = new string;
 		*s=commas;
 		try	{
-			while ( (c=f.get()) && c!=commas ) {
-				if ( c=='/' && f.peek()==commas ) c=f.get();
+			while ( (c=(char)f.get())!=0 && c!=commas ) {
+				if ( c=='/' && f.peek()==commas ) c=(char)f.get();
 				if ( c=='\n' ) throw ScannerException("new line in constant");
 				(*s)+=c;
 			}
@@ -82,7 +83,7 @@ namespace scan {
 	{
 		string *s = new string;
 		try	{
-			while ( (c=f.get()) && (IsLetter(c) || IsDigit(c)) ) {
+			while ( (c=(char)f.get())!=0 && (IsLetter(c) || IsDigit(c)) ) {
 				(*s)+=c;
 			}
 			f.putback(c);
@@ -104,7 +105,7 @@ namespace scan {
 		if ( !f.is_open() ) throw ScannerException( "source file was not opened" );
 		string *s = new string;
 		try	{
-			do c=f.get(); while ( IsDelimeter(c) );
+			do c=(char)f.get(); while ( IsDelimeter(c) );
 			SkipComments();
 			if ( f.eof() ) return 0;
 			if ( IsLetter(c) || IsDigit(c) ) { *s = c; *s += *ReadWord(); }
