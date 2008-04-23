@@ -21,6 +21,7 @@ namespace names_table
             virtual ~AliasesTableException() throw() {}
 
         private:
+            AliasesTableException& operator=( const AliasesTableException& ) {}
 			AliasesTableException();
             const std::string message;
     };
@@ -43,7 +44,7 @@ namespace names_table
 	public:
 		AliasesTable() {};
 		void	AddAlias( const Alias& );
-		Alias	GetAlias( const unsigned int i ) const	{ return Alias(aliases[i]); }
+		Alias	GetAlias( const size_t i ) const	{ return Alias(aliases[i]); }
 		size_t	ItemsCount() const						{ return aliases.size(); }
 		int		FindAliasByName( const char* ) const;
 		int		FindAliasByChar( const char ) const;
@@ -59,7 +60,7 @@ namespace names_table
 		aliases.push_back( alias );
     }
 
-	int AliasesTable::FindAliasByChar( const char c ) const
+	int AliasesTable::FindAliasByChar( const char ) const
 	{
 		for ( unsigned int i=0; i<aliases.size(); ++i )
 			for ( unsigned int j=0; j<aliases.size(); ++j )

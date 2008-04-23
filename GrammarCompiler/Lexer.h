@@ -17,6 +17,7 @@ namespace lex {
             virtual ~LexerException() throw() {}
 
         private:
+            LexerException& operator=( const LexerException& ) {}
 			LexerException();
             const std::string message;
     };

@@ -21,6 +21,7 @@ namespace parser {
             virtual ~ParserException() throw() {}
 
         private:
+            ParserException& operator=( const ParserException & ) {}
 			ParserException();
             const std::string message;
     };
@@ -209,7 +210,7 @@ namespace parser {
 				*terminals += t->at(t->size()-1).terminals.c_str();
 				for ( unsigned int i=0; i<terminals->size(); ++i )
 				{
-					unsigned int j=terminals->find(terminals->at(i));
+					size_t j=terminals->find(terminals->at(i));
 					if ( j != terminals->rfind(terminals->at(i)) )
 						throw ParserException( string("duplicate terminal '")+terminals->at(j)+"'"+"found in transfers" );
 				}

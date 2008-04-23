@@ -35,19 +35,19 @@ int main(int argc, char **argv)
 	Transfers *t = p.GetTransfersTable();
 	Terminals *ts = p.GetTerminalsString();
 	cout<<"\nTerminals used:\n";
-	for ( int i=0; i<ts->size(); ++i) cout<<ts->at(i);
+	for ( size_t i=0; i<ts->size(); ++i) cout<<ts->at(i);
 	cout<<"\n\nStates:\n";
-	for ( int i=0; i<s->size(); ++i) cout<<s->at(i)<<' ';
+	for ( size_t i=0; i<s->size(); ++i) cout<<s->at(i)<<' ';
 	cout<<"\n\nTransfers:\n"; 
-	for ( int i=0; i<t->size(); ++i) 
+	for ( size_t i=0; i<t->size(); ++i) 
 	{
 		cout<<t->at(i).terminals.c_str()<<' ';
-		for ( int j=0; j<t->at(i).states.size(); ++j ) 
+		for ( size_t j=0; j<t->at(i).states.size(); ++j ) 
 			cout<<t->at(i).states[j]<<' ';
 		cout<<endl;
 	}
 	cout<<"\nAliases:\n"; 
-	for ( int i=0; i<p.atable->ItemsCount(); ++i) 
+	for ( size_t i=0; i<p.atable->ItemsCount(); ++i) 
 		cout<<p.atable->GetAlias(i).Name<<' '<<p.atable->GetAlias(i).IsTerminal<<' '<<p.atable->GetAlias(i).Value<<endl;
 	cout<<"==========================================================\n";
 
