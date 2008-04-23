@@ -1,0 +1,13 @@
+// identifier fsm
+
+<aliases
+	<letter  'a'-'z','A'-'Z' >
+	<digit	 '0'-'9' >
+	<word    non_terminal_alias>
+>
+
+<states		  empty,  number,  id, unknown>
+<transfers
+	<letter;  id,     unknown, id, unknown>
+	<digit;    number, number,  id, unknown>
+>
