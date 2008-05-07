@@ -1,4 +1,4 @@
-#include <iostream.h>
+﻿#include <iostream.h>
 #include <conio.h>
 #include <iomanip.h>
 
@@ -163,10 +163,10 @@ Matrix Matrix::operator [] (int n) {
 
 int main() {
   // clrscr();
-  // ����஢���� �ணࠬ��
+  // ’ҐбвЁа®ў ­ЁҐ Їа®Ја ¬¬л
   Matrix t(2, 2); 
   //  t[0][0] = 1;
-  // ����஢���� � ���ࠪ⨢��� ०���
+  // ’ҐбвЁа®ў ­ЁҐ ў Ё­вҐа ЄвЁў­®¬ аҐ¦Ё¬Ґ
   Matrix m1(2, 2), m2(2, 2), m3;
   cout<<"Input first Matrix";
   cin >>m1;
