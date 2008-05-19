@@ -1,0 +1,315 @@
+//--------------------------------------------------------------------------------
+//English language file 1.6 by Saprikin Alexander                    
+//You should translate all after symbol "="                               
+//DO NOT TRASLATE AFTER "//" AND BETWEEN "[  ]"  
+//Send new language file at xelfium@mail.ru                             
+//--------------------------------------------------------------------------------
+
+[LangName]
+MAIN_LANGUAGE_NATIVE=English  //name of your language in your native language
+MAIN_LANGUAGE_ENGLISH=English  //name of your language in English
+
+[Language]  //DO NOT TRANSLATE THIS LINE 
+//main menu// 
+MAIN_MENU_FILE=&File 
+MAIN_MENU_EDIT=&Edit
+MAIN_MENU_VIEW=&View
+MAIN_MENU_FORMAT=&Format
+MAIN_MENU_LANGUAGE=&Language
+MAIN_MENU_TOOLS=&Tools
+MAIN_MENU_HELP=&Help
+
+MAIN_MENU_NEW=&New
+MAIN_MENU_OPEN=&Open...
+MAIN_MENU_SAVE_AS=&Save as...
+MAIN_MENU_PRINT=&Print
+MAIN_MENU_EXIT=&Exit
+MAIN_MENU_UNDO=&Undo
+MAIN_MENU_REDO=Re&do
+MAIN_MENU_CUT=&Cut
+MAIN_MENU_COPY=Cop&y
+MAIN_MENU_PASTE=Past&e
+MAIN_MENU_PASTE_TEXT=&Paste (text only)
+MAIN_MENU_SELECT_ALL=&Select All
+MAIN_MENU_FIND=&Find...
+MAIN_MENU_REPLACE=&Replace
+MAIN_MENU_PASTE_SPECIAL=Paste &Special
+MAIN_MENU_INSERT_OBJECT=&Insert Object
+MAIN_MENU_INSERT_IMAGE=Insert I&mage
+MAIN_MENU_TOOLBARS=&Toolbars
+MAIN_MENU_FORMAT_BAR=&Format Toolbar
+MAIN_MENU_SERVICE_BAR=&Service Toolbar
+MAIN_MENU_MENU_BAR=&Main Menu
+MAIN_MENU_WORD_WRAP=&Word Wrap
+MAIN_MENU_ON_TOP=&Always on Top
+MAIN_MENU_LEFT_MARGIN=&Left margin
+MAIN_MENU_FONT=&Font
+MAIN_MENU_COLOR=&Background Color
+MAIN_MENU_CALC=&Calculator
+MAIN_MENU_PREFERENCES=&Preferences
+MAIN_MENU_BACKUP=&Backup
+MAIN_MENU_RESTORE=&Restore
+MAIN_MENU_ABOUT=&About...
+MAIN_MENU_HOME_PAGE=&Home Webpage
+MAIN_MENU_TO_AUTHOR=&Mail to Author
+MAIN_MENU_RTF_FORMAT=rtf-format
+MAIN_MENU_TXT_FORMAT=txt-format
+
+MAIN_TOOLBUTTON_FONT_COLOR_AUTO=&Auto
+MAIN_TOOLBUTTON_FONT_COLOR_OTHER=&Other...
+
+//page context menu - right-click on page's title
+MAIN_PAGE_POPUP_NEW=New Page
+MAIN_PAGE_POPUP_DELETE=Delete Page
+MAIN_PAGE_POPUP_RENAME=Rename Page
+
+ //main text editor right-click menu
+MAIN_EDITOR_POPUP_FORMAT=Font Format
+MAIN_EDITOR_POPUP_FORMAT_BOLD=Bold
+MAIN_EDITOR_POPUP_FORMAT_ITALIC=Italic
+MAIN_EDITOR_POPUP_FORMAT_UNDERLINE=Underline
+MAIN_EDITOR_POPUP_FORMAT_STRIKEOUT=Strikeout
+MAIN_EDITOR_POPUP_FORMAT_MARKERS=Markers
+MAIN_EDITOR_POPUP_FORMAT_UP_LETTERS=Capital Letters
+MAIN_EDITOR_POPUP_FORMAT_LOW_LETTERS=Lower Letters
+MAIN_EDITOR_POPUP_FORMAT_INDENT=Indent
+MAIN_EDITOR_POPUP_FORMAT_UNINDENT=Un-Indent
+MAIN_EDITOR_POPUP_COLOR=Font Color
+MAIN_EDITOR_POPUP_COLOR_BLACK=Black
+MAIN_EDITOR_POPUP_COLOR_WHITE=White
+MAIN_EDITOR_POPUP_COLOR_RED=Red
+MAIN_EDITOR_POPUP_COLOR_GREEN=Green
+MAIN_EDITOR_POPUP_COLOR_BLUE=Blue
+MAIN_EDITOR_POPUP_COLOR_YELLOW=Yellow
+MAIN_EDITOR_POPUP_COLOR_PINK=Pink
+MAIN_EDITOR_POPUP_COLOR_DARK_RED=Dark Red
+MAIN_EDITOR_POPUP_COLOR_DARK_BLUE=Dark Blue
+MAIN_EDITOR_POPUP_COLOR_AQUA=Aqua
+MAIN_EDITOR_POPUP_COLOR_LIME=Lime
+MAIN_EDITOR_POPUP_COLOR_PURPLE=Purple
+MAIN_EDITOR_POPUP_COLOR_GRAY=Gray
+MAIN_EDITOR_POPUP_FONT=Font
+MAIN_EDITOR_POPUP_UNDO=Undo
+MAIN_EDITOR_POPUP_REDO=Redo
+MAIN_EDITOR_POPUP_CUT=Cut
+MAIN_EDITOR_POPUP_COPY=Copy
+MAIN_EDITOR_POPUP_PASTE=Paste
+MAIN_EDITOR_POPUP_PASTE_TEXT=Paste (text only)
+MAIN_EDITOR_POPUP_SELECT_ALL=Select All
+MAIN_EDITOR_POPUP_FIND=Find...
+MAIN_EDITOR_POPUP_REPLACE=Replace
+MAIN_EDITOR_POPUP_INSERT_DATE=Insert Date
+MAIN_EDITOR_POPUP_COPY_LINK=Copy Link
+
+//popup menu in system tray
+TRAY_POPUP_CALC=Calculator
+TRAY_POPUP_RESTORE=Restore
+TRAY_POPUP_EXIT=Exit
+TRAY_POPUP_HOME_PAGE=Home Webpage
+TRAY_POPUP_TO_AUTHOR=Mail to Author
+
+//button hints
+MAIN_TOOLBUTTON_NEW_HINT=New Page (Ctrl+N)
+MAIN_TOOLBUTTON_DELETE_HINT=Delete Page (Ctrl+D)
+MAIN_TOOLBUTTON_SAVE_AS_HINT=Save as... (Ctrl+S)
+MAIN_TOOLBUTTON_PRINT_HINT=Print (Ctrl+P)
+MAIN_TOOLBUTTON_FIND_HINT=Find (Ctrl+F)
+MAIN_TOOLBUTTON_CALC_HINT=Calculator (F3)
+MAIN_TOOLBUTTON_ALIGN_LEFT_HINT=Align Left (Ctrl+L)
+MAIN_TOOLBUTTON_ALIGN_CENTER_HINT=Align Center (Ctrl+E)
+MAIN_TOOLBUTTON_ALIGN_RIGHT_HINT=Align Right (Ctrl+R)
+MAIN_TOOLBUTTON_BACKUP_HINT=Backup (F4)
+MAIN_TOOLBUTTON_PREFERENCES_HINT=Preferences (F2)
+MAIN_TOOLBUTTON_INSERT_IMAGE_HINT=Insert Image
+MAIN_TOOLBUTTON_FONT_COLOR_HINT=Font Color
+
+//'Preferences' window
+OPTIONS_WINDOW_TITLE=Preferences
+OPTIONS_PAGE_GENERAL=General
+OPTIONS_PAGE_VIEW=View
+OPTIONS_PAGE_OPTIMIZATION=Optimization
+OPTIONS_PAGE_HOTKEY=Hotkey
+OPTIONS_PAGE_DEFAULT=Default
+OPTIONS_OK_BUTTON=OK
+OPTIONS_CANCEL_BUTTON=Cancel
+OPTIONS_APPLY_BUTTON=Apply
+OPTIONS_GENERAL_LABEL=General preferences
+OPTIONS_CLOSE_AS_MIN_CHECKBOX=CLOSE works as MINIMIZE
+OPTIONS_AUTORUN_CHECKBOX=Run with Windows
+OPTIONS_STORE_PAGES_LABEL=Store pages' names
+OPTIONS_ON_TOP_RADIO=On top
+OPTIONS_BOTTOM_RADIO=Bottom
+OPTIONS_BACKUP_FOLDER_LABEL=Select folder for backup:
+OPTIONS_TASKBAR_ICON_CHECKBOX=Enable taskbar icon (restart program)
+OPTIONS_TRAY_ICON_CHECKBOX=Enable icon in system tray
+OPTIONS_HIDE_WINDOW_CHECKBOX=Hide window if inactive
+OPTIONS_SECONDS_LABEL=sec.
+//"sec" means "seconds"
+OPTIONS_VIEW_LABEL=View
+OPTIONS_TRANS_CHECKBOX=Enable transparency (WinXP/2K/2003)
+OPTIONS_MULTILINE_CHECKBOX=Multiline pages' names
+OPTIONS_AUTO_URL_CHECKBOX=URL Auto detection (restart program)
+OPTIONS_FADE_SHOW_CHECKBOX=Fade showing
+OPTIONS_SPEED_LABEL=Speed
+OPTIONS_STYLE_LABEL=Style:
+OPTIONS_DEFAULT_STYLE=Default
+OPTIONS_XP_EFECTS_CHECKBOX=Enable XP effects
+OPTIONS_PROGRAM_MODE_LABEL=Select program mode
+OPTIONS_NORMAL_RADIO=Normal
+OPTIONS_SECURITY_RADIO=Security
+OPTIONS_NORMAL_MODE_LABEL=Program saves text on page changing, minimizing and close. Works fastly on slow computers.
+OPTIONS_SECURITY_MODE_LABEL=Program saves every entered symbol. Need smaller space in RAM - is about 0.5 Ìב, but works slowly during high CPU loading.
+OPTIONS_SEY_HOTKEY_LABEL=Set hotkey for SimpleNotes 
+OPTIONS_HOTKEY_LABEL=Hotkey for minimizing/restoring of SimpleNotes
+OPTIONS_SET_HOTKEY_BUTTON=Set Hotkey!
+OPTIONS_FADE_HIDE_CHECKBOX=Fade hiding on hotkey press
+OPTIONS_DEFAULT_LABEL=Preferences by default
+OPTIONS_DEFAULT_FONT_LABEL=Default font:
+OPTIONS_DEFAULT_COLOR_LABEL=Default page's background color:
+OPTIONS_DEFAULT_FONT_SIZE_LABEL=Default font size:
+OPTIONS_DEFAULT_FORMAT_LABEL=Create new pages in:
+OPTIONS_DEFAULT_RTF_FORMAT=rtf-format
+OPTIONS_DEFAULT_TXT_FORMAT=txt-format
+OPTIONS_FORMAT_WARNING_LABEL=Warning!!! In txt-format you canNOT insert objects and images, change formating of different parts of text, change font color, etc.
+OPTIONS_CONFIRM_FORMAT_CHANGE_CHECKBOX=Confirm changing of page format from rtf to txt
+
+//'About' box and dialogs
+MAIN_NEW_PAGE_DIALOG_TITLE=New Page Creation
+MAIN_NEW_PAGE_DIALOG_LABEL=Enter the name of new page:
+MAIN_SAVE_PAGE_DIALOG_TITLE=Save Page
+MAIN_RENAME_PAGE_DIALOG_TITLE=Rename Page
+MAIN_RENAME_PAGE_DIALOG_LABEL=Enter new name of page:
+MAIN_INSERT_IMAGE_DIALOG_TITLE=Select image to insert
+MAIN_OPEN_FILE_DIALOG_TITLE=Select file to open
+MAIN_OPEN_TEMP_FOLDER_DIALOG_TITLE=Select folder to save page:
+ABOUT_WINDOW_TITLE=About...
+ABOUT_LOGO_LABEL=Logo creation:
+ABOUT_YEARS_LABEL=years
+ABOUT_WARRANTY_LABEL=This program comes to you as freeware product with absolutly no warranty.
+OPTIONS_SELECT_FOLDER_DIALOG_LABEL=Select folder for backup:
+BACKUP_WINDOW_TITLE=Backup
+BACKUP_FILES_COPIED_LABEL=Files copied:
+BACKUP_COPYING_LABEL=Copying:
+BACKUP_COMPLETE_LABEL=Backup completed!
+RESTORE_WINDOW_TITLE=Restoration
+RESTORE_FILES_COPIED_LABEL=Files restored:
+RESTORE_COPYING_LABEL=Restoring:
+RESTORE_COMPLETE_LABEL=Restoration completed!
+
+//different messages
+MAIN_MESSAGE_ERROR=Error
+MAIN_MESSAGE_ERROR_PAGE_NOT_FOUND=File with contents of this page not found:
+MAIN_MESSAGE_PRINT_PAGE=Page of
+MAIN_MESSAGE_ERROR_HOTKEY_ALREADY_USING=Another program is using hotkey of SimpleNotes!
+MAIN_MESSAGE_ERROR_EMPTY=Empty
+MAIN_MESSAGE_ERROR_IN_PREFERENCES=Error in file with preferences
+MAIN_MESSAGE_ERROR_PAGE_EXISTS=Page with such name already exists!
+MAIN_MESSAGE_ERROR_PAGE_EXISTS_TITLE=Page creation error
+MAIN_MESSAGE_PAGE_DELETE=Are you sure want to delete current page? All information will be lost.
+MAIN_MESSAGE_PAGE_DELETE_TITLE=Confirm deletion
+MAIN_MESSAGE_ERROR_ONE_PAGE=There must be at least one page!
+MAIN_MESSAGE_ERROR_ONE_PAGE_TITLE=Delete error
+MAIN_MESSAGE_ERROR_SELECT_BACKUP_FOLDER=Select folder for backup in Preferences!
+MAIN_MESSAGE_ERROR_SELECT_BACKUP_FOLDER_TITLE=No folder for backup
+MAIN_MESSAGE_SIMPLE_MESSAGE=Message
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_TITLE=Wrong folder
+MAIN_MESSAGE_CONFIRM_SAVE_TO_TEMP=Save page in another folder?
+MAIN_MESSAGE_CONFIRM_READONLY_OFF=Remove attribute 'Read only' from the file?
+MAIN_MESSAGE_REMOVE_READONLY_FAIL=Failed to change file attributes!
+MAIN_MESSAGE_CREATE_FOLDER_FAIL=Failed to create folder for backup!
+MAIN_MESSAGE_ERROR_RESTORE_NO_FOLDER=Select folder with backup in Preferences.
+MAIN_MESSAGE_ERROR_COPY_FILE=Unable to copy file:
+MAIN_MESSAGE_ERROR_NO_PRINTER=There is no default printer currently selected. Unable to print.
+//begining of the message//
+MAIN_MESSAGE_ERROR_RESTORE_EMPTY_FOLDER_1=Backup not found! Please check folder
+MAIN_MESSAGE_ERROR_RESTORE_EMPTY_FOLDER_2=or select another folder with backup in Preferences.
+//end of the message//
+//--------------------------//
+//begining of the message//
+MAIN_MESSAGE_CONFIRM_RESTORE_1=Are you sure want to restore information from
+MAIN_MESSAGE_CONFIRM_RESTORE_2=All newer information will be deleted!
+//end of the message//
+//--------------------------//
+//begining of the message//
+MAIN_MESSAGE_CONFIRM_RESTORE_BROKEN_1=Backup is probably without some files.
+MAIN_MESSAGE_CONFIRM_RESTORE_BROKEN_2=Continue restoration anyway?
+//end of the message//
+//--------------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_1=Folder you have selected in Preferences not exists!
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_2=Create this folder: 
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_CONFIRM_FORMAT_CHANGE_1=Are you sure want to change page format from rtf to txt?
+MAIN_MESSAGE_CONFIRM_FORMAT_CHANGE_2=Text formating features will be disabled!
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_PREFERENCES_NOT_FOUND_1=File with preferences
+MAIN_MESSAGE_ERROR_PREFERENCES_NOT_FOUND_2=not found and cannot be created. Check your rights for writting.
+//end of the message//
+//--------------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_1=Error writting in file with preferences 
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_2=Possible reasons: file was locked by another application and there is no access
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_3= to it, file/disk is write-protected (overfulled), or another user is writting in this file now.
+//end of the message//
+//-----------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_1=Error reading file with preferences
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_2=Possible reasons: file was locked by another application and cannot be readed.
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_3= Find this application and turn off locking. Or may be the data in this file is incorrect.
+//end of the message//
+//------------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_1=Error loading page file! File
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_2=with contents of this page is locked by another process and cannot be readed. SimpleNotes 
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_3=never locks files, so it does another application. Change page of SimpleNotes, turn off
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_4= locking and try again.
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_1=Error saving page file! File
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_2= with contents of this page is locked by another process and cannot be readed. SimpleNotes
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_3= never locks files, so it does another application. Find which and turn off locking. 
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_1=Error saving page file! File
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_2=with contents of this page is write-protected. Or may be another user
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_3=is writting in it.
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_SAVE_DISK_FULL_1=Error saving page file
+MAIN_MESSAGE_ERROR_SAVE_DISK_FULL_2=Disk may be full or write-protected. Or you have not got enough rights for writting on this disk.
+//end of the message//
+//---------------------//
+//begining of the message//
+MAIN_MESSAGE_ERROR_INSERT_IMAGE_1=Error inserting image! May be the picture has invalid format.
+MAIN_MESSAGE_ERROR_INSERT_IMAGE_2=SimpleNotes supports only BMP, JPG, JPEG and GIF formats.
+//end of the message//
+//---------------------//
+MAIN_MESSAGE_TEMP_COPY_OK=Page was successfully saved in the temp folder:
+MAIN_MESSAGE_TEMP_COPY_FAIL=Saving in the temp folder failed!
+
+OPTIONS_MESSAGE_ERROR_HOTKEY_ALREADY_REGISTERED=This hotkey is already registered!
+TRAY_MESSAGE_BACKUP_RECOMMEND=It is recommended to do backup of your information at least once a week.
+TRAY_MESSAGE_BACKUP_RECOMMEND_TITLE=Don't forget to do backups!
+
+//begining of the message//
+BACKUP_MESSAGE_ERROR_BACKUP_1=Not all files were backuped! May be some files were locked by another process. Or target
+BACKUP_MESSAGE_ERROR_BACKUP_2=folder is overfulled or disk is write-protected. And check network connection if need.
+//end of the message//
+//---------------------//
+//begining of the message//
+BACKUP_MESSAGE_ERROR_BACKUP_1=Not all files were restored! May be some files were locked by another process. Or target
+BACKUP_MESSAGE_ERROR_BACKUP_2=folder is overfulled or disk is write-protected. And check network connection if need. 
+//end of the message//
+//-------------------------//
+
+//toolbars' captions
+MAIN_MENU_BAR_CAPTION=Main Menu
+MAIN_FORMAT_BAR_CAPTION=Format Toolbar
+MAIN_SERVICE_BAR_CAPTION=Service Toolbar
