@@ -1,21 +1,21 @@
 #include <iostream.h>
 #include <conio.h>
 #include <iomanip.h>
-class Matrix{
-  private:
-    int** num;
-    int rows, columns;
-   public:
-    Matrix ();
-    Matrix(int,int);
-    Matrix (Matrix&);
-    ~Matrix ();	
 
-    friend istream& operator >> (istream& s, Matrix& m);
-    friend ostream& operator << (ostream& s, Matrix& m);
-    Matrix& operator = (Matrix& );
-    Matrix& operator + (Matrix& );
-    Matrix& operator - (Matrix& );
+class Matrix{
+ private:
+  int** num;
+  int rows, columns;
+ public:
+  Matrix ();
+  Matrix(int,int);
+  Matrix (Matrix&);
+  ~Matrix ();	
+  friend istream& operator >> (istream& s, Matrix& m);
+  friend ostream& operator << (ostream& s, Matrix& m);
+  Matrix& operator = (Matrix& );
+  Matrix& operator + (Matrix& );
+  Matrix& operator - (Matrix& );
     Matrix& operator += (Matrix& );
     Matrix& operator -= (Matrix& );
     Matrix& operator * (Matrix& );
