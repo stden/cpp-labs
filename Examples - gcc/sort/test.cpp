@@ -1,8 +1,8 @@
 #include <iostream>
 
 // Операции сравнения
-template<class T> bool comp(T c1, T c2){ return c1>c2; }
-bool comp(char* str1, char* str2){ return strcmp(str1,str2)>0; }
+template<class T> bool comp(T c1, T c2){ return c1>c2; } // Общая функция стравнения
+bool comp(char* str1, char* str2){ return strcmp(str1,str2)>0; } // Специализированная функция сравнения
 
 template <class T>
 class Vector {
