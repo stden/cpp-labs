@@ -8,7 +8,9 @@ void main(){
     lpSystemInfo  // system information - информация о системе				[out]
   );
   cout << "SysInfo.cpp" << endl;
-  cout << "Архитектура процессора" << lpSystemInfo->wProcessorArchitecture << endl;
+  char buf[256];
+  CharToOem("Архитектура процессора ",buf);
+  cout << buf << lpSystemInfo->wProcessorArchitecture << endl;
   /*      WORD wProcessorArchitecture;		// архитектура процессора
       WORD wReserved;
   }
