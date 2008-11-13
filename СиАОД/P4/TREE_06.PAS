@@ -52,8 +52,8 @@ begin
          case T of
             NameIndex: Name:= NameString(N);
             AgeIndex: Age:= integer(N)
-         end{case}
-      end{with}
+         end
+      end
    end
    else
       case T of

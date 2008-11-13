@@ -44,7 +44,7 @@ begin
          Height:= ExamplHeight[count];
          Weight:= ExamplWeight[count]
       end
-end;{InitFile}
+end;
 
 {Процедура построения  дерева  поиска по ключу "Имя" (Name - в таблице
  MyFile. Элемент с именем N, расположенный в таблице MyFile по индексу
@@ -61,7 +61,7 @@ begin
    else
       if P^.Name[1] > N[1] then BildTreeName(P^.Left,N,M)
                            else BildTreeName(P^.Right,N,M)
-end;{BildTree}
+end;
 
 {Процедура построения дерева поиска по ключу "Возраст" (Age - в табли-
  це MyFile.  Элемент с именем N, расположенный в таблице MyFile по ин-
@@ -79,7 +79,7 @@ begin
    else
       if P^.Age > N then BildTreeAge(P^.Left,N,M)
                     else BildTreeAge(P^.Right,N,M)
-end;{BildTree}
+end;
 
 procedure WriteTree(Q: pointer; Tree: TreeType);
 var P: pointer;
@@ -94,7 +94,7 @@ begin
                         MyFile[P^.MyIndex].Age);
       WriteTree(P^.Right)
    end
-end;{WriteTree}
+end;
 
 procedure WriteTreeAge(P: PointerA);
 begin
@@ -104,7 +104,7 @@ begin
                         MyFile[P^.MyIndex].Age);
       WriteTreeAge(P^.Right)
    end
-end;{WriteTree}
+end;
 
 begin
    InitFile; NameTree:= nil; AgeTree:= nil;
