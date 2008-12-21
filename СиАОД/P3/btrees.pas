@@ -132,21 +132,28 @@ end;
 { Вывод выражения на экран в заданной форме }
 procedure Show( T:BTree; Form:TForm );
 
-procedure S( node:index; parentOp:char );
-var Skobki : Boolean;
+function S( i:index; parentOp:char ):string;
+var Left,Right : string;
 begin
-  if node > Length(T) then exit;
-  if T[node] in Operations then begin
-    Skobki := (Form = Infix) and (T[node] in Op1) and (parentOp in Op2);
-    if Skobki then write('(');
-    if Form = Prefix then write(T[node]);
-    S(L(node),T[node]);
-    if Form = Infix then write(T[node]);
-    S(R(node),T[node]);
-    if Form = Postfix then write(T[node]);
-    if Skobki then write(')');
+  if i > Length(T) then begin
+    S := '';
+    exit;
   end;
-  if T[node] in Vars then write(T[node]);
+  Left := S(L(i),T[i]);
+  Right := S(R(i),T[i]);
+  if T[i] in Operations then begin
+    case Form of
+      Infix: begin
+        if (T[i] in Op1) and (parentOp in Op2) then
+          S := '(' + Left + T[i] + Right + ')'
+        else
+          S := Left + T[i] + Right;
+      end;
+      Prefix: S := T[i] + Left + Right;
+      Postfix: S := Left + Right + T[i];
+    end;
+  end else
+    if T[i] in Vars then S:=T[i];
 end;
 begin
   case Form of
@@ -154,8 +161,7 @@ begin
     Prefix: write('Префиксная форма: ');
     Postfix: write('Постфиксная форма: ');
   end;
-  S(1,' ');
-  writeln;
+  writeln(S(1,' '));
 end;
 
 end.
