@@ -23,10 +23,10 @@ function R( i:index ):index;
 { Построение дерева для конкретного арифметического выражения,
   заданного в префиксной форме и состоящего из 16-ти символов
   (буквенных символов и символов операций). }
-procedure BuildTree( var tree:BTree; prefix:string );
+procedure BuildTree( var T:BTree; prefix:string );
 
 { Показать дерево на экране }
-procedure ShowTree( tree:BTree );
+procedure ShowTree( T:BTree );
 
 implementation
 
@@ -57,8 +57,34 @@ end;
 
 
 { Показать дерево на экране }
-procedure ShowTree( tree:BTree );
+procedure ShowTree( T:BTree );
+  { Вывод N пробелов }
+  procedure Spaces( N:integer );
+  var i:integer;
+  begin
+    for i:=1 to N do write(' ');
+  end;
+var i,k,q,S,Last:integer;
 begin
+  { Ищем ближайшую степень 2-ки большую либо равную количеству узлов }
+  S:=1;
+  while S < Length(T) do S:=S*2;
+  { Вычисляем отступ }
+  K := S div 2 - 1;
+  i := 1;
+  while i < S do begin
+    Spaces(K);
+    Last := 2*i-1;
+    if Last > Length(T) then
+      Last := Length(T);
+    for q:=i to Last-1 do begin
+      write(T[q]);
+      Spaces(2*K+1);
+    end;
+    writeln(T[Last]);
+    k := k div 2;
+    i := i*2;
+  end;
 end;
 
 function L( i:index ):index;
@@ -71,24 +97,25 @@ begin
   R := i*2+1;
 end;
 
-procedure BuildTree( var tree:BTree; prefix:string );
-  { Расширяем строку до длины Len }
-  procedure FixLen( Len : integer );
-  begin
-    while Length(tree) < Len do
-      tree := tree + ' ';
-  end;
-
+procedure BuildTree( var T:BTree; prefix:string );
+var idx : index;
   { Построение с символа i в префиксной форме }
-  procedure Build( i : index; treeIdx : index );
+  procedure Build( treeIdx : index );
   begin
-    if prefix[i] in Operations then
-      tree[treeIdx] := prefix[i];
-
+    { Удлиняем строку до длины treeIdx }
+    while Length(T) < treeIdx do
+      T:=T+' ';
+    T[treeIdx] := prefix[idx];
+    idx:=idx+1;
+    if T[treeIdx] in Operations then begin
+      Build(L(treeIdx));
+      Build(R(treeIdx));
+    end;
   end;
 begin
-  tree := '';
-  Build(1,1);
+  T := '';
+  idx := 1;
+  Build(1);
 end;
 
 
