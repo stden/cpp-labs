@@ -1,5 +1,13 @@
 uses BTrees;
 
+procedure Assert( e,a : String );
+begin
+  if e<>a then begin
+    writeln('Expected "'+e+'" actual "'+a+'"');
+    halt(1);
+  end;
+end;
+
 var
   T : BTree;
   prefix : string;
@@ -15,9 +23,9 @@ begin
   {   *       -    }
   { c   +   d   /  }
   {    a b     f e }
-  Assert( T[1] = '*' ); { Вершина дерева }
-  Assert( copy(T,2,2) = '*-' );
-  Assert( copy(T,4,4) = 'c+d/' );
-  Assert( copy(T,8,8) = '  ab  fe' );
+  Assert( '*', T[1] ); { Вершина дерева }
+  Assert( '*-', copy(T,2,2) );
+  Assert( 'c+d/', copy(T,4,4) );
+  Assert( '  ab  fe', copy(T,8,8) );
   ShowTree(T);
 end.
