@@ -10,14 +10,14 @@ end;
 
 var
   T : BTree;
-  prefix : string;
+  PrefixStr : string;
 begin
   { Запоминаем количество доступной памяти при старте програмы
     (для обнаружения утечек памяти) }
   writeln(' Лабораторная работа №3 ');
-  prefix := '**c+ab-d/fe';
-  Writeln('Исходное выражение в префиксной форме: ',prefix);
-  BuildTree(T,prefix);
+  PrefixStr := '**c+ab-d/fe';
+  Writeln('Исходное выражение в префиксной форме: ',PrefixStr);
+  BuildTree(T,PrefixStr);
   { Должно получиться дерево: }
   {       *        }
   {   *       -    }
@@ -28,4 +28,8 @@ begin
   Assert( 'c+d/', copy(T,4,4) );
   Assert( '  ab  fe', copy(T,8,8) );
   ShowTree(T);
+  Show(T,Infix);
+  Show(T,Prefix);
+  Show(T,Postfix);
 end.
+

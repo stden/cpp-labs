@@ -10,6 +10,8 @@ type { Дерево, реализованная, как "куча" Heap }
 const { Индекс корневого узла }
   RootIdx = 1; { Первый символ строки }
   Operations = ['+','-','*','/']; { Операции }
+  Op1 = ['+','-']; { Операции с приоритетом 1 }
+  Op2 = ['*','/']; { Операции с приоритетом 2 (более высоким приоритетом) }
   Vars = ['a'..'z','A'..'Z']; { Переменные }
 
 { На входе i - индекс элемента }
@@ -27,6 +29,12 @@ procedure BuildTree( var T:BTree; prefix:string );
 
 { Показать дерево на экране }
 procedure ShowTree( T:BTree );
+
+type { Формы представления математических выражений }
+  TForm = (Infix,Prefix,Postfix);
+
+{ Вывод выражения на экран в заданной форме }
+procedure Show( T:BTree; Form:TForm );
 
 implementation
 
@@ -100,16 +108,19 @@ end;
 procedure BuildTree( var T:BTree; prefix:string );
 var idx : index;
   { Построение с символа i в префиксной форме }
-  procedure Build( treeIdx : index );
+  procedure Build( node : index );
   begin
-    { Удлиняем строку до длины treeIdx }
-    while Length(T) < treeIdx do
+    { Удлиняем строку до длины nodeIdx }
+    while Length(T) < node do
       T:=T+' ';
-    T[treeIdx] := prefix[idx];
+    { Записываем очередной символ в дерево }
+    T[node] := prefix[idx];
+    { Переходим к следующему символу в строке }
     idx:=idx+1;
-    if T[treeIdx] in Operations then begin
-      Build(L(treeIdx));
-      Build(R(treeIdx));
+    { Если мы обрабатываем операцию => строим правое и левое поддерево }
+    if T[node] in Operations then begin
+      Build(L(node));
+      Build(R(node));
     end;
   end;
 begin
@@ -118,5 +129,33 @@ begin
   Build(1);
 end;
 
+{ Вывод выражения на экран в заданной форме }
+procedure Show( T:BTree; Form:TForm );
+
+procedure S( node:index; parentOp:char );
+var Skobki : Boolean;
+begin
+  if node > Length(T) then exit;
+  if T[node] in Operations then begin
+    Skobki := (Form = Infix) and (T[node] in Op1) and (parentOp in Op2);
+    if Skobki then write('(');
+    if Form = Prefix then write(T[node]);
+    S(L(node),T[node]);
+    if Form = Infix then write(T[node]);
+    S(R(node),T[node]);
+    if Form = Postfix then write(T[node]);
+    if Skobki then write(')');
+  end;
+  if T[node] in Vars then write(T[node]);
+end;
+begin
+  case Form of
+    Infix: write('Инфиксная форма: ');
+    Prefix: write('Префиксная форма: ');
+    Postfix: write('Постфиксная форма: ');
+  end;
+  S(1,' ');
+  writeln;
+end;
 
 end.
