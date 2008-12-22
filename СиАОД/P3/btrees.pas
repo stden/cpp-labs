@@ -106,7 +106,7 @@ begin
 end;
 
 procedure BuildTree( var T:BTree; prefix:string );
-var idx : index;
+var i : index;
   { Построение с символа i в префиксной форме }
   procedure Build( node : index );
   begin
@@ -114,9 +114,9 @@ var idx : index;
     while Length(T) < node do
       T:=T+' ';
     { Записываем очередной символ в дерево }
-    T[node] := prefix[idx];
+    T[node] := prefix[i];
     { Переходим к следующему символу в строке }
-    idx:=idx+1;
+    i:=i+1;
     { Если мы обрабатываем операцию => строим правое и левое поддерево }
     if T[node] in Operations then begin
       Build(L(node));
@@ -125,12 +125,12 @@ var idx : index;
   end;
 begin
   T := '';
-  idx := 1;
+  i := 1;
   Build(1);
 end;
 
-{ Вывод выражения на экран в заданной форме }
-procedure Show( T:BTree; Form:TForm );
+{ Получение выражения в определенной форме }
+function GetForm( T:BTree; Form:TForm ):string;
 
 function S( i:index; parentOp:char ):string;
 var Left,Right : string;
@@ -156,12 +156,18 @@ begin
     if T[i] in Vars then S:=T[i];
 end;
 begin
+  GetForm := S(1,' ');
+end;
+
+{ Вывод выражения на экран в заданной форме }
+procedure Show( T:BTree; Form:TForm );
+begin
   case Form of
     Infix: write('Инфиксная форма: ');
     Prefix: write('Префиксная форма: ');
     Postfix: write('Постфиксная форма: ');
   end;
-  writeln(S(1,' '));
+  writeln(GetForm(T,Form));
 end;
 
 end.
