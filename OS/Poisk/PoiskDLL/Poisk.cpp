@@ -3,12 +3,12 @@
 ListL*	Poisk::PoiskDubl( bool inVlosP,bool inTabulP, bool inIFIP, LPCSTR	inParametrP, ListP	*inListPP, 
 						 DWORD   inFileP, DWORD   inDerekP)
 {
-  	inVlos =	inVlosP;		
+ 	inVlos =	inVlosP;		
 	inTabul =	inTabulP;	
 	inIFI = inIFIP;	
 	inParametr =	inParametrP;	
 	inListP = inListPP;	
-    inFile = inFileP;			
+  inFile = inFileP;			
 	inDerek =	inDerekP;	
 
 	return PoiskDubl();
