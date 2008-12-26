@@ -66,7 +66,7 @@ public:
 	bool	BITscan;
 	LPCSTR	inParametr;		// параметр поиска
 	ListP	*inListP;		// список папок для поиска
-	ListF	*inListF;		// список фаелов после поиска
+	ListF	*inListF;		// список файлов после поиска
 	ListL	*inListL;		// список списков
 	DWORD   inFile;			// параметры поиска фаила
 	DWORD   inDerek;		// параметры поиска деректории
