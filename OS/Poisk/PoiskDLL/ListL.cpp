@@ -1,3 +1,5 @@
+//						ListL.cpp
+
 #include "PoiskDLL.h"
 
 ListL* ListL::add(ListF  *lf, ListL  *fest)
