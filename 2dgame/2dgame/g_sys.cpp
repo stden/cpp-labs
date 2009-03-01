@@ -25,7 +25,12 @@ INT WINAPI WinMain(
     HINSTANCE hprevinstance,
     LPSTR lpcmdline,
     INT ncmdshow){
-		// задаем параметры окна и создаем его
-		rgame.init("2dgame",640,640,10,10);
-		return (rgame.view.g_main(hinstance, hprevinstance, lpcmdline, ncmdshow));
+		// задаем параметры окна ,создаем его запускаем игру с картой
+		if (rgame.init("2dgame",800,800,"m2"))
+			return (rgame.view.g_main(hinstance, hprevinstance, lpcmdline, ncmdshow));
+	return 0;
+}
+
+void msgwin(){
+	rgame.controller.updframe();
 }
