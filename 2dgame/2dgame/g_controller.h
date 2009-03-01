@@ -6,12 +6,14 @@ Controller (имеет ссылки на Model и View, знает про Клавиатуру, про другие событ
 	вызов перерисовки View при resize окна
 	при прочих изменениях
 */
-#include "g_view.h"
+#pragma once
+//#ifndef G_CONTROLLERH
 
-#ifndef G_CONTROLLERH
+#include "g_view.h"
 
 class g_controller{
 private:
+	bool x;
 	// указатель на модель
 	g_model *model;
 	// указатель на вью
@@ -25,6 +27,7 @@ public:
 bool g_controller::init(g_model *pmodel, g_view *pview){
 	model=pmodel;
 	view=pview;
+	x=true;
 	return true;
 }
 
@@ -32,12 +35,57 @@ bool g_controller::handlemsg(HWND hwnd,
 			   				 UINT msg,
 			   				 WPARAM wparam,
 			   				 LPARAM lparam){
-    return (false);
+ 	//updframe();
+ switch(msg){
+	case WM_KEYDOWN:
+		switch(wparam){
+			case VK_LEFT:
+			 // Нажата стрелка влево.
+				view->scr_map.dxstart(-1); break;
+			case VK_RIGHT:
+			 // Нажата стрелка враво.
+				view->scr_map.dxstart(1); break;
+			case VK_UP:
+			 // Нажата стрелка вверх.
+				view->scr_map.dystart(-1); break;
+			case VK_DOWN:
+			 // Нажата стрелка вниз.
+				view->scr_map.dystart(1); break;
+			 // Обработка других не-буквенных клавиш.
+			default: break;
+		}
+	case WM_LBUTTONDOWN: 
+		if (hwnd==view->m_map.hwnd){
+			if (LOWORD(lparam)/4>2&&LOWORD(lparam)/4<view->scr_map.m_xsize-view->scr_map.xsize/2)view->scr_map.xstart=LOWORD(lparam)/4-3;
+			if (HIWORD(lparam)/4>=0&&HIWORD(lparam)/4<view->scr_map.m_ysize-view->scr_map.ysize/2-3)view->scr_map.ystart=HIWORD(lparam)/4;
+		};
+	case WM_MOUSEMOVE:
+		switch(wparam){
+	case MK_LBUTTON:
+				if (hwnd==view->m_map.hwnd){
+					if (LOWORD(lparam)/4>2&&LOWORD(lparam)/4<view->scr_map.m_xsize-view->scr_map.xsize/2)view->scr_map.xstart=LOWORD(lparam)/4-3;
+					if (HIWORD(lparam)/4>=0&&HIWORD(lparam)/4<view->scr_map.m_ysize-view->scr_map.ysize/2-3)view->scr_map.ystart=HIWORD(lparam)/4;
+		 		};break;
+			default: break;
+		 };
+		
+	
+ 
+ }
+	return (false);
 }
 
 bool g_controller::updframe(){
-     return (true);
+	if (x){
+		x=false;
+		model->worldmap.m_tile[10][10].vsetvalue('#',0);
+	}
+	else{
+		x=true;	
+		model->worldmap.m_tile[10][10].vsetvalue('0',0);
+	}
+	return (true);
 }
 
-#define G_CONTROLLERH 1
-#endif
+//#define G_CONTROLLERH 1
+//#endif

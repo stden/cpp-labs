@@ -1,7 +1,8 @@
 // mapclass.h - класс содержащий информацию о карте мира
 
 #include <fstream> 
-#ifndef MAPCLASSH
+#pragma once
+//#ifndef MAPCLASSH
 
 #include "tileclass.h" 
 
@@ -12,11 +13,10 @@ public:
 	int m_xsize;
 	int m_ysize;
 	int m_kollayers;
+	int m_tilesize;
 public:
 	bool mapinit();
 	bool loadmap(std::string mapname);
-	int getx();
-	int gety();
 	~mapclass();
 };
 
@@ -33,7 +33,7 @@ bool mapclass::mapinit(){
 			// ѕрисваиваем каждому блоку значение 0 в нулевом слое
 			m_tile[i][j].vsetvalue('-', 0);
 			// ”станавливаем размер блока равным 64 пикселам
-			m_tile[i][j].vsetsize(64, 0);
+			m_tile[i][j].vsetsize((float)m_tilesize, 0);
 		}
 	}
 	return true;
@@ -43,6 +43,7 @@ bool mapclass::loadmap(std::string mapname){
 	char ch;	
 	f>>m_xsize;
 	f>>m_ysize;
+	f>>m_tilesize;
 	f>>m_kollayers;
 	mapinit();
 	for (int i=0;i<m_kollayers;i++){
@@ -63,13 +64,7 @@ bool mapclass::loadmap(std::string mapname){
 	}
 	return true;
 }
-int mapclass::getx(){
-	return m_xsize;
-}
 
-int mapclass::gety(){
-	return m_ysize;
-}
 mapclass::~mapclass(){
 //	for(int i=0; i<m_xsize; i++){
 //		delete [](m_tile[i]);
@@ -77,5 +72,5 @@ mapclass::~mapclass(){
 	//delete []m_tile;
 }
 
-#define MAPCLASSH 1
-#endif
+//#define MAPCLASSH 1
+//#endif

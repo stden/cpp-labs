@@ -10,16 +10,16 @@ Model (Game World – не знает про DirectX, не знает про Клавиатуру, Мышь, знает п
 			HeroUnit – наследник Unit, которым можно управлять с клавиатуры
 				Дополненные перегруженные методы Load/Save в поток.
 */
-#include "mapclass.h"
+#pragma once
+//#ifndef G_MODELH
 
-#ifndef G_MODELH
+#include "mapclass.h"
 
 class g_model{
 public:
 	mapclass worldmap;
-
 	g_model();
-	bool init(int m_xsize, int m_ysize);
+	bool init(std::string mapname);
 	void clear();
 };
 
@@ -28,14 +28,14 @@ g_model::g_model(){
 
 }
 
-bool g_model::init(int m_xsize, int m_ysize){
-	//if (worldmap.mapinit()) return true;
-	return true;
+bool g_model::init(std::string mapname){
+	if (worldmap.loadmap(mapname)) return true;
+	return false;
 }
 
 void g_model::clear(){
 
 }
 
-#define G_MODELH 1
-#endif
+//#define G_MODELH 1
+//#endif
