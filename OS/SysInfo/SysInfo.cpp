@@ -1,6 +1,8 @@
-#include <fstream.h>
+#include <iostream>
 #include <windows.h>
 #include <conio.h>
+
+using namespace std;
 
 void main(){
   LPSYSTEM_INFO lpSystemInfo = (LPSYSTEM_INFO) malloc (sizeof(SYSTEM_INFO));  // system information - информаци€ о системе				[out]
@@ -10,12 +12,12 @@ void main(){
   cout << "SysInfo.cpp" << endl;
   char buf[256];
   CharToOem("јрхитектура процессора ",buf);
-  cout << buf << lpSystemInfo->wProcessorArchitecture << endl;
-  /*      WORD wProcessorArchitecture;		// архитектура процессора
-      WORD wReserved;
-  }
-  DWORD dwPageSize;	// размер страницы пам€ти
-  LPVOID lpMinimumApplicationAddress;	// нижн€€ граница доступного адресного пространства
+  cout << buf << lpSystemInfo->wProcessorArchitecture << endl; // архитектура процессора
+  CharToOem("–азмер страницы пам€ти ",buf);
+  cout << buf << lpSystemInfo->dwPageSize;	// размер страницы пам€ти
+/* » так далее выводим остальные параметры...
+
+LPVOID lpMinimumApplicationAddress;	// нижн€€ граница доступного адресного пространства
   LPVOID lpMaximumApplicationAddress;	// верхн€€ граница доступного адресного пространства
   DWORD dwActiveProcessorMask;		// маска активности процессоров
   DWORD dwNumberOfProcessors;		// число процессоров
