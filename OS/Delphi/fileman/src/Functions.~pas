@@ -1,0 +1,42 @@
+unit Functions;
+
+interface
+
+uses Windows, SysUtils, Forms;
+        function StringSize(a: TLargeInteger) : String;
+        procedure RemoveAll(path: string);
+implementation
+
+function StringSize(a: TLargeInteger) : String;
+begin
+  if (a < 1000) then
+		result:= IntToStr(a)+' B'
+	else if (a < 1000 * 1024) then
+    result:= IntToStr(a div 1024)+' kB'
+  else if (a < 1000 * 1048576) then
+    result:= IntToStr(a div 1048576)+' MB'
+  else
+	  result:= IntToStr(a div 1073741824)+' GB';
+end;
+
+
+procedure RemoveAll(path: string);
+var
+  f: TSearchRec;
+begin
+  if FindFirst(path + '\*.*', faAnyFile, f) = 0 then
+  repeat
+    if f.Attr and faDirectory = 0 then
+    begin
+      DeleteFile(PChar(path + '\' + f.name));
+      Application.Title:=path + '\' + f.name;
+      Application.ProcessMessages;
+    end
+    else
+      RemoveAll(path + '\' + f.name);
+  until FindNext(f) <> 0;
+  FindClose(f);
+  RemoveDirectory(PChar(path));
+end;
+
+end.

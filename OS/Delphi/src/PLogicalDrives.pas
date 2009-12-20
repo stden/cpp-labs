@@ -1,0 +1,74 @@
+unit PLogicalDrives;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, ComCtrls, Functions, ImgList, ExtCtrls;
+
+type
+  TLogicalDrives = class(TFrame)
+    ListLogicalDrives: TListView;
+    ImageListDisk: TImageList;
+    Panel1: TPanel;
+    procedure init;
+
+  private
+  protected
+    { Private declarations }
+  public
+    procedure Update;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TLogicalDrives.init;
+begin
+  Update;
+end;
+
+procedure TLogicalDrives.Update;
+var
+  i: integer;
+  DriveItem: TListItem;
+  DriveType: uInt;
+  LogDrives: set of 0..25;
+  FreeBytesAvailableToCaller, TotalNumberOfBytes, TotalNumberOfFreeBytes: TLargeInteger;
+begin
+  ListLogicalDrives.Clear;
+  integer(LogDrives) := GetLogicalDrives;
+  for i := 0 to 25 do
+    if (i in LogDrives) then
+    begin
+      FreeBytesAvailableToCaller := 0;
+      TotalNumberOfBytes := 0;
+      TotalNumberOfFreeBytes := 0;
+
+      DriveItem := ListLogicalDrives.Items.Add;
+      DriveItem.Caption := chr(i + 65);
+
+      DriveType := GetDriveType(PChar(chr(i + 65) + ':\'));
+      DriveItem.ImageIndex := DriveType;
+      case DriveType of
+        DRIVE_UNKNOWN: DriveItem.SubItems.Add('?');
+        DRIVE_NO_ROOT_DIR: DriveItem.SubItems.Add('Path does not exists');
+        DRIVE_REMOVABLE:
+          if(i<2) then
+            DriveItem.SubItems.Add('Floppy drive')
+          else
+            DriveItem.SubItems.Add('Removable');
+        DRIVE_FIXED: DriveItem.SubItems.Add('Fixed');
+        DRIVE_REMOTE: DriveItem.SubItems.Add('Remote');
+        DRIVE_CDROM: DriveItem.SubItems.Add('CD-ROM');
+        DRIVE_RAMDISK: DriveItem.SubItems.Add('RAMDisk');
+      else DriveItem.SubItems.Add('Unknown');
+      end;
+
+      GetDiskFreeSpaceEx(PChar(chr(i + 65) + ':\'), FreeBytesAvailableToCaller, TotalNumberOfBytes, @TotalNumberOfFreeBytes);
+      DriveItem.SubItems.Add(StringSize(TotalNumberOfFreeBytes));
+      DriveItem.SubItems.Add(StringSize(TotalNumberOfBytes));
+    end;
+end;
+end.
