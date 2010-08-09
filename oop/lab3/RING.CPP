@@ -6,6 +6,7 @@
 #define _USE_MATH_DEFINES
 
 #include <math.h>
+#include <assert.h>
 #include "Ring.h"
 
 CRing::CRing(double x,double y,double R) : CCountedPoint(x,y), m_R(R)
@@ -38,6 +39,7 @@ double CRing::getR() const
 
 void CRing::setR(const double& value)
 {
+  assert( value >= 0 );
   m_R = value;
 }
 
@@ -52,6 +54,8 @@ void CRing :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   if ( m_x+m_R > *maxx) *maxx = m_x+m_R;
   if ( m_y-m_R < *miny) *miny = m_y-m_R;
   if ( m_y+m_R > *maxy) *maxy = m_y+m_R;
+  assert( *minx < *maxx );
+  assert( *miny < *maxy );
 }
 
 
