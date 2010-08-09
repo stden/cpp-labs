@@ -1,7 +1,7 @@
-// ╘рщы: Rectangle.h
-// ╬с· тыхэшх ъырёёр ╥ЁряхЎш  (яхЁхт╕ЁэєЄр )
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Trapez.h
+// Объявление класса Трапеция (перевёрнутая)
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.0
 #ifndef _TRAPEZ_H_
 #define _TRAPEZ_H_
 
@@ -13,51 +13,38 @@ class CTrapezium  {
 private:
 CList<CCountedPoint> m_list;
 
-//╩юышўхёЄтю ¤ъчхьяы Ёют ъырёёр яЁ ьюєуюы№эшъ
+//Количество экземпляров класса прямоугольник
   static int countreal;
 
-  //╬с∙хх ъюышўхёЄтю ёючфрээ√ї ъюуфр-ышсю ¤ъчхьяы Ёют
+  //Общее количество созданных когда-либо экземпляров
   static int countall;
 
-  //╚фхэЄшЇшърЄюЁ
+  //Идентификатор
   int m_id;
 
 public:
 
   /*
-  * ╩юэёЄЁєъЄюЁ
-  * x - ыхтр  эшцэ   Єюўър, y - ыхтр  тхЁїэ   Єюўър, l - ─ышэр ьхэ№°хую юёэютрэш 
+  * Конструктор
+  * x - левая нижняя точка, y - левая верхняя точка, l - Длина меньшего основания
   */
   CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l);
 
   ~CTrapezium(void);
 
-
   void MovedXdY (double dx, double dy);
   void MoveToPoint (const CCountedPoint& P);
 
- const CList<CCountedPoint>& getPoints () { return m_list; }
- const CCountedPoint& getPoint (int index);
+  const CList<CCountedPoint>& getPoints () { return m_list; }
+  const CCountedPoint& getPoint (int index);
 
- static int getCount() { return countreal; }
- 
- int getId () { return m_id; }
+  static int getCount() { return countreal; }
 
+  int getId () { return m_id; }
 
-friend ostream& operator << (ostream& s, CTrapezium& r)
-{
-  s << "  " << "Trapez: " << endl;
-  r.getPoints().goFirst();
+  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
-
-  s << "    (" << r.getPoints().getElem().getValue() << ")";
-  s << endl;
-
-  return (s);
-}
+  friend ostream& operator << (ostream& s, CTrapezium& r);
 
 };
 

@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "Glass.h"
+#include "GlassR.h"
 #include "CService.h"
 
 void check_input(char *temp,int *k, int *flag){
@@ -54,7 +54,13 @@ void addGlass(CService& s, int toBegin = 0)
   hBottom = input_double("  Input the less foundation heigth:");
   lessSide = input_double("  Input the less rib length:");
 
-  CGlass glass(bottom, top, bottomLength, hBottom, lessSide);
+  CGlassR glass(bottom, top, bottomLength, hBottom, lessSide);
+  double minx,maxx,miny,maxy;
+  glass.GetBorders(&minx,&maxx,&miny,&maxy);
+  cout << " Borders: " <<
+     " minx = " << minx << " maxx = " << maxx <<
+     " miny = " << miny << " maxy = " << maxy << endl;
+  getch();
 
   if(toBegin)
     s.insertBegin(glass);
@@ -76,13 +82,13 @@ void main()
   //Input number of elements
   flag = 1;
   while (flag){
-	  cout << "Input number of elements: ";
-	  cin  >> temp;
-	  check_input(temp, &k,&flag);
-	  cout << "\n";
+    cout << "Input number of elements: ";
+    cin  >> temp;
+    check_input(temp, &k,&flag);
+    cout << "\n";
   };
 
-	  i = 0;
+  i = 0;
   //Input value of elements
   while (i < k){
     cout << "Input element " << (i+1) << ": " << endl;
@@ -96,48 +102,46 @@ void main()
   s.print();
 
   int a;
-
   do {
-    cout<<"\n\n===========MAIN MENU===========";
-    cout<<"\nPress 1 to add glass to end;";
-	cout<<"\nPress 2 to add glass to begin;";
-	cout <<"\nPress 3 to move glasses by dx dy";
-	cout <<"\nPress 4 to place glasses to point";
-	cout <<"\nPress 5 to print";
-	cout<<"\nPress 0 to exit;\n";
-	cout<<"===============================\n";
-	cin >>a;
+    cout << "\n\n===========MAIN MENU===========";
+    cout << "\nPress 1 to add glass to end;";
+    cout << "\nPress 2 to add glass to begin;";
+    cout << "\nPress 3 to move glasses by dx dy";
+    cout << "\nPress 4 to place glasses to point";
+    cout << "\nPress 5 to print";
+    cout << "\nPress 0 to exit;\n";
+    cout << "===============================\n";
+    cin >>a;
 
-   switch(a){
-     case 1:
-       addGlass(s);
-       break;
-     case 2:
-       addGlass(s, 1);
-       break;
-     case 3:
-       double dx = input_double("Enter dx:"),
-	      dy = input_double("Enter dy:");
-       s.MovedXdY(dx,dy);
-       break;
-     case 4:
-       double x = input_double("Enter x:"),
-	      y = input_double("Enter y:");
-       s.MoveToPoint(CCountedPoint(x,y));
-       break;
-
-     case 5:
-      s.print();
-       break;
-     case 0:
-       break;
-     default:
-       cout << "Out of menu :)" << endl;
-   }
-
-	//Out lists
-	cout << endl << "Service: " << endl;
+    switch(a){
+      case 1:
+	addGlass(s);
+	break;
+      case 2:
+	addGlass(s, 1);
+	break;
+      case 3:
+	double dx = input_double("Enter dx:"),
+	       dy = input_double("Enter dy:");
+	s.MovedXdY(dx,dy);
+	break;
+      case 4:
+	double x = input_double("Enter x:"),
+	       y = input_double("Enter y:");
+	s.MoveToPoint(CCountedPoint(x,y));
+	break;
+      case 5:
 	s.print();
-	cout<<endl;
-	} while (a!=0);
+	break;
+      case 0:
+	break;
+      default:
+	cout << "Out of menu :)" << endl;
+    }
+
+    //Out lists
+    cout << endl << "Service: " << endl;
+    s.print();
+    cout<<endl;
+  } while (a!=0);
 }

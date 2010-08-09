@@ -1,10 +1,10 @@
-// Файл: LIST.H
+// Файл: COLIST.H
 // Класс Список
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 16.05.10, редакция 1.0.
 
-#ifndef _COUTNED_LIST_H
-#define _COUTNED_LIST_H
+#ifndef _CO_LIST_H
+#define _CO_LIST_H
 
 #include <iostream.h>
 #include "Element.h"
@@ -84,6 +84,7 @@ public:
 
     tmp->setNext(m_first);
     m_first=tmp;
+
   }
 
   /*
@@ -154,7 +155,7 @@ public:
   /*
   * Переместиться на головной элемент списка
   */
-  void goFirst()
+  const void goFirst()
   {
     m_current=m_first;
   }

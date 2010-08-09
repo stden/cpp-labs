@@ -1,7 +1,7 @@
-// ╘рщы: Rectangle.cpp
-// ╨хышчрЎш  ъырёёр ╥ЁряхЎш 
-// └тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Trapez.cpp
+// Релизация класса Трапеция
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 16.05.10, Редакция: 1.0
 
 #include <math.h>
 #include <iostream.h>
@@ -34,7 +34,7 @@ void CTrapezium :: MovedXdY (double dx, double dy) {
     m_list.goFirst();
 
     do{
-      m_list.getElem().getValue().move(dx, dy);
+      m_list.getElem().getValue().MovedXdY(dx, dy);
     }while(m_list.goNext());
 }
 
@@ -54,5 +54,32 @@ const CCountedPoint& CTrapezium :: getPoint (int index) {
       m_list.goNext();
 
     return m_list.getElem().getValue();
+}
+
+ostream& operator << (ostream& s, CTrapezium& r)
+{
+  s << "  " << "Trapez: " << endl;
+  r.getPoints().goFirst();
+
+  do{
+    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
+  }while(r.getPoints().goNext());
+
+  s << endl;
+
+  return (s);
+}
+
+
+void CTrapezium :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
+  getPoints().goFirst();
+  do{
+    double x = m_list.getElem().getValue().getX();
+    double y = m_list.getElem().getValue().getY();
+    if (x < *minx) *minx = x;
+    if (x > *maxx) *maxx = x;
+    if (y < *miny) *miny = y;
+    if (y > *maxy) *maxy = y;
+  } while(getPoints().goNext());
 }
 

@@ -1,7 +1,7 @@
-// ╘рщы: Parallelogram.cpp
-// ╨хышчрЎш  ъырёёр ╤Єрърэ
-// └тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Glass.cpp
+// Релизация класса Стакан
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 16.05.10, Редакция: 1.0
 
 #include <iostream.h>
 #include <conio.h>
@@ -9,7 +9,7 @@
 
 
 CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
-	 const double& bottom, const double& hBottom, const double& lessSide):
+   const double& bottom, const double& hBottom, const double& lessSide):
   m_bottom(x, CCountedPoint(x.getX() + bottom, x.getY() + hBottom)),
   m_cage(CCountedPoint(x.getX() + lessSide, x.getY() + hBottom),
    CCountedPoint(y.getX() + lessSide, y.getY()),
@@ -17,10 +17,8 @@ CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
   m_leftSide(CCountedPoint(x.getX(), x.getY() + hBottom),
        y, lessSide),
   m_rightSide(CCountedPoint(x.getX() + bottom - lessSide, x.getY() + hBottom),
-	CCountedPoint(y.getX() + bottom + 2 * (x.getX() - y.getX()) - lessSide, y.getY()),
-	lessSide),
-  m_ring(x.getX()+bottom/2.0,
-	 x.getY()+hBottom+2*(y.get),(y.getY()-x.getY())/4.0)
+  CCountedPoint(y.getX() + bottom + 2 * (x.getX() - y.getX()) - lessSide, y.getY()),
+  lessSide)
 {
   cout << " Glass created" << endl;
 }

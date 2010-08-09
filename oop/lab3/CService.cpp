@@ -1,7 +1,7 @@
-// ╘рщы: ╤service.cpp
-// ╨хрышчрЎш  ъырёёр ╤Єрърэ
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Сservice.cpp
+// Реализация класса Стакан
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.0
 
 #include <conio.h>
 #include <iostream.h>
@@ -10,11 +10,11 @@
 
 
 void CService :: CService () {
-	cout << "Service created"<<endl;
+  cout << "Service created"<<endl;
 }
 
 void CService :: ~CService () {
-	cout << "Service deleted"<<endl;
+  cout << "Service deleted"<<endl;
 }
 
 
@@ -41,4 +41,19 @@ void CService::MovedXdY(double x, double y)
 
 //  cout << "!2!" << endl;
 //  GlassList.getElem().getValue().MovedXdY(x, y);
+}
+
+ostream& operator << (ostream& s, CService& service)
+{
+  s << "  " << "Service" << ": " << endl;
+  service.GlassList.goFirst();
+
+  do{
+    s << "    (" << service.GlassList.getElem().getValue() << "), " << endl;
+  }while(service.GlassList.goNext());
+
+  s << "    (" << service.GlassList.getElem().getValue() << ")";
+  s << endl;
+
+  return (s);
 }

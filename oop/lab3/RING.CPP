@@ -1,7 +1,7 @@
-// ╘рщы: Ring.cpp
-// ╨хышчрЎш  ъырёёр "╩юы№Ўю"
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.1
+// Файл: Ring.cpp
+// Релизация класса "Кольцо"
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.1
 
 #define _USE_MATH_DEFINES
 
@@ -43,7 +43,15 @@ void CRing::setR(const double& value)
 
 ostream& operator << (ostream& s, const CRing& P)
 {
-  s << "Ring: " << P.getX() << ", " << P.getY() << "  R(big)  = " << P.getR() << "  R(small) = " << P.getR()*0.9;
+  s << "Ring: " << P.getX() << ", " << P.getY() << "  R(big)  = " << P.getR() << "  R(small) = " << P.getR()*0.9 << endl;
   return (s);
 }
+
+void CRing :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
+  if ( m_x-m_R < *minx) *minx = m_x-m_R;
+  if ( m_x+m_R > *maxx) *maxx = m_x+m_R;
+  if ( m_y-m_R < *miny) *miny = m_y-m_R;
+  if ( m_y+m_R > *maxy) *maxy = m_y+m_R;
+}
+
 
