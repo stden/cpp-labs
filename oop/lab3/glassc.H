@@ -1,23 +1,23 @@
-// Файл: Rectan.h
-// Объявление класса Прямоугольник
+// Файл: GlassC.h
+// Объявление класса: Glass case
 // Автор: Волынко Е.
 // Дата: 16.05.10, Редакция: 1.1
 
-#ifndef _RECTAN_H
-#define _RECTAN_H
+#ifndef _GLASSC_H
+#define _GLASSC_H
 
 #include "CoPoint.h"
 #include "CoList.h"
 
-class CRectangle
+class CGlassCase
 {
 private :
-CList<CCountedPoint> m_list;
+  CList<CCountedPoint> m_list;
 
-//Количество экземпляров класса прямоугольник
+  // Количество экземпляров класса
   static int countreal;
 
-  //Общее количество созданных когда-либо экземпляров
+  // Общее количество созданных когда-либо экземпляров
   static int countall;
 
   //Идентификатор
@@ -29,7 +29,7 @@ public:
   * Конструктор
   * x - левая нижняя точка, y - правая верхняя
   */
-  CRectangle(const CCountedPoint& x, const CCountedPoint& y);
+  CGlassCase(const CCountedPoint& x, const CCountedPoint& y);
 
   void MovedXdY (double dx, double dy);
   void MoveToPoint (const CCountedPoint& P);
@@ -38,17 +38,26 @@ public:
   const CCountedPoint& getPoint (int index);
 
   static int getCount() { return countreal; }
-
+ 
   int getId () { return m_id; }
-
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 
   /*
   * Деструктор
   */
-  ~CRectangle();
+  ~CGlassCase();
 
-  friend ostream& operator << (ostream& s, CRectangle& r);
+friend ostream& operator << (ostream& s, CGlassCase& r)
+{
+  s << "  " << "Витрина: " << ": " << endl;
+  r.getPoints().goFirst();
+
+  do{
+    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
+  }while(r.getPoints().goNext());
+  s << endl;
+
+  return (s);
+}
 
 };
 

@@ -1,7 +1,7 @@
-// ╘рщы: Point.cpp
-// ╨хышчрЎш  ъырёёр ╥юўър
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.1
+// Файл: CoPoint.cpp
+// Релизация класса Точка
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.1
 
 #define _USE_MATH_DEFINES
 
@@ -13,25 +13,25 @@ int CCountedPoint::countall = 0;
 
 CCountedPoint::CCountedPoint(double x,double y) : m_x(x),m_y(y),m_id(++countall)
 {
-	cout << "          Point number " << m_count << " created" << endl;
-	m_count++;
+  cout << "          Point number " << m_count << " created" << endl;
+  m_count++;
 }
 
 CCountedPoint::CCountedPoint(const CCountedPoint& point) : m_id(++countall)
 {
-	m_x=point.m_x;
-	m_y=point.m_y;
-	cout << "          Point number " << m_count << " copyed" << endl;
-	m_count++;
+  m_x=point.m_x;
+  m_y=point.m_y;
+  cout << "          Point number " << m_count << " copyed" << endl;
+  m_count++;
 }
 
 CCountedPoint::~CCountedPoint()
 {
-	m_count--;
-	cout << "          Point destroyed (remain " << m_count << ")"  << endl;
+  m_count--;
+  cout << "          Point destroyed (remain " << m_count << ")"  << endl;
 }
 
-void CCountedPoint::move(double x,double y)
+void CCountedPoint::MovedXdY(double x,double y)
 {
   cout << "move " << m_x << " " << m_y << " -> " << x << " " << y << endl;
   m_x+=x;

@@ -1,10 +1,10 @@
-// файл Point
+// Файл: CoPoint.h
 // проект класса "точка"
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 16.05.10, редакция 1.0.
 
-#ifndef _POINT_H
-#define _POINT_H
+#ifndef _COPOINT_H
+#define _COPOINT_H
 
 #include <iostream.h>
 
@@ -49,7 +49,7 @@ public:
   /*
   * Смещение точки
   */
-  void move(double dx,double dy);
+  void MovedXdY(double dx,double dy);
 
 
   /*

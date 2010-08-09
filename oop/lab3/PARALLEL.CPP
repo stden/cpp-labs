@@ -1,7 +1,7 @@
-// ╘рщы: Parallelogram.cpp
-// ╨хышчрЎш  ъырёёр ╧рЁрыыхыюуЁрьь
-// └тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Parallel.cpp
+// Релизация класса Параллелограмм
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 16.05.10, Редакция: 1.0
 
 #include "Parallel.h"
 
@@ -27,12 +27,11 @@ CParallelogram::~CParallelogram(void)
 }
 
 void CParallelogram :: MovedXdY (double dx, double dy) {
-        // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
-    m_list.goFirst();
-
-    do{
-      m_list.getElem().getValue().move(dx, dy);
-    }while(m_list.goNext());
+  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
+  m_list.goFirst();
+  do{
+    m_list.getElem().getValue().MovedXdY(dx, dy);
+  }while(m_list.goNext());
 }
 
 void CParallelogram :: MoveToPoint (const CCountedPoint& P) {
@@ -44,6 +43,18 @@ void CParallelogram :: MoveToPoint (const CCountedPoint& P) {
     MovedXdY(dx, dy);
 }
 
+ostream& operator << (ostream& s, CParallelogram& r)
+{
+  s << "  " << "Parallelogram" << ": " << endl;
+  r.getPoints().goFirst();
+  do{
+    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
+  }while(r.getPoints().goNext());
+  s << endl;
+  return (s);
+}
+
+
 const CCountedPoint& CParallelogram :: getPoint (int index) {
      m_list.goFirst();
 
@@ -52,3 +63,11 @@ const CCountedPoint& CParallelogram :: getPoint (int index) {
 
     return m_list.getElem().getValue();
 }
+
+void CParallelogram :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
+/*  getPoints().goFirst();
+  do{
+    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
+  }while(r.getPoints().goNext()); */
+
+};

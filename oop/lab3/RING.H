@@ -1,4 +1,4 @@
-// файл Ring
+// файл Ring.h
 // проект класса "Кольцо"
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 16.05.10, редакция 1.0.
@@ -40,6 +40,8 @@ public:
   * Установка радиуса
   */
   void setR(const double& value);
+
+  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 };
 
 /*

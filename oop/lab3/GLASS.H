@@ -1,7 +1,7 @@
-// ╘рщы: Rectangle.h
-// ╬с· тыхэшх ъырёёр ╤Єрърэ
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Glass.h
+// Объявление класса Стакан
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.0
 
 #ifndef _GLASS_H
 #define _GLASS_H
@@ -15,47 +15,45 @@
 
 class CGlass
 {
-  // ─эю
-  cRectangle m_bottom;
+protected:
+  // Дно
+  CRectangle m_bottom;
 
-  // ╧юыюёЄ№
+  // Полость
   CTrapezium m_cage;
 
-  // ╦хтр  ёЄхэър
+  // Левая стенка
   CParallelogram m_leftSide;
 
-  // ╧Ёртр  ёЄхэър
+  // Правая стенка
   CParallelogram m_rightSide;
-
-  // ╩юы№Ўю
-  CRing m_ring;
 
 public:
   /*
-  * ╩юэёЄЁєъЄюЁ
-  * x - ыхтр  эшцэ   Єюўър, y - ыхтр  тхЁїэ  , bottom - ─ышэр юёэютрэш ,
-  * hBottom - т√ёюЄр юёэютрэш , lessSide - фышэр ьхэ№°хую ЁхсЁр сюъютющ ёЄхэъш
+  * Конструктор
+  * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
+  * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
   CGlass(const CCountedPoint& x, const CCountedPoint& y, 
          const double& bottom, const double& hBottom, const double& lessSide);
 
   /*
-  * ─хёЄЁєъЄюЁ
+  * Деструктор
   */
   ~CGlass(void);
 
   /*
-  * ╧хЁхьх∙хэшх
+  * Перемещение
   */
   void MoveToPoint(const CCountedPoint& point);
   
   /*
-  * ╤ьх∙хэшх
+  * Смещение
   */
   void MovedXdY(double x, double y);
   
   /*
-  * ╬яхЁрЄюЁ т√тюфр т яюЄюъ
+  * Оператор вывода в поток
   */
   friend ostream& operator << (ostream& s, CGlass& r) {
     s << "Glass: "
@@ -63,7 +61,6 @@ public:
     s << "  Cage: " << r.m_cage; getch();
     s << "  Left side: " << r.m_leftSide; getch();
     s << "  Right side: " << r.m_rightSide;
-    s << "  Ring : " << r.m_ring;
     getch();
     return s;
   }

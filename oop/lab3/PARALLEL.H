@@ -1,36 +1,38 @@
-// ╘рщы: Parallelogram.h
-// ╬с· тыхэшх ъырёёр ╧рЁрыыхыюуЁрьь
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: Parallel.h
+// Объявление класса Параллелограмм
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.0
 
+#ifndef _PARALLEL_H
+#define _PARALLEL_H
 
 #include "CoPoint.h"
 #include "CoList.h"
 
 /*
- * ╧рЁрыыхыюуЁрьь ыхцр∙шщ эр ьхэ№°хь ЁхсЁх
+ * Параллелограмм лежащий на меньшем ребре
  */
 class CParallelogram {
 private:
 CList<CCountedPoint> m_list;
 
-//╩юышўхёЄтю ¤ъчхьяы Ёют ъырёёр яЁ ьюєуюы№эшъ
+//Количество экземпляров класса прямоугольник
   static int countreal;
 
-  //╬с∙хх ъюышўхёЄтю ёючфрээ√ї ъюуфр-ышсю ¤ъчхьяы Ёют
+  //Общее количество созданных когда-либо экземпляров
   static int countall;
 
-  //╚фхэЄшЇшърЄюЁ
+  //Идентификатор
   int m_id;
 public:
   /*
-  * ╩юэёЄЁєъЄюЁ
-  * x - ыхтр  эшцэ   Єюўър, y - ыхтр  тхЁїэ  , l - ─ышэр ьхэ№°хую ЁхсЁр
+  * Конструктор
+  * x - левая нижняя точка, y - левая верхняя, l - Длина меньшего ребра
   */
   CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l);
 
   /*
-  * ─хёЄЁєъЄюЁ
+  * Деструктор
   */
   ~CParallelogram(void);
 
@@ -38,27 +40,16 @@ public:
   void MovedXdY (double dx, double dy);
   void MoveToPoint (const CCountedPoint& P);
 
- const CList<CCountedPoint>& getPoints () { return m_list; }
- const CCountedPoint& getPoint (int index);
+  const CList<CCountedPoint>& getPoints () { return m_list; }
+  const CCountedPoint& getPoint (int index);
 
- static int getCount() { return countreal; }
+  static int getCount() { return countreal; }
 
- int getId () { return m_id; }
+  int getId () { return m_id; }
 
+  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 
-friend ostream& operator << (ostream& s, CParallelogram& r)
-{
-  s << "  " << "Parallelogram" << ": " << endl;
-  r.getPoints().goFirst();
-
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
-
-//  s << "    (" << r.getPoints().getElem().getValue() << ")";
-//  s << endl;
-
-  return (s);
-}
-
+  friend ostream& operator << (ostream& s, CParallelogram& r);
 };
+
+#endif

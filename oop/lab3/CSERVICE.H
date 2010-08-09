@@ -1,13 +1,13 @@
-// ╘рщы: CService.h
-// ╬с· тыхэшх ъырёёр эрсюЁ
-// └тЄюЁ: ┬юы√эъю ┼.
-// ─рЄр: 16.05.10, ╨хфръЎш : 1.0
+// Файл: CService.h
+// Объявление класса набор
+// Автор: Волынко Е.
+// Дата: 16.05.10, Редакция: 1.0
 
 #ifndef _CSERVICE_H
 #define _CSERVICE_H
 
 #include "CoPoint.h"
-#include "Glass.h"
+#include "GlassR.h"
 #include "Trapez.h"
 #include "Rectan.h"
 #include "CoList.h"
@@ -15,45 +15,30 @@
 
 class CService {
 private:
-  CList<CGlass> GlassList;
+  CList<CGlassR> GlassList;
 
 public:
-	CService();
-	~CService();
+  CService();
+  ~CService();
 
 
 
-	void insert(const CGlass& gl) {GlassList.insert(gl);}
-	void insertBegin(const CGlass& gl) {GlassList.insert(gl);}
-	void print() {GlassList.print();}
+  void insert(const CGlassR& gl) {GlassList.insert(gl);}
+  void insertBegin(const CGlassR& gl) {GlassList.insert(gl);}
+  void print() {GlassList.print();}
 
   /*
-  * ╧хЁхьх∙хэшх
+  * Перемещение
   */
   void MoveToPoint(const CCountedPoint& point);
 
   /*
-  * ╤ьх∙хэшх
+  * Смещение
   */
   void MovedXdY(double x, double y);
 
 
-
-friend ostream& operator << (ostream& s, CService& service)
-{
-  s << "  " << "Service" << ": " << endl;
-  service.GlassList.goFirst();
-
-  do{
-    s << "    (" << service.GlassList.getElem().getValue() << "), " << endl;
-  }while(service.GlassList.goNext());
-
-  s << "    (" << service.GlassList.getElem().getValue() << ")";
-  s << endl;
-
-  return (s);
-}
-
+  friend ostream& operator << (ostream& s, CService& service);
 };
 
 #endif
