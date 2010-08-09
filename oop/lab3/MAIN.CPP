@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "GlassR.h"
+#include "GlassC.h"
 #include "CService.h"
 
 void check_input(char *temp,int *k, int *flag){
@@ -61,6 +62,7 @@ void addGlass(CService& s, int toBegin = 0)
      " minx = " << minx << " maxx = " << maxx <<
      " miny = " << miny << " maxy = " << maxy << endl;
   getch();
+  CGlassC gc();
 
   if(toBegin)
     s.insertBegin(glass);

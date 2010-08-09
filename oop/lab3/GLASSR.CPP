@@ -44,7 +44,6 @@ void CGlassR::MoveToPoint(const CCountedPoint& point)
 void CGlassR::MovedXdY(double x, double y)
 {
   cout << "CGlassR::MovedXdY(" << x << "," << y << ")" << endl;
-//  CGlass::MovedXdY(x, y);
   m_bottom.MovedXdY(x, y);
   m_cage.MovedXdY(x, y);
   m_leftSide.MovedXdY(x, y);
@@ -54,6 +53,6 @@ void CGlassR::MovedXdY(double x, double y)
 
 CGlassR::~CGlassR(void)
 {
- cout << " GlassR destroyed" << endl;
+  cout << " GlassR destroyed" << endl;
 }
 
