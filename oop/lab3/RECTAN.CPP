@@ -18,7 +18,7 @@ CRectangle::CRectangle(const CCountedPoint& x,const CCountedPoint& y) : m_id(++c
   m_list.insert(CCountedPoint(y.getX(), x.getY()));
   m_list.goFirst();
 
-  cout << "        Rectangle number " << countreal << " created" << endl;
+  cout << "        Rectangle created" << endl;
   ++countreal;
 
 }

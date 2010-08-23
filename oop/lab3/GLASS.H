@@ -13,8 +13,7 @@
 #include "Ring.h"
 #include <conio.h>
 
-class CGlass
-{
+class CGlass {
 protected:
   // „­®
   CRectangle m_bottom;

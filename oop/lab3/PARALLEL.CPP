@@ -27,7 +27,6 @@ CParallelogram::~CParallelogram(void)
 }
 
 void CParallelogram :: MovedXdY (double dx, double dy) {
-  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
   m_list.goFirst();
   do{
     m_list.getElem().getValue().MovedXdY(dx, dy);
@@ -65,9 +64,13 @@ const CCountedPoint& CParallelogram :: getPoint (int index) {
 }
 
 void CParallelogram :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
-/*  getPoints().goFirst();
+  getPoints().goFirst();
   do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext()); */
-
+    double x = getPoints().getElem().getValue().getX();
+    double y = getPoints().getElem().getValue().getY();
+    if(x>*maxx) *maxx = x;
+    if(x<*minx) *minx = x;
+    if(y>*maxx) *maxy = y;
+    if(y<*minx) *miny = y;
+  }while(getPoints().goNext());
 };
