@@ -1,5 +1,5 @@
 // Файл: GlassC.h
-// Объявление класса: Glass case
+// Объявление класса: Glass case - Витрина
 // Автор: Волынко Е.
 // Дата: 16.05.10, Редакция: 1.1
 
@@ -12,51 +12,34 @@
 class CGlassCase
 {
 private :
-  CList<CCountedPoint> m_list;
-
-  // Количество экземпляров класса
-  static int countreal;
-
-  // Общее количество созданных когда-либо экземпляров
-  static int countall;
-
-  //Идентификатор
-  int m_id;
+  // Нижний левый и верхний правый угол витрины
+  CCountedPoint m_leftBottom,m_rightTop;
 
 public:
 
   /*
   * Конструктор
-  * x - левая нижняя точка, y - правая верхняя
+  * leftBottom - левая нижняя точка, rightTop - правая верхняя
   */
-  CGlassCase(const CCountedPoint& x, const CCountedPoint& y);
-
-  void MovedXdY (double dx, double dy);
-  void MoveToPoint (const CCountedPoint& P);
-
-  const CList<CCountedPoint>& getPoints () { return m_list; }
-  const CCountedPoint& getPoint (int index);
-
-  static int getCount() { return countreal; }
- 
-  int getId () { return m_id; }
+  CGlassCase(const CCountedPoint& leftBottom, const CCountedPoint& rightTop);
 
   /*
   * Деструктор
   */
   ~CGlassCase();
 
+  /*
+  * Проверка, помещается ли прямоугольник с заданными координатами внутри витрины
+  */
+  int InGlassCase(double minx,double maxx,double miny,double maxy){
+    return (m_leftBottom.getX()<=minx) && (m_leftBottom.getY()<=miny) &&
+	   (m_rightTop.getX()>=maxx) && (m_rightTop.getY()>=maxy);
+  };
+
 friend ostream& operator << (ostream& s, CGlassCase& r)
 {
-  s << "  " << "Витрина: " << ": " << endl;
-  r.getPoints().goFirst();
-
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
-  s << endl;
-
-  return (s);
+  s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop << endl;
+  return s;
 }
 
 };

@@ -5,9 +5,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "GlassR.h"
-#include "GlassC.h"
 #include "CService.h"
+#include "Scene.h"
 
 void check_input(char *temp,int *k, int *flag){
   if ((atoi(temp) > 0) && (atoi(temp) < 100)){
@@ -25,54 +24,63 @@ double input_double(char *name){
     char temp[10];
     cin  >> temp;
     if(sscanf(temp,"%lf",&k))
-      return k;
+      return k;    
     cout << "Error input\n"<< "try again\n";
   }
 }
 
-void inputPoint(CCountedPoint& p)
-{
-  double x, y;
-  x = input_double("    Input x:");
-  y = input_double("    Input y:");
-  p.setX(x);
-  p.setY(y);
+void inputPoint(CCountedPoint& p) {
+  p.setX(input_double("    Input x:"));
+  p.setY(input_double("    Input y:"));
 }
 
 void addGlass(CService& s, int toBegin = 0)
 {
-  double bottomLength, hBottom, lessSide;
-  CCountedPoint bottom, top;
+  // Создаём Витрину
+  CCountedPoint leftBottom, // Левый нижний угол витрины
+		rightTop; // Правый верхний угол витрины
+  cout<<"  Input glass case left bottom point:" << endl;
+  inputPoint(leftBottom);
+  int error; // Признак ошибки
+  do{
+    cout<<"  Input glass case right top point:" << endl;
+    inputPoint(rightTop);
+    error = (rightTop.getX() <= leftBottom.getX()) ||
+	    (rightTop.getY() <= leftBottom.getY());
+    if(error)
+      cout << "   Error: wrong coordinates " << endl;
+  } while(error);
 
+  int inGlass;
+  do{
+    double bottomLength, hBottom, lessSide;
+    CCountedPoint bottom, top;
+    cout<<"  Input left bottom point:" << endl;
+    inputPoint(bottom);
+    cout<<"  Input left hight point:" << endl;
+    inputPoint(top);
 
-  cout<<"  Input left bottom point:" << endl;
-  inputPoint(bottom);
-  cout<<"  Input left hight point:" << endl;
-  inputPoint(top);
+    bottomLength = input_double("  Input the less foundation length:");
+    hBottom = input_double("  Input the less foundation heigth:");
+    lessSide = input_double("  Input the less rib length:");
 
-
-  bottomLength = input_double("  Input the less foundation length:");
-  hBottom = input_double("  Input the less foundation heigth:");
-  lessSide = input_double("  Input the less rib length:");
-
-  CGlassR glass(bottom, top, bottomLength, hBottom, lessSide);
-  double minx,maxx,miny,maxy;
-  glass.GetBorders(&minx,&maxx,&miny,&maxy);
-  cout << " Borders: " <<
-     " minx = " << minx << " maxx = " << maxx <<
-     " miny = " << miny << " maxy = " << maxy << endl;
-  getch();
-  CGlassC gc();
-
-  if(toBegin)
-    s.insertBegin(glass);
-  else
-    s.insert(glass);
+    CScene scene(leftBottom,rightTop,bottom, top, bottomLength, hBottom, lessSide);
+    inGlass = scene.GlassInGlassCase();
+    if(inGlass){
+      if(toBegin)
+	s.insertBegin(scene);
+      else
+	s.insert(scene);
+    } else {
+      cout << " Glass isn't inside Glass Case" << endl;
+    };
+  } while(!inGlass);
+  cout << "Scene added!" << endl;
 }
 
 void main()
 {
-  int i, k;
+  int k;
   int flag;
   char *temp = new char[5];
 
@@ -90,12 +98,10 @@ void main()
     cout << "\n";
   };
 
-  i = 0;
   //Input value of elements
-  while (i < k){
+  for(int i=0;i < k;i++){
     cout << "Input element " << (i+1) << ": " << endl;
     addGlass(s);
-    i++;
   };
 
   cout << endl << endl;

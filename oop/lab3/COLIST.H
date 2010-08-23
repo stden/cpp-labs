@@ -37,7 +37,7 @@ public:
     m_first  =NULL;
     countreal++;    
     
-   // cout << "Linear list number " << countreal << " created" << endl;
+   // cout << "Linear list # " << countreal << " created" << endl;
   }
 
   /*
@@ -56,7 +56,7 @@ public:
       cur=cur->getNext();
     }
 
-   // cout << "Linear list number " << countreal << " copyed" << endl;
+   // cout << "Linear list # " << countreal << " copyed" << endl;
   }
 
   /*
@@ -143,9 +143,9 @@ public:
     if(m_current!=NULL)
     {
       if(m_current->getNext()!=NULL)
-	m_current=m_current->getNext();
+  m_current=m_current->getNext();
       else
-	return 0;
+  return 0;
     }
     else
       return 0;

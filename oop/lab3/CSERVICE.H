@@ -7,7 +7,7 @@
 #define _CSERVICE_H
 
 #include "CoPoint.h"
-#include "GlassR.h"
+#include "Scene.h"
 #include "Trapez.h"
 #include "Rectan.h"
 #include "CoList.h"
@@ -15,17 +15,19 @@
 
 class CService {
 private:
-  CList<CGlassR> GlassList;
+  CList<CScene> List;
 
 public:
   CService();
   ~CService();
 
+  /*
+  *
+  */
+  void insert(const CScene& gl){ List.insert(gl); }
 
-
-  void insert(const CGlassR& gl) {GlassList.insert(gl);}
-  void insertBegin(const CGlassR& gl) {GlassList.insert(gl);}
-  void print() {GlassList.print();}
+  void insertBegin(const CScene& gl){ List.insertBegin(gl); }
+  void print(){ List.print(); }
 
   /*
   * Перемещение

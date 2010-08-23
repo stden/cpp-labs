@@ -13,7 +13,7 @@ int CCountedPoint::countall = 0;
 
 CCountedPoint::CCountedPoint(double x,double y) : m_x(x),m_y(y),m_id(++countall)
 {
-  cout << "          Point number " << m_count << " created" << endl;
+  // cout << "          Point number " << m_count << " created" << endl;
   m_count++;
 }
 
@@ -21,19 +21,19 @@ CCountedPoint::CCountedPoint(const CCountedPoint& point) : m_id(++countall)
 {
   m_x=point.m_x;
   m_y=point.m_y;
-  cout << "          Point number " << m_count << " copyed" << endl;
+  // cout << "          Point number " << m_count << " copyed" << endl;
   m_count++;
 }
 
 CCountedPoint::~CCountedPoint()
 {
   m_count--;
-  cout << "          Point destroyed (remain " << m_count << ")"  << endl;
+  // cout << "          Point destroyed (remain " << m_count << ")"  << endl;
 }
 
 void CCountedPoint::MovedXdY(double x,double y)
 {
-  cout << "move " << m_x << " " << m_y << " -> " << x << " " << y << endl;
+  // cout << "move " << m_x << " " << m_y << " -> " << x << " " << y << endl;
   m_x+=x;
   m_y+=y;
 }

@@ -11,7 +11,7 @@
 
 CRing::CRing(double x,double y,double R) : CCountedPoint(x,y), m_R(R)
 {
-  cout << "          Ring number " << m_count << " created" << endl;
+  cout << "          Ring created" << endl;
   m_count++;
 }
 
@@ -21,14 +21,12 @@ CRing::CRing(const CRing& ring)
   m_x=ring.m_x;
   m_y=ring.m_y;
   m_R=ring.m_R;
-  cout << "          Ring number " << m_count << " copyed" << endl;
   m_count++;
 }
 
 CRing::~CRing()
 {
   m_count--;
-  cout << "          Ring destroyed (remain " << m_count << ")"  << endl;
 }
 
 
