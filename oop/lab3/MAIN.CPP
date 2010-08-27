@@ -38,7 +38,7 @@ void addGlass(CService& s, int toBegin = 0)
 {
   // Создаём Витрину
   CCountedPoint leftBottom, // Левый нижний угол витрины
-		rightTop; // Правый верхний угол витрины
+    rightTop; // Правый верхний угол витрины
   cout<<"  Input glass case left bottom point:" << endl;
   inputPoint(leftBottom);
   int error; // Признак ошибки
@@ -46,7 +46,7 @@ void addGlass(CService& s, int toBegin = 0)
     cout<<"  Input glass case right top point:" << endl;
     inputPoint(rightTop);
     error = (rightTop.getX() <= leftBottom.getX()) ||
-	    (rightTop.getY() <= leftBottom.getY());
+      (rightTop.getY() <= leftBottom.getY());
     if(error)
       cout << "   Error: wrong coordinates " << endl;
   } while(error);
@@ -68,9 +68,9 @@ void addGlass(CService& s, int toBegin = 0)
     inGlass = scene.GlassInGlassCase();
     if(inGlass){
       if(toBegin)
-	s.insertBegin(scene);
+  s.insertBegin(scene);
       else
-	s.insert(scene);
+  s.insert(scene);
     } else {
       cout << " Glass isn't inside Glass Case" << endl;
     };
@@ -123,28 +123,28 @@ void main()
 
     switch(a){
       case 1:
-	addGlass(s);
-	break;
+        addGlass(s);
+        break;
       case 2:
-	addGlass(s, 1);
-	break;
+        addGlass(s, 1);
+        break;
       case 3:
-	double dx = input_double("Enter dx:"),
-	       dy = input_double("Enter dy:");
-	s.MovedXdY(dx,dy);
-	break;
+        double dx = input_double("Enter dx:"),
+               dy = input_double("Enter dy:");
+        s.MovedXdY(dx,dy);
+        break;
       case 4:
-	double x = input_double("Enter x:"),
-	       y = input_double("Enter y:");
-	s.MoveToPoint(CCountedPoint(x,y));
-	break;
+        double x = input_double("Enter x:"),
+               y = input_double("Enter y:");
+        s.MoveToPoint(CCountedPoint(x,y));
+        break;
       case 5:
-	s.print();
-	break;
+        s.print();
+        break;
       case 0:
-	break;
+        break;
       default:
-	cout << "Out of menu :)" << endl;
+        cout << "Out of menu :)" << endl;
     }
 
     //Out lists

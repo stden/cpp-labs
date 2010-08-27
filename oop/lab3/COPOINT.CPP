@@ -8,26 +8,20 @@
 #include <math.h>
 #include "CoPoint.h"
 
-int CCountedPoint::m_count = 0;
-int CCountedPoint::countall = 0;
-
-CCountedPoint::CCountedPoint(double x,double y) : m_x(x),m_y(y),m_id(++countall)
+CCountedPoint::CCountedPoint(double x,double y) : m_x(x),m_y(y)
 {
   // cout << "          Point number " << m_count << " created" << endl;
-  m_count++;
 }
 
-CCountedPoint::CCountedPoint(const CCountedPoint& point) : m_id(++countall)
+CCountedPoint::CCountedPoint(const CCountedPoint& point)
 {
   m_x=point.m_x;
   m_y=point.m_y;
   // cout << "          Point number " << m_count << " copyed" << endl;
-  m_count++;
 }
 
 CCountedPoint::~CCountedPoint()
 {
-  m_count--;
   // cout << "          Point destroyed (remain " << m_count << ")"  << endl;
 }
 
@@ -81,7 +75,6 @@ void CCountedPoint::setY(const double& value)
 ostream& operator << (ostream& s, const CCountedPoint& P)
 {
   s << "Point:" << P.getX() << ", " << P.getY();
-
-  return (s);
+  return s;
 }
 

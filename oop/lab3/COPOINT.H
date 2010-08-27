@@ -17,15 +17,6 @@ protected:
   //Ордината точки
   double m_y;
 
-  //Количество экземпляров класса Точка
-  static int m_count;
-
-  //Общее количество созданных когда-либо экземпляров
-  static int countall;
-
-  //Идентификатор
-  int m_id;
-
 public:
 
   /*
@@ -38,13 +29,6 @@ public:
   */
   CCountedPoint(const CCountedPoint&);
 
-  /*
-  * Получить количество экземпляров класса
-  */
-  static int getCount()
-  {
-    return m_count;
-  }
 
   /*
   * Смещение точки

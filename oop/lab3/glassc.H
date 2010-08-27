@@ -37,12 +37,13 @@ public:
      (m_rightTop.getX()>=maxx) && (m_rightTop.getY()>=maxy);
   };
 
-friend ostream& operator << (ostream& s, CGlassCase& r)
-{
-  s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop << endl;
-  return s;
-}
-
+  /* 
+  * Вывод параметров витрины в поток 
+  */
+  friend ostream& operator << (ostream& s, CGlassCase& r) {
+    s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop << endl;
+    return s;
+  }
 };
 
 

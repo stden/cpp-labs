@@ -6,31 +6,23 @@
 #include <iostream.h>
 #include "Rectan.h"
 
-int CRectangle::countreal = 0;
-int CRectangle::countall = 0;
-
-
-CRectangle::CRectangle(const CCountedPoint& x,const CCountedPoint& y) : m_id(++countall)
+CRectangle::CRectangle(const CCountedPoint& x,const CCountedPoint& y)
 {
   m_list.insert(x);
   m_list.insert(CCountedPoint(x.getX(), y.getY()));
   m_list.insert(y);
   m_list.insert(CCountedPoint(y.getX(), x.getY()));
   m_list.goFirst();
-
   cout << "        Rectangle created" << endl;
-  ++countreal;
-
 }
 
 CRectangle::~CRectangle()
 {
-  countreal--;
-  cout << "        Rectangle destroyed (remain " << countreal << ")" << endl;
+  cout << "        Rectangle destroyed" << endl;
 }
 
 void CRectangle :: MovedXdY (double dx, double dy) {
-        // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
+  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
   m_list.goFirst();
   do{
     m_list.getElem().getValue().MovedXdY(dx, dy);

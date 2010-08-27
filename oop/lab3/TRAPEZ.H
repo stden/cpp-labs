@@ -9,18 +9,9 @@
 #include "CoPoint.h"
 #include "CoList.h"
 
-class CTrapezium  {
+class CTrapezium {
 private:
-CList<CCountedPoint> m_list;
-
-//Количество экземпляров класса прямоугольник
-  static int countreal;
-
-  //Общее количество созданных когда-либо экземпляров
-  static int countall;
-
-  //Идентификатор
-  int m_id;
+  CList<CCountedPoint> m_list;
 
 public:
 
@@ -38,14 +29,9 @@ public:
   const CList<CCountedPoint>& getPoints () { return m_list; }
   const CCountedPoint& getPoint (int index);
 
-  static int getCount() { return countreal; }
-
-  int getId () { return m_id; }
-
   void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 
   friend ostream& operator << (ostream& s, CTrapezium& r);
-
 };
 
 #endif
