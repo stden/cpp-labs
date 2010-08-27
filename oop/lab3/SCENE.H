@@ -9,7 +9,8 @@
 #include "GlassR.h"
 #include "GlassC.h"
 
-class CScene : public CGlassCase, public CGlassR {
+// Используется множественное наследование
+class CScene : public CGlassCase, public CGlassR { 
 public:
 
   /*

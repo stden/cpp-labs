@@ -11,8 +11,11 @@
 CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
    const double& bottom, const double& hBottom, const double& lessSide):
   CGlass(x,y,bottom,hBottom,lessSide),
+  // Центр "кольца" совпадает с точкой пересечения диагоналей "полости стакана"
   m_ring(x.getX()+bottom/2.0,
     0, // Y-координата будет задана позднее
+    // Диаметр внешней окружности "кольца" равен половине высоты 
+    // "трапеции" образующей "полость стакана" 
     (y.getY()-x.getY()-hBottom)/4.0)
 {
   // Вычисляем высоту большого треугольника

@@ -15,9 +15,9 @@
 #include "values.h"
 #include <conio.h>
 
-class CGlassR : public CGlass
-{
-  // Кольцо
+// "Тонкий стакан с кольцом" 
+class CGlassR : public CGlass { // Используется простое наследование
+  // Кольцо - две концентрические окружности в "полости стакана" 
   CRing m_ring;
 
 public:

@@ -43,6 +43,7 @@ void CRing::setR(const double& value)
 
 ostream& operator << (ostream& s, const CRing& P)
 {
+  // Ширина кольца равняется одной десятой диаметра внешней окружности "кольца"
   s << "Ring: " << P.getX() << ", " << P.getY() << "  R(big)  = " << P.getR() << "  R(small) = " << P.getR()*0.9 << endl;
   return (s);
 }

@@ -9,6 +9,7 @@
 #include "CoPoint.h"
 #include "CoList.h"
 
+// "Витрина" имеет форму прямоугольника
 class CGlassCase
 {
 private :
@@ -33,7 +34,7 @@ public:
   */
   int InGlassCase(double minx,double maxx,double miny,double maxy){
     return (m_leftBottom.getX()<=minx) && (m_leftBottom.getY()<=miny) &&
-	   (m_rightTop.getX()>=maxx) && (m_rightTop.getY()>=maxy);
+     (m_rightTop.getX()>=maxx) && (m_rightTop.getY()>=maxy);
   };
 
 friend ostream& operator << (ostream& s, CGlassCase& r)
