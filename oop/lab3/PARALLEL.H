@@ -16,14 +16,6 @@ class CParallelogram {
 private:
 CList<CCountedPoint> m_list;
 
-//Количество экземпляров класса прямоугольник
-  static int countreal;
-
-  //Общее количество созданных когда-либо экземпляров
-  static int countall;
-
-  //Идентификатор
-  int m_id;
 public:
   /*
   * Конструктор
@@ -42,10 +34,6 @@ public:
 
   const CList<CCountedPoint>& getPoints () { return m_list; }
   const CCountedPoint& getPoint (int index);
-
-  static int getCount() { return countreal; }
-
-  int getId () { return m_id; }
 
   void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
 

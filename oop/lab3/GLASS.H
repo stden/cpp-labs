@@ -27,6 +27,15 @@ protected:
   // Правая стенка
   CParallelogram m_rightSide;
 
+  // Количество экземпляров класса стакан
+  static int countreal;
+
+  // Общее количество созданных когда-либо экземпляров
+  static int countall;
+
+  // Идентификатор
+  int m_id;
+
 public:
   /*
   * Конструктор
@@ -64,7 +73,14 @@ public:
     return s;
   }
 
-};
+  /*
+  * Получить количество экземпляров класса
+  */
+  static int getCount()
+  {
+    return countreal;
+  }
 
+};
 
 #endif

@@ -5,25 +5,19 @@
 
 #include "Parallel.h"
 
-int CParallelogram::countreal = 0;
-int CParallelogram::countall = 0;
-
-CParallelogram::CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l) : m_id(++countall)
+CParallelogram::CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l)
 {
-
   m_list.insert(x);
   m_list.insert(y);
   m_list.insert(CCountedPoint(y.getX() + l, y.getY()));
   m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
   m_list.goFirst();
-  cout << "        Parallelogram number " << countreal << " created" << endl;
-  ++countreal;
+  cout << "        Parallelogram created" << endl;
 }
 
 CParallelogram::~CParallelogram(void)
 {
-        cout << "        Parallelogram destroyed (remain " << countreal << ")" << endl;
-        --countreal; 
+  cout << "        Parallelogram destroyed" << endl;
 }
 
 void CParallelogram :: MovedXdY (double dx, double dy) {

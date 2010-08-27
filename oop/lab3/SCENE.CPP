@@ -32,7 +32,7 @@ void CScene::MovedXdY(double x, double y)
   cout << "CScene::MovedXdY(" << x << "," << y << ")" << endl;
   CGlassR::MovedXdY(x,y);
   if(!GlassInGlassCase()){
-    cout << "Error: Glass outside Glass Case" << endl;
+    cout << "Error: Glass outside Glass Case borders" << endl;
     CGlassR::MovedXdY(-x,-y);
   }
 }

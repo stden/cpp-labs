@@ -7,11 +7,7 @@
 #include <iostream.h>
 #include "Trapez.h"
 
-int CTrapezium::countreal = 0;
-int CTrapezium::countall = 0;
-
-CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l) : m_id(++countall)
-{
+CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l) {
 
   m_list.insert(x);
   m_list.insert(y);
@@ -19,18 +15,16 @@ CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const d
   m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
   m_list.goFirst();
 
-  cout << "        Trapezium number " << countreal << " created" << endl;
-  ++countreal;
+  cout << "        Trapezium created" << endl;
 }
 
 CTrapezium::~CTrapezium(void)
 {
-  cout << "        Trapezium destroyed (remain " << countreal << ")" << endl;
-  --countreal;
+  cout << "        Trapezium destroyed" << endl;
 }
 
 void CTrapezium :: MovedXdY (double dx, double dy) {
-        // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
+	// cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
     m_list.goFirst();
 
     do{
@@ -48,12 +42,10 @@ void CTrapezium :: MoveToPoint (const CCountedPoint& P) {
 }
 
 const CCountedPoint& CTrapezium :: getPoint (int index) {
-     m_list.goFirst();
-
-    for(index;index>1;index--)
-      m_list.goNext();
-
-    return m_list.getElem().getValue();
+  m_list.goFirst();
+  for(index;index>1;index--)
+    m_list.goNext();
+  return m_list.getElem().getValue();
 }
 
 ostream& operator << (ostream& s, CTrapezium& r)
