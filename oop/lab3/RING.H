@@ -13,13 +13,22 @@ class CRing : public CCountedPoint
 {
 
   // Радиус
-  double m_R;
+  double m_R_B;
+
+  double m_R_S;
+  
+  //Абсцисса точки
+  double m_x;
+
+  //Ордината точки
+  double m_y;
 
 public:
   /*
   * Конструктор
   */
-  CRing(double _x = 0,double _y = 0,double _R = 0);
+  CRing(double _x,double _y,double _R_B,double _R_S);
+
 
   /*
   * Конструктор копирования
@@ -34,14 +43,28 @@ public:
   /*
   * Получение радиуса
   */
-  double getR() const;
+  double getR_B() const;
+  double getR_S() const;
 
   /*
   * Установка радиуса
   */
-  void setR(const double& value);
+  void setR_B(const double& value);
+  void setR_S(const double& value);
 
   void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
+
+
+  /*
+  * Смещение точки
+  */
+  void MovedXdY(double dx,double dy);
+
+  /*
+  * Перемещение в заданную точку
+  */
+  void MoveToPoint(double x, double y);
+
 };
 
 /*

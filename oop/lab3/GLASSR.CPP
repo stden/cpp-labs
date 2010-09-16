@@ -25,7 +25,8 @@ CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
     // Диаметр внешней окружности "кольца" равен половине высоты 
     // "трапеции" образующей "полость стакана" 
     // Мы передаём в конструктор радиус внешней окружности, который равен четверти
-    (y.getY()-x.getY()-hBottom)/4.0)
+    (y.getY()-x.getY()-hBottom)/4.0,
+    0.9*(y.getY()-x.getY()-hBottom)/4.0)
 {
   // Вычисляем высоту большого треугольника
   double HBig = y.getY()-x.getY()-hBottom;
