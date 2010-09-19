@@ -16,6 +16,9 @@ private :
   // Нижний левый и верхний правый угол витрины
   CCountedPoint m_leftBottom,m_rightTop;
 
+  double m_Height; // Высота витрины
+  double m_Width; // Ширина витрины
+
 public:
 
   /*
@@ -37,11 +40,44 @@ public:
      (m_rightTop.getX()>=maxx) && (m_rightTop.getY()>=maxy);
   };
 
+  /*
+  * Получить высоту витрины 
+  */
+  double getHeight(){
+    return m_rightTop.getY() - m_leftBottom.getY();
+    // return m_Height;
+  }
+
+  /*
+  * Установить высоту витрины
+  */
+  void setHeight( double value ){
+    m_Height = value;
+    m_rightTop.setY( m_leftBottom.getY() + value );
+  }
+
+  /*
+  * Получить ширину витрины 
+  */
+  double getWidth(){
+    return m_rightTop.getX() - m_leftBottom.getX();
+    // return m_Width;
+  }
+
+  /*
+  * Установить ширину витрины
+  */
+  void setWidth( double value ){
+    m_Width = value;
+    m_rightTop.setX( m_leftBottom.getX() + value );
+  }
+
   /* 
   * Вывод параметров витрины в поток 
   */
   friend ostream& operator << (ostream& s, CGlassCase& r) {
-    s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop << endl;
+    s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop 
+      << " Высота " << r.getHeight() << "  Ширина " << r.getWidth() << endl;
     return s;
   }
 };
