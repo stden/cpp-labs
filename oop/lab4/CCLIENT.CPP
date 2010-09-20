@@ -136,16 +136,16 @@ void CClient::SendMessage(int _type, double _info, int _id) {
 void CClient::ReceiveMessage(CMessage *msg) {
  CServer *server = GetServerByID(msg->getFromID());
  if (server != NULL)  {
-   cout <<endl<< "Client #"<<id<< " recived message from server #" 
+   cout << endl << "Client #" << id << " recived message from server #" 
      << server->getID() << endl;
    msg->Print();
    
    if (msg->getType() > 1)  {
-     /*CMessage *msg1 = new CMessage(*msg);
-     msg1->SetType(0); //код подтверждения приёма сообщения
-     msg1->SetDirection(1);
-     SendMessage(msg1, server->GetID()); //отправка подтверждения о приёме
-     //сообщения */
+     // отправка подтверждения о приёме сообщения
+     CMessage *msg1 = new CMessage(*msg);
+     msg1->setType(Confirmation); //код подтверждения приёма сообщения
+     msg1->setDirection(Client_to_Server);
+     SendMessage(msg1, server->getID());
      Action (msg->getType(), msg->getInfo());
      //отправка подтверждения о выполнении действия
      SendMessage( new CMessage(msg->getToID(),msg->getFromID(),
@@ -189,7 +189,7 @@ void CClient :: Print() const {
     ServerList.GetFirst();
     for (int i = 0;i < ServerList.GetSize(); i++,ServerList.NextCur()) {
       cout << "  #"<< (i+1) <<" Server, ID = "
-	<< ServerList.GetCur()->GetValue()->getID() << endl;
+  << ServerList.GetCur()->GetValue()->getID() << endl;
     }
   }
   cout << endl;

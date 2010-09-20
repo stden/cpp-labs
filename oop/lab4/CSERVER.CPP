@@ -9,6 +9,8 @@
 #include <iostream.h>
 #include <conio.h>
 
+static const int Server_Do_Confirmation = 0;
+
 int CServer :: current = 0;
 int CServer :: total = 0;
 int CServer :: debug = 0;
@@ -66,7 +68,7 @@ void CServer :: Register(CClient *client)
       {
         client->Register(this);
   cout << "Client #" << client->getID() << " was registered on server #"
-          << id<<endl;
+    << id<<endl;
       }
     }
   }
@@ -92,16 +94,12 @@ void CServer ::UnregisterAll() {
 
   if (ClientList.GetSize() == 0) {
     cout << "There are already no registered clients exists"<<endl;
-  }
-
-  else {
+  } else {
     ClientList.GetFirst();
     int tlen = ClientList.GetSize();
-    for (int i = 0; i < tlen;i++) {
-      //            ClientList.GetFirst();
-      /* ClientList.ExcludeCur();*/Unregister(ClientList.GetFirst()->GetValue()->getID());
-    }
-    cout << "Server #"<<id<<" unregistered all clients"<<endl;
+    for (int i = 0; i < tlen;i++) 
+      Unregister(ClientList.GetFirst()->GetValue()->getID());
+    cout << "Server #"<<id<<": unregistered all clients"<<endl;
   }
 }
 
@@ -114,10 +112,10 @@ void CServer :: SendMessage(CMessage *msg, int _id)
     msg->setToID(_id);
     msg->setDirection(Server_to_Client);
     client->ReceiveMessage(msg);
-    //  cout << "Server #"<<id<< " sent message to client #"<<_id<<endl;
+    cout << "Server #" << id << ": sent message to client #"<<_id<<endl;
   }
   else {
-    cout << "Server #" << id<< " could not send messages to client #"<<_id<<endl
+    cout << "Server #" << id << " could not send messages to client #"<<_id<<endl
       <<"cause it not registered on it"<<endl;
     //   delete msg;
   }
@@ -127,17 +125,14 @@ void CServer :: SendMessage(CMessage *msg, int _id)
 void CServer :: SendMessageToAll(int _type, double _info) {
   CMessage* msg = new CMessage(id,1,_type,_info,Server_to_Client);
   if (ClientList.GetSize() != 0) {
-
     msg->setDirection(Server_to_Client);
-
     int tlen = ClientList.GetSize();
     for (int i = 0; i < tlen; i ++) {
       msg->setFromID(id);
       msg->setToID(ClientList.GetElemByNum(i)->GetValue()->getID());
       ClientList.GetElemByNum(i)->GetValue()->ReceiveMessage(msg);
     }
-
-    //  cout << "Server #"<<id<< " sent message to all clients "<<endl;
+    cout << "Server #"<<id<< ": sent message to all clients " << endl;
   }
   else {
     cout << "Server #" << id 
@@ -152,29 +147,28 @@ void CServer :: SendMessageToAll(CMessage *msg) {
 
 void CServer :: SendMessage(int _type, double _info, int _id) {
   CClient *client = GetClientByID(_id);
-  CMessage *msg = new CMessage(id,_id,_type,_info,Server_to_Client);
   if (client != NULL) {
+    CMessage *msg = new CMessage(id,_id,_type,_info,Server_to_Client);
     msg->setFromID(id);
     msg->setToID(_id);
     msg->setType(_type);
     msg->setInfo(_info);
     msg->setDirection(Server_to_Client);
     client->ReceiveMessage(msg);
-    // cout << "Server #"<<id<< " sent message to client #"<<_id<<endl;
+    cout << "Server #" << id << ": sent message to client #" << _id << endl;
+    delete msg;
   } else {
-    cout << "Server #" << id<< "could not send messages to client #" 
+    cout << "Server #" << id << ": could not send messages to client #"
       << _id << "cause it not registered on it"<<endl;
   }
-  delete msg;
 }
 
 void CServer :: ReceiveMessage(CMessage *msg) {
   CClient* client = GetClientByID(msg->getFromID());
   if (client != NULL) {
-    cout << "Server #"<<id<< " recived message"<<endl
-      <<"from client #"<<client->getID()<<endl;
+    cout << "Server #" << id << ": recived message from client #" << client->getID() << endl;
     msg->Print();
-    if (msg->getType() > 0) {
+    if (msg->getType() > 0 && Server_Do_Confirmation) {
       CMessage *msg1 = new CMessage(*msg);
       msg1->setType(Confirmation); //код подтверждения приёма сообщения
       msg1->setDirection(Server_to_Client);
@@ -182,7 +176,7 @@ void CServer :: ReceiveMessage(CMessage *msg) {
       delete msg1;
     }
   } else {
-    cout << "Server #" <<id<< "could not recive message from unknown client"<<endl;
+    cout << "Server #" << id << ": could not recive message from unknown client"<<endl;
   }
   // delete msg;
 }

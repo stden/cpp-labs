@@ -14,18 +14,18 @@
 // Input value from "cin" with error checking
 template <class T>
 T input(char *prompt, T min, T max){
-  cout << prompt << " " << min << ".." << max << ": ";
   T value;
   do{
+    cout << prompt << " " << min << ".." << max << ": ";
     while(!(cin >> value) && !cin.eof()) {
-      cerr << "Invalid input, try again: "<<endl;
+      cerr << "Error: invalid input, try again: "<<endl;
       cin.clear();
       cin.ignore(cin.rdbuf()->in_avail());
     }
     if(value < min)
-      cerr << "Required: value >= " << min <<endl;
+      cerr << "Error: Required value >= " << min <<endl;
     if(value > max)
-      cerr << "Required: value <= " << max <<endl;
+      cerr << "Error: Required value <= " << max <<endl;
   } while(value < min || value > max);
   return value;
 }
@@ -51,7 +51,7 @@ int main() {
   cout << endl << endl << "-----------------------------------------------"<<endl;
   cout << "Programm is modeling of Client->Server->Client message exchange"<<endl
     << "with confirmation of Server->Client interaction."<<endl
-    << "Programmed by: Evgeny Volinko"<<endl<<endl
+    << "Programmed by: Evgeny Volinko"<<endl
     << "--------------------------------"<<endl;
 
   int menu;
