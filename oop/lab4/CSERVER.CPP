@@ -34,14 +34,11 @@ CServer :: ~CServer() {
   }
 }
 
-
 CClient* CServer :: GetClientByID(int _id) {
   ClientList.GetFirst();
-  for (int i = 0; i < ClientList.GetSize();i++,ClientList.NextCur()) {
+  for (int i = 0; i < ClientList.GetSize();i++,ClientList.NextCur()) 
     if (ClientList.GetCur()->GetValue()->getID() == _id)
       return ClientList.GetCur()->GetValue();
-  }
-
   return 0;
 }
 
@@ -49,26 +46,21 @@ int CServer :: Client_Count() const {
   return ClientList.GetSize();
 }
 
-
 void CServer :: Register(CClient *client)
 {
   if (client == NULL) {
     cout << "Server #"<<id<<endl
       <<"Failed to register client due to wrong address"<<endl;
-  }
-  else   {
+  } else {
     if (GetClientByID(client->getID()) != NULL) {
       cout << "Client #" << client->getID() 
         << " already registered on server #"<<id<<endl;
-    }
-    else {
-
+    } else {
       ClientList.Append(new CLNode<CClient*>(client));
-      if (client->GetServerByID(id) == NULL)
-      {
+      if (client->GetServerByID(id) == NULL) {
         client->Register(this);
-  cout << "Client #" << client->getID() << " was registered on server #"
-    << id<<endl;
+        cout << "Client #" << client->getID() << " was registered on server #"
+          << id<<endl;
       }
     }
   }
@@ -80,8 +72,7 @@ void CServer :: Unregister(int _id) {
   if (client == NULL) {
     cout << "Client #"<<_id<< " can not unregister from server #"<<id<<endl
       <<"cause it does not registered on it"<<endl;
-  }
-  else {
+  } else {
     ClientList.ExcludeCur();
     if (client->GetServerByID(id) != NULL) {
       client->Unregister(id);

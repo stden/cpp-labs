@@ -26,10 +26,9 @@ CClient :: ~CClient() {
   --current;
   if (debug) {
     cout << "Client #" << id << " is deleted" <<endl
-   << "total = " << total << ", current = " << current<<endl;
+      << "total = " << total << ", current = " << current<<endl;
   }
 }
-
 
 CServer* CClient :: GetServerByID(int _id) {
   ServerList.GetFirst();
@@ -39,11 +38,9 @@ CServer* CClient :: GetServerByID(int _id) {
   return 0;
 }
 
-
 int CClient :: ServerCount() const {
   return ServerList.GetSize();
 }
-
 
 void CClient :: Register(CServer *server) {
   if (server == NULL)  {
@@ -53,26 +50,23 @@ void CClient :: Register(CServer *server) {
     if (GetServerByID(server->getID()) != NULL) {
       cout << "Client #" << id 
         <<" already registered on server #" << server->getID() << endl;
-    }
-    else {
+    } else {
       ServerList.Append(new CLNode<CServer*>(server));
       if (server->GetClientByID(id) == NULL) {
-  server->Register(this);
-  cout << "Client #" << id << " was registered on server #"
-    << server->getID()<<endl;
+        server->Register(this);
+        cout << "Client #" << id << " was registered on server #"
+          << server->getID()<<endl;
       }
     }
   }
 }
 
-
-void CClient::Unregister(int _id)
-{
+void CClient::Unregister(int _id) {
   CServer *server = GetServerByID(_id);
   if (server == NULL) {
     cout << "Client #" << id << " can not unregister from server #"
       << server->getID() << endl
-    <<"cause it does not registered on it"<<endl;
+      <<"cause it does not registered on it"<<endl;
   } else {
     ServerList.ExcludeCur();
     if (server->GetClientByID(id) != NULL) {
@@ -81,7 +75,6 @@ void CClient::Unregister(int _id)
     }
   }
 }
-
 
 void CClient::UnregisterAll() {
 
@@ -106,11 +99,11 @@ void CClient::SendMessage(CMessage *msg, int _id) {
     msg->setToID(_id);
     msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
-  //  cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
+    cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
   } else {
     cout << "Client #" << id<< "could not send messages to server #"<<_id<<endl
-    <<"cause it not registered on it"<<endl;
-   // delete msg;
+      <<"cause it not registered on it"<<endl;
+    // delete msg;
   }
 }
 
@@ -124,7 +117,7 @@ void CClient::SendMessage(int _type, double _info, int _id) {
     msg->setInfo(_info);
     msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
-   // cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
+    cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
   }
   else {
     cout << "Client #" << id<< "could not send messages to server #"<<_id
@@ -134,54 +127,53 @@ void CClient::SendMessage(int _type, double _info, int _id) {
 }
 
 void CClient::ReceiveMessage(CMessage *msg) {
- CServer *server = GetServerByID(msg->getFromID());
- if (server != NULL)  {
-   cout << endl << "Client #" << id << " recived message from server #" 
-     << server->getID() << endl;
-   msg->Print();
-   
-   if (msg->getType() > 1)  {
-     // отправка подтверждения о приёме сообщения
-     CMessage *msg1 = new CMessage(*msg);
-     msg1->setType(Confirmation); //код подтверждения приёма сообщения
-     msg1->setDirection(Client_to_Server);
-     SendMessage(msg1, server->getID());
-     Action (msg->getType(), msg->getInfo());
-     //отправка подтверждения о выполнении действия
-     SendMessage( new CMessage(msg->getToID(),msg->getFromID(),
-       Report,msg->getInfo(),Client_to_Server),
-       server->getID());
-   }
- }
- else {
-   cout << "Client #" <<id<< "could not recive message from unknown server"<<endl;
- }
- //delete msg;
+  CServer *server = GetServerByID(msg->getFromID());
+  if (server != NULL)  {
+    cout << endl << "Client #" << id << " recived message from server #" 
+      << server->getID() << endl;
+    msg->Print();
+
+    if (msg->getType() > 1)  {
+      // отправка подтверждения о приёме сообщения
+      CMessage *msg1 = new CMessage(*msg);
+      msg1->setType(Confirmation); //код подтверждения приёма сообщения
+      msg1->setDirection(Client_to_Server);
+      SendMessage(msg1, server->getID());
+      Action (msg->getType(), msg->getInfo());
+      //отправка подтверждения о выполнении действия
+      SendMessage( new CMessage(msg->getToID(),msg->getFromID(),
+        Report,msg->getInfo(),Client_to_Server),
+        server->getID());
+    }
+  }
+  else {
+    cout << "Client #" <<id<< "could not recive message from unknown server"<<endl;
+  }
+  //delete msg;
 }
 
 void CClient::Action(int _code, const float _info) {
   switch (_code) {
     case 2:
       cout << "Client is handling action with code = "<<_code<<endl
-  << "And parametrs = "<< _info<<endl<<endl;
+        << "And parametrs = "<< _info<<endl<<endl;
       break;
     case 3:
       cout << "Client is handling action with code = "<<_code<<endl
-  << "And parametrs = "<< _info<< endl<<endl;
+        << "And parametrs = "<< _info<< endl<<endl;
       break;
     default:
       cout << "Client could not handle action with code = "<<_code<<endl
-  << "case of unknown code "<< endl<<endl;
+        << "case of unknown code "<< endl<<endl;
       break;
   }
 }
 
-
 void CClient :: Print() const {
   cout << "Client #" << id << endl
-       << "  Current number of clients = "<<current<<endl
-       << "  Number of registered servers = "<<ServerList.GetSize() <<endl
-       << "  List of servers: "<<endl;
+    << "  Current number of clients = "<<current<<endl
+    << "  Number of registered servers = "<<ServerList.GetSize() <<endl
+    << "  List of servers: "<<endl;
   if (ServerList.GetSize() == 0) {
     cout << "List is empty"<<endl;
   }
@@ -189,13 +181,8 @@ void CClient :: Print() const {
     ServerList.GetFirst();
     for (int i = 0;i < ServerList.GetSize(); i++,ServerList.NextCur()) {
       cout << "  #"<< (i+1) <<" Server, ID = "
-  << ServerList.GetCur()->GetValue()->getID() << endl;
+        << ServerList.GetCur()->GetValue()->getID() << endl;
     }
   }
   cout << endl;
 }
-
-
-
-
-
