@@ -1,16 +1,16 @@
-//Файл : CPiston.cpp
-//Реализация класса "крышка"
-//Автор : Волынко Е. ст. гр. 7304
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPiston.cpp
+// Реализация класса "крышка"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CCover.h"
 #include <iostream.h>
 
 
-unsigned int CCover :: debug = 0;
-unsigned int CCover :: total = 0;
-unsigned int CCover :: current = 0;
+int CCover :: debug = 0;
+int CCover :: total = 0;
+int CCover :: current = 0;
 
 
 CCover :: CCover (CPoint P0, double cover_width, double cover_height, double hole_width) : Cover(P0.GetX(),P0.GetY(),cover_width,cover_height),
@@ -141,19 +141,19 @@ void CCover :: Print () {
         " Width = "<< Cover.GetWidth() <<endl;
 }
 
-void CCover :: SetDebug (unsigned int d) {
+void CCover :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CCover :: GetID () {
+int CCover :: getID() {
         return id;
 }
 
-unsigned int CCover :: GetCurrent () {
+int CCover :: getCurrent() {
         return current;
 }
 
-unsigned int CCover :: GetTotal () {
+int CCover :: getTotal() {
         return total;
 }
 

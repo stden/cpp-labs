@@ -1,7 +1,7 @@
-//Файл : CPMec.h
+// Файл: CPMec.h
 //Проект класса "стакан"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 #ifndef CPMEC_H
 #define CPMEC_H
@@ -19,10 +19,10 @@ protected:
   CircleList<CPoint> MainPoints;
   CPiston Piston;
   CCup Cup;
-  static unsigned int debug;
-  static unsigned int total;
-  unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  int id;
+  static int current;
   void  AddPoints ();
 public:
 
@@ -57,10 +57,10 @@ public:
   //---------------------------------------------------
 
    virtual void Print () const;
-   virtual void SetDebug (unsigned int);
-   virtual  unsigned int GetID ();
-   virtual  unsigned int GetCurrent();
-   virtual  unsigned int GetTotal();
+   virtual void setDebug(int);
+   virtual  int getID();
+   virtual  int GetCurrent();
+   virtual  int GetTotal();
 
   friend ostream& operator<<( ostream& output,const CPistonMechanism&);
 

@@ -1,7 +1,7 @@
-//Файл : CPoint.h
+// Файл: CPoint.h
 //Проект класса "точка"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 #ifndef CPOINT_H
 #define CPOINT_H
@@ -13,10 +13,10 @@ class CPoint {
 private:
   double x;
   double y;
-  static unsigned int debug;
-  static unsigned int total;
-  unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  int id;
+  static int current;
 public:
   CPoint(double,double);
   CPoint();
@@ -41,10 +41,10 @@ public:
   int nCheck( CPoint, CPoint);
 
 
-  void SetDebug (unsigned int);
-  unsigned int GetID ();
-  unsigned int GetCurrent();
-  unsigned int GetTotal();
+  void setDebug(int);
+  int getID();
+  int GetCurrent();
+  int GetTotal();
 
   // одинаковы ли точки ?
 

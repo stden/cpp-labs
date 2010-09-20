@@ -1,16 +1,16 @@
-//Файл : CPoint.cpp
-//Реализация класса "точка"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPoint.cpp
+// Реализация класса "точка"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 #include "CPoint.h"
 #include <iostream.h>
 #include <math.h>
 
 
-unsigned int CPoint :: debug = 0;
-unsigned int CPoint :: total = 0;
-unsigned int CPoint :: current = 0;
+int CPoint :: debug = 0;
+int CPoint :: total = 0;
+int CPoint :: current = 0;
 
 
 CPoint::CPoint (double _x, double _y) : x (_x), y (_y) {
@@ -94,19 +94,19 @@ int CPoint :: nCheck(CPoint P1, CPoint P2) {
 }
 
 
-void CPoint :: SetDebug (unsigned int d) {
+void CPoint :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CPoint ::  GetID () {
+int CPoint ::  getID() {
         return id;
 }
 
-unsigned int CPoint :: GetCurrent () {
+int CPoint :: getCurrent() {
         return current;
 }
 
-unsigned int CPoint :: GetTotal () {
+int CPoint :: getTotal() {
         return total;
 }
 

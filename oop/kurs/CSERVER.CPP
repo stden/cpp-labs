@@ -1,7 +1,7 @@
-//Файл : CServer.cpp
-//Реализация класса "сервер"
-//Автор : Волынко Е. ст. гр. 7304
-//Дата : 1.06.2010 Редакция : 1.0
+// Файл: CServer.cpp
+// Реализация класса "сервер"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 
 #include "CList.h"
@@ -11,9 +11,9 @@
 #include <conio.h>
 
 
-unsigned int CServer :: current = 0;
-unsigned int CServer :: total = 0;
-unsigned int CServer :: debug = 0;
+int CServer :: current = 0;
+int CServer :: total = 0;
+int CServer :: debug = 0;
 
 CServer :: CServer() : id(++total) {
 
@@ -37,17 +37,17 @@ CServer :: ~CServer() {
 }
 
 
-CClient* CServer :: GetClientByID(unsigned int _id) {
+CClient* CServer :: GetClientByID(int _id) {
   ClientList.GetFirst();
   for (int i = 0; i < ClientList.GetSize();i++,ClientList.NextCur()) {
-         if (ClientList.GetCur()->GetValue()->GetID() == _id)
+         if (ClientList.GetCur()->GetValue()->getID() == _id)
          return ClientList.GetCur()->GetValue();
   }
 
   return 0;
 }
 
-unsigned int CServer :: Client_Count() const {
+int CServer :: Client_Count() const {
   return ClientList.GetSize();
 }
 
@@ -59,8 +59,8 @@ void CServer :: Register(CClient *client)
       <<"Failed to register client due to wrong address"<<endl;
   }
   else   {
-    if (GetClientByID(client->GetID()) != NULL) {
-       cout << "Client with id = "<<client->GetID()<<endl
+    if (GetClientByID(client->getID()) != NULL) {
+       cout << "Client with id = "<<client->getID()<<endl
       <<"Already registered on server with id = "<<id<<endl;
     }
     else {
@@ -69,7 +69,7 @@ void CServer :: Register(CClient *client)
       if (client->GetServerByID(id) == NULL)
       {
   client->Register(this);
-  cout << "Client with id = " << client->GetID() << " was registered on server with id = "
+  cout << "Client with id = " << client->getID() << " was registered on server with id = "
        << id<<endl;
       }
     }
@@ -77,17 +77,17 @@ void CServer :: Register(CClient *client)
 }
 
 
-void CServer :: Unregister(unsigned int _id) {
+void CServer :: Unregister(int _id) {
   CClient* client = GetClientByID(_id);
   if (client == NULL) {
-    cout << "Client with id = "<<client->GetID()<< " can not unregister from server with id = "<<id<<endl
+    cout << "Client with id = "<<client->getID()<< " can not unregister from server with id = "<<id<<endl
     <<"cause it does not registered on it"<<endl;
   }
   else {
       ClientList.ExcludeCur();
     if (client->GetServerByID(id) != NULL) {
       client->Unregister(id);
-      cout << "Client with id = "<<client->GetID()<<" was unregistered from server with id = "<<id<<endl;
+      cout << "Client with id = "<<client->getID()<<" was unregistered from server with id = "<<id<<endl;
     }
   }
 }
@@ -103,19 +103,19 @@ void CServer ::UnregisterAll() {
     int tlen = ClientList.GetSize();
     for (int i = 0; i < tlen;i++) {
 //            ClientList.GetFirst();
-           /* ClientList.ExcludeCur();*/Unregister(ClientList.GetFirst()->GetValue()->GetID());
+           /* ClientList.ExcludeCur();*/Unregister(ClientList.GetFirst()->GetValue()->getID());
     }
     cout << "Server with id = "<<id<<" unregistered all clients"<<endl;
   }
 }
 
 
-void CServer :: SendMessage(CMessage *msg, unsigned int _id)
+void CServer :: SendMessage(CMessage *msg, int _id)
 {
   CClient *client = GetClientByID(_id);
   if (client != NULL) {
-    msg->SetFromID(id);
-    msg->SetToID(_id);
+    msg->setFromID(id);
+    msg->setToID(_id);
     msg->SetDirection(0);
     client->ReceiveMessage(msg);
   //  cout << "Server with id = "<<id<< " sent message to client with id = "<<_id<<endl;
@@ -129,7 +129,7 @@ void CServer :: SendMessage(CMessage *msg, unsigned int _id)
 }
 
 
-void CServer :: SendMessageToAll(unsigned int _type, const CInfo& _info)
+void CServer :: SendMessageToAll(int _type, const CInfo& _info)
 {
   CMessage* msg = new CMessage(id,1,_type,_info,0);
   if (ClientList.GetSize() != 0) {
@@ -138,8 +138,8 @@ void CServer :: SendMessageToAll(unsigned int _type, const CInfo& _info)
 
     int tlen = ClientList.GetSize();
     for (int i = 0; i < tlen; i ++) {
-        msg->SetFromID(id);
-        msg->SetToID(ClientList.GetElemByNum(i)->GetValue()->GetID());
+        msg->setFromID(id);
+        msg->setToID(ClientList.GetElemByNum(i)->GetValue()->getID());
         ClientList.GetElemByNum(i)->GetValue()->ReceiveMessage(msg);
     }
 
@@ -158,15 +158,15 @@ void CServer :: SendMessageToAll(CMessage *msg)
   SendMessageToAll(msg->GetType(),msg->GetInfo());
 }
 
-void CServer :: SendMessage(unsigned int _type, const CInfo& _info, unsigned int _id)
+void CServer :: SendMessage(int _type, const CInfo& _info, int _id)
 {
   CClient *client = GetClientByID(_id);
   CMessage *msg = new CMessage;
   if (client != NULL) {
-    msg->SetFromID(id);
-    msg->SetToID(_id);
-    msg->SetType(_type);
-    msg->SetInfo(_info);
+    msg->setFromID(id);
+    msg->setToID(_id);
+    msg->setType(_type);
+    msg->setInfo(_info);
     msg->SetDirection(0);
     client->ReceiveMessage(msg);
    // cout << "Server with id = "<<id<< " sent message to client with id = "<<_id<<endl;
@@ -187,7 +187,7 @@ void CServer :: ReceiveMessage(CMessage *msg) {
   if (client != NULL)
   {
     cout << "Server with id = "<<id<< " recived message"<<endl
-    <<"from client with id = "<<client->GetID()<<endl;
+    <<"from client with id = "<<client->getID()<<endl;
    msg->Print();
    getch();
 
@@ -195,9 +195,9 @@ void CServer :: ReceiveMessage(CMessage *msg) {
     if (msg->GetType() > 0 && msg->GetType() < 2)
     {
      CMessage *msg1 = new CMessage(*msg);
-     msg1->SetType(0); //код подтверждения приёма сообщения
+     msg1->setType(0); //код подтверждения приёма сообщения
      msg1->SetDirection(0);
-     SendMessage(msg1, client->GetID());
+     SendMessage(msg1, client->getID());
      delete msg1;
 
     }
@@ -205,10 +205,10 @@ void CServer :: ReceiveMessage(CMessage *msg) {
     if (msg->GetType() >= 2)
     {
      CMessage *msg1 = new CMessage(*msg);
-     msg1->SetType(msg->GetType()); //код подтверждения приёма сообщения
-     msg1->SetInfo(msg->GetInfo());
+     msg1->setType(msg->GetType()); //код подтверждения приёма сообщения
+     msg1->setInfo(msg->GetInfo());
      msg1->SetDirection(0);
-     SendMessage(msg1, client->GetID());
+     SendMessage(msg1, client->getID());
      delete msg1;
 
     }
@@ -235,7 +235,7 @@ void CServer::Print() const{
   else  {
     ClientList.GetFirst();
     for (int i = 0;i < ClientList.GetSize(); i++,ClientList.NextCur()) {
-        cout << "#"<< i+1<<" Server, ID = "<<ClientList.GetCur()->GetValue()->GetID()<<endl;
+        cout << "#"<< i+1<<" Server, ID = "<<ClientList.GetCur()->GetValue()->getID()<<endl;
     }
   }
 }

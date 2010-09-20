@@ -1,6 +1,6 @@
 //Файл: CListD.h
 //Проект шаблона класса "Кольцевой однонаправленный список"
-//Автор: Монько А.О.
+//Автор: Волынко Е. ст. гр. 7304
 //Дата: 21.02.2010, Редакция: 1.0
 
 #ifndef CLISTD_H
@@ -16,7 +16,7 @@ template<class ValueType>
 		      	CLNode<ValueType> *cur;
 		      	CLNode<ValueType> *last;
 		        int _length;
-                        static unsigned int debug;
+                        static int debug;
 		 public :
 		      	CircleList (void);  // Constructor creates NULL list
 		      	~CircleList (void); // Destructor deletes all elements
@@ -36,6 +36,6 @@ template<class ValueType>
 };
 
 template<class ValueType>
-unsigned int CircleList<ValueType> :: debug = 0;
+int CircleList<ValueType> :: debug = 0;
 
 #endif

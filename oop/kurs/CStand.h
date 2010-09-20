@@ -1,7 +1,7 @@
-//Файл : CStand.h
+// Файл: CStand.h
 //Проект класса "стенд"
-//Автор : Монько А.О.
-//Дата : 22.05.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.05.2010 Редакция: 1.0
 
 #ifndef CSTAND_H
 #define CSTAND_H
@@ -17,10 +17,10 @@ protected:
   CircleList<CPoint> MainPoints;
   CTriangle Stand;
 private:
-  static unsigned int debug;
-  static unsigned int total;
-  unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  int id;
+  static int current;
 virtual  void  AddPoints ();
 public:
 
@@ -52,10 +52,10 @@ public:
   //---------------------------------------------------
 
  virtual  void Print ();
- virtual  void SetDebug (unsigned int);
- virtual   unsigned int GetID ();
- virtual   unsigned int GetCurrent();
- virtual   unsigned int GetTotal();
+ virtual  void setDebug(int);
+ virtual   int getID();
+ virtual   int GetCurrent();
+ virtual   int GetTotal();
 
 
 };

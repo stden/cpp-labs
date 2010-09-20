@@ -1,16 +1,16 @@
-//Файл : CRect.cpp
-//Реализация класса "прямоугольник"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CRect.cpp
+// Реализация класса "прямоугольник"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CRect.h"
 #include <iostream.h>
 
 
-unsigned int CRectangle :: debug = 0;
-unsigned int CRectangle :: total = 0;
-unsigned int CRectangle :: current = 0;
+int CRectangle :: debug = 0;
+int CRectangle :: total = 0;
+int CRectangle :: current = 0;
 
 
 CRectangle :: CRectangle (double x1, double y1, double _width, double _height) {
@@ -183,25 +183,25 @@ void CRectangle :: Print () {
         " Width = "<< Width << ", Height = " << Height<< endl;
 }
 
-void CRectangle :: SetDebug (unsigned int d) {
+void CRectangle :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CRectangle :: GetID () {
+int CRectangle :: getID() {
         return id;
 }
 
-unsigned int CRectangle :: GetCurrent () {
+int CRectangle :: getCurrent() {
         return current;
 }
 
-unsigned int CRectangle :: GetTotal () {
+int CRectangle :: getTotal() {
         return total;
 }
 
 ostream& operator<<( ostream& output,const CRectangle& R) {
 
-        output << "Rectangle : id = " << R.GetID() << " " << R.GetP1() << "," << R.GetP2() << "," << R.GetP3() << "," << R.GetP4() <<
+        output << "Rectangle : id = " << R.getID() << " " << R.GetP1() << "," << R.GetP2() << "," << R.GetP3() << "," << R.GetP4() <<
         " Width = "<< R.GetWidth() << ", Height = " << R.GetHeight()<< endl;
  	return output;
 }

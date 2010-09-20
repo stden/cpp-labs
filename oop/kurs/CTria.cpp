@@ -1,7 +1,7 @@
-//Файл : CTria.cpp
-//Реализация класса "тупоугольный треугольник"
-//Автор : Монько А.О.
-//Дата : 22.05.2010 Редакция : 1.0
+// Файл: CTria.cpp
+// Реализация класса "тупоугольный треугольник"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.05.2010 Редакция: 1.0
 
 
 #include "CTria.h"
@@ -9,9 +9,9 @@
 #include <math.h>
 
 
-unsigned int CTriangle :: debug = 0;
-unsigned int CTriangle :: total = 0;
-unsigned int CTriangle :: current = 0;
+int CTriangle :: debug = 0;
+int CTriangle :: total = 0;
+int CTriangle :: current = 0;
 
 
 CTriangle :: CTriangle (CPoint _P1, double _P1P2, CPoint _P3) {
@@ -177,19 +177,19 @@ void CTriangle :: Print () {
         cout << "P1P2 = "<< P1P2 << ", P2P3 = " << P2P3<< ", P3P1 = " <<P3P1<< endl;
 }
 
-void CTriangle :: SetDebug (unsigned int d) {
+void CTriangle :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CTriangle :: GetID () {
+int CTriangle :: getID() {
         return id;
 }
 
-unsigned int CTriangle :: GetCurrent () {
+int CTriangle :: getCurrent() {
         return current;
 }
 
-unsigned int CTriangle :: GetTotal () {
+int CTriangle :: getTotal() {
         return total;
 }
 

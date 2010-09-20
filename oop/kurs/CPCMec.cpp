@@ -1,7 +1,7 @@
-//Файл : CPСMec.cpp
-//Реализация класса "закрытый поршневой механизм"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPСMec.cpp
+// Реализация класса "закрытый поршневой механизм"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CPCMec.h"
@@ -271,7 +271,7 @@ void CClosedPistonMechanism :: Print () const{
 
 ostream& operator<<(ostream& output,const CClosedPistonMechanism& P) {
 
-         output << "ClosedPistonMechanism id = " << P.GetID() << endl;
+         output << "ClosedPistonMechanism id = " << P.getID() << endl;
          output << "LeftCupSide : " << P.GetCup().GetLeftSide();
          output << "BottomCupSide : " << P.GetCup().GetBottomSide();
          output << "RightCupSide : " << P.GetCup().GetRightSide();

@@ -1,7 +1,7 @@
-//Файл : CClient.h
-//Реализация класса "клиент"
-//Автор : Волынко Е. ст. гр. 7304
-//Дата : 1.06.2010 Редакция : 1.0
+// Файл: CClient.h
+// Реализация класса "клиент"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 #include "CClient.H"
 #include "CList.h"
@@ -9,9 +9,9 @@
 #include <iostream.h>
 #include <conio.h>
 
-unsigned int CClient :: current = 0;
-unsigned int CClient :: total = 0;
-unsigned int CClient :: debug = 0;
+int CClient :: current = 0;
+int CClient :: total = 0;
+int CClient :: debug = 0;
 
 CClient :: CClient() : id(++total) {
 
@@ -38,11 +38,11 @@ CClient :: ~CClient()
 }
 
 
-CServer* CClient :: GetServerByID(unsigned int _id)
+CServer* CClient :: GetServerByID(int _id)
 {
    ServerList.GetFirst();
    for (int i = 0; i < ServerList.GetSize(); i++,ServerList.NextCur()) {
-        if (ServerList.GetElemByNum(i)->GetValue()->GetID() == _id)
+        if (ServerList.GetElemByNum(i)->GetValue()->getID() == _id)
         return  ServerList.GetCur()->GetValue();
    }
 
@@ -50,7 +50,7 @@ CServer* CClient :: GetServerByID(unsigned int _id)
 }
 
 
-unsigned int CClient :: ServerCount() const {
+int CClient :: ServerCount() const {
   return ServerList.GetSize();
 }
 
@@ -62,9 +62,9 @@ void CClient :: Register(CServer *server) {
   }
 
   else  {
-    if (GetServerByID(server->GetID()) != NULL) {
+    if (GetServerByID(server->getID()) != NULL) {
          cout << "Client with id = "<<id<<endl
-      <<"Already registered on server with id = "<<server->GetID()<<endl;
+      <<"Already registered on server with id = "<<server->getID()<<endl;
     }
 
     else {
@@ -74,18 +74,18 @@ void CClient :: Register(CServer *server) {
       if (server->GetClientByID(id) == NULL) {
   server->Register(this);
   cout << "Client with id = " << id << " was registered on server with id = "
-       << server->GetID()<<endl;
+       << server->getID()<<endl;
       }
     }
   }
 }
 
 
-void CClient::Unregister(unsigned int _id)
+void CClient::Unregister(int _id)
 {
   CServer *server = GetServerByID(_id);
   if (server == NULL) {
-    cout << "Client with id = "<<id << " can not unregister from server with id = "<<server->GetID()<<endl
+    cout << "Client with id = "<<id << " can not unregister from server with id = "<<server->getID()<<endl
     <<"cause it does not registered on it"<<endl;
   }
   else {
@@ -93,7 +93,7 @@ void CClient::Unregister(unsigned int _id)
    ServerList.ExcludeCur();
     if (server->GetClientByID(id) != NULL) {
       server->Unregister(id);
-      cout << "Client with id = "<<id<<" was unregistered from server with id = "<<server->GetID()<<endl;
+      cout << "Client with id = "<<id<<" was unregistered from server with id = "<<server->getID()<<endl;
     }
   }
 }
@@ -108,20 +108,20 @@ void CClient::UnregisterAll() {
 
     int tlen = ServerList.GetSize();
     for (int i = 0; i < tlen;i++) {
-            Unregister(ServerList.GetElemByNum(i)->GetValue()->GetID());
+            Unregister(ServerList.GetElemByNum(i)->GetValue()->getID());
     }
     cout << "Client with id = "<<id<<" was unregistered from all servers"<<endl;
   }
 }
 
 
-void CClient::SendMessage(CMessage *msg, unsigned int _id)
+void CClient::SendMessage(CMessage *msg, int _id)
 {
   CServer *server = GetServerByID(_id);
   if (server != NULL) {
-    msg->SetFromID(id);
-    msg->SetToID(_id);
-    msg->SetDirection(1);
+    msg->setFromID(id);
+    msg->setToID(_id);
+    msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
   //  cout << "Client with id = "<<id<< " sent message to server with id = "<<_id<<endl;
   }
@@ -133,16 +133,16 @@ void CClient::SendMessage(CMessage *msg, unsigned int _id)
   }
 }
 
-void CClient::SendMessage(unsigned int _type, const CInfo& _info, unsigned int _id)
+void CClient::SendMessage(int _type, const CInfo& _info, int _id)
 {
   CServer *server = GetServerByID(_id);
   CMessage *msg = new CMessage;
   if (server != NULL) {
-    msg->SetFromID(id);
-    msg->SetToID(_id);
-    msg->SetType(_type);
-    msg->SetInfo(_info);
-    msg->SetDirection(1);
+    msg->setFromID(id);
+    msg->setToID(_id);
+    msg->setType(_type);
+    msg->setInfo(_info);
+    msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
    // cout << "Client with id = "<<id<< " sent message to server with id = "<<_id<<endl;
   }
@@ -161,22 +161,22 @@ void CClient::ReceiveMessage(CMessage *msg)
  CServer *server = GetServerByID(msg->GetFromID());
  if (server != NULL)  {
    cout <<endl<< "Client with id = "<<id<< " recived message"<<endl
-   <<"from server with id = "<<server->GetID()<<endl;
+   <<"from server with id = "<<server->getID()<<endl;
    msg->Print();
    getch();
 
    if (msg->GetType() > 1)  {
      /*CMessage *msg1 = new CMessage(*msg);
-     msg1->SetType(0); //код подтверждения приёма сообщения
-     msg1->SetDirection(1);
-     SendMessage(msg1, server->GetID()); //отправка подтверждения о приёме
+     msg1->setType(0); //код подтверждения приёма сообщения
+     msg1->setDirection(Client_to_Server);
+     SendMessage(msg1, server->getID()); //отправка подтверждения о приёме
            //сообщения */
      Action (msg->GetType(), msg->GetInfo());
      //отправка подтверждения о выполнении действия
      CMessage *msg2 = new CMessage();
-     msg2->SetType(1);
-     msg2->SetDirection(1);
-     SendMessage(msg2, server->GetID());
+     msg2->setType(1);
+     msg2->setDirection(Client_to_Server);
+     SendMessage(msg2, server->getID());
      //delete msg2;
    }
  }
@@ -186,7 +186,7 @@ void CClient::ReceiveMessage(CMessage *msg)
  //delete msg;
 }
 
-void CClient::Action(unsigned int _code, const CInfo& _info)
+void CClient::Action(int _code, const CInfo& _info)
 {
 
   switch (_code)
@@ -224,7 +224,7 @@ void CClient :: Print() const {
   else  {
     ServerList.GetFirst();
     for (int i = 0;i < ServerList.GetSize(); i++,ServerList.NextCur()) {
-        cout << "#"<< i+1<<" Server, ID = "<<ServerList.GetCur()->GetValue()->GetID()<<endl;
+        cout << "#"<< i+1<<" Server, ID = "<<ServerList.GetCur()->GetValue()->getID()<<endl;
     }
   }
 }

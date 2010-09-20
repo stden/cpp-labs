@@ -1,7 +1,7 @@
-//Файл : CPMec.cpp
-//Реализация класса "поршневой механизм"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPMec.cpp
+// Реализация класса "поршневой механизм"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CPMec.h"
@@ -9,9 +9,9 @@
 #include <conio.h>-
 
 
-unsigned int CPistonMechanism :: debug = 0;
-unsigned int CPistonMechanism :: total = 0;
-unsigned int CPistonMechanism :: current = 0;
+int CPistonMechanism :: debug = 0;
+int CPistonMechanism :: total = 0;
+int CPistonMechanism :: current = 0;
 
 void CPistonMechanism :: AddPoints () {
 	MainPoints.Append(new CLNode<CPoint>(Cup.GetLeftSide().GetP1()));
@@ -272,19 +272,19 @@ void CPistonMechanism :: Print () const {
 
 }
 
-void CPistonMechanism :: SetDebug (unsigned int d) {
+void CPistonMechanism :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CPistonMechanism :: GetID () {
+int CPistonMechanism :: getID() {
         return id;
 }
 
-unsigned int CPistonMechanism :: GetCurrent () {
+int CPistonMechanism :: getCurrent() {
         return current;
 }
 
-unsigned int CPistonMechanism :: GetTotal () {
+int CPistonMechanism :: getTotal() {
         return total;
 }
 
