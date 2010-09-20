@@ -19,7 +19,7 @@ CClient :: CClient() : id(++total) {
 
   if (debug)
   {
-    cout << "Client with id = " << id << " is created" <<endl
+    cout << "Client #" << id << " is created" <<endl
    << "total = " << total << ", current = " << current<<endl;
   }
 }
@@ -32,7 +32,7 @@ CClient :: ~CClient()
 
   if (debug)
   {
-    cout << "Client with id = " << id << " is deleted" <<endl
+    cout << "Client #" << id << " is deleted" <<endl
    << "total = " << total << ", current = " << current<<endl;
   }
 }
@@ -57,14 +57,14 @@ int CClient :: ServerCount() const {
 
 void CClient :: Register(CServer *server) {
   if (server == NULL)  {
-      cout << "Client with id = "<<id<<endl
+      cout << "Client #"<<id<<endl
       <<"Failed to register on server due to wrong address"<<endl;
   }
 
   else  {
     if (GetServerByID(server->getID()) != NULL) {
-         cout << "Client with id = "<<id<<endl
-      <<"Already registered on server with id = "<<server->getID()<<endl;
+         cout << "Client #"<<id<<endl
+      <<"Already registered on server #"<<server->getID()<<endl;
     }
 
     else {
@@ -73,7 +73,7 @@ void CClient :: Register(CServer *server) {
 
       if (server->GetClientByID(id) == NULL) {
   server->Register(this);
-  cout << "Client with id = " << id << " was registered on server with id = "
+  cout << "Client #" << id << " was registered on server #"
        << server->getID()<<endl;
       }
     }
@@ -85,7 +85,7 @@ void CClient::Unregister(int _id)
 {
   CServer *server = GetServerByID(_id);
   if (server == NULL) {
-    cout << "Client with id = "<<id << " can not unregister from server with id = "<<server->getID()<<endl
+    cout << "Client #"<<id << " can not unregister from server #"<<server->getID()<<endl
     <<"cause it does not registered on it"<<endl;
   }
   else {
@@ -93,7 +93,7 @@ void CClient::Unregister(int _id)
    ServerList.ExcludeCur();
     if (server->GetClientByID(id) != NULL) {
       server->Unregister(id);
-      cout << "Client with id = "<<id<<" was unregistered from server with id = "<<server->getID()<<endl;
+      cout << "Client #"<<id<<" was unregistered from server #"<<server->getID()<<endl;
     }
   }
 }
@@ -110,7 +110,7 @@ void CClient::UnregisterAll() {
     for (int i = 0; i < tlen;i++) {
             Unregister(ServerList.GetElemByNum(i)->GetValue()->getID());
     }
-    cout << "Client with id = "<<id<<" was unregistered from all servers"<<endl;
+    cout << "Client #"<<id<<" was unregistered from all servers"<<endl;
   }
 }
 
@@ -123,10 +123,10 @@ void CClient::SendMessage(CMessage *msg, int _id)
     msg->setToID(_id);
     msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
-  //  cout << "Client with id = "<<id<< " sent message to server with id = "<<_id<<endl;
+  //  cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
   }
   else {
-    cout << "Client with id = " << id<< "could not send messages to server with id = "<<_id<<endl
+    cout << "Client #" << id<< "could not send messages to server #"<<_id<<endl
     <<"cause it not registered on it"<<endl;
     getch();
    // delete msg;
@@ -144,10 +144,10 @@ void CClient::SendMessage(int _type, const CInfo& _info, int _id)
     msg->setInfo(_info);
     msg->setDirection(Client_to_Server);
     server->ReceiveMessage(msg);
-   // cout << "Client with id = "<<id<< " sent message to server with id = "<<_id<<endl;
+   // cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
   }
   else {
-    cout << "Client with id = " << id<< "could not send messages to server with id = "<<_id<<endl
+    cout << "Client #" << id<< "could not send messages to server #"<<_id<<endl
     <<"cause it not registered on it"<<endl;
     getch();
 
@@ -160,8 +160,8 @@ void CClient::ReceiveMessage(CMessage *msg)
 {
  CServer *server = GetServerByID(msg->GetFromID());
  if (server != NULL)  {
-   cout <<endl<< "Client with id = "<<id<< " recived message"<<endl
-   <<"from server with id = "<<server->getID()<<endl;
+   cout <<endl<< "Client #"<<id<< " recived message"<<endl
+   <<"from server #"<<server->getID()<<endl;
    msg->Print();
    getch();
 
@@ -181,7 +181,7 @@ void CClient::ReceiveMessage(CMessage *msg)
    }
  }
  else {
-   cout << "Client with id = " <<id<< "could not recive message from unknown server"<<endl;
+   cout << "Client #" <<id<< "could not recive message from unknown server"<<endl;
  }
  //delete msg;
 }
@@ -224,7 +224,7 @@ void CClient :: Print() const {
   else  {
     ServerList.GetFirst();
     for (int i = 0;i < ServerList.GetSize(); i++,ServerList.NextCur()) {
-        cout << "#"<< i+1<<" Server, ID = "<<ServerList.GetCur()->GetValue()->getID()<<endl;
+        cout << "#"<< i+1<<" Server,#"<<ServerList.GetCur()->GetValue()->getID()<<endl;
     }
   }
 }

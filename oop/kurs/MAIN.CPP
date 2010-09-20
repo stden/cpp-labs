@@ -33,7 +33,7 @@ void main () {
         cout << "Programm is creating the view on collection of schematic images of"<<endl
              << "closed piston mechanisms which can be moved or placed in point"<<endl
              << "Server->Client->Server system of message exchange is used."<<endl
-             << "Programmed by : Artyom Mon'ko"<<endl<<endl
+             << "Programmed by: Evgeny Volinko"<<endl<<endl
              << "----------------Press any key to continue or ESC to exit----------------"<<endl;
 
          while(1) {

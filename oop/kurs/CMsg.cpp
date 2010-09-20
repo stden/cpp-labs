@@ -20,9 +20,9 @@ FromID(_FromID), ToID(_ToID), Type(_Type), Info(_Info), id(++total) {
 ++current;
 
  if (debug) {
-         cout << InterpritateType(Type)<< " Message with id = " << id << " created"<<endl;
-         if (direction == 0) cout << "From server with id = " <<FromID<<"to client with id = "<<ToID<<endl;
-         else cout << "From client with id = " <<FromID<<"to server with id = "<<ToID<<endl;
+         cout << InterpritateType(Type)<< " Message #" << id << " created"<<endl;
+         if (direction == Server_to_Client) cout << "From server #" <<FromID<<"to client #"<<ToID<<endl;
+         else cout << "From client #" <<FromID<<"to server #"<<ToID<<endl;
          cout << "Info = ";Info.Print(); cout<<endl;
 
 
@@ -38,9 +38,9 @@ CMessage :: CMessage(const CMessage &msg)
 
 
   if (debug) {
-         cout << InterpritateType(Type)<< " Message with id = " << id << " copied"<<endl;
-         if (direction == 0) cout << "From server with id = " <<FromID<<"to client with id = "<<ToID<<endl;
-         else cout << "From client with id = " <<FromID<<"to server with id = "<<ToID<<endl;
+         cout << InterpritateType(Type)<< " Message #" << id << " copied"<<endl;
+         if (direction == Server_to_Client) cout << "From server #" <<FromID<<"to client #"<<ToID<<endl;
+         else cout << "From client #" <<FromID<<"to server #"<<ToID<<endl;
          cout << "Info = ";Info.Print(); cout<<endl;
 
 
@@ -51,9 +51,9 @@ CMessage :: ~CMessage() {
 --current;
 
  if (debug) {
-         cout << InterpritateType(Type)<< " Message with id = " << id << " deleted"<<endl;
-         if (direction == 0) cout << "From server with id = " <<FromID<<"to client with id = "<<ToID<<endl;
-         else cout << "From client with id = " <<FromID<<" to server with id = "<<ToID<<endl;
+         cout << InterpritateType(Type)<< " Message #" << id << " deleted"<<endl;
+         if (direction == Server_to_Client) cout << "From server #" <<FromID<<"to client #"<<ToID<<endl;
+         else cout << "From client #" <<FromID<<" to server #"<<ToID<<endl;
          cout << "Info = ";Info.Print(); cout<<endl;
 
 
@@ -99,8 +99,8 @@ const char* CMessage :: InterpritateType (int type){
 
 void CMessage :: Print () const{
          cout <<endl<< InterpritateType (Type)<<" message ";
-         if (direction == 0) cout << "from server with id = " <<FromID<<" to client with id = "<<ToID<<endl;
-         else cout << "from client with id = " <<FromID<<" to server with id = "<<ToID<<endl;
+         if (direction == Server_to_Client) cout << "from server #" <<FromID<<" to client #"<<ToID<<endl;
+         else cout << "from client #" <<FromID<<" to server #"<<ToID<<endl;
          cout << "Info = ";Info.Print(); cout<<endl;
 
 
