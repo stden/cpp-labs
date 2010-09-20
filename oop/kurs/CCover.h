@@ -24,24 +24,23 @@ private:
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CCover(CPoint,double cover_width,double cover_height, double hole_width); // P1 width heigth length
-	CCover(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CCover(CPoint,double cover_width,double cover_height, double hole_width); // P1 width heigth length
+  CCover(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CCover();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CCover();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
   int inv ();	// Инвариант
   void RefreshPoints ();
 
-  //---------------------------------------------------
   void SetP1(double,double);
   void SetP1(CPoint P0); // Задание точки P1
   void Move (double dx, double dy); // Плоскопараллельное перемещение на dx dy
@@ -49,17 +48,11 @@ public:
   CRectangle GetHole() const;
   CRectangle GetCover() const;
 
-
-  //---------------------------------------------------
-
   void Print ();
   void setDebug(int);
   int getID();
   int GetCurrent();
   int GetTotal();
-
 };
-
-
 
 #endif

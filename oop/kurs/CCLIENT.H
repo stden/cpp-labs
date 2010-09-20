@@ -24,35 +24,30 @@ private:
   //список серверов на которых зарегестрирован клиент
   CircleList<CServer*> ServerList;
 
-   virtual void Action(int _type, const CInfo& _info);
+  virtual void Action(int _type, const CInfo& _info);
 
-  public:
-    CClient();
-    virtual ~CClient();
+public:
+  CClient();
+  virtual ~CClient();
 
+  CServer* GetServerByID(int _id);     //получить сервер по ID
+  CircleList<CServer*> GetServerList() const { return ServerList; }
 
-    CServer* GetServerByID(int _id);     //получить сервер по ID
-    CircleList<CServer*> GetServerList() const { return ServerList; }
+  int ServerCount() const;     //кол-во зарегестрированных серверов
+  void Register(CServer *server); // «арегестрироватьс€ на сервере
+  void Unregister(int _id); // —н€тьс€ с регистрации
+  void UnregisterAll(); //—н€тьс€ с регистрации со всех серверов
+  void SendMessage(CMessage *msg, int _id); // отправить сообщение серверу
+  void SendMessage(int _type, const CInfo& _info, int _id); // отправить сообщение серверу
+  void ReceiveMessage(CMessage *msg); // ѕолучить сообщение
 
-    int ServerCount() const;     //кол-во зарегестрированных серверов
-    void Register(CServer *server); // «арегестрироватьс€ на сервере
-    void Unregister(int _id); // —н€тьс€ с регистрации
-    void UnregisterAll(); //—н€тьс€ с регистрации со всех серверов
-    void SendMessage(CMessage *msg, int _id); // отправить сообщение серверу
-    void SendMessage(int _type, const CInfo& _info, int _id); // отправить сообщение серверу
-    void ReceiveMessage(CMessage *msg); // ѕолучить сообщение
+  virtual void Print() const;
 
-    virtual void Print() const;
-
-        static void  setDebug(int d) { debug = d; }
-        virtual int getID() { return id; }
-        static  int getCurrent() { return current; }
-        static  int getTotal() { return total; }
-        static int getDebug() { return debug; }
-
-
+  static void  setDebug(int d) { debug = d; }
+  virtual int getID() { return id; }
+  static  int getCurrent() { return current; }
+  static  int getTotal() { return total; }
+  static int getDebug() { return debug; }
 };
-
-
 
 #endif
