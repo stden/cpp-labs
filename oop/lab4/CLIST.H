@@ -109,8 +109,6 @@ void CircleList<ValueType>::RemoveCur() {
   }
 
   if(_length > 1){
-
-
     if (cur == header) {
       CLNode<ValueType>* tcur = header;
       header = header->GetNext();
@@ -120,7 +118,6 @@ void CircleList<ValueType>::RemoveCur() {
       --_length;
       return;
     }
-
     int i = 0;
     CLNode<ValueType>* tcur = header;
     while (i < _length+1 ) {
@@ -209,11 +206,11 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
     CLNode<ValueType>* tcur = header;
     while (i < _length+1 ) {
       if (i == n) {
-	tcur->SetNext(cur->GetNext());
-	if (cur == last) last = tcur;
-	--_length;
-	//       delete cur;
-	return;
+        tcur->SetNext(cur->GetNext());
+        if (cur == last) last = tcur;
+        --_length;
+        //       delete cur;
+        return;
       }
       tcur = tcur->GetNext();
     }
@@ -221,21 +218,17 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
 }
 
 template<class ValueType>
-CLNode<ValueType>* CircleList<ValueType>:: Append (CLNode<ValueType>* node)
-{
+CLNode<ValueType>* CircleList<ValueType>:: Append (CLNode<ValueType>* node) {
   if(_length == 0) { // Empty list
     header = last = node;
     last->SetNext(header);
     ++_length;
-  }
-
-  else { // List is filled somehow
+  } else { // List is filled somehow
     last->SetNext(node);
     last = node;
     node->SetNext(header);
     ++_length;
   }
-
   return node;
 }
 
@@ -246,14 +239,11 @@ CLNode<ValueType>* CircleList<ValueType>:: Prepend (CLNode<ValueType>* node)
     header = last = node;
     last->SetNext(header);
     ++_length;
-  }
-
-  else { // List is filled somehow
+  } else { // List is filled somehow
     node->SetNext(header->GetNext());
     header->SetNext(node);
     ++_length;
   }
-
   return node;
 }
 
