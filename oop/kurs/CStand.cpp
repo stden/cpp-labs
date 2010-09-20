@@ -1,16 +1,16 @@
-//Файл : CStand.cpp
-//Реализация класса "стенд"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CStand.cpp
+// Реализация класса "стенд"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CStand.h"
 #include <iostream.h>
 
 
-unsigned int CStand :: debug = 0;
-unsigned int CStand :: total = 0;
-unsigned int CStand :: current = 0;
+int CStand :: debug = 0;
+int CStand :: total = 0;
+int CStand :: current = 0;
 
 void CStand :: AddPoints () {
 	MainPoints.Append(new CLNode<CPoint>(Stand.GetP1()));
@@ -115,19 +115,19 @@ void CStand :: Print () {
 
 }
 
-void CStand :: SetDebug (unsigned int d) {
+void CStand :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CStand :: GetID () {
+int CStand :: getID() {
         return id;
 }
 
-unsigned int CStand :: GetCurrent () {
+int CStand :: getCurrent() {
         return current;
 }
 
-unsigned int CStand :: GetTotal () {
+int CStand :: getTotal() {
         return total;
 }
 

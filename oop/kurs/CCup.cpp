@@ -1,16 +1,16 @@
-//Файл : CCup.cpp
-//Реализация класса "стакан"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CCup.cpp
+// Реализация класса "стакан"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CCup.h"
 #include <iostream.h>
 
 
-unsigned int CCup :: debug = 0;
-unsigned int CCup :: total = 0;
-unsigned int CCup :: current = 0;
+int CCup :: debug = 0;
+int CCup :: total = 0;
+int CCup :: current = 0;
 
 
 CCup :: CCup (double x1, double y1, double leftwidth, double leftheight, double bottomwidth, double bottomheight, double rightwidth)
@@ -204,19 +204,19 @@ void CCup :: Print () {
 
 }
 
-void CCup :: SetDebug (unsigned int d) {
+void CCup :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CCup :: GetID () {
+int CCup :: getID() {
         return id;
 }
 
-unsigned int CCup :: GetCurrent () {
+int CCup :: getCurrent() {
         return current;
 }
 
-unsigned int CCup :: GetTotal () {
+int CCup :: getTotal() {
         return total;
 }
 

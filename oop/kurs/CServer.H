@@ -1,7 +1,7 @@
-//Файл : CServer.h
+// Файл: CServer.h
 //Проект класса "сервер"
-//Автор : Монько А.О.
-//Дата : 1.06.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 #ifndef _CSERVER_H_
 #define _CSERVER_H_
@@ -16,10 +16,10 @@ class CClient;
 class CServer
 {
 private:
-  static unsigned int debug;
-  static unsigned int total;
-  const unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  const int id;
+  static int current;
 
  CircleList<CClient*> ClientList;
 
@@ -28,23 +28,23 @@ public:
     virtual ~CServer();
 
 
-    CClient* GetClientByID(unsigned int _id);
-    unsigned int Client_Count() const;
+    CClient* GetClientByID(int _id);
+    int Client_Count() const;
     void Register(CClient *client);
-    void Unregister(unsigned int _id);
+    void Unregister(int _id);
     void UnregisterAll();
-    void SendMessage(CMessage *msg, unsigned int _id);
-    void SendMessage(unsigned int _type, const CInfo& _info, unsigned int _id);
+    void SendMessage(CMessage *msg, int _id);
+    void SendMessage(int _type, const CInfo& _info, int _id);
     void SendMessageToAll(CMessage *msg);
-    void SendMessageToAll(unsigned int _type, const CInfo& _info);
+    void SendMessageToAll(int _type, const CInfo& _info);
     virtual void ReceiveMessage(CMessage *msg);
     virtual void Print() const;
 
-    static void  SetDebug (unsigned int d) { debug = d; }
-    unsigned int GetID () { return id; }
-    static  unsigned int GetCurrent () { return current; }
-    static  unsigned int GetTotal () { return total; }
-    static unsigned int Get_debug() { return debug; }
+    static void  setDebug(int d) { debug = d; }
+    int getID() { return id; }
+    static  int getCurrent() { return current; }
+    static  int getTotal() { return total; }
+    static int getDebug() { return debug; }
 
 };
 

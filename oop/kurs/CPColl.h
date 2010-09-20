@@ -1,7 +1,7 @@
-//Файл : CPColl.h
+// Файл: CPColl.h
 //Проект класса "набор поршневых механизмов"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 #ifndef CPCOLL_H
 #define CPCOLL_H
@@ -17,12 +17,12 @@ class CPistonCollection {
 protected:
  // CircleList<CPoint> MainPoints;
   CircleList<CPistonMechanism*> Collection;
-  unsigned int Length;
+  int Length;
 private:
-  static unsigned int debug;
-  static unsigned int total;
-  unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  int id;
+  static int current;
 public:
 
 				/*Конструкторы*/
@@ -50,16 +50,16 @@ virtual void MovePiston (double);
 
 virtual  void Add (CPistonMechanism*);
   void Delete (int);
-  unsigned int GetLength () const;
+  int GetLength () const;
 
   //---------------------------------------------------
 
 virtual  void Print ();
 
-virtual  void SetDebug (unsigned int);
-virtual  unsigned int GetID ();
-virtual  unsigned int GetCurrent();
-virtual  unsigned int GetTotal();
+virtual  void setDebug(int);
+virtual  int getID();
+virtual  int GetCurrent();
+virtual  int GetTotal();
 
 };
 

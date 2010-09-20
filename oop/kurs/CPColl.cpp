@@ -1,16 +1,16 @@
-//Файл : CPColl.cpp
-//Реализация класса "набор поршневых механизмов"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPColl.cpp
+// Реализация класса "набор поршневых механизмов"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CPColl.h"
 #include <iostream.h>
 
 
-unsigned int CPistonCollection :: debug = 0;
-unsigned int CPistonCollection :: total = 0;
-unsigned int CPistonCollection :: current = 0;
+int CPistonCollection :: debug = 0;
+int CPistonCollection :: total = 0;
+int CPistonCollection :: current = 0;
 
 
 CPistonCollection :: CPistonCollection() : /*MainPoints(),*/ Collection(), Length(0) {
@@ -137,7 +137,7 @@ void CPistonCollection :: MovePiston (double dy) {
   // RefreshPoints();
 }
 
-unsigned int CPistonCollection :: GetLength () const{
+int CPistonCollection :: GetLength () const{
         return Length;
 }
 
@@ -172,19 +172,19 @@ void CPistonCollection :: Print () {
 
 }
 
-void CPistonCollection :: SetDebug (unsigned int d) {
+void CPistonCollection :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CPistonCollection :: GetID () {
+int CPistonCollection :: getID() {
         return id;
 }
 
-unsigned int CPistonCollection :: GetCurrent () {
+int CPistonCollection :: getCurrent() {
         return current;
 }
 
-unsigned int CPistonCollection :: GetTotal () {
+int CPistonCollection :: getTotal() {
         return total;
 }
 

@@ -1,7 +1,7 @@
-//Файл : CMsg.h
-//Реализация класса "сообщение"
-//Автор : Монько А.О.
-//Дата : 1.06.2010 Редакция : 1.0
+// Файл: CMsg.h
+// Реализация класса "сообщение"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 
 
@@ -9,12 +9,12 @@
 #include <iostream.h>
 
 
-unsigned int CMessage :: current = 0;
-unsigned int CMessage :: total = 0;
-unsigned int CMessage :: debug = 0;
+int CMessage :: current = 0;
+int CMessage :: total = 0;
+int CMessage :: debug = 0;
 
 
-CMessage :: CMessage(unsigned int _FromID, unsigned int _ToID, int _Type, const CInfo& _Info, unsigned int _dir) :
+CMessage :: CMessage(int _FromID, int _ToID, int _Type, const CInfo& _Info, int _dir) :
 FromID(_FromID), ToID(_ToID), Type(_Type), Info(_Info), id(++total) {
 
 ++current;
@@ -62,11 +62,11 @@ CMessage :: ~CMessage() {
 
 }
 
-void CMessage :: SetFromID(unsigned int _FromID){
+void CMessage :: SetFromID(int _FromID){
 	FromID = _FromID;
 }
 
-void CMessage :: SetToID(unsigned int _ToID){
+void CMessage :: SetToID(int _ToID){
 	ToID = _ToID;
 }
 
@@ -74,15 +74,15 @@ void CMessage :: SetInfo(const CInfo& _Info){
 	Info = _Info;
 }
 
-void CMessage :: SetType(unsigned int _Type){
+void CMessage :: SetType(int _Type){
 	Type = _Type;
 }
 
-void CMessage :: SetDirection(unsigned int _dir){
+void CMessage :: SetDirection(int _dir){
 	direction = _dir;
 }
 
-const char* CMessage :: InterpritateType (unsigned int type){
+const char* CMessage :: InterpritateType (int type){
 	switch(type){
 		case 0 :{
 			return "Confirm";

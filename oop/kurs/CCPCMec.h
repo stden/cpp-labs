@@ -1,7 +1,7 @@
-//Файл : CPСMec.h
+// Файл: CPСMec.h
 //Проект класса "клиент - закрытый поршневой механизм"
-//Автор : Монько А.О.
-//Дата : 1.06.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 #ifndef CCPCMEC_H
 #define CCPCMEC_H
@@ -24,9 +24,9 @@ public:
 	void SetP1(CPoint P0);
         virtual int MovePiston (double);
 	void Print() const;
-        unsigned int GetID();
+        int getID();
 private:
-	void Action(unsigned int _type, const CInfo& info);
+	void Action(int _type, const CInfo& info);
 };
 
 #endif

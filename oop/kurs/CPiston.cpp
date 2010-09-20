@@ -1,16 +1,16 @@
-//Файл : CPiston.cpp
-//Реализация класса "поршень"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CPiston.cpp
+// Реализация класса "поршень"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CPiston.h"
 #include <iostream.h>
 
 
-unsigned int CPiston :: debug = 0;
-unsigned int CPiston :: total = 0;
-unsigned int CPiston :: current = 0;
+int CPiston :: debug = 0;
+int CPiston :: total = 0;
+int CPiston :: current = 0;
 
 
 CPiston :: CPiston (double x1, double y1, double _width, double _height, double _length) : Piston(x1,y1,_width,_height),
@@ -177,19 +177,19 @@ void CPiston :: Print () {
 
 }
 
-void CPiston :: SetDebug (unsigned int d) {
+void CPiston :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CPiston :: GetID () {
+int CPiston :: getID() {
         return id;
 }
 
-unsigned int CPiston :: GetCurrent () {
+int CPiston :: getCurrent() {
         return current;
 }
 
-unsigned int CPiston :: GetTotal () {
+int CPiston :: getTotal() {
         return total;
 }
 

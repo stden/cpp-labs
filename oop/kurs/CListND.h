@@ -1,6 +1,6 @@
 //Файл: CListND.h
 //Проект шаблона класса "Узел кольцевого однонаправленного списка"
-//Автор: Монько А.О.
+//Автор: Волынко Е. ст. гр. 7304
 //Дата: 21.02.2010, Редакция: 1.0
 
 
@@ -13,7 +13,7 @@ class CLNode {
 protected:
   CLNode* _next;	// связь к последующему узлу
   ValueType _value;
-  static unsigned int debug;
+  static int debug;
 public:
   CLNode (const ValueType& value);
   CLNode ();
@@ -26,6 +26,6 @@ public:
 };
 
 template <class ValueType>
-unsigned int CLNode<ValueType> :: debug = 0;
+int CLNode<ValueType> :: debug = 0;
 
 #endif

@@ -1,7 +1,7 @@
-//Файл : CSection.cpp
-//Реализация класса "отрезок"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Файл: CSection.cpp
+// Реализация класса "отрезок"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 
 #include "CSection.h"
@@ -9,9 +9,9 @@
 #include <math.h>
 
 
-unsigned int CSection :: debug = 0;
-unsigned int CSection :: total = 0;
-unsigned int CSection :: current = 0;
+int CSection :: debug = 0;
+int CSection :: total = 0;
+int CSection :: current = 0;
 
 
 CSection :: CSection (double x1, double y1, double len) {
@@ -141,19 +141,19 @@ void CSection :: Print () {
 	cout << "P1" << P1 << " -- P2" << P2 << ", L = " << L <<endl;
 }
 
-void CSection :: SetDebug (unsigned int d) {
+void CSection :: setDebug(int d) {
         debug = d;
 }
 
-unsigned int CSection :: GetID () {
+int CSection :: getID() {
         return id;
 }
 
-unsigned int CSection :: GetCurrent () {
+int CSection :: getCurrent() {
         return current;
 }
 
-unsigned int CSection :: GetTotal () {
+int CSection :: getTotal() {
         return total;
 }
 

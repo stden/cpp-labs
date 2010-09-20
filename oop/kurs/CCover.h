@@ -1,7 +1,7 @@
-//Файл : CCover.h
+// Файл: CCover.h
 //Проект класса "крышка"
-//Автор : Монько А.О.
-//Дата : 22.02.2010 Редакция : 1.0
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 22.02.2010 Редакция: 1.0
 
 #ifndef CCOVER_H
 #define CCOVER_H
@@ -18,10 +18,10 @@ private:
   CircleList<CPoint> MainPoints;
   CRectangle Hole;
   CRectangle Cover;
-  static unsigned int debug;
-  static unsigned int total;
-  unsigned int id;
-  static unsigned int current;
+  static int debug;
+  static int total;
+  int id;
+  static int current;
 public:
 
 				/*Конструкторы*/
@@ -53,10 +53,10 @@ public:
   //---------------------------------------------------
 
   void Print ();
-  void SetDebug (unsigned int);
-  unsigned int GetID ();
-  unsigned int GetCurrent();
-  unsigned int GetTotal();
+  void setDebug(int);
+  int getID();
+  int GetCurrent();
+  int GetTotal();
 
 };
 
