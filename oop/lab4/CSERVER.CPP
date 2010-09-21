@@ -177,7 +177,7 @@ void CServer :: ReceiveMessage(CMessage *msg) {
 
 void CServer::Print() const {
   cout << "Server: "<< endl
-    << "  ID = " << id << endl
+    << " #" << id << endl
     << "  Current number of servers = " << current << endl
     << "  Number of registered clients = " << ClientList.size() << endl
     << "  List of clients : " << endl;
@@ -186,6 +186,6 @@ void CServer::Print() const {
   } else  {
     ClientList.goFirst();
     for (int i = 0;i < ClientList.size(); i++,ClientList.goNext())
-      cout << "#" << (i+1) << " Server, ID = " << ClientList.getElem().getValue()->getID() << endl;
+      cout << "#" << (i+1) << " Server,#" << ClientList.getElem().getValue()->getID() << endl;
   }
 }
