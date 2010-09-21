@@ -10,6 +10,7 @@
 #include <iostream.h>
 #include <conio.h>
 #include <values.h>
+#include <assert.h>
 
 // Input value from "cin" with error checking
 template <class T>
@@ -17,8 +18,8 @@ T input(char *prompt, T min, T max){
   T value;
   do{
     cout << prompt << " " << min << ".." << max << ": ";
-    while(!(cin >> value) && !cin.eof()) {
-      cerr << "Error: invalid input, try again: "<<endl;
+    while(!(cin >> value)/* && !cin.eof()*/) {
+      cerr << "Error: invalid input " << value << ", try again: ";
       cin.clear();
       cin.ignore(cin.rdbuf()->in_avail());
     }
@@ -48,11 +49,11 @@ float inputInfoField(){
 
 int main() {
   clrscr();
-  cout << endl << endl << "-----------------------------------------------"<<endl;
+  cout << endl << endl << "----------------------------------------------------"<<endl;
   cout << "Programm is modeling of Client->Server->Client message exchange"<<endl
     << "with confirmation of Server->Client interaction."<<endl
     << "Programmed by: Evgeny Volinko"<<endl
-    << "--------------------------------"<<endl;
+    << "----------------------------------------------------"<<endl;
 
   int menu;
   CServer server;
@@ -68,10 +69,9 @@ int main() {
       << "  5. Unregistrate all clients from server"<<endl
       << "  6. Send message Client -> Server"<<endl
       << "  7. Send message Server -> Client"<<endl
-      << "  8. Send message Server -> all Clients"<<endl
-      << "  9. Print clients info"<<endl
-      << "  10. Print all clients info"<<endl
-      << "  11. Exit"<<endl << endl;
+      << "  8. Print clients info"<<endl
+      << "  9. Print all clients info"<<endl
+      << "  10. Exit"<<endl << endl;
 
     menu = input("Your choice",1,11);
     cout << endl;
@@ -81,12 +81,13 @@ int main() {
         CClient* cl = new CClient;
         if (cl) {
 	  clients.insert(cl);
-          cout << "New client added #" << cl->getID() << endl;
-        } else
-          cout << "Error while create client!" << endl;
-        break;
+	  cout << "New client added #" << cl->getID() << endl;
+	  assert(server.GetClientByID(cl->getID()) == NULL);
+	} else
+	  cout << "Error while create client!" << endl;
+	break;
       case 2:
-        cout << "== 2. Registrate on server ==" << endl;
+	cout << "== 2. Registrate on server ==" << endl;
 	int id = inputClientID("Enter id of client to register");
 	clients.goFirst();
 	if(clients.getCurrent()!=NULL)
@@ -96,6 +97,7 @@ int main() {
 	      break;
 	    }
 	  } while(clients.goNext());
+	assert(server.GetClientByID(id) != NULL);
 	break;
       case 3: {
 	cout << "== 3. Registrate all clients on server ==" << endl;
@@ -103,15 +105,17 @@ int main() {
 	if(clients.getCurrent()!=NULL)
 	  do{
 	    server.Register(clients.getElem().getValue());
+	    assert(server.GetClientByID(clients.getElem().getValue()->getID()) != NULL);
 	  } while(clients.goNext());
 	break;
-	      };
+      };
       case 4: {
 	cout << "== 4. Unregistrate client from server ==" << endl;
-	int tid = inputClientID("Enter id of client, u want to unregister");
+	int tid = inputClientID("Enter id of client to unregister");
 	server.Unregister(tid);
+	assert(server.GetClientByID(id) == NULL);
 	break;
-	      };
+      };
       case 5:
 	cout << "== 5. Unregistrate all clients from server ==" << endl;
 	server.UnregisterAll();
@@ -122,6 +126,7 @@ int main() {
 	if(tid==0) break;
 	int tcode = inputMessageCode();
 	float tinfo = inputInfoField();
+	cout << endl;
 	clients.goFirst();
 	if(clients.getCurrent()!=NULL)
 	  do{
@@ -139,17 +144,15 @@ int main() {
 	if(tid==0) break;
 	int tcode = inputMessageCode();
 	float tinfo = inputInfoField();
+	cout << endl;
 	server.SendMessage(
 	  new CMessage(server.getID(),tid,tcode,tinfo,Server_to_Client),tid);
 	break;
 	      }
-      case 8:
-	cout << "== 8. Send message Server -> all Clients ==" << endl;
-	server.SendMessageToAll( inputMessageCode(), inputInfoField() );
-	break;
-      case 9: {
-	cout << "== 9. Print clients info ==" << endl;
+      case 8: {
+	cout << "== 8. Print clients info ==" << endl;
 	int tid = inputClientID("Enter id of client, which info u want to look");
+	cout << endl;
 	clients.goFirst();
 	if(clients.getCurrent()!=NULL)
 	  do{
@@ -160,8 +163,8 @@ int main() {
 	  } while(clients.goNext());
 	break;
       }
-      case 10: {
-	cout << "== 10. Print all clients info ==" << endl;
+      case 9: {
+	cout << "== 9. Print all clients info ==" << endl;
 	clients.goFirst();
 	if(clients.getCurrent()!=NULL)
 	  do{
@@ -172,8 +175,8 @@ int main() {
 	break;
       }
       default:
-        return 0;
+	return 0;
     }
-  } while(menu!=11);
+  } while(menu!=10);
   return 0;
 }
