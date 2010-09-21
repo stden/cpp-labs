@@ -32,7 +32,7 @@ public:
   void Register(CServer *server); // Зарегестрироваться на сервере
   void Unregister(int _id); // Сняться с регистрации
   void UnregisterAll(); //Сняться с регистрации со всех серверов
-  void SendMessage(CMessage *msg, int _id); // отправить сообщение серверу
+  void SendMessage(CMessage *msg); // отправить сообщение серверу
   void SendMessage(int _type, double _info, int _id); // отправить сообщение серверу
   void ReceiveMessage(CMessage *msg); // Получить сообщение
   void Action(int _type, const float _info);

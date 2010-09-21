@@ -31,7 +31,7 @@ public:
   void Register(CClient *client);
   void Unregister(int _id);
   void UnregisterAll();
-  void SendMessage(CMessage *msg, int _id);
+  void SendMessage(CMessage *msg);
   void SendMessage(int _type, double _info, int _id);
   void SendMessageToAll(CMessage *msg);
   void SendMessageToAll(int _type, double _info);

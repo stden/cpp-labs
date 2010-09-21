@@ -47,15 +47,12 @@ CLNode<ValueType>* CircleList<ValueType> :: GetLast() {
   if (_length) {
     cur = last;
     return cur;
-  }
-
-  else return 0;
+  } else return 0;
 }
 
 template <class ValueType>
 CLNode<ValueType>* CircleList<ValueType> :: GetCur() const {
-  if (_length && cur) return cur;
-  else return 0;
+  if (_length && cur) return cur; else return 0;
 }
 
 template <class ValueType>
