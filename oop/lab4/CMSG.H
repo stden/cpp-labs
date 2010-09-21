@@ -25,8 +25,7 @@ private:
   const int id;
   static int current;
 public:
-  CMessage(int _FromID, int _ToID,
-    int _Type, double _Info, Direction _dir);
+  CMessage(int _FromID, int _ToID, int _Type, double _Info, Direction _dir);
   CMessage(const CMessage& msg);
   ~CMessage();
   int getFromID() const { return FromID; }
@@ -34,10 +33,10 @@ public:
   int getType() const { return Type; }
   double getInfo() const { return Info; }
   Direction getDirection() const { return direction; }
-  void setFromID(int _FromID);
-  void setToID(int _ToID);
-  void setType(int _Type){ Type = _Type; };
-  void setInfo(double _Info);
+  void setFromID(int _FromID) { FromID = _FromID; };
+  void setToID(int _ToID) { ToID = _ToID; };
+  void setType(int _Type) { Type = _Type; };
+  void setInfo(double _Info) { Info = _Info; };
   void setDirection(Direction _dir){ direction = _dir; }
   const char* InterpritateType(int type) const;
   void Print(char *prompt="") const;

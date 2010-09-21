@@ -35,15 +35,15 @@ CServer :: ~CServer() {
 }
 
 CClient* CServer :: GetClientByID(int _id) {
-  ClientList.GetFirst();
-  for (int i = 0; i < ClientList.GetSize();i++,ClientList.NextCur()) 
-    if (ClientList.GetCur()->GetValue()->getID() == _id)
-      return ClientList.GetCur()->GetValue();
+  ClientList.goFirst();
+  for (int i = 0; i < ClientList.size();i++,ClientList.goNext())
+    if (ClientList.getElem().getValue()->getID() == _id)
+      return ClientList.getElem().getValue();
   return 0;
 }
 
 int CServer :: Client_Count() const {
-  return ClientList.GetSize();
+  return ClientList.size();
 }
 
 void CServer :: Register(CClient *client)
@@ -56,7 +56,7 @@ void CServer :: Register(CClient *client)
       cout << "Client #" << client->getID() 
         << " already registered on server #"<<id<<endl;
     } else {
-      ClientList.Append(new CLNode<CClient*>(client));
+      ClientList.insert(client);
       if (client->GetServerByID(id) == NULL) {
         client->Register(this);
         cout << "Client #" << client->getID() << " was registered on server #"
@@ -73,7 +73,7 @@ void CServer :: Unregister(int _id) {
     cout << "Client #"<<_id<< " can not unregister from server #"<<id<<endl
       <<"cause it does not registered on it"<<endl;
   } else {
-    ClientList.ExcludeCur();
+    ClientList.dispose();
     if (client->GetServerByID(id) != NULL) {
       client->Unregister(id);
       cout << "Client #"<< client->getID() <<" was unregistered from server #"<<id<<endl;
@@ -83,13 +83,15 @@ void CServer :: Unregister(int _id) {
 
 void CServer ::UnregisterAll() {
 
-  if (ClientList.GetSize() == 0) {
+  if (ClientList.size() == 0) {
     cout << "There are already no registered clients exists"<<endl;
   } else {
-    ClientList.GetFirst();
-    int tlen = ClientList.GetSize();
-    for (int i = 0; i < tlen;i++) 
-      Unregister(ClientList.GetFirst()->GetValue()->getID());
+    ClientList.goFirst();
+    int tlen = ClientList.size();
+    for (int i = 0; i < tlen;i++){
+      ClientList.goFirst();
+      Unregister(ClientList.getElem().getValue()->getID());
+    }
     cout << "Server #"<<id<<": unregistered all clients"<<endl;
   }
 }
@@ -115,14 +117,15 @@ void CServer :: SendMessage(CMessage *msg, int _id)
 
 void CServer :: SendMessageToAll(int _type, double _info) {
   CMessage* msg = new CMessage(id,1,_type,_info,Server_to_Client);
-  if (ClientList.GetSize() != 0) {
+  if (ClientList.size() != 0) {
     msg->setDirection(Server_to_Client);
-    int tlen = ClientList.GetSize();
-    for (int i = 0; i < tlen; i ++) {
-      msg->setFromID(id);
-      msg->setToID(ClientList.GetElemByNum(i)->GetValue()->getID());
-      ClientList.GetElemByNum(i)->GetValue()->ReceiveMessage(msg);
-    }
+    ClientList.goFirst();
+    if(ClientList.getCurrent()!=NULL)
+      do{
+	msg->setFromID(id);
+	msg->setToID(ClientList.getElem().getValue()->getID());
+	ClientList.getElem().getValue()->ReceiveMessage(msg);
+      } while (ClientList.goNext());
     cout << "Server #"<<id<< ": sent message to all clients " << endl;
   }
   else {
@@ -176,13 +179,13 @@ void CServer::Print() const {
   cout << "Server: "<< endl
     << "  ID = " << id << endl
     << "  Current number of servers = " << current << endl
-    << "  Number of registered clients = " << ClientList.GetSize() << endl
+    << "  Number of registered clients = " << ClientList.size() << endl
     << "  List of clients : " << endl;
-  if (ClientList.GetSize() == 0) {
+  if (ClientList.size() == 0) {
     cout << "List is empty"<<endl;
   } else  {
-    ClientList.GetFirst();
-    for (int i = 0;i < ClientList.GetSize(); i++,ClientList.NextCur()) 
-      cout << "#" << (i+1) << " Server, ID = " << ClientList.GetCur()->GetValue()->getID() << endl;
+    ClientList.goFirst();
+    for (int i = 0;i < ClientList.size(); i++,ClientList.goNext())
+      cout << "#" << (i+1) << " Server, ID = " << ClientList.getElem().getValue()->getID() << endl;
   }
 }

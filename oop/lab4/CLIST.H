@@ -259,7 +259,7 @@ void CircleList<ValueType>:: Print () const {
   CLNode <ValueType> * temp = header;
 
   while (i < _length && temp) {
-    cout << "Element "<<i<<": "<<temp->GetValue()<<endl;
+    cout << "Element "<<i<<": "<<temp.getValue<<endl;
     i++;
     temp = temp->GetNext();
   }
