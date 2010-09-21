@@ -34,12 +34,12 @@ CServer* CClient :: GetServerByID(int _id) {
   ServerList.goFirst();
   for (int i = 0; i < ServerList.size(); i++,ServerList.goNext())
     if (ServerList.getElem().getValue()->getID() == _id)
-      return  ServerList.getElem()->GetValue();
+      return  ServerList.getElem().getValue();
   return 0;
 }
 
 int CClient :: ServerCount() const {
-  return ServerList.GetSize();
+  return ServerList.size();
 }
 
 void CClient :: Register(CServer *server) {
@@ -51,7 +51,7 @@ void CClient :: Register(CServer *server) {
       cout << "Client #" << id 
         <<" already registered on server #" << server->getID() << endl;
     } else {
-      ServerList.Append(new CLNode<CServer*>(server));
+      ServerList.insert(server);
       if (server->GetClientByID(id) == NULL) {
         server->Register(this);
         cout << "Client #" << id << " was registered on server #"
@@ -68,7 +68,7 @@ void CClient::Unregister(int _id) {
       << server->getID() << endl
       <<"cause it does not registered on it"<<endl;
   } else {
-    ServerList.ExcludeCur();
+    ServerList.dispose();
     if (server->GetClientByID(id) != NULL) {
       server->Unregister(id);
       cout << "Client #" << id<<" was unregistered from server #" << server->getID()<<endl;
@@ -78,15 +78,15 @@ void CClient::Unregister(int _id) {
 
 void CClient::UnregisterAll() {
 
-  if (ServerList.GetSize() == 0) {
+  if (ServerList.size() == 0) {
     cout << "There are already no registered servers exists"<<endl;
   }
   else {
-
-    int tlen = ServerList.GetSize();
-    for (int i = 0; i < tlen;i++) {
-      Unregister(ServerList.GetElemByNum(i)->GetValue()->getID());
-    }
+    ServerList.goFirst();
+    if(ServerList.getCurrent()!=NULL)
+      do{
+	Unregister(ServerList.getElem().getValue()->getID());
+      } while(ServerList.goNext());
     cout << "Client #"<<id<<" was unregistered from all servers"<<endl;
   }
 }
@@ -170,16 +170,16 @@ void CClient::Action(int _code, const float _info) {
 void CClient :: Print() const {
   cout << "Client #" << id << endl
     << "  Current number of clients = "<<current<<endl
-    << "  Number of registered servers = "<<ServerList.GetSize() <<endl
+    << "  Number of registered servers = "<<ServerList.size() <<endl
     << "  List of servers: "<<endl;
-  if (ServerList.GetSize() == 0) {
+  if (ServerList.size() == 0) {
     cout << "List is empty"<<endl;
   }
   else  {
-    ServerList.GetFirst();
-    for (int i = 0;i < ServerList.GetSize(); i++,ServerList.NextCur()) {
-      cout << "  #"<< (i+1) <<" Server, ID = "
-        << ServerList.GetCur()->GetValue()->getID() << endl;
+    ServerList.goFirst();
+    for (int i = 0;i < ServerList.size(); i++,ServerList.goNext()) {
+      cout << "  #"<< (i+1) <<" Server,#"
+	<< ServerList.getElem().getValue()->getID() << endl;
     }
   }
   cout << endl;
