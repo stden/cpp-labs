@@ -31,10 +31,10 @@ CClient :: ~CClient() {
 }
 
 CServer* CClient :: GetServerByID(int _id) {
-  ServerList.GetFirst();
-  for (int i = 0; i < ServerList.GetSize(); i++,ServerList.NextCur()) 
-    if (ServerList.GetElemByNum(i)->GetValue()->getID() == _id)
-      return  ServerList.GetCur()->GetValue();
+  ServerList.goFirst();
+  for (int i = 0; i < ServerList.size(); i++,ServerList.goNext())
+    if (ServerList.getElem().getValue()->getID() == _id)
+      return  ServerList.getElem()->GetValue();
   return 0;
 }
 
@@ -145,10 +145,8 @@ void CClient::ReceiveMessage(CMessage *msg) {
         Report,msg->getInfo(),Client_to_Server),
         server->getID());
     }
-  }
-  else {
-    cout << "Client #" <<id<< "could not recive message from unknown server"<<endl;
-  }
+  } else
+    cout << "Client #" << id << " could not recive message from unknown server"<<endl;
   //delete msg;
 }
 

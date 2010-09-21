@@ -6,7 +6,7 @@
 #ifndef _CCLIENT_H
 #define _CCLIENT_H
 
-#include "CList.h"
+#include "CoList.h"
 #include "CServer.h"
 #include "CMsg.h"
 #include <iostream.h>
@@ -21,7 +21,7 @@ private:
   static int current;
 
   //список серверов на которых зарегестрирован клиент
-  CircleList<CServer*> ServerList;
+  CList<CServer*> ServerList;
 
 public:
   CClient();

@@ -29,18 +29,6 @@ CMessage :: ~CMessage() {
   if (debug) Print("deleted");
 }
 
-void CMessage :: setFromID(int _FromID){
-  FromID = _FromID;
-}
-
-void CMessage :: setToID(int _ToID){
-  ToID = _ToID;
-}
-
-void CMessage :: setInfo(double _Info){
-  Info = _Info;
-}
-
 const char* CMessage :: InterpritateType(int type) const {
   switch(type){
     case Confirmation: return "CONFIRMATION";

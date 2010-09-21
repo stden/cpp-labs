@@ -20,7 +20,7 @@ private:
   const int id;
   static int current;
 
-  CircleList<CClient*> ClientList;
+  CList<CClient*> ClientList;
 
 public:
   CServer();

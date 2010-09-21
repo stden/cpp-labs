@@ -6,7 +6,7 @@
 #include "CMsg.h"
 #include "CServer.h"
 #include "CClient.h"
-#include "CList.h"
+#include "CoList.h"
 #include <iostream.h>
 #include <conio.h>
 #include <values.h>
@@ -56,7 +56,7 @@ int main() {
 
   int menu;
   CServer server;
-  CircleList<CClient*> clients;
+  CList<CClient*> clients;
 
   do{
     cout << endl
@@ -80,91 +80,97 @@ int main() {
         cout << "== 1. Create Client ==" << endl;
         CClient* cl = new CClient;
         if (cl) {
-          clients.Append(new CLNode<CClient*>(cl));
+	  clients.insert(cl);
           cout << "New client added #" << cl->getID() << endl;
         } else
           cout << "Error while create client!" << endl;
         break;
       case 2:
         cout << "== 2. Registrate on server ==" << endl;
-        int id = inputClientID("Enter id of client to register");
-        for (int i = 0;i < clients.GetSize();i++) {
-          if (clients.GetElemByNum(i)->GetValue()->getID() == id) {
-            server.Register(clients.GetElemByNum(i)->GetValue());
-            break;
-          }
-        }
-        break;
+	int id = inputClientID("Enter id of client to register");
+	clients.goFirst();
+	if(clients.getCurrent()!=NULL)
+	  do{
+	    if (clients.getElem().getValue()->getID() == id) {
+	      server.Register(clients.getElem().getValue());
+	      break;
+	    }
+	  } while(clients.goNext());
+	break;
       case 3: {
-        cout << "== 3. Registrate all clients on server ==" << endl;
-        for (int i = 0;i < clients.GetSize();i++)
-          server.Register(clients.GetElemByNum(i)->GetValue());
-        break;
-              };
+	cout << "== 3. Registrate all clients on server ==" << endl;
+	clients.goFirst();
+	if(clients.getCurrent()!=NULL)
+	  do{
+	    server.Register(clients.getElem().getValue());
+	  } while(clients.goNext());
+	break;
+	      };
       case 4: {
-        cout << "== 4. Unregistrate client from server ==" << endl;
-        int tid = inputClientID("Enter id of client, u want to unregister");
-        for (int i = 0;i < clients.GetSize();i++) {
-          if (clients.GetElemByNum(i)->GetValue()->getID() == tid) {
-            server.Unregister(tid);
-            break;
-          }
-        }
-        break;
-              };
+	cout << "== 4. Unregistrate client from server ==" << endl;
+	int tid = inputClientID("Enter id of client, u want to unregister");
+	server.Unregister(tid);
+	break;
+	      };
       case 5:
-        cout << "== 5. Unregistrate all clients from server ==" << endl;
-        server.UnregisterAll();
-        break;
+	cout << "== 5. Unregistrate all clients from server ==" << endl;
+	server.UnregisterAll();
+	break;
       case 6: {
-        cout << "== 6. Send message Client -> Server ==" << endl;
-        int tid = inputClientID("Enter id of client");
-        if(tid==0) break;
-        int tcode = inputMessageCode();
-        float tinfo = inputInfoField();
-        for (int i = 0;i < clients.GetSize();i++) {
-          if (clients.GetElemByNum(i)->GetValue()->getID() == tid) {
-            clients.GetElemByNum(i)->GetValue()->
-              SendMessage(tcode,tinfo,server.getID());
-            break;
-          }
-        }
-        break;
-              }
+	cout << "== 6. Send message Client -> Server ==" << endl;
+	int tid = inputClientID("Enter id of client");
+	if(tid==0) break;
+	int tcode = inputMessageCode();
+	float tinfo = inputInfoField();
+	clients.goFirst();
+	if(clients.getCurrent()!=NULL)
+	  do{
+	    if (clients.getElem().getValue()->getID() == tid) {
+	      clients.getElem().getValue()->
+		SendMessage(tcode,tinfo,server.getID());
+	      break;
+	    }
+	  } while(clients.goNext());
+	break;
+	      }
       case 7: {
-        cout << "== 7. Send message Server -> Client ==" << endl;
-        int tid = inputClientID("Enter id of client");
-        if(tid==0) break;
-        int tcode = inputMessageCode();
-        float tinfo = inputInfoField();
-        server.SendMessage(
-          new CMessage(server.getID(),tid,tcode,tinfo,Server_to_Client),tid);
-        break;
-              }
+	cout << "== 7. Send message Server -> Client ==" << endl;
+	int tid = inputClientID("Enter id of client");
+	if(tid==0) break;
+	int tcode = inputMessageCode();
+	float tinfo = inputInfoField();
+	server.SendMessage(
+	  new CMessage(server.getID(),tid,tcode,tinfo,Server_to_Client),tid);
+	break;
+	      }
       case 8:
-        cout << "== 8. Send message Server -> all Clients ==" << endl;
-        server.SendMessageToAll( inputMessageCode(), inputInfoField() );
-        break;
+	cout << "== 8. Send message Server -> all Clients ==" << endl;
+	server.SendMessageToAll( inputMessageCode(), inputInfoField() );
+	break;
       case 9: {
-        cout << "== 9. Print clients info ==" << endl;
-        int tid = inputClientID("Enter id of client, which info u want to look");
-        for (int i = 0;i < clients.GetSize();i++) {
-          if (clients.GetElemByNum(i)->GetValue()->getID() == tid) {
-            clients.GetElemByNum(i)->GetValue()->Print();
-            break;
-          }
-        }
-        break;
-              }
+	cout << "== 9. Print clients info ==" << endl;
+	int tid = inputClientID("Enter id of client, which info u want to look");
+	clients.goFirst();
+	if(clients.getCurrent()!=NULL)
+	  do{
+	    if (clients.getElem().getValue()->getID() == tid) {
+	      clients.getElem().getValue()->Print();
+	      break;
+	    }
+	  } while(clients.goNext());
+	break;
+      }
       case 10: {
-        cout << "== 10. Print all clients info ==" << endl;
-        for (int i = 0;i < clients.GetSize();i++) {
-          clients.GetElemByNum(i)->GetValue()->Print();
-          cout << "-- Press any key to continue or ESC to exit -- "<<endl;
-          if (getch() == 27) break; // Waiting for some action
-        }
-        break;
-               }
+	cout << "== 10. Print all clients info ==" << endl;
+	clients.goFirst();
+	if(clients.getCurrent()!=NULL)
+	  do{
+	    clients.getElem().getValue()->Print();
+	    cout << "-- Press any key to continue or ESC to exit -- "<<endl;
+	    if (getch() == 27) break; // Waiting for some action
+	  } while(clients.goNext());
+	break;
+      }
       default:
         return 0;
     }
