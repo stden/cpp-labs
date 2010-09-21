@@ -54,7 +54,7 @@ CClient* clientByID( int id ){
   if(clients.getCurrent()!=NULL)
     do{
       if (clients.getValue()->getID() == id)
-	return clients.getValue();
+  return clients.getValue();
     } while(clients.goNext());
   return NULL;
 }
@@ -99,108 +99,107 @@ int main() {
       << "  9. Print all clients info"<<endl
       << "  10. Exit"<<endl << endl;
 
-    menu = input("Your choice",1,11);
+    menu = input("Your choice",1,10);
     cout << endl;
     switch (menu) {
       case 1: {
-	cout << "== 1. Create Client ==" << endl;
-	CClient* cl = new CClient;
-	assert( cl != NULL );
-	int n = clients.size();
-	assert( clientByID(cl->getID()) == NULL );
-	clients.insert(cl);
-	assert( clientByID(cl->getID()) != NULL );
-	assert( clients.size() == n+1 );
-	cout << "New client added #" << cl->getID() << endl;
-	assert( server.GetClientByID(cl->getID()) == NULL );
-	break;
+  cout << "== 1. Create Client ==" << endl;
+  CClient* cl = new CClient;
+  assert( cl != NULL );
+  int n = clients.size();
+  assert( clientByID(cl->getID()) == NULL );
+  clients.insert(cl);
+  assert( clientByID(cl->getID()) != NULL );
+  assert( clients.size() == n+1 );
+  cout << "New client added #" << cl->getID() << endl;
+  assert( server.GetClientByID(cl->getID()) == NULL );
+  break;
       };
       case 2: {
-	cout << "== 2. Registrate on server ==" << endl;
-	int id = inputClientID("Enter id of client to register");
-	CClient* cl = clientByID(id);
-	if(cl==NULL){
-	  cout << "Client #" << id << " not exists!" << endl;
-	  break;
-	}
-	server.Register(cl);
-	assert(server.GetClientByID(id) == cl);
-	assert(cl->GetServerByID(server.getID()) != NULL);
-	break;
+  cout << "== 2. Registrate on server ==" << endl;
+  int id = inputClientID("Enter id of client to register");
+  CClient* cl = clientByID(id);
+  if(cl==NULL){
+    cout << "Client #" << id << " not exists!" << endl;
+    break;
+  }
+  server.Register(cl);
+  assert(server.GetClientByID(id) == cl);
+  assert(cl->GetServerByID(server.getID()) != NULL);
+  break;
       };
       case 3: {
-	cout << "== 3. Registrate all clients on server ==" << endl;
-	clients.goFirst();
-	if(clients.getCurrent()!=NULL)
-	  do{
-	    server.Register(clients.getValue());
-	    assert( server.GetClientByID(clients.getValue()->getID()) ==
-		    clients.getValue() );
-	  } while(clients.goNext());
-	assert(clients.size() == server.ClientCount());
-	break;
+  cout << "== 3. Registrate all clients on server ==" << endl;
+  clients.goFirst();
+  if(clients.getCurrent()!=NULL)
+    do{
+      server.Register(clients.getValue());
+      assert( server.GetClientByID(clients.getValue()->getID()) ==
+        clients.getValue() );
+    } while(clients.goNext());
+  assert(clients.size() == server.ClientCount());
+  break;
       };
       case 4: {
-	cout << "== 4. Unregistrate client from server ==" << endl;
-	int id = inputClientID("Enter id of client to unregister");
-	server.Unregister(id);
-	assert(server.GetClientByID(id) == NULL);
-	break;
+  cout << "== 4. Unregistrate client from server ==" << endl;
+  int id = inputClientID("Enter id of client to unregister");
+  server.Unregister(id);
+  assert(server.GetClientByID(id) == NULL);
+  break;
       };
       case 5:
-	cout << "== 5. Unregistrate all clients from server ==" << endl;
-	server.UnregisterAll();
-	break;
+  cout << "== 5. Unregistrate all clients from server ==" << endl;
+  server.UnregisterAll();
+  break;
       case 6: {
-	cout << "== 6. Send message Client -> Server ==" << endl;
-	int id = inputClientID("Enter id of client");
-	if(id==0) break;
-	int tcode = inputMessageCode();
-	float tinfo = inputInfoField();
-	cout << endl;
-	CClient* cl = clientByID(id);
-	if(cl!=NULL)
-	  cl->SendMessage(tcode,tinfo,server.getID());
-	else
-	  cout << "Client #" << id << " not exists!" << endl;
-	break;
+  cout << "== 6. Send message Client -> Server ==" << endl;
+  int id = inputClientID("Enter id of client");
+  if(id==0) break;
+  int tcode = inputMessageCode();
+  float tinfo = inputInfoField();
+  cout << endl;
+  CClient* cl = clientByID(id);
+  if(cl!=NULL)
+    cl->SendMessage(tcode,tinfo,server.getID());
+  else
+    cout << "Client #" << id << " not exists!" << endl;
+  break;
       }
       case 7: {
-	cout << "== 7. Send message Server -> Client ==" << endl;
-	int id = inputClientID("Enter id of client");
-	if(id==0) break;
-	int tcode = inputMessageCode();
-	float tinfo = inputInfoField();
-	cout << endl;
-	server.SendMessage(
-	  new CMessage(server.getID(),id,tcode,tinfo,Server_to_Client));
-	break;
+  cout << "== 7. Send message Server -> Client ==" << endl;
+  int id = inputClientID("Enter id of client");
+  if(id==0) break;
+  int tcode = inputMessageCode();
+  float tinfo = inputInfoField();
+  cout << endl;
+  server.SendMessage(&CMessage(server.getID(),id,tcode,tinfo,Server_to_Client));
+  break;
       }
       case 8: {
-	cout << "== 8. Print client info ==" << endl;
-	int id = inputClientID("Enter id of client, which info u want to look");
-	cout << endl;
-	CClient* cl = clientByID(id);
-	if(cl!=NULL)
-	  cl->Print();
-	else
-	  cout << "Client #" << id << " not exists!" << endl;
-	break;
+        cout << "== 8. Print client info ==" << endl;
+        int id = inputClientID("Enter id of client, which info u want to look");
+        cout << endl;
+        CClient* cl = clientByID(id);
+  if(cl!=NULL)
+    cl->Print();
+  else
+    cout << "Client #" << id << " not exists!" << endl;
+  break;
       }
       case 9: {
-	cout << "== 9. Print all clients info ==" << endl;
-	clients.goFirst();
-	if(clients.getCurrent()!=NULL)
-	  do{
-	    clients.getValue()->Print();
-	    cout << "-- Press any key to continue or ESC to exit -- "<<endl;
-	    if (getch() == 27) break; // Waiting for some action
-	  } while(clients.goNext());
-	server.Print();
-	break;
+  cout << "== 9. Print all clients info ==" << endl;
+  clients.goFirst();
+  if(clients.getCurrent()!=NULL)
+    do{
+      clients.getValue()->Print();
+      cout << "-- Press any key to continue or ESC to exit -- "<<endl;
+      if (getch() == 27) break; // Waiting for some action
+    } while(clients.goNext());
+  server.Print();
+  break;
       }
       default:
-	return 0;
+  return 0;
     }
   } while(menu!=10);
   return 0;
