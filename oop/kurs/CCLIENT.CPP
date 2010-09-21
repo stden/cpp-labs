@@ -1,7 +1,7 @@
-// Ôàéë: CClient.h
-// Ðåàëèçàöèÿ êëàññà "êëèåíò"
-// Àâòîð: Âîëûíêî Å. ñò. ãð. 7304
-// Äàòà: 20.09.2010 Ðåäàêöèÿ: 1.0
+// ” ©«: CClient.h
+// ¥ «¨§ æ¨ï ª« áá  "ª«¨¥­â"
+// €¢â®à: ‚®«ë­ª® …. áâ. £à. 7304
+// „ â : 20.09.2010 ¥¤ ªæ¨ï: 1.0
 
 #include "CClient.H"
 #include "CList.h"
@@ -167,12 +167,12 @@ void CClient::ReceiveMessage(CMessage *msg)
 
     if (msg->GetType() > 1)  {
       CMessage *msg1 = new CMessage(*msg);
-      msg1->setType(0); //êîä ïîäòâåðæäåíèÿ ïðè¸ìà ñîîáùåíèÿ
+      msg1->setType(0); //ª®¤ ¯®¤â¢¥à¦¤¥­¨ï ¯à¨ñ¬  á®®¡é¥­¨ï
       msg1->setDirection(Client_to_Server);
-      SendMessage(msg1, server->getID()); //îòïðàâêà ïîäòâåðæäåíèÿ î ïðè¸ìå
-      //ñîîáùåíèÿ 
+      SendMessage(msg1, server->getID()); //®â¯à ¢ª  ¯®¤â¢¥à¦¤¥­¨ï ® ¯à¨ñ¬¥
+      //á®®¡é¥­¨ï 
       Action (msg->GetType(), msg->GetInfo());
-      //îòïðàâêà ïîäòâåðæäåíèÿ î âûïîëíåíèè äåéñòâèÿ
+      //®â¯à ¢ª  ¯®¤â¢¥à¦¤¥­¨ï ® ¢ë¯®«­¥­¨¨ ¤¥©áâ¢¨ï
       CMessage *msg2 = new CMessage();
       msg2->setType(1);
       msg2->setDirection(Client_to_Server);
