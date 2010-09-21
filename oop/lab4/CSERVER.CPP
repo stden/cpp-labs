@@ -8,6 +8,7 @@
 #include "CServer.H"
 #include <iostream.h>
 #include <conio.h>
+#include <assert.h>
 
 static const int Server_Do_Confirmation = 0;
 
@@ -39,29 +40,34 @@ CClient* CServer :: GetClientByID(int _id) {
   for (int i = 0; i < ClientList.size();i++,ClientList.goNext())
     if (ClientList.getElem().getValue()->getID() == _id)
       return ClientList.getElem().getValue();
-  return 0;
+  return NULL;
 }
 
-int CServer :: Client_Count() const {
+int CServer :: ClientCount() const {
   return ClientList.size();
 }
 
-void CServer :: Register(CClient *client)
-{
+void CServer :: Register(CClient *client) {
+  assert( id > 0 && "Server ID must be > 0");
   if (client == NULL) {
-    cout << "Server #"<<id<<endl
-      <<"Failed to register client due to wrong address"<<endl;
+    cout << "Server #"<< id << " Failed to register client due to wrong address" << endl;
   } else {
     if (GetClientByID(client->getID()) != NULL) {
-      cout << "Client #" << client->getID() 
-        << " already registered on server #"<<id<<endl;
+      cout << "Client #" << client->getID()
+	   << " already registered on server #"<<id<<endl;
     } else {
+      int n = ClientCount();
+      cout << "Server #" << id << " register client #" << client->getID() << endl;
+      assert( GetClientByID(client->getID()) == NULL );
       ClientList.insert(client);
+      assert( GetClientByID(client->getID()) != NULL );
+      assert(ClientCount() == n+1);
       if (client->GetServerByID(id) == NULL) {
-        client->Register(this);
-        cout << "Client #" << client->getID() << " was registered on server #"
-          << id<<endl;
+	client->Register(this);
+	cout << "Client #" << client->getID() << " was registered on server #"
+	  << id << endl;
       }
+      assert( client->GetServerByID(id) != NULL );
     }
   }
 }
@@ -70,9 +76,10 @@ void CServer :: Register(CClient *client)
 void CServer :: Unregister(int _id) {
   CClient* client = GetClientByID(_id);
   if (client == NULL) {
-    cout << "Client #"<<_id<< " can not unregister from server #"<<id<<endl
-      <<"cause it does not registered on it"<<endl;
+    cout << "Client #"<<_id<< " can not unregister from server #" << id
+      << " cause it does not registered on it" << endl;
   } else {
+    assert(ClientList.getElem().getValue()->getID() == _id);
     ClientList.dispose();
     if (client->GetServerByID(id) != NULL) {
       client->Unregister(id);

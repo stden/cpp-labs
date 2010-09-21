@@ -27,7 +27,7 @@ public:
   ~CServer();
 
   CClient* GetClientByID(int _id);
-  int Client_Count() const;
+  int ClientCount() const;
   void Register(CClient *client);
   void Unregister(int _id);
   void UnregisterAll();

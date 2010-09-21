@@ -34,8 +34,8 @@ CServer* CClient :: GetServerByID(int _id) {
   ServerList.goFirst();
   for (int i = 0; i < ServerList.size(); i++,ServerList.goNext())
     if (ServerList.getElem().getValue()->getID() == _id)
-      return  ServerList.getElem().getValue();
-  return 0;
+      return ServerList.getElem().getValue();
+  return NULL;
 }
 
 int CClient :: ServerCount() const {
@@ -98,8 +98,8 @@ void CClient::SendMessage(CMessage *msg, int _id) {
     msg->setFromID(id);
     msg->setToID(_id);
     msg->setDirection(Client_to_Server);
-    server->ReceiveMessage(msg);
     cout << "Client #"<<id<< " sent message to server #"<<_id<<endl;
+    server->ReceiveMessage(msg);
   } else {
     cout << "Client #" << id<< "could not send messages to server #"<<_id<<endl
       <<"cause it not registered on it"<<endl;
