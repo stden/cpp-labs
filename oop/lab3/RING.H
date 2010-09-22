@@ -9,14 +9,13 @@
 #include <iostream.h>
 #include "CoPoint.h"
 
-class CRing : public CCountedPoint
-{
+class CRing {
 
   // Радиус
   double m_R_B;
 
   double m_R_S;
-  
+
   //Абсцисса точки
   double m_x;
 
@@ -28,7 +27,6 @@ public:
   * Конструктор
   */
   CRing(double _x,double _y,double _R_B,double _R_S);
-
 
   /*
   * Конструктор копирования
@@ -64,6 +62,11 @@ public:
   * Перемещение в заданную точку
   */
   void MoveToPoint(double x, double y);
+
+  double getX(){ return m_x; };
+  double getY(){ return m_y; };
+  void setX(double value){ m_x=value; };
+  void setY(double value){ m_y=value; };
 
 };
 

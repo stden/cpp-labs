@@ -167,7 +167,7 @@ void CServer :: ReceiveMessage(CMessage *msg) {
     msg->Print();
     if (msg->getType() > 0 && Server_Do_Confirmation) {
       CMessage msg1(*msg);
-      msg1.setType(Confirmation); //код подтверждения приёма сообщения
+      msg1.setType(CONFIRMATION); //код подтверждения приёма сообщения
       msg1.setDirection(Server_to_Client);
       msg1.setToID(client->getID());
       SendMessage(&msg1);
