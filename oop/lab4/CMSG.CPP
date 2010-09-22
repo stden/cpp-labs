@@ -12,8 +12,8 @@ int CMessage :: debug = 0;
 
 CMessage :: CMessage(int _FromID, int _ToID,
                      int _Type, double _Info, Direction _dir) :
-FromID(_FromID), ToID(_ToID), Type(_Type), Info(_Info), id(++total),
-direction(_dir) {
+ id(++total), FromID(_FromID), ToID(_ToID), Type(_Type),
+ Info(_Info), direction(_dir) {
   ++current;
   if (debug) Print("created");
 }
@@ -31,8 +31,8 @@ CMessage :: ~CMessage() {
 
 const char* CMessage :: InterpritateType(int type) const {
   switch(type){
-    case Confirmation: return "CONFIRMATION";
-    case Report: return "REPORT";
+    case CONFIRMATION: return "CONFIRMATION";
+    case REPORT: return "REPORT";
     default: return "ACTION";
   }
 }
@@ -43,7 +43,7 @@ void CMessage :: Print(char *prompt) const{
     cout << "from server #" << FromID << " to client #" << ToID;
   else 
     cout << "from client #" << FromID << " to server #" << ToID;
-  cout << " Info = " << Info << endl << endl;
+  cout << " Code=" << Type << " Info=" << Info << endl << endl;
 }
 
 

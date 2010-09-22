@@ -131,12 +131,12 @@ void CClient::ReceiveMessage(CMessage *msg) {
       // отправка подтверждения о приёме сообщения
       CMessage msg1(*msg);
       msg1.setFromID(id);
-      msg1.setType(Confirmation); //код подтверждения приёма сообщения
+      msg1.setType(CONFIRMATION); //код подтверждения приёма сообщения
       msg1.setDirection(Client_to_Server);
       SendMessage(&msg1);
       Action(msg->getType(), msg->getInfo());
       //отправка подтверждения о выполнении действия
-      SendMessage(&CMessage(id,msg->getFromID(),Report,
+      SendMessage(&CMessage(id,msg->getFromID(),REPORT,
 	msg->getInfo(),Client_to_Server) );
     }
   } else

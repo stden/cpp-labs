@@ -10,8 +10,7 @@
 #include "Ring.h"
 
 CRing::CRing(double x,double y,double R_B, double R_S) :
- m_x(x), m_y(y), m_R_B(R_B), m_R_S(R_S)
-{
+ m_x(x), m_y(y), m_R_B(R_B), m_R_S(R_S) {
   cout << "          Ring created" << endl;
 }
 
@@ -70,12 +69,13 @@ void CRing :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   assert( *miny < *maxy );
 }
 
-  void CRing :: MoveToPoint( double x, double y)
-  {m_x=x;
-   m_y=y;
-   }
+void CRing :: MoveToPoint( double x, double y)
+{
+  m_x=x;
+  m_y=y;
+}
 
-   void CRing::MovedXdY(double x,double y)
+void CRing::MovedXdY( double x, double y )
 {
   // cout << "move " << m_x << " " << m_y << " -> " << x << " " << y << endl;
   m_x+=x;

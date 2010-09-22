@@ -6,45 +6,51 @@
 #ifndef CMSG_H
 #define CMSG_H
 
-// направление передачи: 0 - сервер->клиент, 1 - клиент->сервер
+// направление передачи: сервер->клиент, клиент->сервер
 enum Direction { Server_to_Client, Client_to_Server };
-// тип сообщения: 0 - подтверждение приема
-//   1 - отчет о выполнении >= 2 - запрос действия
-const int Confirmation = 0;
-const int Report = 1;
 
+// тип сообщения: остальные коды - запрос действия (ACTION)
+const int CONFIRMATION = 0; // подтверждение приема
+const int REPORT = 1; // отчет о выполнении команды
+
+// Объявление класса Сообщение
 class CMessage {
 private:
-  int FromID;
-  int ToID;
-  double Info;
-  int Type; // тип сообщения
+  const int id; // id сообщения
+  int FromID; // id от кого сообщение
+  int ToID; // id кому сообщение
+  double Info; // Информационное поле сообщения
+  int Type; // тип сообщения (CONFIRMATION, REPORT, ACTION)
   Direction direction; // направление передачи
   static int debug;
   static int total;
-  const int id;
   static int current;
 public:
   CMessage(int _FromID, int _ToID, int _Type, double _Info, Direction _dir);
   CMessage(const CMessage& msg);
   ~CMessage();
+
+  const char* InterpritateType(int type) const;
+  void Print(char *prompt="") const;
+
+  int getID() const { return id; }
   int getFromID() const { return FromID; }
   int getToID() const { return ToID; }
   int getType() const { return Type; }
   double getInfo() const { return Info; }
   Direction getDirection() const { return direction; }
+
   void setFromID(int _FromID) { FromID = _FromID; };
   void setToID(int _ToID) { ToID = _ToID; };
   void setType(int _Type) { Type = _Type; };
   void setInfo(double _Info) { Info = _Info; };
   void setDirection(Direction _dir){ direction = _dir; }
-  const char* InterpritateType(int type) const;
-  void Print(char *prompt="") const;
+
   static void setDebug(int d) { debug = d; }
-  int getID() { return id; }
+
   static int getCurrent(){ return current; }
   static int getTotal(){ return total; }
-  static int get_debug(){ return debug; }
+  static int getDebug(){ return debug; }
 };
 
 #endif
