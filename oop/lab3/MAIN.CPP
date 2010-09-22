@@ -107,7 +107,7 @@ void main()
   cout << endl << endl;
 
   cout << endl << "Our service:" << endl;
-  s.print();
+  s.Print();
 
   int a;
   do {
@@ -139,7 +139,7 @@ void main()
         s.MoveToPoint(CCountedPoint(x,y));
         break;
       case 5:
-        s.print();
+	s.Print();
         break;
       case 0:
         break;
@@ -149,7 +149,8 @@ void main()
 
     //Out lists
     cout << endl << "Service: " << endl;
-    s.print();
+    s.Print();
     cout<<endl;
   } while (a!=0);
+  delete[] temp;
 }

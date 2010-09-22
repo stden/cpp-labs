@@ -63,8 +63,8 @@ public:
   */
   void MoveToPoint(double x, double y);
 
-  double getX(){ return m_x; };
-  double getY(){ return m_y; };
+  double getX() const { return m_x; };
+  double getY() const { return m_y; };
   void setX(double value){ m_x=value; };
   void setY(double value){ m_y=value; };
 

@@ -25,9 +25,9 @@ public:
   *
   */
   void insert(const CScene& gl){ List.insert(gl); }
-
   void insertBegin(const CScene& gl){ List.insertBegin(gl); }
-  void print(){ List.print(); }
+
+  void Print() const { List.Print(); }
 
   /*
   * Перемещение

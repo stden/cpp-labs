@@ -44,7 +44,7 @@ public:
   void Print() const;
 
   static void setDebug(int d) { debug = d; }
-  int getID() { return id; }
+  int getID() const { return id; }
   static int getCurrent(){ return current; }
   static int getTotal(){ return total; }
   static int getDebug(){ return debug; }
