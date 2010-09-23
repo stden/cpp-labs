@@ -30,6 +30,8 @@ class CList
 
 public:
 
+  int getID() const { return m_id; }
+
   /*
   * Конструктор
   */

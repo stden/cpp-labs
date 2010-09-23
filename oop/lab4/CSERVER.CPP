@@ -109,12 +109,13 @@ void CServer ::UnregisterAll() {
 
 void CServer :: SendMessage(CMessage *msg) {
   assert( msg != NULL );
-  assert( msg->getFromID() == id );
-  assert( msg->getDirection() == Server_to_Client );
+  assert( msg->getDirection() == Server_to_Client ||
+          msg->getDirection() == Client_to_Client );
+  if(msg->getDirection() == Server_to_Client)
+    assert( msg->getFromID() == id );
 
   CClient *client = GetClientByID(msg->getToID());
   if (client != NULL) {
-    assert( msg->getDirection() == Server_to_Client );
     client->ReceiveMessage(msg);
     cout << "Server #" << id << ": sent message to client #"
       << msg->getToID() << endl;
@@ -159,18 +160,32 @@ void CServer :: SendMessage(int _type, double _info, int _id) {
 }
 
 void CServer :: ReceiveMessage(CMessage *msg) {
-  assert( msg->getToID() == id );
-  assert( msg->getDirection() == Client_to_Server );
+  assert( msg->getDirection() == Client_to_Server ||
+          msg->getDirection() == Client_to_Client );
+  if(msg->getDirection() == Client_to_Server)
+    assert( msg->getToID() == id );
   CClient* client = GetClientByID(msg->getFromID());
   if (client != NULL) {
     cout << "Server #" << id << ": recived message from client #" << client->getID() << endl;
     msg->Print();
-    if (msg->getType() > 0 && Server_Do_Confirmation) {
+    if (msg->getDirection() == Client_to_Server &&
+        msg->getType() > 0 && Server_Do_Confirmation) {
       CMessage msg1(*msg);
       msg1.setType(CONFIRMATION); //код подтверждения приёма сообщения
       msg1.setDirection(Server_to_Client);
       msg1.setToID(client->getID());
       SendMessage(&msg1);
+    }
+    if (msg->getDirection() == Client_to_Client){
+      CClient* dst_client = GetClientByID(msg->getToID());
+      if (dst_client != NULL) {
+         cout << "Server #" << id << " REDIRECT to Client #" <<
+           msg->getToID() << endl;
+        SendMessage(msg);
+      } else {
+        cout << "Server #" << id << ": could not send message to client "
+          << msg->getToID() << endl;
+      }
     }
   } else {
     cout << "Server #" << id << ": could not recive message from unknown client"<<endl;

@@ -6,8 +6,10 @@
 #ifndef CMSG_H
 #define CMSG_H
 
-// направление передачи: сервер->клиент, клиент->сервер
-enum Direction { Server_to_Client, Client_to_Server };
+// направление передачи: сервер->клиент, клиент->сервер,
+// клиент->клиент через сервер
+enum Direction { Server_to_Client, Client_to_Server,
+  Client_to_Client };
 
 // тип сообщения: остальные коды - запрос действия (ACTION)
 const int CONFIRMATION = 0; // подтверждение приема

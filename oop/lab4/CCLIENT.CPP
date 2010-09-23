@@ -97,14 +97,16 @@ void CClient::UnregisterAll() {
 
 void CClient::SendMessage(CMessage *msg) {
   assert( msg->getFromID() == id );
-  assert( msg->getDirection() == Client_to_Server );
-  CServer *server = GetServerByID(msg->getToID());
+  assert( msg->getDirection() == Client_to_Server ||
+          msg->getDirection() == Client_to_Client );
+  CServer *server = (msg->getDirection() == Client_to_Server) ?
+    GetServerByID(msg->getToID()) : GetServerByID(1);
   if (server != NULL) {
-    cout << "Client #"<<id<< " sent message to server #" << msg->getToID() << endl;
+    cout << "Client #" << id << " sent message to server #" << msg->getToID() << endl;
     server->ReceiveMessage(msg);
   } else {
-    cout << "Client #" << id<< "could not send messages to server #"
-      << msg->getFromID() << "cause it not registered on it"<<endl;
+    cout << "Client #" << id << " could not send messages to server #"
+      << msg->getFromID() << " cause it not registered on it"<<endl;
   }
 }
 
@@ -119,25 +121,31 @@ void CClient::SendMessage(int _type, double _info, int _id) {
 }
 
 void CClient::ReceiveMessage(CMessage *msg) {
-  assert( msg->getDirection() == Server_to_Client );
+  assert( msg->getDirection() == Server_to_Client ||
+          msg->getDirection() == Client_to_Client );
   assert( msg->getToID() == id );
-  CServer *server = GetServerByID(msg->getFromID());
+  int reply_to_server = (msg->getDirection() == Server_to_Client) ?
+    msg->getFromID() : 1;
+  CServer *server = GetServerByID(reply_to_server);
   if (server != NULL)  {
-    cout << endl << "Client #" << id << " recived message from server #" 
-      << server->getID() << endl;
+    if(msg->getDirection() == Server_to_Client)
+      cout << endl << "Client #" << id << " recived message from server #"
+        << server->getID() << endl;
+    else
+      cout << endl << "Client #" << id << " recived message from client #"
+        << msg->getFromID() << endl;
     msg->Print();
 
     if (msg->getType() > 1)  {
       // отправка подтверждения о приёме сообщения
-      CMessage msg1(*msg);
-      msg1.setFromID(id);
-      msg1.setType(CONFIRMATION); //код подтверждения приёма сообщения
-      msg1.setDirection(Client_to_Server);
-      SendMessage(&msg1);
+      CMessage m1(*msg);
+      m1.setFromID(id);
+      m1.setType(CONFIRMATION); //код подтверждения приёма сообщения
+      m1.setDirection(Client_to_Server);
+      SendMessage(&m1);
       Action(msg->getType(), msg->getInfo());
       //отправка подтверждения о выполнении действия
-      SendMessage(&CMessage(id,msg->getFromID(),REPORT,
-	msg->getInfo(),Client_to_Server) );
+      SendMessage(&CMessage(id,reply_to_server,REPORT,msg->getInfo(),Client_to_Server) );
     }
   } else
     cout << "Client #" << id << " could not recive message from unknown server"<<endl;
