@@ -95,11 +95,12 @@ int main() {
       << "  5. Unregistrate all clients from server"<<endl
       << "  6. Send message Client -> Server"<<endl
       << "  7. Send message Server -> Client"<<endl
-      << "  8. Print clients info"<<endl
-      << "  9. Print all clients info"<<endl
-      << "  10. Exit"<<endl << endl;
+      << "  8. Send message Client -> Server -> Client"<<endl
+      << "  9. Print clients info"<<endl
+      << "  10. Print all clients info"<<endl
+      << "  11. Exit"<<endl << endl;
 
-    menu = input("Your choice",1,10);
+    menu = input("Your choice",1,11);
     cout << endl;
     switch (menu) {
       case 1: {
@@ -176,7 +177,22 @@ int main() {
   break;
       }
       case 8: {
-        cout << "== 8. Print client info ==" << endl;
+        cout << "===  8. Send message Client -> Server -> Client ==="<<endl;
+        int src_id = inputClientID("Enter id of source client");
+        int dst_id = inputClientID("Enter id of destination client");
+        if(src_id==0 || dst_id==0) break;
+        int tcode = inputMessageCode();
+        float tinfo = inputInfoField();
+        cout << endl;
+        CClient* src = clientByID(src_id);
+        if(src!=NULL)
+          src->SendMessage(&CMessage(src_id,dst_id,tcode,tinfo,Client_to_Client));
+        else
+          cout << "Client #" << src_id << " not exists!" << endl;
+        break;
+      }
+      case 9: {
+        cout << "== 9. Print client info ==" << endl;
         int id = inputClientID("Enter id of client, which info u want to look");
         cout << endl;
         CClient* cl = clientByID(id);
@@ -186,8 +202,8 @@ int main() {
     cout << "Client #" << id << " not exists!" << endl;
   break;
       }
-      case 9: {
-  cout << "== 9. Print all clients info ==" << endl;
+      case 10: {
+  cout << "== 10. Print all clients info ==" << endl;
   clients.goFirst();
   if(clients.getCurrent()!=NULL)
     do{
@@ -201,6 +217,6 @@ int main() {
       default:
   return 0;
     }
-  } while(menu!=10);
+  } while(menu!=11);
   return 0;
 }
