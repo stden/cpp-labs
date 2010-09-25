@@ -12,6 +12,7 @@
 #include "CoList.h"
 #include "Ring.h"
 #include <conio.h>
+#include <values.h>
 
 class CGlass {
 protected:
@@ -42,7 +43,7 @@ public:
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
   * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
-  CGlass(const CCountedPoint& x, const CCountedPoint& y, 
+  CGlass(const CCountedPoint& x, const CCountedPoint& y,
          const double& bottom, const double& hBottom, const double& lessSide);
 
   /*
@@ -50,25 +51,35 @@ public:
   */
   ~CGlass(void);
 
+  int getID(){ return m_id; };
+
+  CCountedPoint getBasePoint(){
+    return m_bottom.getPoint(0);
+  }
+
   /*
   * Перемещение
   */
-  void MoveToPoint(const CCountedPoint& point);
-  
+  virtual void MoveToPoint(const CCountedPoint& point);
+
   /*
   * Смещение
   */
-  void MovedXdY(double x, double y);
-  
+  virtual void MovedXdY(double x, double y);
+
   /*
   * Оператор вывода в поток
   */
   friend ostream& operator << (ostream& s, CGlass& r) {
-    s << "Glass: "
-      << "  Bottom: " << r.m_bottom; getch();
-    s << "  Cage: " << r.m_cage; getch();
-    s << "  Left side: " << r.m_leftSide; getch();
-    s << "  Right side: " << r.m_rightSide;
+    return r.Write(s);
+  }
+
+  virtual ostream& Write(ostream& s){
+    s << "    Glass #" << getID() << ": " << endl
+      << "      Bottom: " << m_bottom;
+    s << "      Cage: " << m_cage;
+    s << "      Left side: " << m_leftSide;
+    s << "      Right side: " << m_rightSide;
     getch();
     return s;
   }
@@ -76,10 +87,19 @@ public:
   /*
   * Получить количество экземпляров класса
   */
-  static int getCount()
-  {
+  static int getCount() {
     return countreal;
   }
+
+  /*
+  * Получение границ (прямоугольника, описывающего всю фигуру)
+  */
+  void GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
+    m_bottom.GetBorders(minx,maxx,miny,maxy);
+    m_cage.GetBorders(minx,maxx,miny,maxy);
+    m_leftSide.GetBorders(minx,maxx,miny,maxy);
+    m_rightSide.GetBorders(minx,maxx,miny,maxy);
+  };
 
 };
 

@@ -12,37 +12,33 @@ CParallelogram::CParallelogram(const CCountedPoint& x, const CCountedPoint& y, c
   m_list.insert(CCountedPoint(y.getX() + l, y.getY()));
   m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
   m_list.goFirst();
-  cout << "        Parallelogram created" << endl;
+  cout << "      Parallelogram created" << *this;
 }
 
 CParallelogram::~CParallelogram(void)
 {
-  cout << "        Parallelogram destroyed" << endl;
+  cout << "      Parallelogram destroyed " << *this;
 }
 
 void CParallelogram :: MovedXdY (double dx, double dy) {
-  m_list.goFirst();
-  do{
-    m_list.getElem().getValue().MovedXdY(dx, dy);
-  }while(m_list.goNext());
+  for(m_list.goFirst();m_list.hasNext();m_list.goNext())
+    m_list.getValue().MovedXdY(dx, dy);
 }
 
 void CParallelogram :: MoveToPoint (const CCountedPoint& P) {
-    m_list.goFirst();
+  m_list.goFirst();
 
-    double dx = P.getX() - m_list.getElem().getValue().getX();
-    double dy = P.getY() - m_list.getElem().getValue().getY();
-    
-    MovedXdY(dx, dy);
+  double dx = P.getX() - m_list.getValue().getX();
+  double dy = P.getY() - m_list.getValue().getY();
+
+  MovedXdY(dx, dy);
 }
 
 ostream& operator << (ostream& s, CParallelogram& r)
 {
-  s << "  " << "Parallelogram" << ": " << endl;
-  r.getPoints().goFirst();
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
+  s << "  " << "Parallelogram: ";
+  for(r.getPoints().goFirst();r.getPoints().hasNext();r.getPoints().goNext())
+    s << r.getPoints().getValue() << " ";
   s << endl;
   return (s);
 }
@@ -54,14 +50,14 @@ const CCountedPoint& CParallelogram :: getPoint (int index) {
     for(index;index>1;index--)
       m_list.goNext();
 
-    return m_list.getElem().getValue();
+    return m_list.getValue();
 }
 
 void CParallelogram :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   getPoints().goFirst();
   do{
-    double x = getPoints().getElem().getValue().getX();
-    double y = getPoints().getElem().getValue().getY();
+    double x = getPoints().getValue().getX();
+    double y = getPoints().getValue().getY();
     if(x>*maxx) *maxx = x;
     if(x<*minx) *minx = x;
     if(y>*maxx) *maxy = y;

@@ -32,7 +32,7 @@ T input(char *prompt, T min, T max){
 }
 
 int inputClientID(char *prompt){
-  if(CClient::getCurrent() < 1){
+  if(CClient::getTotal() < 1){
     cout << "Register at least one client at first" << endl;
     return 0;
   };
@@ -126,7 +126,7 @@ int main() {
   }
   server.Register(cl);
   assert(server.GetClientByID(id) == cl);
-  assert(cl->GetServerByID(server.getID()) != NULL);
+  assert(cl->getServer() != NULL);
   break;
       };
       case 3: {
@@ -161,7 +161,7 @@ int main() {
   cout << endl;
   CClient* cl = clientByID(id);
   if(cl!=NULL)
-    cl->SendMessage(tcode,tinfo,server.getID());
+    cl->SendMessage(tcode,tinfo,1);
   else
     cout << "Client #" << id << " not exists!" << endl;
   break;
@@ -173,7 +173,7 @@ int main() {
   int tcode = inputMessageCode();
   float tinfo = inputInfoField();
   cout << endl;
-  server.SendMessage(&CMessage(server.getID(),id,tcode,tinfo,Server_to_Client));
+  server.SendMessage(&CMessage(1,id,tcode,tinfo,Server_to_Client));
   break;
       }
       case 8: {

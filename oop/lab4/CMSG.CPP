@@ -39,11 +39,18 @@ const char* CMessage :: InterpritateType(int type) const {
 
 void CMessage :: Print(char *prompt) const{
   cout << InterpritateType(Type) << " message #" << id << " " << prompt << " ";
-  if (direction == Server_to_Client) 
-    cout << "from server #" << FromID << " to client #" << ToID;
-  else 
-    cout << "from client #" << FromID << " to server #" << ToID;
-  cout << " Code=" << Type << " Info=" << Info << endl << endl;
+  switch(direction){
+    case Server_to_Client:
+      cout << "from Server to Client #" << ToID;
+      break;
+    case Client_to_Server:
+      cout << "from Client #" << FromID << " to Server";
+      break;
+    case Client_to_Client:
+      cout << "from Client #" << FromID << " to Client #" << ToID;
+      break;
+  }
+  cout << " Code=" << Type << " Info=" << Info << endl;
 }
 
 
