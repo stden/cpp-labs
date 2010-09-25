@@ -27,24 +27,6 @@ CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
   cout << " Glass #" << m_id << " created" << endl;
 }
 
-void CGlass::MoveToPoint(const CCountedPoint& point)
-{
-  CCountedPoint basePoint = m_bottom.getPoint(0);
-
-  double dx = point.getX() - basePoint.getX();
-  double dy = point.getY() - basePoint.getY();
-
-  MovedXdY(dx, dy);
-}
-
-void CGlass::MovedXdY(double x, double y) {
-  cout << "Glass #" << m_id << " MovedXdY(" << x << "," << y << ")" << endl;
-  m_bottom.MovedXdY(x, y);
-  m_cage.MovedXdY(x, y);
-  m_leftSide.MovedXdY(x, y);
-  m_rightSide.MovedXdY(x, y);
-}
-
 CGlass::~CGlass(void)
 {
   cout << " Glass #" << m_id << " destroyed" << endl;

@@ -22,8 +22,20 @@ public:
   */
   CRectangle(const CCountedPoint& x, const CCountedPoint& y);
 
-  void MovedXdY (double dx, double dy);
-  void MoveToPoint (const CCountedPoint& P);
+  void MovedXdY (double dx, double dy){
+    cout << "CRectangle::MovedXdY(" << dx << "," << dy << ")" << endl;
+    for(m_list.goFirst();m_list.hasNext();m_list.goNext())
+      m_list.getValue().MovedXdY(dx, dy);
+  };
+
+  void MoveToPoint (const CCountedPoint& P){
+    m_list.goFirst();
+
+    double dx = P.getX() - m_list.getValue().getX();
+    double dy = P.getY() - m_list.getValue().getY();
+
+    MovedXdY(dx, dy);
+  };
 
   const CList<CCountedPoint>& getPoints() const { return m_list; }
   const CCountedPoint& getPoint(int index);

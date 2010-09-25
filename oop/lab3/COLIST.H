@@ -150,7 +150,7 @@ public:
   /*
   * Получить значение текущего элемента
   */
-  type getValue() const {
+  type& getValue() const {
     assert( m_current != NULL );
     return (*m_current).getValue();
   }

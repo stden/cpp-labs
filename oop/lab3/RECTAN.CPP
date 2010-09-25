@@ -21,24 +21,6 @@ CRectangle::~CRectangle() {
   cout << "      Rectangle destroyed" << *this;
 }
 
-void CRectangle :: MovedXdY (double dx, double dy) {
-  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
-  m_list.goFirst();
-  do{
-    m_list.getValue().MovedXdY(dx, dy);
-  }while(m_list.goNext());
-}
-
-void CRectangle :: MoveToPoint (const CCountedPoint& P) {
-  m_list.goFirst();
-
-  double dx = P.getX() - m_list.getValue().getX();
-  double dy = P.getY() - m_list.getValue().getY();
-
-  MovedXdY(dx, dy);
-}
-
-
 void CRectangle :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   m_list.goFirst();
   do{
