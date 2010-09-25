@@ -8,42 +8,88 @@
 
 #include "GlassR.h"
 #include "GlassC.h"
+#include "GlList.h"
 
 // Набор изображений: витрина и стакан с кольцом внутри неё
 // Используется множественное наследование
-class CScene : public CGlassCase, public CGlassR { 
+class CScene : public CGlassCase, public CGlassList {
 public:
 
   /*
   * Конструктор
   * leftBottom - левая нижняя точка, rightTop - правая верхняя
   */
-  CScene(const CCountedPoint& leftBottom, const CCountedPoint& rightTop,
-    const CCountedPoint& x, const CCountedPoint& y,
-    const double& bottom, const double& hBottom, const double& lessSide);
+  CScene(const CCountedPoint& leftBottom, const CCountedPoint& rightTop) :
+    CGlassCase(leftBottom,rightTop){
+    cout << "Scene created" << endl;
+  }
 
   /*
   * Деструктор
   */
-  ~CScene();
+  ~CScene(){
+    cout << "Scene destroyed" << endl;
+  }
 
   /*
   * Передвинуть в заданную точку
   */
-  void MoveToPoint(const CCountedPoint& point);
+  void MoveToPoint(const CCountedPoint& point,int glassID){
+    CCountedPoint basePoint = getByID(glassID)->getBasePoint();
+
+    double dx = point.getX() - basePoint.getX();
+    double dy = point.getY() - basePoint.getY();
+
+    MovedXdY(dx, dy, glassID);
+  };
+
+  void MoveToPoint(const CCountedPoint& point){
+    CCountedPoint basePoint = getFirst()->getBasePoint();
+
+    double dx = point.getX() - basePoint.getX();
+    double dy = point.getY() - basePoint.getY();
+
+    MovedXdY(dx, dy);
+  }
 
   /*
   * Сдвинить на заданный вектор
   */
-  void MovedXdY(double x, double y);
+  void MovedXdY(double x, double y,int glassID){
+    cout << "CScene::MovedXdY(" << x << "," << y << "," << glassID
+      << ")" << endl;
+    CGlass* glass = getByID(glassID);
+    if(glass!=NULL){
+      glass->MovedXdY(x,y);
+      if(!GlassInGlassCase(glass)){
+        cout << "Error: Glass outside Glass Case borders" << endl;
+        glass->MovedXdY(-x,-y);
+      }
+    } else {
+      cout << "Glass #" << glassID << " not found!";
+    }
+  };
+
+  void MovedXdY(double x, double y){
+    cout << "CScene::MovedXdY(" << x << "," << y << ")" << endl;
+    List.goFirst();
+    while(List.getCurrent()!=NULL){
+      List.getValue()->MovedXdY(x,y);
+      if(!GlassInGlassCase(List.getValue())){
+        cout << "Error: Glass outside Glass Case borders" << endl;
+        List.getValue()->MovedXdY(-x,-y);
+      }
+    }
+  }
 
   /*
   * Находится ли стакан внутри витрины?
   */
-  int GlassInGlassCase(){
+  int GlassInGlassCase(CGlass *glass){
+    assert( glass != NULL );
     // Получаем координаты "описывающего прямоугольника" для стакана
     double minx,maxx,miny,maxy;
-    GetBorders(&minx,&maxx,&miny,&maxy);
+    glass->GetBorders(&minx,&maxx,&miny,&maxy);
     cout << " Glass borders: " <<
        "  minx = " << minx << "  maxx = " << maxx <<
        "  miny = " << miny << "  maxy = " << maxy << endl;
@@ -55,12 +101,11 @@ public:
   * Вывод в поток
   */
   friend ostream& operator << (ostream& s, CScene& r) {
-    s << "  " << "Витрина со стаканом: ";
-    s << CGlassCase(r) << endl;
-    s << CGlassR(r) << endl;
+    s << endl << "=== SCENE === " << endl
+      << (CGlassList&)r << endl
+      << (CGlassCase&)r << endl;
     return s;
   }
-
 };
 
 

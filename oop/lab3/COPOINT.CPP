@@ -74,7 +74,7 @@ void CCountedPoint::setY(const double& value)
 
 ostream& operator << (ostream& s, const CCountedPoint& P)
 {
-  s << "Point:" << P.getX() << ", " << P.getY(); 
+  s << "(" << P.getX() << ";" << P.getY() << ") ";
   return s;
 }
 

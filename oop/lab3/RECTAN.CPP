@@ -12,38 +12,38 @@ CRectangle::CRectangle(const CCountedPoint& x,const CCountedPoint& y)
   m_list.insert(CCountedPoint(x.getX(), y.getY()));
   m_list.insert(y);
   m_list.insert(CCountedPoint(y.getX(), x.getY()));
+  assert( m_list.size() == 4 );
   m_list.goFirst();
-  cout << "        Rectangle created" << endl;
+  cout << "      Rectangle created " << *this;
 }
 
-CRectangle::~CRectangle()
-{
-  cout << "        Rectangle destroyed" << endl;
+CRectangle::~CRectangle() {
+  cout << "      Rectangle destroyed" << *this;
 }
 
 void CRectangle :: MovedXdY (double dx, double dy) {
   // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
   m_list.goFirst();
   do{
-    m_list.getElem().getValue().MovedXdY(dx, dy);
+    m_list.getValue().MovedXdY(dx, dy);
   }while(m_list.goNext());
 }
 
 void CRectangle :: MoveToPoint (const CCountedPoint& P) {
-    m_list.goFirst();
+  m_list.goFirst();
 
-    double dx = P.getX() - m_list.getElem().getValue().getX();
-    double dy = P.getY() - m_list.getElem().getValue().getY();
+  double dx = P.getX() - m_list.getValue().getX();
+  double dy = P.getY() - m_list.getValue().getY();
 
-    MovedXdY(dx, dy);
+  MovedXdY(dx, dy);
 }
 
 
 void CRectangle :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   m_list.goFirst();
   do{
-    double x = m_list.getElem().getValue().getX();
-    double y = m_list.getElem().getValue().getY();
+    double x = m_list.getValue().getX();
+    double y = m_list.getValue().getY();
     if (x < *minx) *minx = x; 
     if (x > *maxx) *maxx = x;
     if (y < *miny) *miny = y;
@@ -51,25 +51,21 @@ void CRectangle :: GetBorders( double *minx,double *maxx,double *miny,double *ma
   }while(m_list.goNext());
 }
 
-ostream& operator << (ostream& s, CRectangle& r)
-{
-  s << "  " << "Rectangle" << ": " << endl;
-  r.getPoints().goFirst();
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
+ostream& operator << (ostream& s, CRectangle& r) {
+  s << "  " << "Rectangle: ";
+  for(r.getPoints().goFirst();r.getPoints().hasNext();r.getPoints().goNext())
+    s << r.getPoints().getValue() << " ";
   s << endl;
   return s;
 }
 
+const CCountedPoint& CRectangle :: getPoint(int index) {
+  m_list.goFirst();
 
-const CCountedPoint& CRectangle :: getPoint (int index) {
-     m_list.goFirst();
+  for(index;index>1;index--)
+    m_list.goNext();
 
-    for(index;index>1;index--)
-      m_list.goNext();
-
-    return m_list.getElem().getValue();
+  return m_list.getValue();
 }
 
 

@@ -36,7 +36,6 @@ public:
   ~CRectangle();
 
   friend ostream& operator << (ostream& s, CRectangle& r);
-
 };
 
 

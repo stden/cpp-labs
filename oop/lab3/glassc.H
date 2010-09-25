@@ -76,7 +76,7 @@ public:
   * Вывод параметров витрины в поток 
   */
   friend ostream& operator << (ostream& s, CGlassCase& r) {
-    s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop 
+    s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop
       << " Высота " << r.getHeight() << "  Ширина " << r.getWidth() << endl;
     return s;
   }

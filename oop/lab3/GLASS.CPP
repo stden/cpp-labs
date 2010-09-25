@@ -37,9 +37,7 @@ void CGlass::MoveToPoint(const CCountedPoint& point)
   MovedXdY(dx, dy);
 }
 
-void CGlass::MovedXdY(double x, double y)
-{
-
+void CGlass::MovedXdY(double x, double y) {
   cout << "Glass #" << m_id << " MovedXdY(" << x << "," << y << ")" << endl;
   m_bottom.MovedXdY(x, y);
   m_cage.MovedXdY(x, y);

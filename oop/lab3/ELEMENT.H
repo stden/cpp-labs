@@ -10,8 +10,7 @@
 
 
 template<class elemType>
-class CElem
-{
+class CElem {
   //Значение элемента списка
   elemType  m_value;
 

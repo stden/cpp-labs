@@ -15,50 +15,41 @@ CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const d
   m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
   m_list.goFirst();
 
-  cout << "        Trapezium created" << endl;
+  cout << "      Trapezium created " << *this;
 }
 
 CTrapezium::~CTrapezium(void)
 {
-  cout << "        Trapezium destroyed" << endl;
+  cout << "      Trapezium destroyed " << *this;
 }
 
 void CTrapezium :: MovedXdY (double dx, double dy) {
 	// cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
-    m_list.goFirst();
-
-    do{
-      m_list.getElem().getValue().MovedXdY(dx, dy);
-    }while(m_list.goNext());
+  for(m_list.goFirst();m_list.hasNext();m_list.goNext())
+    m_list.getValue().MovedXdY(dx, dy);
 }
 
 void CTrapezium :: MoveToPoint (const CCountedPoint& P) {
-    m_list.goFirst();
+  m_list.goFirst();
 
-    double dx = P.getX() - m_list.getElem().getValue().getX();
-    double dy = P.getY() - m_list.getElem().getValue().getY();
+  double dx = P.getX() - m_list.getValue().getX();
+  double dy = P.getY() - m_list.getValue().getY();
 
-    MovedXdY(dx, dy);
+  MovedXdY(dx, dy);
 }
 
 const CCountedPoint& CTrapezium :: getPoint (int index) {
   m_list.goFirst();
   for(index;index>1;index--)
     m_list.goNext();
-  return m_list.getElem().getValue();
+  return m_list.getValue();
 }
 
-ostream& operator << (ostream& s, CTrapezium& r)
-{
-  s << "  " << "Trapez: " << endl;
-  r.getPoints().goFirst();
-
-  do{
-    s << "    (" << r.getPoints().getElem().getValue() << "), " << endl;
-  }while(r.getPoints().goNext());
-
+ostream& operator << (ostream& s, CTrapezium& r) {
+  s << "Trapez: ";
+  for(r.getPoints().goFirst();r.getPoints().hasNext();r.getPoints().goNext())
+    s << r.getPoints().getValue() << " ";
   s << endl;
-
   return (s);
 }
 
@@ -66,8 +57,8 @@ ostream& operator << (ostream& s, CTrapezium& r)
 void CTrapezium :: GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
   getPoints().goFirst();
   do{
-    double x = m_list.getElem().getValue().getX();
-    double y = m_list.getElem().getValue().getY();
+    double x = m_list.getValue().getX();
+    double y = m_list.getValue().getY();
     if (x < *minx) *minx = x;
     if (x > *maxx) *maxx = x;
     if (y < *miny) *miny = y;

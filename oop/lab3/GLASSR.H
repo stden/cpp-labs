@@ -37,12 +37,12 @@ public:
   /*
   * Перемещение
   */
-  void MoveToPoint(const CCountedPoint& point);
-  
+  virtual void MoveToPoint(const CCountedPoint& point);
+
   /*
   * Смещение
   */
-  void MovedXdY(double x, double y);
+  virtual void MovedXdY(double x, double y);
 
   /* 
   * Получение границ (прямоугольника, описывающего всю фигуру)
@@ -64,15 +64,20 @@ public:
   * Оператор вывода в поток
   */
   friend ostream& operator << (ostream& s, CGlassR& r) {
-    s << "GlassR: "
-      << "  Bottom: " << r.m_bottom; getch();
-    s << "  Cage: " << r.m_cage; getch();
-    s << "  Left side: " << r.m_leftSide; getch();
-    s << "  Right side: " << r.m_rightSide;
-    s << "  Ring : " << r.m_ring;
+    return r.Write(s);
+  }
+
+  virtual ostream& Write(ostream& s){
+    s << "    Glass with Ring #"<< getID() << ": " << endl
+      << "      Bottom: " << m_bottom;
+    s << "      Cage: " << m_cage;
+    s << "      Left side: " << m_leftSide;
+    s << "      Right side: " << m_rightSide;
+    s << "      Ring : " << m_ring;
     getch();
     return s;
   }
+
 };
 
 

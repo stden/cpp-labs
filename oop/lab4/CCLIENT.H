@@ -15,34 +15,27 @@ class CServer;
 
 class CClient {
 private:
-  static int debug;
   static int total;
   const int id;
-  static int current;
 
   //список серверов на которых зарегестрирован клиент
-  CList<CServer*> ServerList;
+  CServer* server;
 
 public:
   CClient();
   ~CClient();
 
-  CServer* GetServerByID(int _id);     //получить сервер по ID
-  int ServerCount() const;     //кол-во зарегестрированных серверов
+  CServer* getServer();     // Получить сервер
   void Register(CServer *server); // Зарегестрироваться на сервере
-  void Unregister(int _id); // Сняться с регистрации
-  void UnregisterAll(); //Сняться с регистрации со всех серверов
-  void SendMessage(CMessage *msg); // отправить сообщение серверу
-  void SendMessage(int _type, double _info, int _id); // отправить сообщение серверу
+  void Unregister(); // Сняться с регистрации на сервере
+  void SendMessage(CMessage *msg); // Отправить сообщение серверу
+  void SendMessage(int _type, double _info, int _id); // Отправить сообщение серверу
   void ReceiveMessage(CMessage *msg); // Получить сообщение
   void Action(int _type, const float _info);
   void Print() const;
 
-  static void setDebug( int _debug ){ debug = _debug; }
   int getID() const { return id; }
-  static int getCurrent(){ return current; }
   static int getTotal(){ return total; }
-  static int getDebug(){ return debug; }
 };
 
 #endif

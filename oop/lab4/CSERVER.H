@@ -20,11 +20,6 @@ class CClient;
 // Описание класса Сервер
 class CServer {
 private:
-  static int debug;
-  static int total;
-  const int id;
-  static int current;
-
   CList<CClient*> ClientList;
 
 public:
@@ -42,12 +37,6 @@ public:
   void SendMessageToAll(int _type, double _info);
   void ReceiveMessage(CMessage *msg);
   void Print() const;
-
-  static void setDebug(int d) { debug = d; }
-  int getID() const { return id; }
-  static int getCurrent(){ return current; }
-  static int getTotal(){ return total; }
-  static int getDebug(){ return debug; }
 };
 
 #endif
