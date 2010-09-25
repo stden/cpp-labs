@@ -1,7 +1,7 @@
-// ‘айл: CP—Mec.h
-//ѕроект класса "клиент - закрытый поршневой механизм"
-// јвтор: ¬олынко ≈. ст. гр. 7304
-// ƒата: 20.09.2010 –едакци€: 1.0
+// Ф†©Ђ: CPСMec.h
+// ПаЃ•™в ™Ђ†бб† "™Ђ®•≠в - бв†™†≠ б ™ЃЂмжЃђ"
+// АҐвЃа: ВЃЂл≠™Ѓ Е. бв. £а. 7304
+// Д†в†: 20.09.2010 Р•§†™ж®п: 1.0
 
 #ifndef CCPCMEC_H
 #define CCPCMEC_H
@@ -20,13 +20,13 @@ public:
         CClientClosedPistonMechanism();
 
         virtual ~CClientClosedPistonMechanism();
-	void Move(double dx, double dy);
-	void SetP1(CPoint P0);
+  void Move(double dx, double dy);
+  void SetP1(CPoint P0);
         virtual int MovePiston (double);
-	void Print() const;
+  void Print() const;
         int getID();
 private:
-	void Action(int _type, const CInfo& info);
+  void Action(int _type, const CInfo& info);
 };
 
 #endif

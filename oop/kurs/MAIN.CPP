@@ -27,996 +27,996 @@
 
 
 void main () {
-{
+  {
 
-        cout << endl<<endl<<"-----------------------------------------------"<<endl;
-        cout << "Programm is creating the view on collection of schematic images of"<<endl
-             << "closed piston mechanisms which can be moved or placed in point"<<endl
-             << "Server->Client->Server system of message exchange is used."<<endl
-             << "Programmed by: Evgeny Volinko"<<endl<<endl
-             << "----------------Press any key to continue or ESC to exit----------------"<<endl;
+    cout << endl<<endl<<"-----------------------------------------------"<<endl;
+    cout << "Programm is creating the view on collection of schematic images of"<<endl
+      << "closed piston mechanisms which can be moved or placed in point"<<endl
+      << "Server->Client->Server system of message exchange is used."<<endl
+      << "Programmed by: Evgeny Volinko"<<endl<<endl
+      << "----------------Press any key to continue or ESC to exit----------------"<<endl;
 
-         while(1) {
-          int key = getch();
-          if (key == 27) return; // Waiting for some action
-	  else break;
-	}
+    while(1) {
+      int key = getch();
+      if (key == 27) return; // Waiting for some action
+      else break;
+    }
 
 
-	int flag = 1;
-        int ViewCreated = 0;
-	char* buffer = new char[80];
-	int menu = 0;
-	CPistonCollection c;
-        CPistonMechanism* p;
-        CServerView *v;
-        //CServer server;
-        CircleList<CClient*> clients;
-	while (flag) {
-        cout    << "1.Create View"<<endl
-                << "2.Add Closed Mechanism to Collection"<<endl
-                << "3.Add Mechanism to Collection"<<endl
-                << "4.Add Client Closed Mechanism to Collection"<<endl
-                << "5.Delete Mechanism from Collection"<<endl
-                << "6.Move Collection and Stand"<<endl
-                << "7.Place Collection and Stand into Point"<<endl
-                << "8.Place Collection into Point"<<endl
-                << "9.Place Stand into Point"<<endl
-	        << "10.Move Collection"<<endl
-                << "11.Move Stand"<<endl
-                << "12.Move Piston of element"<<endl
-                << "13.Move every Piston"<<endl
-                << "14.Print View"<<endl
-                << "15.Print Collection"<<endl
-	        << "16.Exit"<<endl;
+    int flag = 1;
+    int ViewCreated = 0;
+    char* buffer = new char[80];
+    int menu = 0;
+    CPistonCollection c;
+    CPistonMechanism* p;
+    CServerView *v;
+    //CServer server;
+    CircleList<CClient*> clients;
+    while (flag) {
+      cout    << "1.Create View"<<endl
+        << "2.Add Closed Mechanism to Collection"<<endl
+        << "3.Add Mechanism to Collection"<<endl
+        << "4.Add Client Closed Mechanism to Collection"<<endl
+        << "5.Delete Mechanism from Collection"<<endl
+        << "6.Move Collection and Stand"<<endl
+        << "7.Place Collection and Stand into Point"<<endl
+        << "8.Place Collection into Point"<<endl
+        << "9.Place Stand into Point"<<endl
+        << "10.Move Collection"<<endl
+        << "11.Move Stand"<<endl
+        << "12.Move Piston of element"<<endl
+        << "13.Move every Piston"<<endl
+        << "14.Print View"<<endl
+        << "15.Print Collection"<<endl
+        << "16.Exit"<<endl;
 
-	cin >> buffer;
+      cin >> buffer;
 
-	if ((atoi(buffer) == 0) || (atoi(buffer) < 1 || atoi(buffer) > 16)) {
-		cout << "Invalid input, try again : "<<endl;
-		continue;
-	}
+      if ((atoi(buffer) == 0) || (atoi(buffer) < 1 || atoi(buffer) > 16)) {
+        cout << "Invalid input, try again : "<<endl;
+        continue;
+      }
 
-	else {
-	    menu = (int)atoi(buffer);
+      else {
+        menu = (int)atoi(buffer);
 
-	    switch (menu) {
+        switch (menu) {
                case 1: {
-	       double x1 = 0,y1 = 0, _P1P2,x3,y3;
+                 double x1 = 0,y1 = 0, _P1P2,x3,y3;
 
 
 
-	       cout << "Enter x value of point P1 : ";
+                 cout << "Enter x value of point P1 : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		x1 = atof(buffer);
+                 x1 = atof(buffer);
 
 
-		cout << "Enter y value of point P1 : ";
+                 cout << "Enter y value of point P1 : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		y1 = atof(buffer);
+                 y1 = atof(buffer);
 
-                cout << "Enter lenght of P1P2 side : ";
+                 cout << "Enter lenght of P1P2 side : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		_P1P2 = atof(buffer);
+                 _P1P2 = atof(buffer);
 
-                cout << "Enter x value of point P3 : ";
+                 cout << "Enter x value of point P3 : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		x3 = atof(buffer);
+                 x3 = atof(buffer);
 
 
-		cout << "Enter y value of point P3 : ";
+                 cout << "Enter y value of point P3 : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		y3 = atof(buffer);
+                 y3 = atof(buffer);
 
-                v = new CServerView(CPoint(x1,y1),_P1P2,CPoint(x3,y3));
+                 v = new CServerView(CPoint(x1,y1),_P1P2,CPoint(x3,y3));
 
-               if (v->inv()) {
-                ViewCreated = 1;
-                if (c.GetLength() > 0) v->Add(c);
-                       cout << "View is created"<<endl;}
-                else cout << "View do not created due to some input errors"<<endl;
+                 if (v->inv()) {
+                   ViewCreated = 1;
+                   if (c.GetLength() > 0) v->Add(c);
+                   cout << "View is created"<<endl;}
+                 else cout << "View do not created due to some input errors"<<endl;
 
 
-               break;
-               }
+                 break;
+                       }
 
-	       case 2: {
-	       double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
+               case 2: {
+                 double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
 
 
-	       cout << "Enter x value of point P1(A) : ";
+                 cout << "Enter x value of point P1(A) : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		x1 = atof(buffer);
+                 x1 = atof(buffer);
 
 
-		cout << "Enter y value of point P1(A) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y1 = atof(buffer);
-
-                cout << "Enter width of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lwidth = atof(buffer);
-
-                cout << "Enter height of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lheight = atof(buffer);
-
-                cout << "Enter width of bottom side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bwidth = atof(buffer);
-
-                cout << "Enter height of bottom : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bheight = atof(buffer);
-
-                cout << "Enter width of right side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		rwidth = atof(buffer);
-
-                cout << "Enter y value of piston point P1(I) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y2 = atof(buffer);
-
-                cout << "Enter piston height : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		pheight = atof(buffer);
-
-                cout << "Enter stock length : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		slen = atof(buffer);
-
-                cout << "Enter cover height : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		cover_height = atof(buffer);
-
-                cout << "Enter hole's width : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		hole_width = atof(buffer);
-
-                p = new CClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
-
-                if (p->inv()){
-                 c.Add(p);
-                 if (ViewCreated) v->Add(p);
-                 cout << "Closed Piston Mechanism Added"<<endl;}
-                else cout << "Closed Piston Mechanism not added due to some input errors"<<endl;
-
-
-               break;
-               }
+                 cout << "Enter y value of point P1(A) : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y1 = atof(buffer);
+
+                 cout << "Enter width of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lwidth = atof(buffer);
+
+                 cout << "Enter height of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lheight = atof(buffer);
+
+                 cout << "Enter width of bottom side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bwidth = atof(buffer);
+
+                 cout << "Enter height of bottom : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bheight = atof(buffer);
+
+                 cout << "Enter width of right side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 rwidth = atof(buffer);
+
+                 cout << "Enter y value of piston point P1(I) : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y2 = atof(buffer);
+
+                 cout << "Enter piston height : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 pheight = atof(buffer);
+
+                 cout << "Enter stock length : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 slen = atof(buffer);
+
+                 cout << "Enter cover height : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 cover_height = atof(buffer);
+
+                 cout << "Enter hole's width : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 hole_width = atof(buffer);
+
+                 p = new CClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
+
+                 if (p->inv()){
+                   c.Add(p);
+                   if (ViewCreated) v->Add(p);
+                   cout << "Closed Piston Mechanism Added"<<endl;}
+                 else cout << "Closed Piston Mechanism not added due to some input errors"<<endl;
+
+
+                 break;
+                       }
 
                case 3: {
-	       double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
+                 double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
 
 
-	       cout << "Enter x value of point P1(A) : ";
+                 cout << "Enter x value of point P1(A) : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-		x1 = atof(buffer);
-
-
-		cout << "Enter y value of point P1(A) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y1 = atof(buffer);
-
-                cout << "Enter width of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lwidth = atof(buffer);
-
-                cout << "Enter height of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lheight = atof(buffer);
-
-                cout << "Enter width of bottom side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bwidth = atof(buffer);
-
-                cout << "Enter height of bottom : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bheight = atof(buffer);
-
-                cout << "Enter width of right side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		rwidth = atof(buffer);
-
-                cout << "Enter y value of piston point P1(I) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y2 = atof(buffer);
-
-                cout << "Enter piston height : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		pheight = atof(buffer);
-
-                cout << "Enter stock length : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		slen = atof(buffer);
+                 x1 = atof(buffer);
 
 
-                p = new CPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen);
+                 cout << "Enter y value of point P1(A) : ";
 
-                if (p->inv()){
-                 c.Add(p);
-                 if (ViewCreated) v->Add(p);
-                 cout << "Piston Mechanism Added"<<endl;}
-                else cout << "Piston Mechanism not added due to some input errors"<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y1 = atof(buffer);
+
+                 cout << "Enter width of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lwidth = atof(buffer);
+
+                 cout << "Enter height of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lheight = atof(buffer);
+
+                 cout << "Enter width of bottom side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bwidth = atof(buffer);
+
+                 cout << "Enter height of bottom : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bheight = atof(buffer);
+
+                 cout << "Enter width of right side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 rwidth = atof(buffer);
+
+                 cout << "Enter y value of piston point P1(I) : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y2 = atof(buffer);
+
+                 cout << "Enter piston height : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 pheight = atof(buffer);
+
+                 cout << "Enter stock length : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 slen = atof(buffer);
 
 
-               break;
-               }
+                 p = new CPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen);
+
+                 if (p->inv()){
+                   c.Add(p);
+                   if (ViewCreated) v->Add(p);
+                   cout << "Piston Mechanism Added"<<endl;}
+                 else cout << "Piston Mechanism not added due to some input errors"<<endl;
+
+
+                 break;
+                       }
 
                case 4: {
-	       double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
+                 double x1 = 0,y1 = 0, lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width;
 
 
-	       cout << "Enter x value of point P1(A) : ";
+                 cout << "Enter x value of point P1(A) : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		x1 = atof(buffer);
-
-
-		cout << "Enter y value of point P1(A) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y1 = atof(buffer);
-
-                cout << "Enter width of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lwidth = atof(buffer);
-
-                cout << "Enter height of left side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		lheight = atof(buffer);
-
-                cout << "Enter width of bottom side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bwidth = atof(buffer);
-
-                cout << "Enter height of bottom : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		bheight = atof(buffer);
-
-                cout << "Enter width of right side : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		rwidth = atof(buffer);
-
-                cout << "Enter y value of piston point P1(I) : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		y2 = atof(buffer);
-
-                cout << "Enter piston height : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		pheight = atof(buffer);
-
-                cout << "Enter stock length : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		slen = atof(buffer);
-
-                cout << "Enter cover height : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		cover_height = atof(buffer);
-
-                cout << "Enter hole's width : ";
-
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-
-		hole_width = atof(buffer);
-
-//            p = new CClientClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
-            CClientClosedPistonMechanism* cp = new CClientClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
-
-
-                if (cp->inv()){
-                 c.Add(cp);
-                 if (ViewCreated) {
-                        v->Add(cp);
-                        clients.Append(new CLNode<CClient*>(cp));
-                        v->Register(cp);
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
                  }
-                 cout << "Client Closed Piston Mechanism Added"<<endl;}
-                else cout << "Client Closed Piston Mechanism not added due to some input errors"<<endl;
+
+                 x1 = atof(buffer);
 
 
-               break;
-               }
+                 cout << "Enter y value of point P1(A) : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y1 = atof(buffer);
+
+                 cout << "Enter width of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lwidth = atof(buffer);
+
+                 cout << "Enter height of left side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 lheight = atof(buffer);
+
+                 cout << "Enter width of bottom side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bwidth = atof(buffer);
+
+                 cout << "Enter height of bottom : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 bheight = atof(buffer);
+
+                 cout << "Enter width of right side : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 rwidth = atof(buffer);
+
+                 cout << "Enter y value of piston point P1(I) : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y2 = atof(buffer);
+
+                 cout << "Enter piston height : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 pheight = atof(buffer);
+
+                 cout << "Enter stock length : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 slen = atof(buffer);
+
+                 cout << "Enter cover height : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 cover_height = atof(buffer);
+
+                 cout << "Enter hole's width : ";
+
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 hole_width = atof(buffer);
+
+                 //            p = new CClientClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
+                 CClientClosedPistonMechanism* cp = new CClientClosedPistonMechanism(x1,y1,lwidth,lheight,bwidth,bheight,rwidth,y2,pheight,slen,cover_height,hole_width);
+
+
+                 if (cp->inv()){
+                   c.Add(cp);
+                   if (ViewCreated) {
+                     v->Add(cp);
+                     clients.Append(new CLNode<CClient*>(cp));
+                     v->Register(cp);
+                   }
+                   cout << "Client Closed Piston Mechanism Added"<<endl;}
+                 else cout << "Client Closed Piston Mechanism not added due to some input errors"<<endl;
+
+
+                 break;
+                       }
 
                case 5: {
-               cout << "Enter number of element : ";
+                 cout << "Enter number of element : ";
 
-	       while (1) {
-		cin >> buffer;
-		if (atoi(buffer) == 0 && buffer[0] != '0') {
-			cout << "Invalind input, try again : ";
-			continue;
-		}
-		else break;
-		}
-                c.Delete(atoi(buffer));
-                if (ViewCreated) v->Delete(atoi(buffer));
-                if (c.invColl()) cout << "Element deleted"<<endl;
-               break;
-               }
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+                 c.Delete(atoi(buffer));
+                 if (ViewCreated) v->Delete(atoi(buffer));
+                 if (c.invColl()) cout << "Element deleted"<<endl;
+                 break;
+                       }
 
                case 6: {
-               double dx,dy;
+                 double dx,dy;
 
-               cout << "Enter dx :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dx :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dx = atof(buffer);
+                 dx = atof(buffer);
 
-                cout << "Enter dy :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dy :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dy = atof(buffer);
-
-
-                if (ViewCreated) {
-                        v->MoveCollection(dx,dy);
-                        v->MoveStand(dx,dy);
-                        if (v->inv()) cout << "Collection and stand are moved by dx = "<<dx<<", dy = "<<dy<<endl;
-                }
-                else {
-                        c.Move(dx,dy);
-                        if (c.invColl()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
-                }
+                 dy = atof(buffer);
 
 
-               break;
-               }
-
-                case 7: {
-
-               double x,y;
-               cout << "Enter P1 "<<endl;
-               cout << "Enter x :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
-
-                x = atof(buffer);
-
-                cout << "Enter y :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
-
-                y = atof(buffer);
+                 if (ViewCreated) {
+                   v->MoveCollection(dx,dy);
+                   v->MoveStand(dx,dy);
+                   if (v->inv()) cout << "Collection and stand are moved by dx = "<<dx<<", dy = "<<dy<<endl;
+                 }
+                 else {
+                   c.Move(dx,dy);
+                   if (c.invColl()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
+                 }
 
 
-                if (ViewCreated) {
-                        v->SetP1(CPoint(x,y));
-                        v->SetStandP1(CPoint(x,y));
-                        if (v->inv()) cout << "Collection and stand are placed to Point("<<x<<";"<<y<<")"<<endl;
-                }
-                else {
-                        c.SetP1(CPoint(x,y));
-                        if (c.invColl()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
-                }
+                 break;
+                       }
+
+               case 7: {
+
+                 double x,y;
+                 cout << "Enter P1 "<<endl;
+                 cout << "Enter x :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 x = atof(buffer);
+
+                 cout << "Enter y :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 y = atof(buffer);
 
 
-               break;
-               }
+                 if (ViewCreated) {
+                   v->SetP1(CPoint(x,y));
+                   v->SetStandP1(CPoint(x,y));
+                   if (v->inv()) cout << "Collection and stand are placed to Point("<<x<<";"<<y<<")"<<endl;
+                 }
+                 else {
+                   c.SetP1(CPoint(x,y));
+                   if (c.invColl()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
+                 }
+
+
+                 break;
+                       }
 
                case 8: {
 
-               double x,y;
-               cout << "Enter P1 "<<endl;
-               cout << "Enter x :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 double x,y;
+                 cout << "Enter P1 "<<endl;
+                 cout << "Enter x :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                x = atof(buffer);
+                 x = atof(buffer);
 
-                cout << "Enter y :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter y :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                y = atof(buffer);
+                 y = atof(buffer);
 
 
-                if (ViewCreated) {
-                        v->SetCollectionP1(CPoint(x,y));
-                        if (v->inv()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
-                }
-                else {
-                        c.SetP1(CPoint(x,y));
-                        if (c.invColl()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
-                }
+                 if (ViewCreated) {
+                   v->SetCollectionP1(CPoint(x,y));
+                   if (v->inv()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
+                 }
+                 else {
+                   c.SetP1(CPoint(x,y));
+                   if (c.invColl()) cout << "Collection is placed to Point("<<x<<";"<<y<<")"<<endl;
+                 }
 
-               break;
-               }
+                 break;
+                       }
 
                case 9: {
 
-               double x,y;
-               cout << "Enter P1 "<<endl;
-               cout << "Enter x :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 double x,y;
+                 cout << "Enter P1 "<<endl;
+                 cout << "Enter x :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                x = atof(buffer);
+                 x = atof(buffer);
 
-                cout << "Enter y :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter y :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                y = atof(buffer);
+                 y = atof(buffer);
 
-                if (ViewCreated) {
-                        v->SetStandP1(CPoint(x,y));
-                        if (v->inv()) cout << "Stand is placed to Point("<<x<<";"<<y<<")"<<endl;
-                }
-                else cout << "View is not created"<<endl;
+                 if (ViewCreated) {
+                   v->SetStandP1(CPoint(x,y));
+                   if (v->inv()) cout << "Stand is placed to Point("<<x<<";"<<y<<")"<<endl;
+                 }
+                 else cout << "View is not created"<<endl;
 
-               break;
-               }
+                 break;
+                       }
 
                case 10: {
-               double dx,dy;
+                 double dx,dy;
 
-               cout << "Enter dx :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dx :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dx = atof(buffer);
+                 dx = atof(buffer);
 
-                cout << "Enter dy :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dy :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dy = atof(buffer);
+                 dy = atof(buffer);
 
 
-                if (ViewCreated) {
-                        v->MoveCollection(dx,dy);
-                        if (v->inv()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
-                }
-                else {
-                        c.Move(dx,dy);
-                        if (c.invColl()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
-                }
-               break;
-               }
+                 if (ViewCreated) {
+                   v->MoveCollection(dx,dy);
+                   if (v->inv()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
+                 }
+                 else {
+                   c.Move(dx,dy);
+                   if (c.invColl()) cout << "Collection is moved by dx = "<<dx<<", dy = "<<dy<<endl;
+                 }
+                 break;
+                        }
 
                case 11: {
-               double dx,dy;
+                 double dx,dy;
 
-               cout << "Enter dx :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dx :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dx = atof(buffer);
+                 dx = atof(buffer);
 
-                cout << "Enter dy :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dy :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dy = atof(buffer);
-
-
-                if (ViewCreated) {
-                        v->MoveStand(dx,dy);
-                        if (v->inv()) cout << "Stand is moved by dx = "<<dx<<", dy = "<<dy<<endl;
-                }
-                else
-                cout << "View is not created"<<dy<<endl;
-               break;
-               }
-
-		case 12: {
-               double dy, index = 0;
-
-               cout << "Index of element :  "<<endl;
-               while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
-
-                index = atof(buffer);
-
-                cout << "Enter dy :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
-
-                dy = atof(buffer);
+                 dy = atof(buffer);
 
 
-                if (ViewCreated) {
-                        v->GetCollection().GetElemByNum(index)->GetValue()->MovePiston(dy);
-                        if (v->inv()) cout << "Piston of "<< index<< "'th element is moved by dy = "<<dy<<endl;
-                        else cout << "Piston didn't move"<<endl;
-                }
-                else {
-                        c.GetCollection().GetElemByNum(index)->GetValue()->MovePiston(dy);
-                        if (c.invColl()) cout << "Piston of "<< index<< "'th element is moved by dy = "<<dy<<endl;
-                        else cout << "Piston didn't move"<<endl;
-                }
+                 if (ViewCreated) {
+                   v->MoveStand(dx,dy);
+                   if (v->inv()) cout << "Stand is moved by dx = "<<dx<<", dy = "<<dy<<endl;
+                 }
+                 else
+                   cout << "View is not created"<<dy<<endl;
+                 break;
+                        }
 
-               break;
-               }
+               case 12: {
+                 double dy, index = 0;
+
+                 cout << "Index of element :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 index = atof(buffer);
+
+                 cout << "Enter dy :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
+
+                 dy = atof(buffer);
+
+
+                 if (ViewCreated) {
+                   v->GetCollection().GetElemByNum(index)->GetValue()->MovePiston(dy);
+                   if (v->inv()) cout << "Piston of "<< index<< "'th element is moved by dy = "<<dy<<endl;
+                   else cout << "Piston didn't move"<<endl;
+                 }
+                 else {
+                   c.GetCollection().GetElemByNum(index)->GetValue()->MovePiston(dy);
+                   if (c.invColl()) cout << "Piston of "<< index<< "'th element is moved by dy = "<<dy<<endl;
+                   else cout << "Piston didn't move"<<endl;
+                 }
+
+                 break;
+                        }
 
                case 13: {
-               double dy;
+                 double dy;
 
-                cout << "Enter dy :  "<<endl;
-                while (1) {
-                cin >> buffer;
-                if (atoi(buffer) == 0 && buffer[0] != '0') {
-                        cout << "Invalind input, try again : ";
-                        continue;
-                }
-                else break;
-                }
+                 cout << "Enter dy :  "<<endl;
+                 while (1) {
+                   cin >> buffer;
+                   if (atoi(buffer) == 0 && buffer[0] != '0') {
+                     cout << "Invalind input, try again : ";
+                     continue;
+                   }
+                   else break;
+                 }
 
-                dy = atof(buffer);
+                 dy = atof(buffer);
 
-                if (ViewCreated) {
-                        v->MovePiston(dy);
-                        if (v->inv()) cout << "Pistons moved by dy = "<<dy<<endl;
-                        else cout << "Piston didn't move"<<endl;
-                }
-                else {
-                        c.MovePiston(dy);
-                        if (c.invColl()) cout << "Pistons moved by dy = "<<dy<<endl;
-                        else cout << "Piston didn't move"<<endl;
-                }
+                 if (ViewCreated) {
+                   v->MovePiston(dy);
+                   if (v->inv()) cout << "Pistons moved by dy = "<<dy<<endl;
+                   else cout << "Piston didn't move"<<endl;
+                 }
+                 else {
+                   c.MovePiston(dy);
+                   if (c.invColl()) cout << "Pistons moved by dy = "<<dy<<endl;
+                   else cout << "Piston didn't move"<<endl;
+                 }
 
-               break;
-               }
+                 break;
+                        }
 
                case 14: {
-               if(ViewCreated) v->PrintView();
-                else cout << "View is not created"<<endl;
-               break;
-               }
+                 if(ViewCreated) v->PrintView();
+                 else cout << "View is not created"<<endl;
+                 break;
+                        }
 
                case 15: {
-                if(ViewCreated) v->Print();
-                else c.Print();
+                 if(ViewCreated) v->Print();
+                 else c.Print();
 
-               break;
-               }
+                 break;
+                        }
 
                case 16: {
-               flag = 0;
-               break;
-               }
-
-            }
+                 flag = 0;
+                 break;
+                        }
 
         }
 
+      }
 
-}
-}
+
+    }
+  }
 }
 
 

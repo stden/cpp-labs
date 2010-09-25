@@ -1,53 +1,41 @@
-// ‘айл: CClient.h
-//ѕроект класса "клиент"
-// јвтор: ¬олынко ≈. ст. гр. 7304
-// ƒата: 20.09.2010 –едакци€: 1.0
+// Ф†©Ђ: CClient.h
+// ПаЃ•™в ™Ђ†бб† "™Ђ®•≠в"
+// АҐвЃа: ВЃЂл≠™Ѓ Е. бв. £а. 7304
+// Д†в†: 20.09.2010 Р•§†™ж®п : 1.0
 
 #ifndef _CCLIENT_H
 #define _CCLIENT_H
 
-#include "CList.h"
+#include "CoList.h"
 #include "CServer.h"
 #include "CMsg.h"
 #include <iostream.h>
 
 class CServer;
 
-class CClient
-{
+class CClient {
 private:
-  static int debug;
   static int total;
   const int id;
-  static int current;
 
-  //список серверов на которых зарегестрирован клиент
-  CircleList<CServer*> ServerList;
-
-  virtual void Action(int _type, const CInfo& _info);
+  //бѓ®бЃ™ б•аҐ•аЃҐ ≠† ™ЃвЃале І†а•£•бва®аЃҐ†≠ ™Ђ®•≠в
+  CServer* server;
 
 public:
   CClient();
-  virtual ~CClient();
+  ~CClient();
 
-  CServer* GetServerByID(int _id);     //получить сервер по ID
-  CircleList<CServer*> GetServerList() const { return ServerList; }
+  CServer* getServer();     // ПЃЂгз®вм б•аҐ•а
+  void Register(CServer *server); // З†а•£•бва®аЃҐ†вмбп ≠† б•аҐ•а•
+  void Unregister(); // С≠пвмбп б а•£®бва†ж®® ≠† б•аҐ•а•
+  void SendMessage(CMessage *msg); // Овѓа†Ґ®вм бЃЃ°й•≠®• б•аҐ•аг
+  void SendMessage(int _type, double _info, int _id); // Овѓа†Ґ®вм бЃЃ°й•≠®• б•аҐ•аг
+  void ReceiveMessage(CMessage *msg); // ПЃЂгз®вм бЃЃ°й•≠®•
+  void Action(int _type, const float _info);
+  void Print() const;
 
-  int ServerCount() const;     //кол-во зарегестрированных серверов
-  void Register(CServer *server); // «арегестрироватьс€ на сервере
-  void Unregister(int _id); // —н€тьс€ с регистрации
-  void UnregisterAll(); //—н€тьс€ с регистрации со всех серверов
-  void SendMessage(CMessage *msg, int _id); // отправить сообщение серверу
-  void SendMessage(int _type, const CInfo& _info, int _id); // отправить сообщение серверу
-  void ReceiveMessage(CMessage *msg); // ѕолучить сообщение
-
-  virtual void Print() const;
-
-  static void  setDebug(int d) { debug = d; }
-  virtual int getID() { return id; }
-  static  int getCurrent() { return current; }
-  static  int getTotal() { return total; }
-  static int getDebug() { return debug; }
+  int getID() const { return id; }
+  static int getTotal(){ return total; }
 };
 
 #endif

@@ -1,7 +1,7 @@
-//╘рщы: CListND.h
-//╧ЁюхъЄ °рсыюэр ъырёёр "╙чхы ъюы№Ўхтюую юфэюэряЁртыхээюую ёяшёър"
-//└тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-//─рЄр: 21.02.2010, ╨хфръЎш : 1.0
+//Файл: CListND.h
+//Проект шаблона класса "Узел кольцевого однонаправленного списка"
+//Автор: Волынко Е. ст. гр. 7304
+//Дата: 21.02.2010, Редакция: 1.0
 
 
 #ifndef CLISTND_H
@@ -11,7 +11,7 @@ template <class ValueType>
 
 class CLNode {
 protected:
-  CLNode* _next;	// ёт ч№ ъ яюёыхфє■∙хьє єчыє
+  CLNode* _next;  // связь к последующему узлу
   ValueType _value;
   static int debug;
 public:
@@ -22,7 +22,7 @@ public:
   void SetNext(CLNode* n);
   ValueType& GetValue();
   void SetValue (ValueType);
- // CLNode* Insert(CLNode*);  // тёЄртшЄ№ єчхы яюёых Єхъє∙хую
+ // CLNode* Insert(CLNode*);  // вставить узел после текущего
 };
 
 template <class ValueType>
