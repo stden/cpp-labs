@@ -1,79 +1,58 @@
-// ╘рщы: CMessage.h
-//╧ЁюхъЄ ъырёёр "ёююс∙хэшх"
-// └тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-// ─рЄр: 20.09.2010 ╨хфръЎш : 1.0
+// Файл: CMessage.h
+// Проект класса "сообщение"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 #ifndef CMSG_H
 #define CMSG_H
 
-#include "CPoint.h"
+// направление передачи: сервер->клиент, клиент->сервер,
+// клиент->клиент через сервер
+enum Direction { Server_to_Client, Client_to_Server,
+  Client_to_Client };
 
+// тип сообщения: остальные коды - запрос действия (ACTION)
+const int CONFIRMATION = 0; // подтверждение приема
+const int REPORT = 1; // отчет о выполнении команды
 
-
-class CInfo {
-     public :
-     	int command; /*2 - ╧юьх∙хэшх т Єюўъє
-                       3 - ╧ыюёъюярЁрыыхы№эюх яхЁхьх∙хэшх эр dx,dy 
-                       4 - ╧хЁхьх∙хэшх яюЁ°э  т ёЄрърэх эр dy */
-	double dx;
-	double dy;
-	CPoint p;
-        /* ╩юэёЄЁєъЄюЁ */
-	CInfo (int _command = 1, double _dx = 0, double _dy = 0, const CPoint& _p = CPoint()) :
-        command(_command), dx(_dx), dy(_dy), p(_p) {}
-         
-       void Print () {
-                cout << "(dx = " << dx << ", dy = " << dy << ", Point = " << p << ")" <<endl;
-        }
-
-
-};
-
+// Объявление класса Сообщение
 class CMessage {
 private:
-	int FromID;
-	int ToID;
-	CInfo Info;
-        int Type;/*    Єшя ёююс∙хэш :
-                                      0 - яюфЄтхЁцфхэшх яЁшхьр
-                                      1 - юЄўхЄ ю т√яюыэхэшх
-                                      > 1 - чряЁюё фхщёЄтш   */
-
-
-        int direction; /*    эряЁртыхэшх яхЁхфрўш:
-                                      0 - ёхЁтхЁ->ъышхэЄ
-                                      1 - ъышхэЄ->ёхЁтхЁ  */
-
-
-        static int debug;
-        static int total;
-        const int id;
-        static int current;
+  const int id; // id сообщения
+  int FromID; // id от кого сообщение
+  int ToID; // id кому сообщение
+  double Info; // Информационное поле сообщения
+  int Type; // тип сообщения (CONFIRMATION, REPORT, ACTION)
+  Direction direction; // направление передачи
+  static int debug;
+  static int total;
+  static int current;
 public:
-	CMessage(int _FromID = 0, int _ToID = 0, int _Type = 0, const CInfo& _Info = 0, int _dir = 0);
-        CMessage(const CMessage& msg);
-	~CMessage();
-        int GetFromID() const { return FromID; }
-        int GetToID() const { return ToID; }
-        int GetType() const { return Type; }
-        const CInfo& GetInfo() const { return Info; }
-        int GetDirection() const { return direction; }
-        void SetFromID(int _FromID);
-        void SetToID(int _ToID);
-        void SetType(int _Type);
-        void SetInfo(const CInfo& _Info);
-        void SetDirection(int _dir);
-        const char* InterpritateType (int type);
+  CMessage(int _FromID, int _ToID, int _Type, double _Info, Direction _dir);
+  CMessage(const CMessage& msg);
+  ~CMessage();
 
-        void Print () const;
+  const char* InterpritateType(int type) const;
+  void Print(char *prompt="") const;
 
-        static void  setDebug(int d) { debug = d; }
-        int getID() { return id; }
-        static  int getCurrent() { return current; }
-        static  int getTotal() { return total; }
-        static int getDebug() { return debug; }
+  int getID() const { return id; }
+  int getFromID() const { return FromID; }
+  int getToID() const { return ToID; }
+  int getType() const { return Type; }
+  double getInfo() const { return Info; }
+  Direction getDirection() const { return direction; }
 
+  void setFromID(int _FromID) { FromID = _FromID; };
+  void setToID(int _ToID) { ToID = _ToID; };
+  void setType(int _Type) { Type = _Type; };
+  void setInfo(double _Info) { Info = _Info; };
+  void setDirection(Direction _dir){ direction = _dir; }
+
+  static void setDebug(int d) { debug = d; }
+
+  static int getCurrent(){ return current; }
+  static int getTotal(){ return total; }
+  static int getDebug(){ return debug; }
 };
-
 
 #endif

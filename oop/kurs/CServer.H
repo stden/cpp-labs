@@ -1,7 +1,7 @@
-// ╘рщы: CServer.h
-//╧ЁюхъЄ ъырёёр "ёхЁтхЁ"
-// └тЄюЁ: ┬юы√эъю ┼. ёЄ. уЁ. 7304
-// ─рЄр: 20.09.2010 ╨хфръЎш : 1.0
+// Файл: CServer.h
+// Проект класса "сервер"
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
 
 #ifndef _CSERVER_H_
 #define _CSERVER_H_
@@ -11,42 +11,32 @@
 #include "CCLIENT.H"
 #include <iostream.h>
 
+// Класс Сервер использует класс Клиент, а класс Клиент класс Сервер
+// Получается, Сервер должен быть определён раньше Клиента, но в то же самое
+// время Клиент должен быть раньше Сервера, для выхода из этой ситуации
+// используем предварительное объявление класса
 class CClient;
 
-class CServer
-{
+// Описание класса Сервер
+class CServer {
 private:
-  static int debug;
-  static int total;
-  const int id;
-  static int current;
-
- CircleList<CClient*> ClientList;
+  CList<CClient*> ClientList;
 
 public:
-    CServer();
-    virtual ~CServer();
+  CServer();
+  ~CServer();
 
-
-    CClient* GetClientByID(int _id);
-    int Client_Count() const;
-    void Register(CClient *client);
-    void Unregister(int _id);
-    void UnregisterAll();
-    void SendMessage(CMessage *msg, int _id);
-    void SendMessage(int _type, const CInfo& _info, int _id);
-    void SendMessageToAll(CMessage *msg);
-    void SendMessageToAll(int _type, const CInfo& _info);
-    virtual void ReceiveMessage(CMessage *msg);
-    virtual void Print() const;
-
-    static void  setDebug(int d) { debug = d; }
-    int getID() { return id; }
-    static  int getCurrent() { return current; }
-    static  int getTotal() { return total; }
-    static int getDebug() { return debug; }
-
+  CClient* GetClientByID(int _id);
+  int ClientCount() const;
+  void Register(CClient *client);
+  void Unregister(int _id);
+  void UnregisterAll();
+  void SendMessage(CMessage *msg);
+  void SendMessage(int _type, double _info, int _id);
+  void SendMessageToAll(CMessage *msg);
+  void SendMessageToAll(int _type, double _info);
+  void ReceiveMessage(CMessage *msg);
+  void Print() const;
 };
-
 
 #endif
