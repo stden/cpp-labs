@@ -72,8 +72,7 @@ public:
 
   void MovedXdY(double x, double y){
     cout << "CScene::MovedXdY(" << x << "," << y << ")" << endl;
-    List.goFirst();
-    while(List.getCurrent()!=NULL){
+    for(List.goFirst();List.hasNext();List.goNext()){
       List.getValue()->MovedXdY(x,y);
       if(!GlassInGlassCase(List.getValue())){
         cout << "Error: Glass outside Glass Case borders" << endl;

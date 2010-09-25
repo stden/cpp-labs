@@ -60,12 +60,25 @@ public:
   /*
   * Перемещение
   */
-  virtual void MoveToPoint(const CCountedPoint& point);
+  virtual void MoveToPoint(const CCountedPoint& point){
+    CCountedPoint basePoint = m_bottom.getPoint(0);
+
+    double dx = point.getX() - basePoint.getX();
+    double dy = point.getY() - basePoint.getY();
+
+    MovedXdY(dx, dy);
+  };
 
   /*
   * Смещение
   */
-  virtual void MovedXdY(double x, double y);
+  virtual void MovedXdY(double dX, double dY){
+    cout << "Glass #" << m_id << " MovedXdY(" << dX << "," << dY << ")" << endl;
+    m_bottom.MovedXdY(dX, dY);
+    m_cage.MovedXdY(dX, dY);
+    m_leftSide.MovedXdY(dX, dY);
+    m_rightSide.MovedXdY(dX, dY);
+  };
 
   /*
   * Оператор вывода в поток
