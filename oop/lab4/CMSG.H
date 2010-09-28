@@ -6,6 +6,8 @@
 #ifndef CMSG_H
 #define CMSG_H
 
+#include <iostream.h>
+
 // направление передачи: сервер->клиент, клиент->сервер,
 // клиент->клиент через сервер
 enum Direction { Server_to_Client, Client_to_Server,
@@ -34,7 +36,6 @@ public:
   ~CMessage();
 
   const char* InterpritateType(int type) const;
-  void Print(char *prompt = "") const;
 
   int getID() const { return id; }
   int getFromID() const { return FromID; }
@@ -54,6 +55,27 @@ public:
   static int getCurrent() { return current; }
   static int getTotal() { return total; }
   static int getDebug() { return debug; }
+
+  /*
+  * Оператор вывода в поток
+  */
+  friend ostream& operator << (ostream& s, CMessage& m) {
+    s << " " << m.InterpritateType(m.Type) << "-" << m.Type
+    << " #" << m.id << " ";
+    switch (m.direction) {
+      case Server_to_Client:
+        s << "S -> C" << m.ToID;
+        break;
+      case Client_to_Server:
+        s << "C" << m.FromID << " -> S";
+        break;
+      case Client_to_Client:
+        s << "C" << m.FromID << " -> S -> C" << m.ToID;
+        break;
+    }
+    s << " Info=" << m.Info << " ";
+    return s;
+  }
 };
 
 #endif

@@ -50,12 +50,9 @@ float inputInfoField() {
 CList<CClient*> clients;
 
 CClient* clientByID(int id) {
-  clients.goFirst();
-  if (clients.getCurrent() != NULL)
-    do {
-      if (clients.getValue()->getID() == id)
-        return clients.getValue();
-    } while (clients.goNext());
+  for (clients.goFirst();clients.hasNext();clients.goNext())
+    if (clients.getValue()->getID() == id)
+      return clients.getValue();
   return NULL;
 }
 
@@ -131,13 +128,11 @@ int main() {
       };
       case 3: {
         cout << "== 3. Registrate all clients on server ==" << endl;
-        clients.goFirst();
-        if (clients.getCurrent() != NULL)
-          do {
-            server.Register(clients.getValue());
-            assert(server.GetClientByID(clients.getValue()->getID()) ==
-                   clients.getValue());
-          } while (clients.goNext());
+        for (clients.goFirst();clients.hasNext();clients.goNext()) {
+          server.Register(clients.getValue());
+          assert(server.GetClientByID(clients.getValue()->getID()) ==
+                 clients.getValue());
+        };
         assert(clients.size() == server.ClientCount());
         break;
       };
@@ -197,20 +192,18 @@ int main() {
         cout << endl;
         CClient* cl = clientByID(id);
         if (cl != NULL)
-          cl->Print();
+          cout << *cl << endl;
         else
           cout << "Client #" << id << " not exists!" << endl;
         break;
       }
       case 10: {
         cout << "== 10. Print all clients info ==" << endl;
-        clients.goFirst();
-        if (clients.getCurrent() != NULL)
-          do {
-            clients.getValue()->Print();
-            cout << "-- Press any key to continue or ESC to exit -- " << endl;
-            if (getch() == 27) break; // Waiting for some action
-          } while (clients.goNext());
+        for (clients.goFirst();clients.hasNext();clients.goNext()) {
+          cout << *clients.getValue() << endl;
+          cout << "-- Press any key to continue or ESC to exit -- " << endl;
+          if (getch() == 27) break; // Waiting for some action
+        };
         server.Print();
         break;
       }

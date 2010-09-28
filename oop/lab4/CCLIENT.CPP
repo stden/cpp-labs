@@ -66,9 +66,10 @@ void CClient::SendMessage(CMessage *msg) {
          msg->getDirection() == Client_to_Client);
   if (server != NULL) {
     if (msg->getDirection() == Client_to_Server)
-      cout << "Client #" << id << " sent message to server " << endl;
+      cout << "Client #" << id << " sent " << *msg << " to server "
+           << endl;
     else
-      cout << "Client #" << id << " sent message to client #" <<
+      cout << "Client #" << id << " sent " << *msg << " to client #" <<
            msg->getToID() << endl;
     server->ReceiveMessage(msg);
   } else {
@@ -95,13 +96,11 @@ void CClient::ReceiveMessage(CMessage *msg) {
 
   if (server != NULL)  {
     if (msg->getDirection() == Server_to_Client)
-      cout << endl << "Client #" << id << " recived message from server"
-           << endl;
+      cout << endl << "Client #" << id << " recived " << *msg << " from server"
+           << endl << endl;
     else
-      cout << endl << "Client #" << id << " recived message from client #"
-           << msg->getFromID() << endl;
-    msg->Print();
-
+      cout << endl << "Client #" << id << " recived " << *msg << " from client #"
+           << msg->getFromID() << endl << endl;
     if (msg->getType() > 1)  {
       // отправка подтверждения о приёме сообщения
       CMessage m1(*msg);
@@ -115,8 +114,8 @@ void CClient::ReceiveMessage(CMessage *msg) {
       SendMessage(&CMessage(id, 1, REPORT, msg->getInfo(), Client_to_Server));
     }
   } else
-    cout << "Client #" << id << " could not recive message from unknown server" << endl;
-  //delete msg;
+    cout << "Client #" << id << " could not recive message from unknown server"
+         << endl << endl;
 }
 
 void CClient::Action(int _code, const float _info) {
@@ -136,9 +135,3 @@ void CClient::Action(int _code, const float _info) {
   }
 }
 
-void CClient :: Print() const {
-  cout << "Client #" << id << "  total = " << total <<
-       ((server == NULL) ?
-        " - Not registered on server" : " - Registered on server")
-       << endl << endl;
-}

@@ -36,10 +36,20 @@ public:
   void SendMessage(int _type, double _info, int _id); // Отправить сообщение серверу
   void ReceiveMessage(CMessage *msg); // Получить сообщение
   void Action(int _type, const float _info);
-  void Print() const;
 
   int getID() const { return id; }
   static int getTotal() { return total; }
+
+  /*
+  * Оператор вывода в поток
+  */
+  friend ostream& operator << (ostream& s, const CClient& c) {
+    s << "Client #" << c.id << "  total = " << c.total <<
+    ((c.server == NULL) ?
+     " - Not registered on server" : " - Registered on server")
+    << endl << endl;
+    return s;
+  }
 };
 
 #endif
