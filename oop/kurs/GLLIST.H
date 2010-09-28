@@ -46,13 +46,19 @@ public:
   }
 
   CGlass* getByID(int glassID) {
-    List.goFirst();
-    while (List.getCurrent() != NULL) {
+    for (List.goFirst();List.hasNext();List.goNext())
       if (List.getValue()->getID() == glassID)
         return List.getValue();
-      List.goNext();
-    }
     return NULL;
+  }
+
+  int Delete(int glassID) {
+    for (List.goFirst();List.hasNext();List.goNext())
+      if (List.getValue()->getID() == glassID) {
+        List.dispose();
+        return 1;
+      }
+    return 0;
   }
 
   friend ostream& operator << (ostream& s, CGlassList& list);

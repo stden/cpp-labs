@@ -1,5 +1,5 @@
 // Файл: CoPoint.h
-// проект класса "точка"
+// Проект класса "Точка"
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 16.05.10, редакция 1.0.
 
@@ -71,4 +71,4 @@ public:
 */
 ostream& operator << (ostream& s, const CCountedPoint& P);
 
-#endif /* CCountedPoint_H */
+#endif
