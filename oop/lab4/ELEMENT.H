@@ -10,8 +10,7 @@
 
 
 template<class elemType>
-class CElem
-{
+class CElem {
   //Значение элемента списка
   elemType  m_value;
 
@@ -31,69 +30,61 @@ public:
   /*
   * Конструтор
   */
-  CElem(const elemType& elem) : m_value(elem), m_id(countall++)
-  {
+  CElem(const elemType& elem) : m_value(elem), m_id(countall++) {
     countreal++;
-    m_next=NULL;    
-   // cout << "  Element num = " << countreal << " created" << endl;
+    m_next = NULL;
+    // cout << "  Element num = " << countreal << " created" << endl;
   }
 
 
   /*
   * Конструтор копирования
   */
-  CElem(const CElem& elem) : m_value(elem.m_value), m_id(countall++)
-  {
+  CElem(const CElem& elem) : m_value(elem.m_value), m_id(countall++) {
     countreal++;
-    m_next=NULL;
-   // cout << "  Element num = " << countreal << " copyed" << endl;
+    m_next = NULL;
+    // cout << "  Element num = " << countreal << " copyed" << endl;
   }
 
   /*
   * Получить значение
   */
-  elemType& getValue()
-  {
+  elemType& getValue() {
     return m_value;
   }
 
   /*
   * Заменить значение
   */
-  void setValue(const elemType& elem)
-  {
-    m_value=elem;
+  void setValue(const elemType& elem) {
+    m_value = elem;
   }
 
   /*
   * Получить указатель на следующий элемент
   */
-  CElem<elemType>* getNext() const
-  {
+  CElem<elemType>* getNext() const {
     return m_next;
   }
 
   /*
   * Указать слудующий элемент
   */
-  void setNext(CElem* elem)
-  {
-    m_next=elem;
+  void setNext(CElem* elem) {
+    m_next = elem;
   }
 
   /*
   * Получить количество экземпляров класса
   */
-  static int getCount()
-  {
+  static int getCount() {
     return countall;
   }
 
   /*
   * Деструктор
   */
-  ~CElem()
-  {
+  ~CElem() {
     countreal--;
     //cout << "  Element destroyed (remain " << countreal << ") " << endl;
   }

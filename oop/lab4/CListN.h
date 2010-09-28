@@ -11,12 +11,12 @@
 
 template <class ValueType>
 CLNode<ValueType>::CLNode(const ValueType& value) : _next(this), _value(value) {
-  if (debug) cout << "CLNode is created, value = "<<_value<<endl;
+  if (debug) cout << "CLNode is created, value = " << _value << endl;
 }
 
 template <class ValueType>
-CLNode<ValueType>::CLNode() : _next ( NULL ), _value(0) {
-  if (debug) cout << "CLNode is created, value = "<<_value<<endl;
+CLNode<ValueType>::CLNode() : _next(NULL), _value(0) {
+  if (debug) cout << "CLNode is created, value = " << _value << endl;
 }
 
 /*template <class ValueType>

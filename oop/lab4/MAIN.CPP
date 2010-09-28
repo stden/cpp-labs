@@ -14,48 +14,48 @@
 
 // Input value from "cin" with error checking
 template <class T>
-T input(char *prompt, T min, T max){
+T input(char *prompt, T min, T max) {
   T value;
-  do{
+  do {
     cout << prompt << " " << min << ".." << max << ": ";
-    while(!(cin >> value)/* && !cin.eof()*/) {
+    while (!(cin >> value)/* && !cin.eof()*/) {
       cerr << "Error: invalid input " << value << ", try again: ";
       cin.clear();
       cin.ignore(cin.rdbuf()->in_avail());
     }
-    if(value < min)
-      cerr << "Error: Required value >= " << min <<endl;
-    if(value > max)
-      cerr << "Error: Required value <= " << max <<endl;
-  } while(value < min || value > max);
+    if (value < min)
+      cerr << "Error: Required value >= " << min << endl;
+    if (value > max)
+      cerr << "Error: Required value <= " << max << endl;
+  } while (value < min || value > max);
   return value;
 }
 
-int inputClientID(char *prompt){
-  if(CClient::getTotal() < 1){
+int inputClientID(char *prompt) {
+  if (CClient::getTotal() < 1) {
     cout << "Register at least one client at first" << endl;
     return 0;
   };
-  return input(prompt,1,CClient::getTotal());
+  return input(prompt, 1, CClient::getTotal());
 }
 
-int inputMessageCode(){
-  return input("Enter code of message, u want to send",2,99);
+int inputMessageCode() {
+  return input("Enter code of message, u want to send", 2, 99);
 }
 
-float inputInfoField(){
-  return input("Enter info field",MINFLOAT,MAXFLOAT);
+float inputInfoField() {
+  return input("Enter info field", MINFLOAT, MAXFLOAT);
 }
 
 CList<CClient*> clients;
 
-CClient* clientByID( int id ){
+CClient* clientByID(int id) {
   clients.goFirst();
-  if(clients.getCurrent()!=NULL)
-    do{
+  if (clients.getCurrent() != NULL)
+    do {
       if (clients.getValue()->getID() == id)
-  return clients.getValue();
-    } while(clients.goNext());
+        return clients.getValue();
+    } while (clients.goNext());
   return NULL;
 }
 
@@ -76,117 +76,117 @@ int main() {
   l.insertBegin(239); assert(l.getValue() == 239 && l.size() == 1); // [239]
 
   clrscr();
-  cout << endl << endl << "----------------------------------------------------"<<endl;
-  cout << "Programm is modeling of Client->Server->Client message exchange"<<endl
-    << "with confirmation of Server->Client interaction."<<endl
-    << "Programmed by: Evgeny Volinko"<<endl
-    << "----------------------------------------------------"<<endl;
+  cout << endl << endl << "----------------------------------------------------" << endl;
+  cout << "Programm is modeling of Client->Server->Client message exchange" << endl
+       << "with confirmation of Server->Client interaction." << endl
+       << "Programmed by: Evgeny Volinko" << endl
+       << "----------------------------------------------------" << endl;
 
   int menu;
   CServer server;
-  assert( server.ClientCount() == 0 );
-  do{
+  assert(server.ClientCount() == 0);
+  do {
     cout << endl
-      << "Main Menu" << endl 
-      << "  1. Create Client"<<endl
-      << "  2. Registrate on server"<<endl
-      << "  3. Registrate all clients on server"<<endl
-      << "  4. Unregistrate client from server"<<endl
-      << "  5. Unregistrate all clients from server"<<endl
-      << "  6. Send message Client -> Server"<<endl
-      << "  7. Send message Server -> Client"<<endl
-      << "  8. Send message Client -> Server -> Client"<<endl
-      << "  9. Print clients info"<<endl
-      << "  10. Print all clients info"<<endl
-      << "  11. Exit"<<endl << endl;
+         << "Main Menu" << endl
+         << "  1. Create Client" << endl
+         << "  2. Registrate on server" << endl
+         << "  3. Registrate all clients on server" << endl
+         << "  4. Unregistrate client from server" << endl
+         << "  5. Unregistrate all clients from server" << endl
+         << "  6. Send message Client -> Server" << endl
+         << "  7. Send message Server -> Client" << endl
+         << "  8. Send message Client -> Server -> Client" << endl
+         << "  9. Print clients info" << endl
+         << "  10. Print all clients info" << endl
+         << "  11. Exit" << endl << endl;
 
-    menu = input("Your choice",1,11);
+    menu = input("Your choice", 1, 11);
     cout << endl;
     switch (menu) {
       case 1: {
-  cout << "== 1. Create Client ==" << endl;
-  CClient* cl = new CClient;
-  assert( cl != NULL );
-  int n = clients.size();
-  assert( clientByID(cl->getID()) == NULL );
-  clients.insert(cl);
-  assert( clientByID(cl->getID()) != NULL );
-  assert( clients.size() == n+1 );
-  cout << "New client added #" << cl->getID() << endl;
-  assert( server.GetClientByID(cl->getID()) == NULL );
-  break;
+        cout << "== 1. Create Client ==" << endl;
+        CClient* cl = new CClient;
+        assert(cl != NULL);
+        int n = clients.size();
+        assert(clientByID(cl->getID()) == NULL);
+        clients.insert(cl);
+        assert(clientByID(cl->getID()) != NULL);
+        assert(clients.size() == n + 1);
+        cout << "New client added #" << cl->getID() << endl;
+        assert(server.GetClientByID(cl->getID()) == NULL);
+        break;
       };
       case 2: {
-  cout << "== 2. Registrate on server ==" << endl;
-  int id = inputClientID("Enter id of client to register");
-  CClient* cl = clientByID(id);
-  if(cl==NULL){
-    cout << "Client #" << id << " not exists!" << endl;
-    break;
-  }
-  server.Register(cl);
-  assert(server.GetClientByID(id) == cl);
-  assert(cl->getServer() != NULL);
-  break;
+        cout << "== 2. Registrate on server ==" << endl;
+        int id = inputClientID("Enter id of client to register");
+        CClient* cl = clientByID(id);
+        if (cl == NULL) {
+          cout << "Client #" << id << " not exists!" << endl;
+          break;
+        }
+        server.Register(cl);
+        assert(server.GetClientByID(id) == cl);
+        assert(cl->getServer() != NULL);
+        break;
       };
       case 3: {
-  cout << "== 3. Registrate all clients on server ==" << endl;
-  clients.goFirst();
-  if(clients.getCurrent()!=NULL)
-    do{
-      server.Register(clients.getValue());
-      assert( server.GetClientByID(clients.getValue()->getID()) ==
-        clients.getValue() );
-    } while(clients.goNext());
-  assert(clients.size() == server.ClientCount());
-  break;
+        cout << "== 3. Registrate all clients on server ==" << endl;
+        clients.goFirst();
+        if (clients.getCurrent() != NULL)
+          do {
+            server.Register(clients.getValue());
+            assert(server.GetClientByID(clients.getValue()->getID()) ==
+                   clients.getValue());
+          } while (clients.goNext());
+        assert(clients.size() == server.ClientCount());
+        break;
       };
       case 4: {
-  cout << "== 4. Unregistrate client from server ==" << endl;
-  int id = inputClientID("Enter id of client to unregister");
-  server.Unregister(id);
-  assert(server.GetClientByID(id) == NULL);
-  break;
+        cout << "== 4. Unregistrate client from server ==" << endl;
+        int id = inputClientID("Enter id of client to unregister");
+        server.Unregister(id);
+        assert(server.GetClientByID(id) == NULL);
+        break;
       };
       case 5:
-  cout << "== 5. Unregistrate all clients from server ==" << endl;
-  server.UnregisterAll();
-  break;
+        cout << "== 5. Unregistrate all clients from server ==" << endl;
+        server.UnregisterAll();
+        break;
       case 6: {
-  cout << "== 6. Send message Client -> Server ==" << endl;
-  int id = inputClientID("Enter id of client");
-  if(id==0) break;
-  int tcode = inputMessageCode();
-  float tinfo = inputInfoField();
-  cout << endl;
-  CClient* cl = clientByID(id);
-  if(cl!=NULL)
-    cl->SendMessage(tcode,tinfo,1);
-  else
-    cout << "Client #" << id << " not exists!" << endl;
-  break;
+        cout << "== 6. Send message Client -> Server ==" << endl;
+        int id = inputClientID("Enter id of client");
+        if (id == 0) break;
+        int tcode = inputMessageCode();
+        float tinfo = inputInfoField();
+        cout << endl;
+        CClient* cl = clientByID(id);
+        if (cl != NULL)
+          cl->SendMessage(tcode, tinfo, 1);
+        else
+          cout << "Client #" << id << " not exists!" << endl;
+        break;
       }
       case 7: {
-  cout << "== 7. Send message Server -> Client ==" << endl;
-  int id = inputClientID("Enter id of client");
-  if(id==0) break;
-  int tcode = inputMessageCode();
-  float tinfo = inputInfoField();
-  cout << endl;
-  server.SendMessage(&CMessage(1,id,tcode,tinfo,Server_to_Client));
-  break;
+        cout << "== 7. Send message Server -> Client ==" << endl;
+        int id = inputClientID("Enter id of client");
+        if (id == 0) break;
+        int tcode = inputMessageCode();
+        float tinfo = inputInfoField();
+        cout << endl;
+        server.SendMessage(&CMessage(1, id, tcode, tinfo, Server_to_Client));
+        break;
       }
       case 8: {
-        cout << "===  8. Send message Client -> Server -> Client ==="<<endl;
+        cout << "===  8. Send message Client -> Server -> Client ===" << endl;
         int src_id = inputClientID("Enter id of source client");
         int dst_id = inputClientID("Enter id of destination client");
-        if(src_id==0 || dst_id==0) break;
+        if (src_id == 0 || dst_id == 0) break;
         int tcode = inputMessageCode();
         float tinfo = inputInfoField();
         cout << endl;
         CClient* src = clientByID(src_id);
-        if(src!=NULL)
-          src->SendMessage(&CMessage(src_id,dst_id,tcode,tinfo,Client_to_Client));
+        if (src != NULL)
+          src->SendMessage(&CMessage(src_id, dst_id, tcode, tinfo, Client_to_Client));
         else
           cout << "Client #" << src_id << " not exists!" << endl;
         break;
@@ -196,27 +196,27 @@ int main() {
         int id = inputClientID("Enter id of client, which info u want to look");
         cout << endl;
         CClient* cl = clientByID(id);
-  if(cl!=NULL)
-    cl->Print();
-  else
-    cout << "Client #" << id << " not exists!" << endl;
-  break;
+        if (cl != NULL)
+          cl->Print();
+        else
+          cout << "Client #" << id << " not exists!" << endl;
+        break;
       }
       case 10: {
-  cout << "== 10. Print all clients info ==" << endl;
-  clients.goFirst();
-  if(clients.getCurrent()!=NULL)
-    do{
-      clients.getValue()->Print();
-      cout << "-- Press any key to continue or ESC to exit -- "<<endl;
-      if (getch() == 27) break; // Waiting for some action
-    } while(clients.goNext());
-  server.Print();
-  break;
+        cout << "== 10. Print all clients info ==" << endl;
+        clients.goFirst();
+        if (clients.getCurrent() != NULL)
+          do {
+            clients.getValue()->Print();
+            cout << "-- Press any key to continue or ESC to exit -- " << endl;
+            if (getch() == 27) break; // Waiting for some action
+          } while (clients.goNext());
+        server.Print();
+        break;
       }
       default:
-  return 0;
+        return 0;
     }
-  } while(menu!=11);
+  } while (menu != 11);
   return 0;
 }
