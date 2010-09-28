@@ -226,10 +226,10 @@ public:
   }
 
   /*
-  * Print list
+  * Оператор вывода в поток
   */
-  void Print() const {
-    for (CElem<type>* c = m_first; c != NULL; c = c->getNext())
+  friend ostream& operator << (ostream& s, const CList& l) {
+    for (CElem<type>* c = l.m_first; c != NULL; c = c->getNext())
       cout << c->getValue() << ", ";
     cout << endl;
   }
