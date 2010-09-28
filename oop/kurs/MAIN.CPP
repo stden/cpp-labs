@@ -79,7 +79,7 @@ T input(char *prompt, T min, T max) {
   T value;
   do {
     cout << prompt << " " << min << ".." << max << ": ";
-    while (!(cin >> value)/* && !cin.eof()*/) {
+    while (!(cin >> value) && !cin.eof()) {
       cerr << "Error: invalid input " << value << ", try again: ";
       cin.clear();
       cin.ignore(cin.rdbuf()->in_avail());
@@ -154,14 +154,13 @@ void main() {
   assert(maxy == 5);
 
 
-
   VERBOSE_OUT = 1;
 
   cout << endl << endl
        << "-----------------------------------------------" << endl;
-  cout << "Programm is creating the view on collection of schematic images of" << endl
-       << "closed piston Glasss which can be moved or placed in point" << endl
-       << "Server->Client->Server system of message exchange is used." << endl
+  cout << "Programm is creating the view on collection of glasses images" << endl
+       << "which can be moved or placed in point" << endl
+       << "Client -> Server -> Client system of message exchange is used." << endl
        << "Programmed by: Evgeny Volinko" << endl << endl
        << "----------------Press any key to continue or ESC to exit----------------" << endl;
 
@@ -179,21 +178,21 @@ void main() {
     cout << endl
          << "=== Main Menu ===" << endl
          << "1. Create Glass Case" << endl
-         << "2. Add Glass to Collection" << endl
-         << "3. Add Glass with Ring to Collection" << endl
-         << "4. Add Client Closed Glass to Collection" << endl
-         << "5. Delete Glass from Collection" << endl
-         << "6. Move Collection and Stand" << endl
-         << "7. Place Collection and Stand into Point" << endl
-         << "8. Place Collection into Point" << endl
-         << "9. Place Stand into Point" << endl
-         << "10. Move Collection" << endl
-         << "11. Move Stand" << endl
-         << "12. Move Piston of element" << endl
-         << "13. Move every Piston" << endl
-         << "14. Print View" << endl
-         << "15. Print Collection" << endl
-         << "16. Exit" << endl;
+         << "2. Destroy Glass Case" << endl
+         << "3. Add Glass to Collection" << endl
+         << "4. Add Glass with Ring to Collection" << endl
+         << "5. Add Client Glass to Collection" << endl
+         << "6. Add Client Glass with Ring to Collection" << endl
+         << "7. Delete Glass from Collection" << endl
+         << "8. Move Collection and Glass Case" << endl
+         << "8. Place Collection and Glass Case into Point" << endl
+         << "9. Place Collection into Point" << endl
+         << "10. Place Glass Case into Point" << endl
+         << "11. Move Collection" << endl
+         << "12. Move Glass Case" << endl
+         << "13. Print View" << endl
+         << "14. Print Collection" << endl
+         << "15. Exit" << endl;
 
     menu = input("Your choice", 1, 16);
     switch (menu) {
