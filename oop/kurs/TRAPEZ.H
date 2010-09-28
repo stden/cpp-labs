@@ -23,13 +23,13 @@ public:
 
   ~CTrapezium(void);
 
-  void MovedXdY (double dx, double dy);
-  void MoveToPoint (const CCountedPoint& P);
+  void MovedXdY(double dx, double dy);
+  void MoveToPoint(const CCountedPoint& P);
 
   const CList<CCountedPoint>& getPoints() const { return m_list; }
   const CCountedPoint& getPoint(int index);
 
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
+  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
 
   friend ostream& operator << (ostream& s, CTrapezium& r);
 };

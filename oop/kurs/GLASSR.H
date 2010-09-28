@@ -15,9 +15,9 @@
 #include "values.h"
 #include <conio.h>
 
-// "Тонкий стакан с кольцом" 
+// "Тонкий стакан с кольцом"
 class CGlassR : public CGlass { // Используется простое наследование
-  // Кольцо - две концентрические окружности в "полости стакана" 
+  // Кольцо - две концентрические окружности в "полости стакана"
   CRing m_ring;
 
 public:
@@ -26,7 +26,7 @@ public:
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
   * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
-  CGlassR(const CCountedPoint& x, const CCountedPoint& y, 
+  CGlassR(const CCountedPoint& x, const CCountedPoint& y,
           const double& bottom, const double& hBottom, const double& lessSide);
 
   /*
@@ -44,19 +44,19 @@ public:
   */
   virtual void MovedXdY(double x, double y);
 
-  /* 
+  /*
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
+  void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
     *minx = MAXDOUBLE;
     *maxx = MINDOUBLE;
     *miny = MAXDOUBLE;
     *maxy = MINDOUBLE;
-    m_bottom.GetBorders(minx,maxx,miny,maxy);
-    m_cage.GetBorders(minx,maxx,miny,maxy);
-    m_leftSide.GetBorders(minx,maxx,miny,maxy);
-    m_rightSide.GetBorders(minx,maxx,miny,maxy);
-    m_ring.GetBorders(minx,maxx,miny,maxy);
+    m_bottom.GetBorders(minx, maxx, miny, maxy);
+    m_cage.GetBorders(minx, maxx, miny, maxy);
+    m_leftSide.GetBorders(minx, maxx, miny, maxy);
+    m_rightSide.GetBorders(minx, maxx, miny, maxy);
+    m_ring.GetBorders(minx, maxx, miny, maxy);
 //    cout << "GlassR borders: minx " << minx << " " << " "
   };
 
@@ -67,9 +67,9 @@ public:
     return r.Write(s);
   }
 
-  virtual ostream& Write(ostream& s){
-    s << "    Glass with Ring #"<< getID() << ": " << endl
-      << "      Bottom: " << m_bottom;
+  virtual ostream& Write(ostream& s) {
+    s << "    Glass with Ring #" << getID() << ": " << endl
+    << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
     s << "      Right side: " << m_rightSide;

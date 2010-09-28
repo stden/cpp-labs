@@ -9,8 +9,7 @@
 #include "CoPoint.h"
 #include "CoList.h"
 
-class CRectangle
-{
+class CRectangle {
 private :
   CList<CCountedPoint> m_list;
 
@@ -22,13 +21,13 @@ public:
   */
   CRectangle(const CCountedPoint& x, const CCountedPoint& y);
 
-  void MovedXdY (double dx, double dy){
+  void MovedXdY(double dx, double dy) {
     cout << "CRectangle::MovedXdY(" << dx << "," << dy << ")" << endl;
-    for(m_list.goFirst();m_list.hasNext();m_list.goNext())
+    for (m_list.goFirst();m_list.hasNext();m_list.goNext())
       m_list.getValue().MovedXdY(dx, dy);
   };
 
-  void MoveToPoint (const CCountedPoint& P){
+  void MoveToPoint(const CCountedPoint& P) {
     m_list.goFirst();
 
     double dx = P.getX() - m_list.getValue().getX();
@@ -40,7 +39,7 @@ public:
   const CList<CCountedPoint>& getPoints() const { return m_list; }
   const CCountedPoint& getPoint(int index);
 
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
+  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
 
   /*
   * Деструктор

@@ -9,75 +9,75 @@
 #include <conio.h>
 
 
-CView :: CView (CPoint _P1,double _P1P2,CPoint _P3)
- : CStand(_P1,_P1P2,_P3),
-   CPistonCollection() {}
+CView :: CView(CPoint _P1, double _P1P2, CPoint _P3)
+    : CStand(_P1, _P1P2, _P3),
+    CPistonCollection() {}
 
 
-CView :: CView ()
- : CStand(),
-   CPistonCollection()   {}
+CView :: CView()
+    : CStand(),
+    CPistonCollection()   {}
 
 
 
 
-CView :: ~CView () {}
+CView :: ~CView() {}
 
 
-int CView :: inv () {
-return (invColl() && invStand());
+int CView :: inv() {
+  return (invColl() && invStand());
 }
 
 
 
 void CView :: SetCollectionP1(CPoint P0) {
-      CPistonCollection :: SetP1(P0);
+  CPistonCollection :: SetP1(P0);
 
 }
 
 void CView :: SetStandP1(CPoint P0) {
-      CStand :: SetP(P0);
+  CStand :: SetP(P0);
 
 }
 
 
-void CView :: MoveCollection (double dx, double dy) {
-       CPistonCollection :: Move(dx,dy);
+void CView :: MoveCollection(double dx, double dy) {
+  CPistonCollection :: Move(dx, dy);
 }
 
-void CView :: MoveStand (double dx, double dy) {
-       CStand :: MoveStand(dx,dy);
+void CView :: MoveStand(double dx, double dy) {
+  CStand :: MoveStand(dx, dy);
 }
 
-void CView :: Add(CPistonMechanism* P) const{
-   CPistonCollection :: Add(P);
+void CView :: Add(CPistonMechanism* P) const {
+  CPistonCollection :: Add(P);
 }
 
-void CView :: Add(const CPistonCollection& C) const{
+void CView :: Add(const CPistonCollection& C) const {
 
-   for (int i =0;i < C.GetCollection().GetSize();i++)
-           CPistonCollection :: Add(C.GetCollection().GetElemByNum(i)->GetValue());
+  for (int i = 0;i < C.GetCollection().GetSize();i++)
+    CPistonCollection :: Add(C.GetCollection().GetElemByNum(i)->GetValue());
 }
 
-int CView :: isOnStand (CPistonMechanism* P) const {
-        return isIn(P->GetPoints());
+int CView :: isOnStand(CPistonMechanism* P) const {
+  return isIn(P->GetPoints());
 }
 
 
-void CView :: PrintView () {
-         CStand :: Print ();
-         cout << "Press any key to see more"<<endl;
-         getch();
-         Collection.GetFirst();
-     for (int i = 0; i < Collection.GetSize();i++,Collection.NextCur())
-        if (isOnStand(Collection.GetCur()->GetValue())) Collection.GetCur()->GetValue()->Print();
+void CView :: PrintView() {
+  CStand :: Print();
+  cout << "Press any key to see more" << endl;
+  getch();
+  Collection.GetFirst();
+  for (int i = 0; i < Collection.GetSize();i++, Collection.NextCur())
+    if (isOnStand(Collection.GetCur()->GetValue())) Collection.GetCur()->GetValue()->Print();
 }
 
-void CView :: Print () const{
-        CStand :: Print ();
-        cout << "Press any key to see more"<<endl;
-         getch();
-        CPistonCollection :: Print();
+void CView :: Print() const {
+  CStand :: Print();
+  cout << "Press any key to see more" << endl;
+  getch();
+  CPistonCollection :: Print();
 }
 
 

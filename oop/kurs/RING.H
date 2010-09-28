@@ -26,7 +26,7 @@ public:
   /*
   * Конструктор
   */
-  CRing(double _x,double _y,double _R_B,double _R_S);
+  CRing(double _x, double _y, double _R_B, double _R_S);
 
   /*
   * Конструктор копирования
@@ -50,13 +50,13 @@ public:
   void setR_B(const double& value);
   void setR_S(const double& value);
 
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy );
+  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
 
 
   /*
   * Смещение точки
   */
-  void MovedXdY(double dx,double dy);
+  void MovedXdY(double dx, double dy);
 
   /*
   * Перемещение в заданную точку
@@ -65,8 +65,8 @@ public:
 
   double getX() const { return m_x; };
   double getY() const { return m_y; };
-  void setX(double value){ m_x=value; };
-  void setY(double value){ m_y=value; };
+  void setX(double value) { m_x = value; };
+  void setY(double value) { m_y = value; };
 
 };
 

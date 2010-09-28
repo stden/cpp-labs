@@ -15,16 +15,16 @@
 class CClientClosedPistonMechanism : public CClosedPistonMechanism, public CClient {
 public:
   CClientClosedPistonMechanism(const CClosedPistonMechanism& mec);
-        CClientClosedPistonMechanism(CPoint,double,double,double,double,double,double,double,double,double,double);
-        CClientClosedPistonMechanism(double,double,double,double,double,double,double,double,double,double,double,double);
-        CClientClosedPistonMechanism();
+  CClientClosedPistonMechanism(CPoint, double, double, double, double, double, double, double, double, double, double);
+  CClientClosedPistonMechanism(double, double, double, double, double, double, double, double, double, double, double, double);
+  CClientClosedPistonMechanism();
 
-        virtual ~CClientClosedPistonMechanism();
+  virtual ~CClientClosedPistonMechanism();
   void Move(double dx, double dy);
   void SetP1(CPoint P0);
-        virtual int MovePiston (double);
+  virtual int MovePiston(double);
   void Print() const;
-        int getID();
+  int getID();
 private:
   void Action(int _type, const CInfo& info);
 };

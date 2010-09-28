@@ -18,39 +18,39 @@ class CClosedPistonMechanism : public CPistonMechanism {
 private:
   CircleList<CPoint> MainPoints;
   CCover Cover;
-  void  AddPoints ();
+  void  AddPoints();
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-     	CClosedPistonMechanism(CPoint,double,double,double,double,double,double,double,double,double,double);
-        CClosedPistonMechanism(double,double,double,double,double,double,double,double,double,double,double,double);
-      	CClosedPistonMechanism(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CClosedPistonMechanism(CPoint, double, double, double, double, double, double, double, double, double, double);
+  CClosedPistonMechanism(double, double, double, double, double, double, double, double, double, double, double, double);
+  CClosedPistonMechanism(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      virtual ~CClosedPistonMechanism();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  virtual ~CClosedPistonMechanism();
+  //-------------------------------------------------
 
 
-	/**/
-  int inv ();	// Инвариант
- void RefreshPoints ();
-
-  //---------------------------------------------------
- void SetP1(double,double);
- void SetP1(CPoint); // Задание точки P1
- void Move (double,double); // Плоскопараллельное перемещение на dx dy
-  const CircleList<CPoint>& GetPoints () const;
- const CCover& GetCover() const;
+  /**/
+  int inv();  // Инвариант
+  void RefreshPoints();
 
   //---------------------------------------------------
+  void SetP1(double, double);
+  void SetP1(CPoint); // Задание точки P1
+  void Move(double, double); // Плоскопараллельное перемещение на dx dy
+  const CircleList<CPoint>& GetPoints() const;
+  const CCover& GetCover() const;
 
-  virtual void Print () const;
+  //---------------------------------------------------
+
+  virtual void Print() const;
 
 
- friend ostream& operator<<( ostream& output,const CClosedPistonMechanism&);
+  friend ostream& operator<<(ostream& output, const CClosedPistonMechanism&);
 
 };
 

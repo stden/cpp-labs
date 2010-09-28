@@ -3,7 +3,7 @@
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 21.02.2010, Редакция: 1.0
 
-#ifndef CLIST_H             
+#ifndef CLIST_H
 #define CLIST_H
 
 #include "CListD.h"
@@ -11,11 +11,11 @@
 
 template<class ValueType>
 CircleList<ValueType>::CircleList() : _length(0), header(0), last(0), cur(0) {
-  if (debug) cout << "CircleList is created, length = "<<_length<<endl;
-}                       
+  if (debug) cout << "CircleList is created, length = " << _length << endl;
+}
 
 template<class ValueType>
-CircleList<ValueType>::~CircleList () {
+CircleList<ValueType>::~CircleList() {
   /*  while (_length > 0) {
   CLNode <ValueType>* thead = header;
   header = header->GetNext();
@@ -24,11 +24,11 @@ CircleList<ValueType>::~CircleList () {
   delete thead;
   }*/
 
-  if (debug) cout << "CircleList is deleted, length = "<<_length<<endl;
+  if (debug) cout << "CircleList is deleted, length = " << _length << endl;
 }
 
 template <class ValueType>
-int CircleList<ValueType> :: GetSize () const {
+int CircleList<ValueType> :: GetSize() const {
   return _length;
 }
 
@@ -78,13 +78,13 @@ CLNode<ValueType>* CircleList<ValueType> :: GetElemByNum(int N) const {
 }
 
 template <class ValueType>
-CLNode<ValueType>* CircleList<ValueType> :: SetCur (const ValueType& val) {
+CLNode<ValueType>* CircleList<ValueType> :: SetCur(const ValueType& val) {
   cur->SetValue(val);
   return cur;
 }
 
 template <class ValueType>
-CLNode<ValueType>* CircleList<ValueType> :: NextCur () {
+CLNode<ValueType>* CircleList<ValueType> :: NextCur() {
   cur = cur->GetNext();
   return cur;
 }
@@ -92,12 +92,12 @@ CLNode<ValueType>* CircleList<ValueType> :: NextCur () {
 template<class ValueType>
 void CircleList<ValueType>::RemoveCur() {
 
-  if(_length == 0) {
-    cout<<"Empty list, nothing to delete"<<endl;
+  if (_length == 0) {
+    cout << "Empty list, nothing to delete" << endl;
     return;
   }
 
-  if(_length == 1){
+  if (_length == 1) {
     cur = header;
     delete cur;
     header = last = cur = 0;
@@ -105,7 +105,7 @@ void CircleList<ValueType>::RemoveCur() {
     return;
   }
 
-  if(_length > 1){
+  if (_length > 1) {
     if (cur == header) {
       CLNode<ValueType>* tcur = header;
       header = header->GetNext();
@@ -117,7 +117,7 @@ void CircleList<ValueType>::RemoveCur() {
     }
     int i = 0;
     CLNode<ValueType>* tcur = header;
-    while (i < _length+1 ) {
+    while (i < _length + 1) {
       if (tcur->GetNext() == cur) {
         tcur->SetNext(cur->GetNext());
         if (cur == last) last = tcur;
@@ -133,12 +133,12 @@ void CircleList<ValueType>::RemoveCur() {
 template<class ValueType>
 void CircleList<ValueType>::ExcludeCur() {
 
-  if(_length == 0) {
-    cout<<"Empty list, nothing to delete"<<endl;
+  if (_length == 0) {
+    cout << "Empty list, nothing to delete" << endl;
     return;
   }
 
-  if(_length == 1){
+  if (_length == 1) {
     cur = header;
     // delete cur;
     header = last = cur = 0;
@@ -146,7 +146,7 @@ void CircleList<ValueType>::ExcludeCur() {
     return;
   }
 
-  if(_length > 1){
+  if (_length > 1) {
 
 
     if (cur == header) {
@@ -161,7 +161,7 @@ void CircleList<ValueType>::ExcludeCur() {
 
     int i = 0;
     CLNode<ValueType>* tcur = header;
-    while (i < _length+1 ) {
+    while (i < _length + 1) {
       if (tcur->GetNext() == cur) {
         tcur->SetNext(cur->GetNext());
         if (cur == last) last = tcur;
@@ -176,11 +176,11 @@ void CircleList<ValueType>::ExcludeCur() {
 
 template<class ValueType>
 void CircleList<ValueType>::ExcludeByNum(int n) {
-  if(_length == 0) {
-    cout<<"Empty list, nothing to delete"<<endl;
+  if (_length == 0) {
+    cout << "Empty list, nothing to delete" << endl;
     return;
   }
-  if(_length == 1){
+  if (_length == 1) {
     cur = header;
     // delete cur;
     header = last = cur = 0;
@@ -188,7 +188,7 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
     return;
   }
 
-  if(_length > 1 && n < _length && n > 0){
+  if (_length > 1 && n < _length && n > 0) {
     if (cur == header) {
       CLNode<ValueType>* tcur = header;
       header = header->GetNext();
@@ -201,7 +201,7 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
 
     int i = 0;
     CLNode<ValueType>* tcur = header;
-    while (i < _length+1 ) {
+    while (i < _length + 1) {
       if (i == n) {
         tcur->SetNext(cur->GetNext());
         if (cur == last) last = tcur;
@@ -215,8 +215,8 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
 }
 
 template<class ValueType>
-CLNode<ValueType>* CircleList<ValueType>:: Append (CLNode<ValueType>* node) {
-  if(_length == 0) { // Empty list
+CLNode<ValueType>* CircleList<ValueType>:: Append(CLNode<ValueType>* node) {
+  if (_length == 0) { // Empty list
     header = last = node;
     last->SetNext(header);
     ++_length;
@@ -230,9 +230,8 @@ CLNode<ValueType>* CircleList<ValueType>:: Append (CLNode<ValueType>* node) {
 }
 
 template<class ValueType>
-CLNode<ValueType>* CircleList<ValueType>:: Prepend (CLNode<ValueType>* node)
-{
-  if(_length == 0) { // Empty list
+CLNode<ValueType>* CircleList<ValueType>:: Prepend(CLNode<ValueType>* node) {
+  if (_length == 0) { // Empty list
     header = last = node;
     last->SetNext(header);
     ++_length;
@@ -245,10 +244,10 @@ CLNode<ValueType>* CircleList<ValueType>:: Prepend (CLNode<ValueType>* node)
 }
 
 template<class ValueType>
-void CircleList<ValueType>:: Print () const {
+void CircleList<ValueType>:: Print() const {
 
-  if(_length == 0){
-    cout<<endl<<"The List is empty"<<endl;
+  if (_length == 0) {
+    cout << endl << "The List is empty" << endl;
     return;
   }
 
@@ -256,12 +255,12 @@ void CircleList<ValueType>:: Print () const {
   CLNode <ValueType> * temp = header;
 
   while (i < _length && temp) {
-    cout << "Element "<<i<<": "<<temp.getValue<<endl;
+    cout << "Element " << i << ": " << temp.getValue << endl;
     i++;
     temp = temp->GetNext();
   }
 
-  cout <<endl<<endl;
+  cout << endl << endl;
 
 
 }

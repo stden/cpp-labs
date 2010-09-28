@@ -13,8 +13,8 @@ int CCover :: total = 0;
 int CCover :: current = 0;
 
 
-CCover :: CCover (CPoint P0, double cover_width, double cover_height, double hole_width) : Cover(P0.GetX(),P0.GetY(),cover_width,cover_height),
-Hole(P0.GetX() + cover_width/2 - hole_width/2,P0.GetY(),hole_width,cover_height) {
+CCover :: CCover(CPoint P0, double cover_width, double cover_height, double hole_width) : Cover(P0.GetX(), P0.GetY(), cover_width, cover_height),
+    Hole(P0.GetX() + cover_width / 2 - hole_width / 2, P0.GetY(), hole_width, cover_height) {
 
   MainPoints.Append(new CLNode<CPoint>(Cover.GetP1()));
   MainPoints.Append(new CLNode<CPoint>(Cover.GetP2()));
@@ -29,16 +29,16 @@ Hole(P0.GetX() + cover_width/2 - hole_width/2,P0.GetY(),hole_width,cover_height)
   ++current;
 
   if (debug) cout << "Cover  " << Cover.GetP1() << "," << Cover.GetP2() <<
-    "," << Cover.GetP3() << "," << Cover.GetP4() <<
-    " Width = "<< Cover.GetWidth() << ", Height = " << Cover.GetHeight()<< endl <<
-    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
-    "," << Hole.GetP3() << "," << Hole.GetP4() <<
-    " Width = "<< Cover.GetWidth() << " created"<<endl;
+                    "," << Cover.GetP3() << "," << Cover.GetP4() <<
+                    " Width = " << Cover.GetWidth() << ", Height = " << Cover.GetHeight() << endl <<
+                    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
+                    "," << Hole.GetP3() << "," << Hole.GetP4() <<
+                    " Width = " << Cover.GetWidth() << " created" << endl;
 }
 
 
-CCover :: CCover (): Cover(0,1,1,1),
-Hole(0.4,1,0.1,1) {
+CCover :: CCover(): Cover(0, 1, 1, 1),
+    Hole(0.4, 1, 0.1, 1) {
 
   MainPoints.Append(new CLNode<CPoint>(Cover.GetP1()));
   MainPoints.Append(new CLNode<CPoint>(Cover.GetP2()));
@@ -53,30 +53,30 @@ Hole(0.4,1,0.1,1) {
   ++current;
 
   if (debug) cout << "Cover  " << Cover.GetP1() << "," << Cover.GetP2() <<
-    "," << Cover.GetP3() << "," << Cover.GetP4() <<
-    " Width = "<< Cover.GetWidth() << ", Height = " << Cover.GetHeight()<< endl <<
-    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
-    "," << Hole.GetP3() << "," << Hole.GetP4() <<
-    " Width = "<< Cover.GetWidth() << " created"<<endl;
+                    "," << Cover.GetP3() << "," << Cover.GetP4() <<
+                    " Width = " << Cover.GetWidth() << ", Height = " << Cover.GetHeight() << endl <<
+                    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
+                    "," << Hole.GetP3() << "," << Hole.GetP4() <<
+                    " Width = " << Cover.GetWidth() << " created" << endl;
 }
 
 
-CCover :: ~CCover () {
+CCover :: ~CCover() {
   if (debug) cout << "Cover  " << Cover.GetP1() << "," << Cover.GetP2() <<
-    "," << Cover.GetP3() << "," << Cover.GetP4() <<
-    " Width = "<< Cover.GetWidth() << ", Height = " << Cover.GetHeight()<< endl <<
-    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
-    "," << Hole.GetP3() << "," << Hole.GetP4() <<
-    " Width = "<< Cover.GetWidth() << " deleted"<<endl;
+                    "," << Cover.GetP3() << "," << Cover.GetP4() <<
+                    " Width = " << Cover.GetWidth() << ", Height = " << Cover.GetHeight() << endl <<
+                    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
+                    "," << Hole.GetP3() << "," << Hole.GetP4() <<
+                    " Width = " << Cover.GetWidth() << " deleted" << endl;
   --current;
 }
 
-int CCover :: inv () {
+int CCover :: inv() {
   return (Cover.inv() && Hole.inv() && (Cover.GetHeight() == Hole.GetHeight())
-    && (Hole.GetWidth() < Cover.GetWidth()) && (Hole.GetWidth() / 2 <= 1));
+          && (Hole.GetWidth() < Cover.GetWidth()) && (Hole.GetWidth() / 2 <= 1));
 }
 
-void CCover :: RefreshPoints () {
+void CCover :: RefreshPoints() {
   CLNode<CPoint>* tN = MainPoints.GetFirst();
   tN->SetValue(Cover.GetP1());
   tN = tN->GetNext();
@@ -100,7 +100,7 @@ void CCover :: RefreshPoints () {
 
 void CCover :: SetP1(double x, double y) {
   double d = Cover.GetP1().d(Hole.GetP1());
-  Cover.SetP1(x,y);
+  Cover.SetP1(x, y);
   Hole.SetP1(Cover.GetP1().GetX() + d, Cover.GetP1().GetY());
   RefreshPoints();
 
@@ -114,9 +114,9 @@ void CCover :: SetP1(CPoint P0) {
 }
 
 
-void CCover :: Move (double dx, double dy) {
-  Cover.SetP1(Cover.GetP1().GetX() + dx,Cover.GetP1().GetY() + dy);
-  Hole.SetP1(Hole.GetP1().GetX() + dx,Hole.GetP1().GetY() + dy);
+void CCover :: Move(double dx, double dy) {
+  Cover.SetP1(Cover.GetP1().GetX() + dx, Cover.GetP1().GetY() + dy);
+  Hole.SetP1(Hole.GetP1().GetX() + dx, Hole.GetP1().GetY() + dy);
   RefreshPoints();
 }
 
@@ -128,17 +128,17 @@ CRectangle CCover :: GetCover() const {
   return Cover;
 }
 
-const CircleList<CPoint>& CCover :: GetPoints ()  const{
+const CircleList<CPoint>& CCover :: GetPoints()  const {
   return MainPoints;
 }
 
-void CCover :: Print () {
-  cout << "Cover "<< Cover.GetP1() << "," << Cover.GetP2() <<
-    "," << Cover.GetP3() << "," << Cover.GetP4() <<
-    " Width = "<< Cover.GetWidth() << ", Height = " << Cover.GetHeight()<< endl <<
-    "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
-    "," << Hole.GetP3() << "," << Hole.GetP4() <<
-    " Width = "<< Cover.GetWidth() <<endl;
+void CCover :: Print() {
+  cout << "Cover " << Cover.GetP1() << "," << Cover.GetP2() <<
+       "," << Cover.GetP3() << "," << Cover.GetP4() <<
+       " Width = " << Cover.GetWidth() << ", Height = " << Cover.GetHeight() << endl <<
+       "Hole " << Hole.GetP1() << "," << Hole.GetP2() <<
+       "," << Hole.GetP3() << "," << Hole.GetP4() <<
+       " Width = " << Cover.GetWidth() << endl;
 }
 
 void CCover :: setDebug(int d) {
