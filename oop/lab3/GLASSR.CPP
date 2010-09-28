@@ -14,28 +14,27 @@
 // hBottom - высота основания
 // lessSide - толщина стенки (меньшая сторона параллелограмма)
 CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
-   const double& bottom, const double& hBottom, const double& lessSide):
-  // Создаём стакан без кольца
-  CGlass(x,y,bottom,hBottom,lessSide),
-  // И добавляем кольцо
-  // Центр "кольца" совпадает с точкой пересечения диагоналей "полости стакана"
-  // X-координата центра 
-  m_ring(x.getX()+bottom/2.0,
-    0, // Y-координата будет задана позднее (поскольку её сложно вычислить)
-    // Диаметр внешней окружности "кольца" равен половине высоты 
-    // "трапеции" образующей "полость стакана" 
-    // Мы передаём в конструктор радиус внешней окружности, который равен четверти
-    (y.getY()-x.getY()-hBottom)/4.0,
-    0.9*(y.getY()-x.getY()-hBottom)/4.0)
-{
+                 const double& bottom, const double& hBottom, const double& lessSide):
+    // Создаём стакан без кольца
+    CGlass(x, y, bottom, hBottom, lessSide),
+    // И добавляем кольцо
+    // Центр "кольца" совпадает с точкой пересечения диагоналей "полости стакана"
+    // X-координата центра
+    m_ring(x.getX() + bottom / 2.0,
+           0, // Y-координата будет задана позднее (поскольку её сложно вычислить)
+           // Диаметр внешней окружности "кольца" равен половине высоты
+           // "трапеции" образующей "полость стакана"
+           // Мы передаём в конструктор радиус внешней окружности, который равен четверти
+           (y.getY() - x.getY() - hBottom) / 4.0,
+           0.9*(y.getY() - x.getY() - hBottom) / 4.0) {
   // Вычисляем высоту большого треугольника
-  double HBig = y.getY()-x.getY()-hBottom;
+  double HBig = y.getY() - x.getY() - hBottom;
   // Вычисляем основание большого треугольника
-  double LBig = x.getX()-y.getX()+bottom;
+  double LBig = x.getX() - y.getX() + bottom;
   // Основание маленького треугольника
-  double LSmall = bottom/2;
+  double LSmall = bottom / 2;
   // Высота маленького треугольника
-  double HSmall = HBig/LBig*LSmall; // Поскольку треугольники подобны
+  double HSmall = HBig / LBig * LSmall; // Поскольку треугольники подобны
   // В итоге координата Y центров окружностей будет
   double Y = x.getY() + hBottom + HSmall;
 
@@ -44,8 +43,7 @@ CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
   cout << " GlassR created" << endl;
 }
 
-void CGlassR::MoveToPoint(const CCountedPoint& point)
-{
+void CGlassR::MoveToPoint(const CCountedPoint& point) {
   // Получаем текущие координаты левого нижнего угла основания
   CCountedPoint basePoint = m_bottom.getPoint(0);
 
@@ -58,8 +56,7 @@ void CGlassR::MoveToPoint(const CCountedPoint& point)
   MovedXdY(dx, dy);
 }
 
-void CGlassR::MovedXdY(double x, double y)
-{
+void CGlassR::MovedXdY(double x, double y) {
   cout << "CGlassR::MovedXdY(" << x << "," << y << ")" << endl;
   // Двигаем последовательно все "кусочки" стакана
   m_bottom.MovedXdY(x, y); // основание
@@ -69,8 +66,7 @@ void CGlassR::MovedXdY(double x, double y)
   m_ring.MovedXdY(x, y); // кольцо
 }
 
-CGlassR::~CGlassR(void) 
-{
+CGlassR::~CGlassR(void) {
   cout << " GlassR destroyed" << endl;
 }
 

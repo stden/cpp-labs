@@ -12,8 +12,7 @@
 #include "CoList.h"
 #include <conio.h>
 
-class CGlass
-{
+class CGlass {
   // ƒно
   cRectangle m_bottom;
 
@@ -32,7 +31,7 @@ public:
   * x - лева€ нижн€€ точка, y - лева€ верхн€€, bottom - ƒлина основани€,
   * hBottom - высота основани€, lessSide - длина меньшего ребра боковой стенки
   */
-  CGlass(const CCountedPoint& x, const CCountedPoint& y, 
+  CGlass(const CCountedPoint& x, const CCountedPoint& y,
          const double& bottom, const double& hBottom, const double& lessSide);
 
   /*
@@ -40,28 +39,28 @@ public:
   */
   ~CGlass(void);
 
-	/*
-  * ѕеремещение
-  */
+  /*
+   * ѕеремещение
+   */
   void MoveToPoint(const CCountedPoint& point);
-  
+
   /*
   * —мещение
   */
   void MovedXdY(double x, double y);
-  
+
   /*
   * ќператор вывода в поток
   */
   friend ostream& operator << (ostream& s, CGlass& r) {
-	 s << "Glass: "
-  << "  Bottom: " << r.m_bottom; getch();
-   s  << "  Cage: " << r.m_cage; getch();
-  s << "  Left side: " << r.m_leftSide; getch();
- s  << "  Right side: " << r.m_rightSide;
-  getch();
+    s << "Glass: "
+    << "  Bottom: " << r.m_bottom; getch();
+    s  << "  Cage: " << r.m_cage; getch();
+    s << "  Left side: " << r.m_leftSide; getch();
+    s  << "  Right side: " << r.m_rightSide;
+    getch();
 
-  return s;
+    return s;
   }
 
 };

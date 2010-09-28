@@ -8,18 +8,17 @@
 
 //#include "cNode.cpp"
 template <class type>
-class cNode
-{
+class cNode {
 private:
-	type Value;
-	cNode *Next;
+  type Value;
+  cNode *Next;
 public:
-	cNode(void);
-	~cNode();
-	cNode<type> *GetNext(void);
-	void SetNext(cNode *b);
-	type GetValue(void);
-	void SetValue (type a);
+  cNode(void);
+  ~cNode();
+  cNode<type> *GetNext(void);
+  void SetNext(cNode *b);
+  type GetValue(void);
+  void SetValue(type a);
 };
 
 #endif

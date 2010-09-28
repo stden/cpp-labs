@@ -11,8 +11,7 @@ int cRectangle::countall = 0;
 
 
 
-cRectangle::cRectangle(const CCountedPoint& x,const CCountedPoint& y) : m_id(++countall)
-{
+cRectangle::cRectangle(const CCountedPoint& x, const CCountedPoint& y) : m_id(++countall) {
   m_list.insert(x);
   m_list.insert(CCountedPoint(x.getX(), y.getY()));
   m_list.insert(y);
@@ -24,35 +23,34 @@ cRectangle::cRectangle(const CCountedPoint& x,const CCountedPoint& y) : m_id(++c
 
 }
 
-cRectangle::~cRectangle()
-{
+cRectangle::~cRectangle() {
   countreal--;
   cout << "        Rectangle destroyed (remain " << countreal << ")" << endl;
 }
 
-void cRectangle :: MovedXdY (double dx, double dy) {
-        // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
-    m_list.goFirst();
+void cRectangle :: MovedXdY(double dx, double dy) {
+  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
+  m_list.goFirst();
 
-    do{
-      m_list.getElem().getValue().move(dx, dy);
-    }while(m_list.goNext());
+  do {
+    m_list.getElem().getValue().move(dx, dy);
+  } while (m_list.goNext());
 }
 
-void cRectangle :: MoveToPoint (const CCountedPoint& P) {
-    m_list.goFirst();
+void cRectangle :: MoveToPoint(const CCountedPoint& P) {
+  m_list.goFirst();
 
-    double dx = P.getX() - m_list.getElem().getValue().getX();
-    double dy = P.getY() - m_list.getElem().getValue().getY();
+  double dx = P.getX() - m_list.getElem().getValue().getX();
+  double dy = P.getY() - m_list.getElem().getValue().getY();
 
-    MovedXdY(dx, dy);
+  MovedXdY(dx, dy);
 }
 
-const CCountedPoint& cRectangle :: getPoint (int index) {
-     m_list.goFirst();
+const CCountedPoint& cRectangle :: getPoint(int index) {
+  m_list.goFirst();
 
-    for(index;index>1;index--)
-      m_list.goNext();
+  for (index;index > 1;index--)
+    m_list.goNext();
 
-    return m_list.getElem().getValue();
+  return m_list.getElem().getValue();
 }

@@ -51,16 +51,16 @@ public:
   */
   ~CGlass(void);
 
-  int getID(){ return m_id; };
+  int getID() { return m_id; };
 
-  CCountedPoint getBasePoint(){
+  CCountedPoint getBasePoint() {
     return m_bottom.getPoint(0);
   }
 
   /*
   * Перемещение
   */
-  virtual void MoveToPoint(const CCountedPoint& point){
+  virtual void MoveToPoint(const CCountedPoint& point) {
     CCountedPoint basePoint = m_bottom.getPoint(0);
 
     double dx = point.getX() - basePoint.getX();
@@ -72,7 +72,7 @@ public:
   /*
   * Смещение
   */
-  virtual void MovedXdY(double dX, double dY){
+  virtual void MovedXdY(double dX, double dY) {
     cout << "Glass #" << m_id << " MovedXdY(" << dX << "," << dY << ")" << endl;
     m_bottom.MovedXdY(dX, dY);
     m_cage.MovedXdY(dX, dY);
@@ -87,9 +87,9 @@ public:
     return r.Write(s);
   }
 
-  virtual ostream& Write(ostream& s){
+  virtual ostream& Write(ostream& s) {
     s << "    Glass #" << getID() << ": " << endl
-      << "      Bottom: " << m_bottom;
+    << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
     s << "      Right side: " << m_rightSide;
@@ -107,11 +107,11 @@ public:
   /*
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
-  void GetBorders( double *minx,double *maxx,double *miny,double *maxy ){
-    m_bottom.GetBorders(minx,maxx,miny,maxy);
-    m_cage.GetBorders(minx,maxx,miny,maxy);
-    m_leftSide.GetBorders(minx,maxx,miny,maxy);
-    m_rightSide.GetBorders(minx,maxx,miny,maxy);
+  void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
+    m_bottom.GetBorders(minx, maxx, miny, maxy);
+    m_cage.GetBorders(minx, maxx, miny, maxy);
+    m_leftSide.GetBorders(minx, maxx, miny, maxy);
+    m_rightSide.GetBorders(minx, maxx, miny, maxy);
   };
 
 };
