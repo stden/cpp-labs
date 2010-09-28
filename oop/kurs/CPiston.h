@@ -25,30 +25,30 @@ private:
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CPiston(CPoint,double,double,double); // P1 width heigth length
-      	CPiston(double,double,double,double,double); // x, y, width, heigth, length
-	CPiston(CPoint,double); // p1 width = heigth = length
-	CPiston(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CPiston(CPoint, double, double, double); // P1 width heigth length
+  CPiston(double, double, double, double, double); // x, y, width, heigth, length
+  CPiston(CPoint, double); // p1 width = heigth = length
+  CPiston(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CPiston();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CPiston();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
-  void RefreshPoints ();
+  int inv();  // Инвариант
+  void RefreshPoints();
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy
-  const CircleList<CPoint>& GetPoints () const;
+  void Move(double, double); // Плоскопараллельное перемещение на dx dy
+  const CircleList<CPoint>& GetPoints() const;
   double GetWidth() const;
   double GetHeight() const;
   double GetLength() const;
@@ -58,7 +58,7 @@ public:
 
   //---------------------------------------------------
 
-  void Print ();
+  void Print();
   void setDebug(int);
   int getID();
   int GetCurrent();

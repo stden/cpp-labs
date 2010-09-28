@@ -16,43 +16,43 @@
 class CCup {
 private:
   CircleList<CPoint> MainPoints;
-  CRectangle RightCupSide,BottomCupSide,LeftCupSide;
+  CRectangle RightCupSide, BottomCupSide, LeftCupSide;
   static int debug;
   static int total;
   int id;
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CCup(CPoint,double,double,double,double,double);
-      	CCup(double,double,double,double,double,double,double); // x, y, width, heigth, length
-	CCup(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CCup(CPoint, double, double, double, double, double);
+  CCup(double, double, double, double, double, double, double); // x, y, width, heigth, length
+  CCup(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CCup();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CCup();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
-  void RefreshPoints ();
+  int inv();  // Инвариант
+  void RefreshPoints();
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy
-  const CircleList<CPoint>& GetPoints () const;
+  void Move(double, double); // Плоскопараллельное перемещение на dx dy
+  const CircleList<CPoint>& GetPoints() const;
   CRectangle GetLeftSide() const;
   CRectangle GetBottomSide() const;
   CRectangle GetRightSide() const;
 
   //---------------------------------------------------
 
-  void Print ();
+  void Print();
   void setDebug(int);
   int getID();
   int GetCurrent();

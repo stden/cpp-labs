@@ -18,7 +18,7 @@ private:
   int id;
   static int current;
 public:
-  CPoint(double,double);
+  CPoint(double, double);
   CPoint();
   CPoint(double);
   ~CPoint();
@@ -28,17 +28,17 @@ public:
 
   void SetX(double);
   void SetY(double);
-  void Move (double, double);
+  void Move(double, double);
   double GetX() const;
   double GetY() const;
 
   void Print();
 
   // Point Relations
-  double d( CPoint);         // Distance
+  double d(CPoint);          // Distance
   double d(CPoint, CPoint);
-  double d2( CPoint);        // Distance^2
-  int nCheck( CPoint, CPoint);
+  double d2(CPoint);         // Distance^2
+  int nCheck(CPoint, CPoint);
 
 
   void setDebug(int);
@@ -48,7 +48,7 @@ public:
 
   // одинаковы ли точки ?
 
- // CPoint operator = (CPoint&);
+// CPoint operator = (CPoint&);
   int operator == (CPoint);
   int operator!= (CPoint&);
   int operator== (double);
@@ -61,10 +61,10 @@ public:
   int operator>= (double);
   int operator>= (CPoint&);
   int operator<= (CPoint&);
-  friend ostream& operator<<( ostream& output,const CPoint& P);
-  friend istream& operator>>( istream&, CPoint&);
+  friend ostream& operator<<(ostream& output, const CPoint& P);
+  friend istream& operator>>(istream&, CPoint&);
 
-  
+
 
 
 };

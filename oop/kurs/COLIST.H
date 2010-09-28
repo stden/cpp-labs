@@ -11,8 +11,7 @@
 #include <assert.h>
 
 template<class type>
-class CList
-{
+class CList {
   //Указатель на текущий элемент списка
   CElem<type>* m_current;
 
@@ -50,10 +49,10 @@ public:
     m_current = NULL;
     m_first   = NULL;
 
-    for(CElem<type>* cur=list.m_first; cur!=NULL; cur=cur->getNext())
+    for (CElem<type>* cur = list.m_first; cur != NULL; cur = cur->getNext())
       insert(cur->getValue());
 
-   // cout << "Linear list # " << countreal << " copyed" << endl;
+    // cout << "Linear list # " << countreal << " copyed" << endl;
   }
 
   /*
@@ -62,15 +61,15 @@ public:
   void insert(const type& elem) {
     CElem<type>* tmp = new CElem<type>(elem);
 
-    if(m_first==NULL){
+    if (m_first == NULL) {
       m_first = tmp;
     } else {
       CElem<type>* cur = m_first;
-      while(cur!=NULL && cur->getNext()!=NULL)
+      while (cur != NULL && cur->getNext() != NULL)
         cur = cur->getNext();
       cur->setNext(tmp);
     };
-    m_current=tmp;
+    m_current = tmp;
   }
 
   /*
@@ -79,8 +78,8 @@ public:
   void insertBegin(const type& elem) {
     CElem<type>* new_el = new CElem<type>(elem);
     new_el->setNext(m_first);
-    m_first=new_el;
-    if(m_current == NULL)
+    m_first = new_el;
+    if (m_current == NULL)
       m_current = m_first;
   }
 
@@ -88,7 +87,7 @@ public:
   * Пуст ли список?
   */
   int isEmpty() const {
-    return m_first==NULL;
+    return m_first == NULL;
   }
 
   /*
@@ -96,21 +95,21 @@ public:
   */
   int dispose() {
     // Если текущего элемента нет, то удалять нечего и возвращаем 0
-    if(m_current==NULL)
+    if (m_current == NULL)
       return 0;
 
     CElem<type>* for_delete = m_current; // Запоминаем элемент для удаления
 
     // Правильное перекидывание ссылок
-    if(m_first == m_current){ // Если удаляем первый элемент
+    if (m_first == m_current) { // Если удаляем первый элемент
       m_current = m_current->getNext(); // Делаем текущим элементом следующий
       m_first = m_current; // И первым становится также он
     } else { // Если удаляем не первый элемент
       // То нам нужен элемент перед текущим (надо изменить у него ссылку)
       // Ищем этот предыдущий элемент начиная с первого
       CElem<type>* prev = m_first;
-      while(prev->getNext() != m_current)
-      	prev = prev->getNext();
+      while (prev->getNext() != m_current)
+        prev = prev->getNext();
       // Сейчас prev - тот самый предыдущий элемент
       // И теперь он должен ссылаться на тот элемент, на который ссылался
       // удаляемый элемент
@@ -118,12 +117,12 @@ public:
 
       // Остаётся правильно указать текущий элемент в списке
       // Если мы удаляли не последний элемент
-      if(m_current->getNext() != NULL)
+      if (m_current->getNext() != NULL)
         // то текущим станет элемент, который сдвинется на место удаляемого
-      	m_current = m_current->getNext();
+        m_current = m_current->getNext();
       else
         // а если удаляли последний, то текущим станет предпоследний
-      	m_current = prev;
+        m_current = prev;
     }
 
     delete(for_delete); // Собственно удаление элемента из дин. памяти
@@ -136,7 +135,7 @@ public:
   * Получить элемент
   */
   CElem<type>& getElem() const {
-    assert( m_current != NULL );
+    assert(m_current != NULL);
     return *m_current;
   }
 
@@ -151,7 +150,7 @@ public:
   * Получить значение текущего элемента
   */
   type& getValue() const {
-    assert( m_current != NULL );
+    assert(m_current != NULL);
     return (*m_current).getValue();
   }
 
@@ -159,7 +158,7 @@ public:
   * Заменить элемент
   */
   void setElem(const type& elem) {
-    assert( m_current != NULL );
+    assert(m_current != NULL);
     m_current->setValue(elem);
   }
 
@@ -167,14 +166,14 @@ public:
   * Переместиться на элемент вправо
   */
   int goNext() {
-    if(m_current==NULL) return 0;
+    if (m_current == NULL) return 0;
     m_current = m_current->getNext();
-    if (m_current->getNext()==NULL) return 0;
+    if (m_current->getNext() == NULL) return 0;
     return 1;
   }
 
   int hasNext() {
-    return m_current!=NULL;
+    return m_current != NULL;
   }
 
   /*
@@ -198,8 +197,7 @@ public:
   ~CList() {
     countreal--;
     goFirst();
-    while(dispose())
-    {}
+    while (dispose()) {}
 
     //cout << "Linear list destroyed... (remain " << countreal << ")" << endl;
   }
@@ -210,9 +208,9 @@ public:
   size_t size() const {
     CElem<type>* tmp = m_first;
     size_t count = 0;
-    while(tmp!=NULL){
+    while (tmp != NULL) {
       count++;
-      tmp=tmp->getNext();
+      tmp = tmp->getNext();
     }
     return count;
   }
@@ -222,7 +220,7 @@ public:
   */
   CList& operator=(const CList& list) {
     m_id = list.getID();
-    for( CElem<type>* c=list.m_first; c!=NULL; c=c->getNext())
+    for (CElem<type>* c = list.m_first; c != NULL; c = c->getNext())
       insert(c->getValue());
     return *this;
   }
@@ -231,7 +229,7 @@ public:
   * Print list
   */
   void Print() const {
-    for( CElem<type>* c=m_first; c!=NULL; c=c->getNext() )
+    for (CElem<type>* c = m_first; c != NULL; c = c->getNext())
       cout << c->getValue() << ", ";
     cout << endl;
   }

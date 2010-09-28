@@ -12,14 +12,14 @@ int CMessage :: debug = 0;
 
 CMessage :: CMessage(int _FromID, int _ToID,
                      int _Type, double _Info, Direction _dir) :
- id(++total), FromID(_FromID), ToID(_ToID), Type(_Type),
- Info(_Info), direction(_dir) {
+    id(++total), FromID(_FromID), ToID(_ToID), Type(_Type),
+    Info(_Info), direction(_dir) {
   ++current;
   if (debug) Print("created");
 }
 
-CMessage :: CMessage(const CMessage &msg):id(++total), FromID(msg.getFromID()), ToID(msg.getToID()),
-Type(msg.getType()), Info(msg.getInfo()), direction(msg.getDirection()) {
+CMessage :: CMessage(const CMessage &msg): id(++total), FromID(msg.getFromID()), ToID(msg.getToID()),
+    Type(msg.getType()), Info(msg.getInfo()), direction(msg.getDirection()) {
   ++current;
   if (debug) Print("copied");
 }
@@ -30,16 +30,16 @@ CMessage :: ~CMessage() {
 }
 
 const char* CMessage :: InterpritateType(int type) const {
-  switch(type){
+  switch (type) {
     case CONFIRMATION: return "CONFIRMATION";
     case REPORT: return "REPORT";
     default: return "ACTION";
   }
 }
 
-void CMessage :: Print(char *prompt) const{
+void CMessage :: Print(char *prompt) const {
   cout << InterpritateType(Type) << " message #" << id << " " << prompt << " ";
-  switch(direction){
+  switch (direction) {
     case Server_to_Client:
       cout << "from Server to Client #" << ToID;
       break;

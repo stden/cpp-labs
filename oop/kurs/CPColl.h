@@ -15,7 +15,7 @@
 
 class CPistonCollection {
 protected:
- // CircleList<CPoint> MainPoints;
+// CircleList<CPoint> MainPoints;
   CircleList<CPistonMechanism*> Collection;
   int Length;
 private:
@@ -25,41 +25,41 @@ private:
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-      	CPistonCollection(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CPistonCollection(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-       virtual	~CPistonCollection();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  virtual ~CPistonCollection();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
   virtual int invColl();
- // virtual void RefreshPoints ();
+// virtual void RefreshPoints ();
 
   //---------------------------------------------------
-virtual void SetP1(double,double);
-virtual void SetP1(CPoint); // Задание точки P1
-virtual void Move (double,double); // Плоскопараллельное перемещение на dx dy
-virtual void MovePiston (double);
+  virtual void SetP1(double, double);
+  virtual void SetP1(CPoint); // Задание точки P1
+  virtual void Move(double, double); // Плоскопараллельное перемещение на dx dy
+  virtual void MovePiston(double);
 //virtual  const CircleList<CPoint>& GetPoints () const;
-  const CircleList<CPistonMechanism*>& GetCollection () const;
+  const CircleList<CPistonMechanism*>& GetCollection() const;
 
-virtual  void Add (CPistonMechanism*);
-  void Delete (int);
-  int GetLength () const;
+  virtual  void Add(CPistonMechanism*);
+  void Delete(int);
+  int GetLength() const;
 
   //---------------------------------------------------
 
-virtual  void Print ();
+  virtual  void Print();
 
-virtual  void setDebug(int);
-virtual  int getID();
-virtual  int GetCurrent();
-virtual  int GetTotal();
+  virtual  void setDebug(int);
+  virtual  int getID();
+  virtual  int GetCurrent();
+  virtual  int GetTotal();
 
 };
 

@@ -26,7 +26,7 @@ public:
 
   /*Конструкторы*/
   //-------------------------------------------------
-  CCover(CPoint,double cover_width,double cover_height, double hole_width); // P1 width heigth length
+  CCover(CPoint, double cover_width, double cover_height, double hole_width); // P1 width heigth length
   CCover(); // Constructor without parametrs
   //-------------------------------------------------
 
@@ -38,17 +38,17 @@ public:
 
   /**/
 
-  int inv ();	// Инвариант
-  void RefreshPoints ();
+  int inv();  // Инвариант
+  void RefreshPoints();
 
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint P0); // Задание точки P1
-  void Move (double dx, double dy); // Плоскопараллельное перемещение на dx dy
-  const CircleList<CPoint>& GetPoints () const;
+  void Move(double dx, double dy);  // Плоскопараллельное перемещение на dx dy
+  const CircleList<CPoint>& GetPoints() const;
   CRectangle GetHole() const;
   CRectangle GetCover() const;
 
-  void Print ();
+  void Print();
   void setDebug(int);
   int getID();
   int GetCurrent();

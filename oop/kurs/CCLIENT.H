@@ -35,7 +35,7 @@ public:
   void Print() const;
 
   int getID() const { return id; }
-  static int getTotal(){ return total; }
+  static int getTotal() { return total; }
 };
 
 #endif

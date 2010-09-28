@@ -21,26 +21,26 @@ private:
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CTriangle(CPoint _P1,double _P1P2,CPoint _P3); // P1 length(p1,p2) P3
-	CTriangle(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CTriangle(CPoint _P1, double _P1P2, CPoint _P3); // P1 length(p1,p2) P3
+  CTriangle(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-	~CTriangle();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CTriangle();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
+  int inv();  // Инвариант
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy
+  void Move(double, double); // Плоскопараллельное перемещение на dx dy
   CPoint GetP1() const;
   CPoint GetP2() const;
   CPoint GetP3() const;
@@ -48,11 +48,11 @@ public:
   double GetP2P3() const;
   double GetP3P1() const;
 
-  int isIn (CPoint P) const; // Проверка принадлежности триугольнику
+  int isIn(CPoint P) const;  // Проверка принадлежности триугольнику
 
   //---------------------------------------------------
 
-  void Print ();
+  void Print();
   void setDebug(int);
   int getID();
   int GetCurrent();

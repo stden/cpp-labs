@@ -9,7 +9,8 @@
 // направление передачи: сервер->клиент, клиент->сервер,
 // клиент->клиент через сервер
 enum Direction { Server_to_Client, Client_to_Server,
-  Client_to_Client };
+                 Client_to_Client
+               };
 
 // тип сообщения: остальные коды - запрос действия (ACTION)
 const int CONFIRMATION = 0; // подтверждение приема
@@ -33,7 +34,7 @@ public:
   ~CMessage();
 
   const char* InterpritateType(int type) const;
-  void Print(char *prompt="") const;
+  void Print(char *prompt = "") const;
 
   int getID() const { return id; }
   int getFromID() const { return FromID; }
@@ -46,13 +47,13 @@ public:
   void setToID(int _ToID) { ToID = _ToID; };
   void setType(int _Type) { Type = _Type; };
   void setInfo(double _Info) { Info = _Info; };
-  void setDirection(Direction _dir){ direction = _dir; }
+  void setDirection(Direction _dir) { direction = _dir; }
 
   static void setDebug(int d) { debug = d; }
 
-  static int getCurrent(){ return current; }
-  static int getTotal(){ return total; }
-  static int getDebug(){ return debug; }
+  static int getCurrent() { return current; }
+  static int getTotal() { return total; }
+  static int getDebug() { return debug; }
 };
 
 #endif

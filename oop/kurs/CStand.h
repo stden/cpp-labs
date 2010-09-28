@@ -21,41 +21,41 @@ private:
   static int total;
   int id;
   static int current;
-virtual  void  AddPoints ();
+  virtual  void  AddPoints();
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-     	CStand(CPoint _P1,double _P1P2,CPoint _P3);
-      	CStand(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CStand(CPoint _P1, double _P1P2, CPoint _P3);
+  CStand(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-       	virtual ~CStand();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  virtual ~CStand();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  virtual int invStand ();	// Инвариант
- virtual  void RefreshPoints ();
-
-  //---------------------------------------------------
- virtual  void SetP(double,double);
- virtual  void SetP(CPoint); // Задание точки P1
- virtual  void MoveStand (double,double); // Плоскопараллельное перемещение на dx dy
- const CircleList<CPoint>& CStand :: GetPoints ()  const;
- const CTriangle& CStand :: GetStand() const;
-  int isIn (const CircleList<CPoint>& Points) const;
+  virtual int invStand();  // Инвариант
+  virtual  void RefreshPoints();
 
   //---------------------------------------------------
+  virtual  void SetP(double, double);
+  virtual  void SetP(CPoint); // Задание точки P1
+  virtual  void MoveStand(double, double); // Плоскопараллельное перемещение на dx dy
+  const CircleList<CPoint>& CStand :: GetPoints()  const;
+  const CTriangle& CStand :: GetStand() const;
+  int isIn(const CircleList<CPoint>& Points) const;
 
- virtual  void Print ();
- virtual  void setDebug(int);
- virtual   int getID();
- virtual   int GetCurrent();
- virtual   int GetTotal();
+  //---------------------------------------------------
+
+  virtual  void Print();
+  virtual  void setDebug(int);
+  virtual   int getID();
+  virtual   int GetCurrent();
+  virtual   int GetTotal();
 
 
 };

@@ -21,28 +21,28 @@ private:
   static int current;
 public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------			
-	CRectangle(CPoint,double,double); // P1 width heigth
-      	CRectangle(double,double,double,double); // x, y, width, heigth
-	CRectangle(CPoint,double); // p1 width = heigth
-	CRectangle(); // Constructor without parametrs
-	//-------------------------------------------------
-	
-				/*Деструктор*/
-	//-------------------------------------------------				
-	~CRectangle();
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CRectangle(CPoint, double, double); // P1 width heigth
+  CRectangle(double, double, double, double); // x, y, width, heigth
+  CRectangle(CPoint, double); // p1 width = heigth
+  CRectangle(); // Constructor without parametrs
+  //-------------------------------------------------
+
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CRectangle();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
+  int inv();  // Инвариант
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy
+  void Move(double, double); // Плоскопараллельное перемещение на dx dy
   CPoint GetP1() const;
   CPoint GetP2() const;
   CPoint GetP3() const;
@@ -52,13 +52,13 @@ public:
 
   //---------------------------------------------------
 
-  void Print ();
+  void Print();
   void setDebug(int);
   int getID();
   int GetCurrent();
   int GetTotal();
 
-  friend ostream& operator<<( ostream& output,const CRectangle& R);
+  friend ostream& operator<<(ostream& output, const CRectangle& R);
 
 
 };
