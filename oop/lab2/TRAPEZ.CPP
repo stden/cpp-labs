@@ -10,8 +10,7 @@
 int CTrapezium::countreal = 0;
 int CTrapezium::countall = 0;
 
-CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l) : m_id(++countall)
-{
+CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l) : m_id(++countall) {
 
   m_list.insert(x);
   m_list.insert(y);
@@ -23,36 +22,35 @@ CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const d
   ++countreal;
 }
 
-CTrapezium::~CTrapezium(void)
-{
+CTrapezium::~CTrapezium(void) {
   cout << "        Trapezium destroyed (remain " << countreal << ")" << endl;
   --countreal;
 }
 
-void CTrapezium :: MovedXdY (double dx, double dy) {
-        // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
-    m_list.goFirst();
+void CTrapezium :: MovedXdY(double dx, double dy) {
+  // cout << "CPointSet::MovedXdY(" << x << "," << y << ")" << endl;
+  m_list.goFirst();
 
-    do{
-      m_list.getElem().getValue().move(dx, dy);
-    }while(m_list.goNext());
+  do {
+    m_list.getElem().getValue().move(dx, dy);
+  } while (m_list.goNext());
 }
 
-void CTrapezium :: MoveToPoint (const CCountedPoint& P) {
-    m_list.goFirst();
+void CTrapezium :: MoveToPoint(const CCountedPoint& P) {
+  m_list.goFirst();
 
-    double dx = P.getX() - m_list.getElem().getValue().getX();
-    double dy = P.getY() - m_list.getElem().getValue().getY();
+  double dx = P.getX() - m_list.getElem().getValue().getX();
+  double dy = P.getY() - m_list.getElem().getValue().getY();
 
-    MovedXdY(dx, dy);
+  MovedXdY(dx, dy);
 }
 
-const CCountedPoint& CTrapezium :: getPoint (int index) {
-     m_list.goFirst();
+const CCountedPoint& CTrapezium :: getPoint(int index) {
+  m_list.goFirst();
 
-    for(index;index>1;index--)
-      m_list.goNext();
+  for (index;index > 1;index--)
+    m_list.goNext();
 
-    return m_list.getElem().getValue();
+  return m_list.getElem().getValue();
 }
 

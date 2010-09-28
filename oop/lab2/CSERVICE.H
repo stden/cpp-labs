@@ -18,14 +18,14 @@ private:
   CList<CGlass> GlassList;
 
 public:
-	CService();
-	~CService();
+  CService();
+  ~CService();
 
 
 
-	void insert(const CGlass& gl) {GlassList.insert(gl);}
-	void insertBegin(const CGlass& gl) {GlassList.insert(gl);}
-	void print() {GlassList.print();}
+  void insert(const CGlass& gl) {GlassList.insert(gl);}
+  void insertBegin(const CGlass& gl) {GlassList.insert(gl);}
+  void print() {GlassList.print();}
 
   /*
   * Перемещение
@@ -39,20 +39,19 @@ public:
 
 
 
-friend ostream& operator << (ostream& s, CService& service)
-{
-  s << "  " << "Service" << ": " << endl;
-  service.GlassList.goFirst();
+  friend ostream& operator << (ostream& s, CService& service) {
+    s << "  " << "Service" << ": " << endl;
+    service.GlassList.goFirst();
 
-  do{
-    s << "    (" << service.GlassList.getElem().getValue() << "), " << endl;
-  }while(service.GlassList.goNext());
+    do {
+      s << "    (" << service.GlassList.getElem().getValue() << "), " << endl;
+    } while (service.GlassList.goNext());
 
-  s << "    (" << service.GlassList.getElem().getValue() << ")";
-  s << endl;
+    s << "    (" << service.GlassList.getElem().getValue() << ")";
+    s << endl;
 
-  return (s);
-}
+    return (s);
+  }
 
 };
 

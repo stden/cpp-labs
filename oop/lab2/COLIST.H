@@ -10,8 +10,7 @@
 #include "Element.h"
 
 template<class type>
-class CList
-{
+class CList {
   //Указатель на текущий элемент списка
   CElem<type>* m_current;
 
@@ -31,80 +30,73 @@ public:
   /*
   * Конструктор
   */
-  CList() : m_id(countall++)
-  {
-    m_current=NULL;
-    m_first  =NULL;
-    countreal++;    
-    
-   // cout << "Linear list number " << countreal << " created" << endl;
+  CList() : m_id(countall++) {
+    m_current = NULL;
+    m_first  = NULL;
+    countreal++;
+
+    // cout << "Linear list number " << countreal << " created" << endl;
   }
 
   /*
   * Конструктор копирования
   */
-  CList(const CList& list) : m_id(countall++)
-  {
+  CList(const CList& list) : m_id(countall++) {
     countreal++;
-    m_current=NULL;
-    m_first  =NULL;
-    CElem<type>* cur=list.m_first;
+    m_current = NULL;
+    m_first  = NULL;
+    CElem<type>* cur = list.m_first;
 
-    while(cur!=NULL)
-    {
+    while (cur != NULL) {
       insert(cur->getValue());
-      cur=cur->getNext();
+      cur = cur->getNext();
     }
 
-   // cout << "Linear list number " << countreal << " copyed" << endl;
+    // cout << "Linear list number " << countreal << " copyed" << endl;
   }
 
   /*
   * Добавить элемент в конец списка
   */
-  void insert(const type& elem)
-  {
+  void insert(const type& elem) {
     CElem<type>* tmp = new CElem<type>(elem);
 
-    while(goNext()) {}
+    while (goNext()) {}
 
-    if(m_current!=NULL)
+    if (m_current != NULL)
       m_current->setNext(tmp);
     else
-      m_first=tmp;
-    m_current=tmp;
+      m_first = tmp;
+    m_current = tmp;
   }
 
   /*
   * Добавить элемент в начало списка
   */
-  void insertBegin(const type& elem)
-  {
+  void insertBegin(const type& elem) {
     CElem<type>* tmp = new CElem<type>(elem);
 
     tmp->setNext(m_first);
-    m_first=tmp;
+    m_first = tmp;
   }
 
   /*
   * Пуст ли список?
   */
-  int isEmpty()
-  {
-    return (m_first==NULL);
+  int isEmpty() {
+    return (m_first == NULL);
   }
 
   /*
   * Удалить элемент
   */
-  int dispose()
-  {
-    if(m_current==NULL)
+  int dispose() {
+    if (m_current == NULL)
       return 0;
 
-    CElem<type>* next=m_current->getNext();
+    CElem<type>* next = m_current->getNext();
     delete(m_current);
-    m_current=next;
+    m_current = next;
 
     return 1;
   }
@@ -112,41 +104,35 @@ public:
   /*
   * Получить элемент
   */
-  CElem<type>& getElem()
-  {
+  CElem<type>& getElem() {
     return *m_current;
   }
 
   /*
   * Получить указатель на текущий элемент
   */
-  CElem<type>* getCurrent()
-  {
+  CElem<type>* getCurrent() {
     return m_current;
   }
 
   /*
   * Заменить элемент
   */
-  void setElem(const type& elem)
-  {
-    if(m_current!=NULL)
+  void setElem(const type& elem) {
+    if (m_current != NULL)
       m_current->setValue(elem);
   }
 
   /*
   * Переместиться на элемент вправо
   */
-  int goNext()
-  {
-    if(m_current!=NULL)
-    {
-      if(m_current->getNext()!=NULL)
-	m_current=m_current->getNext();
+  int goNext() {
+    if (m_current != NULL) {
+      if (m_current->getNext() != NULL)
+        m_current = m_current->getNext();
       else
-	return 0;
-    }
-    else
+        return 0;
+    } else
       return 0;
     return 1;
   }
@@ -154,27 +140,23 @@ public:
   /*
   * Переместиться на головной элемент списка
   */
-  void goFirst()
-  {
-    m_current=m_first;
+  void goFirst() {
+    m_current = m_first;
   }
   /*
   * Получить количество экземпляров класса
   */
-  static int getCount()
-  {
+  static int getCount() {
     return countall;
   }
 
   /*
   * Деструктор
   */
-  ~CList()
-  {
+  ~CList() {
     countreal--;
     goFirst();
-    while(dispose())
-    {}
+    while (dispose()) {}
 
     //cout << "Linear list destroyed... (remain " << countreal << ")" << endl;
   }
@@ -182,17 +164,16 @@ public:
   /*
   * Получить число элементов списка
   */
-  size_t size()
-  {
+  size_t size() {
     CElem<type>* tmp = m_current;
     size_t i = 0;
 
     goFirst();
 
-    while(goNext())
+    while (goNext())
       ++i;
 
-    if(m_first != NULL)
+    if (m_first != NULL)
       ++i;
 
     return i;
@@ -201,26 +182,22 @@ public:
   /*
   * Перегрузка оператора присваивания
   */
-  CList& operator=(const CList& list)
-  {
-    CElem<type>* cur=list.m_first;
+  CList& operator=(const CList& list) {
+    CElem<type>* cur = list.m_first;
 
-    while(cur!=NULL)
-    {
+    while (cur != NULL) {
       insert(cur->getValue());
-      cur=cur->getNext();
+      cur = cur->getNext();
     }
     return *this;
   }
 
-  void print()
-  {
-    CElem<type>* cur=m_first;
+  void print() {
+    CElem<type>* cur = m_first;
 
-    while(cur!=NULL)
-    {
+    while (cur != NULL) {
       cout << cur->getValue() << ", ";
-      cur=cur->getNext();
+      cur = cur->getNext();
     }
 
     cout << endl;

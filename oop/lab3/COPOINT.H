@@ -8,8 +8,7 @@
 
 #include <iostream.h>
 
-class CCountedPoint
-{
+class CCountedPoint {
 protected:
   //Абсцисса точки
   double m_x;
@@ -22,7 +21,7 @@ public:
   /*
   * Конструктор
   */
-  CCountedPoint(double _x = 0,double _y = 0);
+  CCountedPoint(double _x = 0, double _y = 0);
 
   /*
   * Конструктор копирования
@@ -33,13 +32,13 @@ public:
   /*
   * Смещение точки
   */
-  void MovedXdY(double dx,double dy);
+  void MovedXdY(double dx, double dy);
 
 
   /*
   * Поворот точки относительно точки
   */
-  void round(const CCountedPoint&,int);
+  void round(const CCountedPoint&, int);
 
   /*
   * Получение абсциссы точки

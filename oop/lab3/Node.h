@@ -17,7 +17,7 @@ public:
   CNode<type> *GetNext(void);
   void SetNext(CNode *b);
   type GetValue(void);
-  void SetValue (type a);
+  void SetValue(type a);
 };
 
 #endif

@@ -24,8 +24,8 @@ public:
   /*
   * Добавление в список новых стаканов
   */
-  void insert(CGlass* gl){ List.insert(gl); }
-  void insertBegin(CGlass* gl){ List.insertBegin(gl); }
+  void insert(CGlass* gl) { List.insert(gl); }
+  void insertBegin(CGlass* gl) { List.insertBegin(gl); }
 
   /*
   * Перемещение
@@ -40,15 +40,15 @@ public:
   /*
   *
   */
-  CGlass* getFirst(){
+  CGlass* getFirst() {
     List.goFirst();
     return List.getValue();
   }
 
-  CGlass* getByID(int glassID){
+  CGlass* getByID(int glassID) {
     List.goFirst();
-    while(List.getCurrent()!=NULL){
-      if(List.getValue()->getID() == glassID)
+    while (List.getCurrent() != NULL) {
+      if (List.getValue()->getID() == glassID)
         return List.getValue();
       List.goNext();
     }
