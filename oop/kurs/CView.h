@@ -19,22 +19,22 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CView(CPoint _P1, double _P1P2, CPoint _P3); // P1 width heigth length
   CView(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   ~CView();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
 
   int inv();  // Инвариант
 
-  //---------------------------------------------------
+  -------------
   virtual  void SetCollectionP1(CPoint P0); // Задание точки P1
   void SetStandP1(CPoint P0);
   void MoveCollection(double dx, double dy);  // Плоскопараллельное перемещение на dx dy
@@ -44,7 +44,7 @@ public:
   int isOnStand(CPistonMechanism*) const;
 
 
-  //---------------------------------------------------
+  -------------
 
   virtual void Print() const;
   void PrintView();

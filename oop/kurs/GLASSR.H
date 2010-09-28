@@ -13,6 +13,7 @@
 #include "Ring.h"
 #include "Glass.h"
 #include "values.h"
+#include "debug.h"
 #include <conio.h>
 
 // "Тонкий стакан с кольцом"
@@ -57,7 +58,8 @@ public:
     m_leftSide.GetBorders(minx, maxx, miny, maxy);
     m_rightSide.GetBorders(minx, maxx, miny, maxy);
     m_ring.GetBorders(minx, maxx, miny, maxy);
-//    cout << "GlassR borders: minx " << minx << " " << " "
+    //VERBOSE_OUT &&
+    //  cout << "GlassR borders: x [" << minx << ".." << maxx "] " << "y [" << miny << ".." << maxy "] " << endl;
   };
 
   /*

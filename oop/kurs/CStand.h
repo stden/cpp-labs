@@ -25,15 +25,15 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CStand(CPoint _P1, double _P1P2, CPoint _P3);
   CStand(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   virtual ~CStand();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
@@ -41,7 +41,7 @@ public:
   virtual int invStand();  // Инвариант
   virtual  void RefreshPoints();
 
-  //---------------------------------------------------
+  -------------
   virtual  void SetP(double, double);
   virtual  void SetP(CPoint); // Задание точки P1
   virtual  void MoveStand(double, double); // Плоскопараллельное перемещение на dx dy
@@ -49,7 +49,7 @@ public:
   const CTriangle& CStand :: GetStand() const;
   int isIn(const CircleList<CPoint>& Points) const;
 
-  //---------------------------------------------------
+  -------------
 
   virtual  void Print();
   virtual  void setDebug(int);

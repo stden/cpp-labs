@@ -24,16 +24,16 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CCup(CPoint, double, double, double, double, double);
   CCup(double, double, double, double, double, double, double); // x, y, width, heigth, length
   CCup(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   ~CCup();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
@@ -41,7 +41,7 @@ public:
   int inv();  // Инвариант
   void RefreshPoints();
 
-  //---------------------------------------------------
+  -------------
   void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void Move(double, double); // Плоскопараллельное перемещение на dx dy
@@ -50,7 +50,7 @@ public:
   CRectangle GetBottomSide() const;
   CRectangle GetRightSide() const;
 
-  //---------------------------------------------------
+  -------------
 
   void Print();
   void setDebug(int);

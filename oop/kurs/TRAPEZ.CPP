@@ -7,19 +7,8 @@
 #include <iostream.h>
 #include "Trapez.h"
 
-CTrapezium :: CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l) {
-
-  m_list.insert(x);
-  m_list.insert(y);
-  m_list.insert(CCountedPoint(y.getX() + l + abs(x.getX() - y.getX()) * 2, y.getY()));
-  m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
-  m_list.goFirst();
-
-  cout << "      Trapezium created " << *this;
-}
-
 CTrapezium::~CTrapezium(void) {
-  cout << "      Trapezium destroyed " << *this;
+  VERBOSE_OUT && cout << "      Trapezium destroyed " << *this;
 }
 
 void CTrapezium :: MovedXdY(double dx, double dy) {
@@ -49,19 +38,17 @@ ostream& operator << (ostream& s, CTrapezium& r) {
   for (r.getPoints().goFirst();r.getPoints().hasNext();r.getPoints().goNext())
     s << r.getPoints().getValue() << " ";
   s << endl;
-  return (s);
+  return s;
 }
 
-
 void CTrapezium :: GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
-  getPoints().goFirst();
-  do {
+  for (getPoints().goFirst();getPoints().hasNext();getPoints().goNext()) {
     double x = m_list.getValue().getX();
     double y = m_list.getValue().getY();
     if (x < *minx) *minx = x;
     if (x > *maxx) *maxx = x;
     if (y < *miny) *miny = y;
     if (y > *maxy) *maxy = y;
-  } while (getPoints().goNext());
+  };
 }
 

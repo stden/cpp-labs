@@ -27,17 +27,17 @@ protected:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CPistonMechanism(CPoint, double, double, double, double, double, double, double, double);
   CPistonMechanism(double, double, double, double, double, double, double, double, double, double);
   CPistonMechanism(const CCup& _cup, const CPiston& _piston);
   CPistonMechanism(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   ~CPistonMechanism();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
@@ -45,7 +45,7 @@ public:
   virtual int inv();  // Инвариант
   virtual  void RefreshPoints();
 
-  //---------------------------------------------------
+  -------------
   virtual  void SetP1(double, double);
   virtual   void SetP1(CPoint); // Задание точки P1
   virtual   void Move(double, double); // Плоскопараллельное перемещение на dx dy
@@ -54,7 +54,7 @@ public:
   const CCup& GetCup() const;
   const CPiston& GetPiston() const;
 
-  //---------------------------------------------------
+  -------------
 
   virtual void Print() const;
   virtual void setDebug(int);

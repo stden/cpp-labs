@@ -8,6 +8,7 @@
 
 #include "CoPoint.h"
 #include "CoList.h"
+#include "debug.h"
 
 class CRectangle {
 private:
@@ -19,7 +20,15 @@ public:
   * Конструктор
   * x - левая нижняя точка, y - правая верхняя
   */
-  CRectangle(const CCountedPoint& x, const CCountedPoint& y);
+  CRectangle(const CCountedPoint& x, const CCountedPoint& y) {
+    m_list.insert(x);
+    m_list.insert(CCountedPoint(x.getX(), y.getY()));
+    m_list.insert(y);
+    m_list.insert(CCountedPoint(y.getX(), x.getY()));
+    assert(m_list.size() == 4);
+    m_list.goFirst();
+    VERBOSE_OUT && cout << "      Rectangle created " << *this;
+  };
 
   void MovedXdY(double dx, double dy) {
     cout << "CRectangle::MovedXdY(" << dx << "," << dy << ")" << endl;

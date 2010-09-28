@@ -5,19 +5,6 @@
 
 #include "Parallel.h"
 
-CParallelogram::CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l) {
-  m_list.insert(x);
-  m_list.insert(y);
-  m_list.insert(CCountedPoint(y.getX() + l, y.getY()));
-  m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
-  m_list.goFirst();
-  cout << "      Parallelogram created" << *this;
-}
-
-CParallelogram::~CParallelogram(void) {
-  cout << "      Parallelogram destroyed " << *this;
-}
-
 void CParallelogram :: MovedXdY(double dx, double dy) {
   for (m_list.goFirst();m_list.hasNext();m_list.goNext())
     m_list.getValue().MovedXdY(dx, dy);

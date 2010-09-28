@@ -40,7 +40,7 @@ CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
 
   m_ring.setY(Y);
 
-  cout << " GlassR created" << endl;
+  VERBOSE_OUT && cout << " GlassR created" << endl;
 }
 
 void CGlassR::MoveToPoint(const CCountedPoint& point) {
@@ -57,7 +57,7 @@ void CGlassR::MoveToPoint(const CCountedPoint& point) {
 }
 
 void CGlassR::MovedXdY(double x, double y) {
-  cout << "CGlassR::MovedXdY(" << x << "," << y << ")" << endl;
+  VERBOSE_OUT && cout << "CGlassR::MovedXdY(" << x << "," << y << ")" << endl;
   // Двигаем последовательно все "кусочки" стакана
   m_bottom.MovedXdY(x, y); // основание
   m_cage.MovedXdY(x, y); // полость стакана
@@ -67,6 +67,6 @@ void CGlassR::MovedXdY(double x, double y) {
 }
 
 CGlassR::~CGlassR(void) {
-  cout << " GlassR destroyed" << endl;
+  VERBOSE_OUT && cout << " CGlassR destroyed" << endl;
 }
 

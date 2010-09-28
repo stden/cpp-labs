@@ -6,12 +6,14 @@
 #ifndef _GLASSLIST_H
 #define _GLASSLIST_H
 
+#include <conio.h>
+
 #include "CoPoint.h"
 #include "Trapez.h"
 #include "Rectan.h"
 #include "CoList.h"
 #include "Glass.h"
-#include <conio.h>
+#include "debug.h"
 
 class CGlassList {
 protected:
@@ -59,6 +61,10 @@ public:
         return 1;
       }
     return 0;
+  }
+
+  size_t size() const {
+    return List.size();
   }
 
   friend ostream& operator << (ostream& s, CGlassList& list);
