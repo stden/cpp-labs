@@ -10,7 +10,7 @@
 #include "CoList.h"
 
 class CRectangle {
-private :
+private:
   CList<CCountedPoint> m_list;
 
 public:

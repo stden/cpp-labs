@@ -32,11 +32,21 @@ public:
   void Unregister(int _id);
   void UnregisterAll();
   void SendMessage(CMessage *msg);
-  void SendMessage(int _type, double _info, int _id);
+  void SendMessage(int _type, const CInfo& _info, int _id) {
+    SendMessage(&CMessage(1, _id, _type, _info, Server_to_Client));
+  }
+
   void SendMessageToAll(CMessage *msg);
-  void SendMessageToAll(int _type, double _info);
   void ReceiveMessage(CMessage *msg);
   void Print() const;
+
+  void SendMessageToAll(int _type, const CInfo& _info) {
+    CMessage msg(1, 1, _type, _info, Server_to_Client);
+    SendMessageToAll(&msg);
+    assert(msg.getFromID() == 1);
+    assert(msg.getType() == _type);
+  }
+
 };
 
 #endif

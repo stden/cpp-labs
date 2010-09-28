@@ -1,23 +1,56 @@
-// Ôàéë: CSView.h
-//Ïðîåêò êëàññà "ñåðâåð-âèä"
-// Àâòîð: Âîëûíêî Å. ñò. ãð. 7304
-// Äàòà: 20.09.2010 Ðåäàêöèÿ: 1.0
+// ” ©«: CSView.h
+// à®¥ªâ ª« áá  "á¥à¢¥à-¢¨¤"
+// €¢â®à: ‚®«ë­ª® …. áâ. £à. 7304
+// „ â : 20.09.2010 ¥¤ ªæ¨ï: 1.0
 
 
 #ifndef CSVIEW_H_
 #define CSVIEW_H_
 
-#include "CView.h"
 #include "CServer.h"
-#include "CPoint.h"
+#include "CoPoint.h"
+#include "Scene.h"
+#include "Glass.h"
 
-class CServerView : public CView, public CServer {
+class CServerView : public CScene, public CServer {
 public:
-  CServerView(CPoint _P1, double _P1P2, CPoint _P3);
-  CServerView(const CView& view);
-  virtual ~CServerView();
-  void ReciveMessage(CMessage* msg);
-  void Print() const;
+  CServerView(const CCountedPoint& leftBottom, const CCountedPoint& rightTop)
+      : CScene(leftBottom, rightTop) {}
+
+  CServerView(const CScene& scene) : CScene(scene) { };
+
+  virtual ~CServerView() {};
+
+  void ReciveMessage(CMessage* msg) {
+    CServer :: ReceiveMessage(msg);
+    if (msg->getType() > 2) {
+      CServer :: SendMessage(msg->getType(), msg->getInfo(), msg->getFromID());
+    }
+  }
+
+  void Print() const {
+    cout << (CScene&)*this << endl;
+    CServer :: Print();
+    cout << "----------------------";
+    cout << endl << endl;
+  }
+
+  int inv() { return 2 == 2; }
+
+  void MoveGlassCaseToPoint(CCountedPoint P) {
+
+  }
+
+  void MoveCollection(double dx, double dy) {
+
+  }
+
+  void MoveStand(double dx, double dy) {
+  }
+
+  CGlassList& GetCollection() {
+    return *this;
+  }
 };
 
 #endif

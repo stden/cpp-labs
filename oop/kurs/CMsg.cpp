@@ -11,22 +11,22 @@ int CMessage :: total = 0;
 int CMessage :: debug = 0;
 
 CMessage :: CMessage(int _FromID, int _ToID,
-                     int _Type, double _Info, Direction _dir) :
+                     int _Type, const CInfo& _Info, Direction _dir) :
     id(++total), FromID(_FromID), ToID(_ToID), Type(_Type),
     Info(_Info), direction(_dir) {
   ++current;
-  if (debug) Print("created");
+  if (debug) cout << "Created: " << *this;
 }
 
 CMessage :: CMessage(const CMessage &msg): id(++total), FromID(msg.getFromID()), ToID(msg.getToID()),
     Type(msg.getType()), Info(msg.getInfo()), direction(msg.getDirection()) {
   ++current;
-  if (debug) Print("copied");
+  if (debug) cout << "Copied: " << *this;
 }
 
 CMessage :: ~CMessage() {
   --current;
-  if (debug) Print("deleted");
+  if (debug) cout << "Deleted: " << *this;
 }
 
 const char* CMessage :: InterpritateType(int type) const {
@@ -37,21 +37,6 @@ const char* CMessage :: InterpritateType(int type) const {
   }
 }
 
-void CMessage :: Print(char *prompt) const {
-  cout << InterpritateType(Type) << " message #" << id << " " << prompt << " ";
-  switch (direction) {
-    case Server_to_Client:
-      cout << "from Server to Client #" << ToID;
-      break;
-    case Client_to_Server:
-      cout << "from Client #" << FromID << " to Server";
-      break;
-    case Client_to_Client:
-      cout << "from Client #" << FromID << " to Client #" << ToID;
-      break;
-  }
-  cout << " Code=" << Type << " Info=" << Info << endl;
-}
 
 
 

@@ -23,12 +23,9 @@ CServer :: ~CServer() {
 }
 
 CClient* CServer :: GetClientByID(int _id) {
-  ClientList.goFirst();
-  if (ClientList.getCurrent() != NULL)
-    do {
-      if (ClientList.getValue()->getID() == _id)
-        return ClientList.getValue();
-    } while (ClientList.goNext());
+  for (ClientList.goFirst();ClientList.hasNext();ClientList.goNext())
+    if (ClientList.getValue()->getID() == _id)
+      return ClientList.getValue();
   return NULL;
 }
 
@@ -102,8 +99,8 @@ void CServer :: SendMessage(CMessage *msg) {
 
   CClient *client = GetClientByID(msg->getToID());
   if (client != NULL) {
+    cout << "Server: sent " << *msg << " to client #" << msg->getToID() << endl;
     client->ReceiveMessage(msg);
-    cout << "Server: sent message to client #" << msg->getToID() << endl;
   } else {
     cout << "Server could not send messages to client #"
          << msg->getToID() << " cause it not registered on it" << endl;
@@ -111,35 +108,21 @@ void CServer :: SendMessage(CMessage *msg) {
 }
 
 
-void CServer :: SendMessageToAll(int _type, double _info) {
-  CMessage msg(1, 1, _type, _info, Server_to_Client);
-  SendMessageToAll(&msg);
-  assert(msg.getFromID() == 1);
-  assert(msg.getType() == _type);
-  assert(msg.getInfo() == _info);
-}
-
 void CServer :: SendMessageToAll(CMessage *msg) {
   assert(msg->getFromID() == 1);
   assert(msg->getDirection() == Server_to_Client);
   if (ClientList.size() != 0) {
     assert(msg->getDirection() == Server_to_Client);
-    ClientList.goFirst();
-    if (ClientList.getCurrent() != NULL)
-      do {
-        assert(msg->getFromID() == 1);
-        msg->setToID(ClientList.getValue()->getID());
-        ClientList.getValue()->ReceiveMessage(msg);
-      } while (ClientList.goNext());
+    for (ClientList.goFirst();ClientList.hasNext();ClientList.goNext()) {
+      assert(msg->getFromID() == 1);
+      msg->setToID(ClientList.getValue()->getID());
+      ClientList.getValue()->ReceiveMessage(msg);
+    };
     cout << "Server: sent message to all clients " << endl;
   } else {
     cout << "Server: could not send messages to clients "
          << "cause they are not registered on it" << endl;
   }
-}
-
-void CServer :: SendMessage(int _type, double _info, int _id) {
-  SendMessage(&CMessage(1, _id, _type, _info, Server_to_Client));
 }
 
 void CServer :: ReceiveMessage(CMessage *msg) {
@@ -149,8 +132,8 @@ void CServer :: ReceiveMessage(CMessage *msg) {
     assert(msg->getToID() == 1);
   CClient* client = GetClientByID(msg->getFromID());
   if (client != NULL) {
-    cout << "Server: recived message from client #" << client->getID() << endl;
-    msg->Print();
+    cout << "Server: recived " << *msg << " from client #" << client->getID()
+         << endl << endl;
     if (msg->getDirection() == Client_to_Server &&
         msg->getType() > 0 && Server_Do_Confirmation) {
       CMessage msg1(*msg);
@@ -170,7 +153,8 @@ void CServer :: ReceiveMessage(CMessage *msg) {
       }
     }
   } else {
-    cout << "Server: could not recive message from unknown client" << endl;
+    cout << "Server: could not recive message from unknown client"
+         << endl << endl;
   }
   assert(msg != NULL);
   delete msg;
