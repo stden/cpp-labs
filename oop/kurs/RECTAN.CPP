@@ -6,18 +6,9 @@
 #include <iostream.h>
 #include "Rectan.h"
 
-CRectangle::CRectangle(const CCountedPoint& x, const CCountedPoint& y) {
-  m_list.insert(x);
-  m_list.insert(CCountedPoint(x.getX(), y.getY()));
-  m_list.insert(y);
-  m_list.insert(CCountedPoint(y.getX(), x.getY()));
-  assert(m_list.size() == 4);
-  m_list.goFirst();
-  cout << "      Rectangle created " << *this;
-}
 
 CRectangle::~CRectangle() {
-  cout << "      Rectangle destroyed" << *this;
+  VERBOSE_OUT && cout << "      Rectangle destroyed" << *this;
 }
 
 void CRectangle :: GetBorders(double *minx, double *maxx, double *miny, double *maxy) {

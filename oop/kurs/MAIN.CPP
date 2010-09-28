@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
-#include <dos.h>
+
 #include "CPoint.h"
 #include "CoList.h"
 #include "Glass.h"
@@ -18,6 +18,7 @@
 #include "CClient.h"
 #include "CSView.h"
 #include "GlList.h"
+#include "debug.h"
 
 float InputFloat(char *prompt) {
   char buffer[255];
@@ -124,6 +125,38 @@ void addGlass(CServerView* s, int withRing) {
 }
 
 void main() {
+  clrscr();
+  VERBOSE_OUT = 0;
+  CGlassList c;
+  assert(c.size() == 0);
+  // Создаём тестовый стакан
+  CGlass* gl = new CGlass(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  double minx = MAXDOUBLE, maxx = MINDOUBLE, miny = MAXDOUBLE, maxy = MINDOUBLE;
+  gl->GetBorders(&minx, &maxx, &miny, &maxy);
+  assert(minx == -1);
+  assert(maxx == -1 + 2*2 + 5);
+  assert(miny == 1);
+  assert(maxy == 5);
+  c.insert(gl);
+  assert(c.size() == 1);
+  c.Delete(gl->getID());
+  assert(c.size() == 0);
+  delete gl;
+  CGlassR* glr = new CGlassR(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  minx = MAXDOUBLE;
+  maxx = MINDOUBLE;
+  miny = MAXDOUBLE;
+  maxy = MINDOUBLE;
+  gl->GetBorders(&minx, &maxx, &miny, &maxy);
+  assert(minx == -1);
+  assert(maxx == -1 + 2*2 + 5);
+  assert(miny == 1);
+  assert(maxy == 5);
+
+
+
+  VERBOSE_OUT = 1;
+
   cout << endl << endl
        << "-----------------------------------------------" << endl;
   cout << "Programm is creating the view on collection of schematic images of" << endl
@@ -139,7 +172,6 @@ void main() {
   }
 
   int menu = 0;
-  CGlassList c;
   CServerView *view = NULL;
   //CServer server;
   CList<CClient*> clients;

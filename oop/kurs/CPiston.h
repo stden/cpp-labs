@@ -26,17 +26,17 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CPiston(CPoint, double, double, double); // P1 width heigth length
   CPiston(double, double, double, double, double); // x, y, width, heigth, length
   CPiston(CPoint, double); // p1 width = heigth = length
   CPiston(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   ~CPiston();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
@@ -44,7 +44,7 @@ public:
   int inv();  // Инвариант
   void RefreshPoints();
 
-  //---------------------------------------------------
+  -------------
   void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void Move(double, double); // Плоскопараллельное перемещение на dx dy
@@ -56,7 +56,7 @@ public:
   CRectangle GetPiston() const;
 
 
-  //---------------------------------------------------
+  -------------
 
   void Print();
   void setDebug(int);

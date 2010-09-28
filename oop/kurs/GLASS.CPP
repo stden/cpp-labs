@@ -6,6 +6,7 @@
 #include <iostream.h>
 #include <conio.h>
 #include "Glass.h"
+#include "debug.h"
 
 int CGlass :: countreal = 0;
 int CGlass :: countall = 0;
@@ -23,11 +24,11 @@ CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
                 CCountedPoint(y.getX() + bottom + 2 * (x.getX() - y.getX()) - lessSide, y.getY()),
                 lessSide) {
   countreal++;
-  cout << " Glass #" << m_id << " created" << endl;
+  VERBOSE_OUT && cout << " Glass #" << m_id << " created" << endl;
 }
 
 CGlass::~CGlass(void) {
-  cout << " Glass #" << m_id << " destroyed" << endl;
+  VERBOSE_OUT && cout << " Glass #" << m_id << " destroyed" << endl;
   countreal--;
 }
 

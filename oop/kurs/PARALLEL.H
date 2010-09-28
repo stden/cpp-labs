@@ -8,6 +8,7 @@
 
 #include "CoPoint.h"
 #include "CoList.h"
+#include "debug.h"
 
 /*
  * Параллелограмм лежащий на меньшем ребре
@@ -21,12 +22,22 @@ public:
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, l - Длина меньшего ребра
   */
-  CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l);
+  CParallelogram(const CCountedPoint& x, const CCountedPoint& y, const double& l) {
+    m_list.insert(x);
+    m_list.insert(y);
+    m_list.insert(CCountedPoint(y.getX() + l, y.getY()));
+    m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
+    m_list.goFirst();
+    VERBOSE_OUT && cout << "      Parallelogram created" << *this;
+
+  };
 
   /*
   * Деструктор
   */
-  ~CParallelogram(void);
+  ~CParallelogram(void) {
+    VERBOSE_OUT && cout << "      Parallelogram destroyed " << *this;
+  };
 
 
   void MovedXdY(double dx, double dy);

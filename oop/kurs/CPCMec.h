@@ -22,30 +22,30 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CClosedPistonMechanism(CPoint, double, double, double, double, double, double, double, double, double, double);
   CClosedPistonMechanism(double, double, double, double, double, double, double, double, double, double, double, double);
   CClosedPistonMechanism(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   virtual ~CClosedPistonMechanism();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
   int inv();  // Инвариант
   void RefreshPoints();
 
-  //---------------------------------------------------
+  -------------
   void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void Move(double, double); // Плоскопараллельное перемещение на dx dy
   const CircleList<CPoint>& GetPoints() const;
   const CCover& GetCover() const;
 
-  //---------------------------------------------------
+  -------------
 
   virtual void Print() const;
 

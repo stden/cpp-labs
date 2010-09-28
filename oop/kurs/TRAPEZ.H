@@ -5,9 +5,10 @@
 #ifndef _TRAPEZ_H_
 #define _TRAPEZ_H_
 
-
+#include <math.h>
 #include "CoPoint.h"
 #include "CoList.h"
+#include "debug.h"
 
 class CTrapezium {
 private:
@@ -19,7 +20,16 @@ public:
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя точка, l - Длина меньшего основания
   */
-  CTrapezium(const CCountedPoint& x, const CCountedPoint& y, const double& l);
+  CTrapezium(const CCountedPoint& x, const CCountedPoint& y,
+             const double& l) {
+    m_list.insert(x);
+    m_list.insert(y);
+    m_list.insert(CCountedPoint(y.getX() + l + abs(x.getX() - y.getX()) * 2, y.getY()));
+    m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
+    m_list.goFirst();
+
+    VERBOSE_OUT && cout << "      Trapezium created " << *this;
+  };
 
   ~CTrapezium(void);
 

@@ -55,8 +55,8 @@ void CView :: Add(CPistonMechanism* P) const {
 
 void CView :: Add(const CPistonCollection& C) const {
 
-  for (int i = 0;i < C.GetCollection().GetSize();i++)
-    CPistonCollection :: Add(C.GetCollection().GetElemByNum(i)->GetValue());
+  for (int i = 0;i < C.GetCollection().size();i++)
+    CPistonCollection :: Add(C.GetCollection().GetElemByNum(i).getValue());
 }
 
 int CView :: isOnStand(CPistonMechanism* P) const {
@@ -69,8 +69,8 @@ void CView :: PrintView() {
   cout << "Press any key to see more" << endl;
   getch();
   Collection.GetFirst();
-  for (int i = 0; i < Collection.GetSize();i++, Collection.NextCur())
-    if (isOnStand(Collection.GetCur()->GetValue())) Collection.GetCur()->GetValue()->Print();
+  for (int i = 0; i < Collection.size();i++, Collection.NextCur())
+    if (isOnStand(Collection.GetCur().getValue())) Collection.GetCur().getValue()->Print();
 }
 
 void CView :: Print() const {

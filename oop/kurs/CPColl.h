@@ -26,21 +26,21 @@ private:
 public:
 
   /*Конструкторы*/
-  //-------------------------------------------------
+  -----------
   CPistonCollection(); // Constructor without parametrs
-  //-------------------------------------------------
+  -----------
 
   /*Деструктор*/
-  //-------------------------------------------------
+  -----------
   virtual ~CPistonCollection();
-  //-------------------------------------------------
+  -----------
 
 
   /**/
   virtual int invColl();
 // virtual void RefreshPoints ();
 
-  //---------------------------------------------------
+  -------------
   virtual void SetP1(double, double);
   virtual void SetP1(CPoint); // Задание точки P1
   virtual void Move(double, double); // Плоскопараллельное перемещение на dx dy
@@ -52,7 +52,7 @@ public:
   void Delete(int);
   int GetLength() const;
 
-  //---------------------------------------------------
+  -------------
 
   virtual  void Print();
 
