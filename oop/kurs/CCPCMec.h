@@ -14,7 +14,7 @@
 
 class CClientClosedPistonMechanism : public CClosedPistonMechanism, public CClient {
 public:
-        CClientClosedPistonMechanism(const CClosedPistonMechanism& mec);
+  CClientClosedPistonMechanism(const CClosedPistonMechanism& mec);
         CClientClosedPistonMechanism(CPoint,double,double,double,double,double,double,double,double,double,double);
         CClientClosedPistonMechanism(double,double,double,double,double,double,double,double,double,double,double,double);
         CClientClosedPistonMechanism();

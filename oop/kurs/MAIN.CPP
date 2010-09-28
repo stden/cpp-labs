@@ -1,3 +1,8 @@
+// Файл: Main.cpp
+// Основная программа
+// Автор: Волынко Е. ст. гр. 7304
+// Дата: 20.09.2010 Редакция: 1.0
+
 #include <iostream.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -22,9 +27,6 @@
 #include "CClient.h"
 #include "CCPCMec.h"
 #include "CSView.h"
-
-
-
 
 void main () {
   {
