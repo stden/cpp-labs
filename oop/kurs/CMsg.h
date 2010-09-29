@@ -10,21 +10,14 @@
 #include "CoPoint.h"
 
 // Информация в сообщении
-enum Command {
-  cmd_NoCommand,
-  cmd_MovedXdY, // Параллельное перемещение на dx,dy
-  cmd_MoveToPoint  // Помещение в точку
-};
-
 class CInfo {
 public:
-  Command command;
   double dx;
   double dy;
   CCountedPoint p;
-  CInfo(Command _command = cmd_NoCommand, double _dx = 0, double _dy = 0,
+  CInfo(double _dx = 0, double _dy = 0,
         const CCountedPoint& _p = CCountedPoint()) :
-      command(_command), dx(_dx), dy(_dy), p(_p) {}
+      dx(_dx), dy(_dy), p(_p) {}
 
   /*
   * Оператор вывода в поток
@@ -45,6 +38,9 @@ enum Direction { Server_to_Client, Client_to_Server,
 // тип сообщения: остальные коды - запрос действия (ACTION)
 const int CONFIRMATION = 0; // подтверждение приема
 const int REPORT = 1; // отчет о выполнении команды
+const int ACTION_NOCOMMAND = 2;
+const int ACTION_MOVEDXDY = 3; // Параллельное перемещение на dx,dy
+const int ACTION_MOVETOPOINT = 4;  // Помещение в точку
 
 // Объявление класса Сообщение
 class CMessage {

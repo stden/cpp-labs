@@ -51,7 +51,7 @@ public:
   */
   ~CGlass(void);
 
-  int getID() { return m_id; };
+  virtual int getID() { return m_id; };
 
   CCountedPoint getBasePoint() {
     return m_bottom.getPoint(0);
