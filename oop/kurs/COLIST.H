@@ -232,6 +232,7 @@ public:
     for (CElem<type>* c = l.m_first; c != NULL; c = c->getNext())
       cout << c->getValue() << ", ";
     cout << endl;
+    return s;
   }
 };
 

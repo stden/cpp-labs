@@ -67,7 +67,8 @@ int input_int(char *name) {
   }
 }
 
-void inputPoint(CCountedPoint& p) {
+void inputPoint(const char* s, CCountedPoint& p) {
+  cout << "  Input " << s << " point:" << endl;
   p.setX(input_double("    Input x:"));
   p.setY(input_double("    Input y:"));
 }
@@ -92,15 +93,13 @@ T input(char *prompt, T min, T max) {
   return value;
 }
 
-void addGlass(CServerView* s, int withRing) {
+void addGlass(CGlassList* s, int withRing, int client = 0) {
   int inGlass;
   do {
     double bottomLength, hBottom, lessSide;
     CCountedPoint bottom, top;
-    cout << "  Input left bottom point:" << endl;
-    inputPoint(bottom);
-    cout << "  Input left hight point:" << endl;
-    inputPoint(top);
+    inputPoint("left bottom", bottom);
+    inputPoint("left hight", top);
 
     bottomLength = input_double("  Input the less foundation length:");
     hBottom = input_double("  Input the less foundation heigth:");
@@ -131,6 +130,7 @@ void main() {
   assert(c.size() == 0);
   // Создаём тестовый стакан
   CGlass* gl = new CGlass(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  assert(gl->getID() == 1);
   double minx = MAXDOUBLE, maxx = MINDOUBLE, miny = MAXDOUBLE, maxy = MINDOUBLE;
   gl->GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
@@ -142,17 +142,19 @@ void main() {
   c.Delete(gl->getID());
   assert(c.size() == 0);
   delete gl;
+
   CGlassR* glr = new CGlassR(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  assert(glr->getID() == 2);
   minx = MAXDOUBLE;
   maxx = MINDOUBLE;
   miny = MAXDOUBLE;
   maxy = MINDOUBLE;
-  gl->GetBorders(&minx, &maxx, &miny, &maxy);
+  glr->GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
   assert(maxx == -1 + 2*2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
-
+  delete glr;
 
   VERBOSE_OUT = 1;
 
@@ -161,14 +163,7 @@ void main() {
   cout << "Programm is creating the view on collection of glasses images" << endl
        << "which can be moved or placed in point" << endl
        << "Client -> Server -> Client system of message exchange is used." << endl
-       << "Programmed by: Evgeny Volinko" << endl << endl
-       << "----------------Press any key to continue or ESC to exit----------------" << endl;
-
-  while (1) {
-    int key = getch();
-    if (key == 27) return; // Waiting for some action
-    else break;
-  }
+       << "Programmed by: Evgeny Volinko" << endl << endl;
 
   int menu = 0;
   CServerView *view = NULL;
@@ -185,27 +180,26 @@ void main() {
          << "6. Add Client Glass with Ring to Collection" << endl
          << "7. Delete Glass from Collection" << endl
          << "8. Move Collection and Glass Case" << endl
-         << "8. Place Collection and Glass Case into Point" << endl
-         << "9. Place Collection into Point" << endl
-         << "10. Place Glass Case into Point" << endl
-         << "11. Move Collection" << endl
-         << "12. Move Glass Case" << endl
-         << "13. Print View" << endl
-         << "14. Print Collection" << endl
-         << "15. Exit" << endl;
+         << "9. Place Collection and Glass Case into Point" << endl
+         << "10. Place Collection into Point" << endl
+         << "11. Place Glass Case into Point" << endl
+         << "12. Move Collection" << endl
+         << "13. Move Glass Case" << endl
+         << "14. Print View" << endl
+         << "15. Print Collection" << endl
+         << "16. Exit" << endl;
 
     menu = input("Your choice", 1, 16);
     switch (menu) {
       case 1: {
+        cout << "=== 1. Create Glass Case ===" << endl;
         // Создаём Витрину
         CCountedPoint leftBottom, // Левый нижний угол витрины
         rightTop; // Правый верхний угол витрины
-        cout << "  Input glass case left bottom point:" << endl;
-        inputPoint(leftBottom);
+        inputPoint("glass case left bottom", leftBottom);
         int error; // Признак ошибки
         do {
-          cout << "  Input glass case right top point:" << endl;
-          inputPoint(rightTop);
+          inputPoint("glass case right top", rightTop);
           error = (rightTop.getX() <= leftBottom.getX()) ||
                   (rightTop.getY() <= leftBottom.getY());
           if (error)
@@ -221,17 +215,33 @@ void main() {
         break;
       }
       case 2:
-        addGlass(view, 0);
+        cout << "=== 2. Destroy Glass Case ===" << endl;
+        delete view;
+        view = NULL;
         break;
       case 3:
+        cout << "=== 3. Add Glass to Collection ===" << endl;
+        addGlass(view, 0);
+        break;
+      case 4:
+        cout << "=== 4. Add Glass with Ring to Collection ===" << endl;
         addGlass(view, 1);
         break;
-      case 5: {
+      case 5:
+        cout << "=== 5. Add Client Glass to Collection ===" << endl;
+        addGlass(view, 0, 1);
+        break;
+      case 6:
+        cout << "=== 6. Add Client Glass with Ring to Collection ===" << endl;
+        addGlass(view, 1, 1);
+        break;
+      case 7: {
         int id = input_int("Enter number of element : ");
         c.Delete(id);
-        if (view != NULL)
+        if (view != NULL) {
           view->Delete(id);
-        cout << "Element deleted" << endl;
+          cout << "Element deleted" << endl;
+        }
         break;
       }
       case 6: {
@@ -251,8 +261,8 @@ void main() {
       case 7: {
         double x, y;
         cout << "Enter P1 " << endl;
-        x = InputFloat("Enter x :  ");
-        y = InputFloat("Enter y :  ");
+        x = InputFloat("Enter x");
+        y = InputFloat("Enter y");
         if (view != NULL) {
           view->MoveToPoint(x, y);
           if (view->inv()) cout << "Collection and stand are placed to Point(" << x << ";" << y << ")" << endl;
@@ -262,12 +272,10 @@ void main() {
         }
         break;
       }
-
-      case 9: {
-        cout << "Enter P1 " << endl;
-        double
-        x = InputFloat("Enter x :  "),
-            y = InputFloat("Enter y :  ");
+      case 8: {
+        cout << "Enter Point " << endl;
+        double x = InputFloat("Enter x");
+        double y = InputFloat("Enter y");
 
         if (view != NULL) {
           view->MoveGlassCaseToPoint(CCountedPoint(x, y));
@@ -276,8 +284,7 @@ void main() {
 
         break;
       }
-
-      case 10: {
+      case 9: {
         double
         dx = InputFloat("Enter dx :  "),
              dy = InputFloat("Enter dy :  ");
@@ -291,8 +298,7 @@ void main() {
         }
         break;
       }
-
-      case 11: {
+      case 10: {
         double
         dx = InputFloat("Enter dx"),
              dy = InputFloat("Enter dy");
@@ -306,7 +312,7 @@ void main() {
         break;
       }
 
-      case 12: {
+      case 11: {
         double dy, index = 0;
         index = input_int("Index of element");
         dy = InputFloat("Enter dy");
@@ -321,7 +327,7 @@ void main() {
         break;
       }
 
-      case 14: {
+      case 12: {
         if (view != NULL)
           view->Print();
         else
@@ -329,12 +335,11 @@ void main() {
         break;
       }
 
-      case 15: {
+      case 13: {
         if (view != NULL)
           view->Print();
         else
           cout << c << endl;
-
         break;
       }
 
@@ -342,5 +347,5 @@ void main() {
         cout << "menu = " << menu << endl;
         break;
     }
-  } while (menu != 16);
+  } while (menu != 15);
 }

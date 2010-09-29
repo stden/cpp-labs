@@ -22,23 +22,23 @@ private:
 public:
 
   /*Конструкторы*/
-  -----------
+  ---------- -
   CSection(double, double, double); // x1 y1 y2
   CSection(CPoint, double); // p1 y2
   CSection();
-  -----------
+  ---------- -
 
   /*Деструктор*/
-  -----------
+  ---------- -
   ~CSection();
-  -----------
+  ---------- -
 
 
   /**/
 
   int inv();  // Инвариант
 
-  -------------
+  ------------ -
   void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void SetL(double);
@@ -46,7 +46,7 @@ public:
   CPoint GetP1() const;
   CPoint GetP2() const;
   double GetL() const;
-  -------------
+  ------------ -
 
   void Print();
   void setDebug(int);
