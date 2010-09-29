@@ -20,14 +20,14 @@ set filesuffix=*
 :run
 FOR /F "tokens=*" %%G IN ('DIR /B /S %searchdir%\*.%filesuffix%') DO (
 echo Indenting file "%%G"
-"C:/UniversalIndentGUI_1.1.0_win32/UniversalIndentGUI_win32/indenters/astyle.exe" "%%G" --options="C:/UniversalIndentGUI_1.1.0_win32/UniversalIndentGUI_win32/indenters/.astylerc"
+"astyle.exe" "%%G" --options=".astylerc"
 
 )
 GOTO ende
 
 :indentFile
 echo Indenting one file %1
-"C:/UniversalIndentGUI_1.1.0_win32/UniversalIndentGUI_win32/indenters/astyle.exe" "%1" --options="C:/UniversalIndentGUI_1.1.0_win32/UniversalIndentGUI_win32/indenters/.astylerc"
+"astyle.exe" "%1" --options=".astylerc"
 
 
 GOTO ende

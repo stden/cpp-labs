@@ -84,7 +84,7 @@ int main() {
   assert(server.ClientCount() == 0);
   do {
     cout << endl
-         << "Main Menu" << endl
+         << "=== Main Menu ===" << endl
          << "  1. Create Client" << endl
          << "  2. Registrate on server" << endl
          << "  3. Registrate all clients on server" << endl
