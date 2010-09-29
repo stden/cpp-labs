@@ -10,8 +10,6 @@
 
 #include "CPoint.h"
 #include "CoList.h"
-#include "Glass.h"
-#include "GlassR.h"
 #include "Scene.h"
 #include "CMsg.h"
 #include "CServer.h"
@@ -19,6 +17,10 @@
 #include "CSView.h"
 #include "GlList.h"
 #include "debug.h"
+#include "Glass.h"
+#include "GlassR.h"
+#include "CGlass.h"
+#include "CGlassR.h"
 
 float InputFloat(char *prompt) {
   char buffer[255];
@@ -93,7 +95,7 @@ T input(char *prompt, T min, T max) {
   return value;
 }
 
-void addGlass(CGlassList* s, int withRing, int client = 0) {
+void addGlass(CServerView* s, int withRing, int client = 0) {
   int inGlass;
   do {
     double bottomLength, hBottom, lessSide;
@@ -107,10 +109,18 @@ void addGlass(CGlassList* s, int withRing, int client = 0) {
     cout << endl;
 
     CGlass *glass;
-    if (withRing)
-      glass = new CGlassR(bottom, top, bottomLength, hBottom, lessSide);
-    else
-      glass = new CGlass(bottom, top, bottomLength, hBottom, lessSide);
+    if (!client) {
+      if (withRing)
+        glass = new CGlassR(bottom, top, bottomLength, hBottom, lessSide);
+      else
+        glass = new CGlass(bottom, top, bottomLength, hBottom, lessSide);
+    } else {
+      glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
+      if (withRing)
+        glass = new CClientGlassR(bottom, top, bottomLength, hBottom, lessSide);
+      else
+        glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
+    }
 
     inGlass = s->GlassInGlassCase(glass);
     if (inGlass) {
@@ -154,7 +164,17 @@ void main() {
   assert(maxx == -1 + 2*2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
+  c.Delete(glr->getID());
   delete glr;
+
+  CClientGlass* cgl = new CClientGlass(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  c.insert(cgl);
+
+  CClientGlassR* cglr = new CClientGlassR(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  c.insert(cglr);
+
+  c.Delete(cgl->getID());
+  c.Delete(cglr->getID());
 
   VERBOSE_OUT = 1;
 
@@ -236,6 +256,7 @@ void main() {
         addGlass(view, 1, 1);
         break;
       case 7: {
+        cout << "=== 7. Delete Glass from Collection ===" << endl;
         int id = input_int("Enter number of element : ");
         c.Delete(id);
         if (view != NULL) {
@@ -244,7 +265,7 @@ void main() {
         }
         break;
       }
-      case 6: {
+      case 8: {
         double
         dx = InputFloat("Enter dx"),
              dy = InputFloat("Enter dy");
@@ -258,7 +279,7 @@ void main() {
         }
         break;
       }
-      case 7: {
+      case 9: {
         double x, y;
         cout << "Enter P1 " << endl;
         x = InputFloat("Enter x");
@@ -272,7 +293,7 @@ void main() {
         }
         break;
       }
-      case 8: {
+      case 10: {
         cout << "Enter Point " << endl;
         double x = InputFloat("Enter x");
         double y = InputFloat("Enter y");
@@ -284,10 +305,9 @@ void main() {
 
         break;
       }
-      case 9: {
-        double
-        dx = InputFloat("Enter dx :  "),
-             dy = InputFloat("Enter dy :  ");
+      case 11: {
+        double dx = InputFloat("Enter dx");
+        double dy = InputFloat("Enter dy");
 
         if (view != NULL) {
           view->MoveCollection(dx, dy);
@@ -298,7 +318,7 @@ void main() {
         }
         break;
       }
-      case 10: {
+      case 12: {
         double
         dx = InputFloat("Enter dx"),
              dy = InputFloat("Enter dy");
@@ -312,7 +332,7 @@ void main() {
         break;
       }
 
-      case 11: {
+      case 13: {
         double dy, index = 0;
         index = input_int("Index of element");
         dy = InputFloat("Enter dy");
@@ -327,7 +347,7 @@ void main() {
         break;
       }
 
-      case 12: {
+      case 14: {
         if (view != NULL)
           view->Print();
         else
@@ -335,7 +355,7 @@ void main() {
         break;
       }
 
-      case 13: {
+      case 15: {
         if (view != NULL)
           view->Print();
         else
@@ -347,5 +367,5 @@ void main() {
         cout << "menu = " << menu << endl;
         break;
     }
-  } while (menu != 15);
+  } while (menu != 16);
 }
