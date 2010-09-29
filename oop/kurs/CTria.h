@@ -22,22 +22,22 @@ private:
 public:
 
   /*Конструкторы*/
-  -----------
+  ---------- -
   CTriangle(CPoint _P1, double _P1P2, CPoint _P3); // P1 length(p1,p2) P3
   CTriangle(); // Constructor without parametrs
-  -----------
+  ---------- -
 
   /*Деструктор*/
-  -----------
+  ---------- -
   ~CTriangle();
-  -----------
+  ---------- -
 
 
   /**/
 
   int inv();  // Инвариант
 
-  -------------
+  ------------ -
   void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void Move(double, double); // Плоскопараллельное перемещение на dx dy
@@ -50,7 +50,7 @@ public:
 
   int isIn(CPoint P) const;  // Проверка принадлежности триугольнику
 
-  -------------
+  ------------ -
 
   void Print();
   void setDebug(int);
