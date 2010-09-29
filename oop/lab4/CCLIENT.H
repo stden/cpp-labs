@@ -17,12 +17,13 @@
 // используем предварительное объявление класса
 class CServer;
 
+// Класс "Клиент"
 class CClient {
 private:
   static int total;
   const int id;
 
-  //список серверов на которых зарегестрирован клиент
+  // сервер на котором зарегестрирован клиент или NULL
   CServer* server;
 
 public:
@@ -40,9 +41,7 @@ public:
   int getID() const { return id; }
   static int getTotal() { return total; }
 
-  /*
-  * Оператор вывода в поток
-  */
+  // Оператор вывода в поток
   friend ostream& operator << (ostream& s, const CClient& c) {
     s << "Client #" << c.id << "  total = " << c.total <<
     ((c.server == NULL) ?

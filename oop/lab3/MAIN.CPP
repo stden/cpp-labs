@@ -75,7 +75,7 @@ void addGlass(CScene& s, int withRing) {
       delete glass;
     };
   } while (!inGlass);
-  cout << "Scene added!" << endl;
+  cout << "Glass added!" << endl;
 }
 
 void main() {
