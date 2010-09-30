@@ -13,8 +13,9 @@
 #include "Ring.h"
 #include <conio.h>
 #include <values.h>
+#include "id_obj.h"
 
-class CGlass {
+class CGlass : public ID_Object {
 protected:
   // Дно
   CRectangle m_bottom;
@@ -27,15 +28,6 @@ protected:
 
   // Правая стенка
   CParallelogram m_rightSide;
-
-  // Количество экземпляров класса стакан
-  static int countreal;
-
-  // Общее количество созданных когда-либо экземпляров
-  static int countall;
-
-  // Идентификатор
-  int m_id;
 
 public:
   /*
@@ -50,8 +42,6 @@ public:
   * Деструктор
   */
   ~CGlass(void);
-
-  virtual int getID() { return m_id; };
 
   CCountedPoint getBasePoint() {
     return m_bottom.getPoint(0);
@@ -73,7 +63,7 @@ public:
   * Смещение
   */
   virtual void MovedXdY(double dX, double dY) {
-    cout << "Glass #" << m_id << " MovedXdY(" << dX << "," << dY << ")" << endl;
+    cout << "Glass #" << getID() << " MovedXdY(" << dX << "," << dY << ")" << endl;
     m_bottom.MovedXdY(dX, dY);
     m_cage.MovedXdY(dX, dY);
     m_leftSide.MovedXdY(dX, dY);
@@ -95,13 +85,6 @@ public:
     s << "      Right side: " << m_rightSide;
     getch();
     return s;
-  }
-
-  /*
-  * Получить количество экземпляров класса
-  */
-  static int getCount() {
-    return countreal;
   }
 
   /*

@@ -9,17 +9,15 @@
 #include <assert.h>
 #include "debug.h"
 
-int CClient :: total = 0;
-
-CClient :: CClient() : id(++total) {
-  VERBOSE_OUT && cout << "Client #" << id << " is created" <<
-                      " total = " << total << endl;
+CClient :: CClient() : ID_Object() {
+  VERBOSE_OUT && cout << "Client #" << getID() << " is created" <<
+                      " total = " << getTotal() << endl;
 }
 
 CClient :: ~CClient() {
   Unregister();
-  VERBOSE_OUT && cout << "Client #" << id << " is deleted" <<
-                      " total = " << total << endl;
+  VERBOSE_OUT && cout << "Client #" << getID() << " is deleted" <<
+                      " total = " << getTotal() << endl;
 }
 
 CServer* CClient :: getServer() {
@@ -28,16 +26,16 @@ CServer* CClient :: getServer() {
 
 void CClient :: Register(CServer *server) {
   if (server == NULL)  {
-    VERBOSE_OUT && cout << "Client #" << id << endl
+    VERBOSE_OUT && cout << "Client #" << getID() << endl
                         << "Failed to register on server due to wrong address" << endl;
   } else  {
     if (getServer() != NULL) {
-      VERBOSE_OUT && cout << "Client #" << id << " already registered on server" << endl;
+      VERBOSE_OUT && cout << "Client #" << getID() << " already registered on server" << endl;
     } else {
       this->server = server;
-      if (server->GetClientByID(id) == NULL) {
+      if (server->GetClientByID(getID()) == NULL) {
         server->Register(this);
-        VERBOSE_OUT && cout << "Client #" << id << " was registered on server" << endl;
+        VERBOSE_OUT && cout << "Client #" << getID() << " was registered on server" << endl;
       }
     }
   }
@@ -45,13 +43,13 @@ void CClient :: Register(CServer *server) {
 
 void CClient::Unregister() {
   if (getServer() == NULL) {
-    VERBOSE_OUT && cout << "Client #" << id << " can not unregister from server"
+    VERBOSE_OUT && cout << "Client #" << getID() << " can not unregister from server"
                         << "cause it does not registered on it" << endl;
   } else {
     server = NULL;
-    if (server->GetClientByID(id) != NULL) {
-      server->Unregister(id);
-      VERBOSE_OUT && cout << "Client #" << id << " was unregistered from server" << endl;
+    if (server->GetClientByID(getID()) != NULL) {
+      server->Unregister(getID());
+      VERBOSE_OUT && cout << "Client #" << getID() << " was unregistered from server" << endl;
     }
   }
 }
@@ -60,26 +58,26 @@ void CClient::Unregister() {
 // Все остальные варианты SendMessage только подготоваливают
 // сообщения разных видов и вызывают данный метод
 void CClient::SendMessage(CMessage *msg) {
-  assert(msg->getFromID() == id);
+  assert(msg->getFromID() == getID());
   assert(msg->getDirection() == Client_to_Server ||
          msg->getDirection() == Client_to_Client);
   if (server != NULL) {
     if (msg->getDirection() == Client_to_Server)
-      cout << "Client #" << id << " sent " << *msg << " to server "
+      cout << "Client #" << getID() << " sent " << *msg << " to server "
            << endl;
     else
-      cout << "Client #" << id << " sent " << *msg << " to client #" <<
+      cout << "Client #" << getID() << " sent " << *msg << " to client #" <<
            msg->getToID() << endl;
     server->ReceiveMessage(msg);
   } else {
-    cout << "Client #" << id << " could not send messages to server "
+    cout << "Client #" << getID() << " could not send messages to server "
          << " cause it not registered on it" << endl;
   }
 }
 
 void CClient::SendMessage(int _type, const CInfo&  _info, int _id) {
-  CMessage msg(id, _id, _type, _info, Client_to_Server);
-  assert(msg.getFromID() == id);
+  CMessage msg(getID(), _id, _type, _info, Client_to_Server);
+  assert(msg.getFromID() == getID());
   assert(msg.getToID() == _id);
   assert(msg.getType() == _type);
   assert(msg.getDirection() == Client_to_Server);
@@ -90,29 +88,29 @@ void CClient::ReceiveMessage(CMessage *msg) {
   // Проверяем кооректность пришедшего сообщения
   assert(msg->getDirection() == Server_to_Client ||
          msg->getDirection() == Client_to_Client);
-  assert(msg->getToID() == id);
+  assert(msg->getToID() == getID());
 
   if (server != NULL)  {
     if (msg->getDirection() == Server_to_Client)
-      cout << endl << "Client #" << id << " recived " << *msg << " from server"
+      cout << endl << "Client #" << getID() << " recived " << *msg << " from server"
            << endl << endl;
     else
-      cout << endl << "Client #" << id << " recived " << *msg << " from client #"
+      cout << endl << "Client #" << getID() << " recived " << *msg << " from client #"
            << msg->getFromID() << endl << endl;
     if (msg->getType() > 1)  {
       // отправка подтверждения о приёме сообщения
       CMessage m1(*msg);
       m1.setToID(1);
-      m1.setFromID(id);
+      m1.setFromID(getID());
       m1.setType(CONFIRMATION); //код подтверждения приёма сообщения
       m1.setDirection(Client_to_Server);
       SendMessage(&m1);
       Action(msg->getType(), msg->getInfo());
       //отправка подтверждения о выполнении действия
-      SendMessage(&CMessage(id, 1, REPORT, msg->getInfo(), Client_to_Server));
+      SendMessage(&CMessage(getID(), 1, REPORT, msg->getInfo(), Client_to_Server));
     }
   } else
-    cout << "Client #" << id << " could not recive message from unknown server"
+    cout << "Client #" << getID() << " could not recive message from unknown server"
          << endl << endl;
 }
 

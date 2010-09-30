@@ -110,17 +110,27 @@ CClient* clientByID(int id) {
   return NULL;
 }
 
+const DEBUG_MODE = 1;
+
 void addGlass(CServerView* s, int withRing, int client = 0) {
   int inGlass;
   do {
     double bottomLength, hBottom, lessSide;
     CCountedPoint bottom, top;
-    inputPoint("left bottom", bottom);
-    inputPoint("left hight", top);
 
-    bottomLength = input_double("  Input the less foundation length:");
-    hBottom = input_double("  Input the less foundation heigth:");
-    lessSide = input_double("  Input the less rib length:");
+    if(DEBUG_MODE){
+      bottom = CCountedPoint(1,1);
+      top = CCountedPoint(-1,5);
+      bottomLength = 5;
+      hBottom = 1;
+      lessSide = 1;
+    } else {
+     inputPoint("left bottom", bottom);
+      inputPoint("left hight", top);
+      bottomLength = input_double("  Input the less foundation length:");
+      hBottom = input_double("  Input the less foundation heigth:");
+      lessSide = input_double("  Input the less rib length:");
+    }
     cout << endl;
 
     CGlass *glass;
@@ -134,7 +144,10 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
         glass = new CClientGlassR(bottom, top, bottomLength, hBottom, lessSide);
       else
         glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
+      assert( glass->getID() == ((CClient *)glass)->getID() );
+      cout << "Glass->getID() " << glass->getID() << endl;
       clients.insert((CClient *)glass);
+      cout << "Client->getID() " << ((CClient *)glass)->getID() << endl;
     }
 
     inGlass = s->GlassInGlassCase(glass);
@@ -183,6 +196,7 @@ void main() {
   c.Delete(glr.getID());
 
   CClientGlass cgl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  assert( cgl.getID() == 3 );
   c.insert(&cgl);
 
   CClientGlassR cglr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
@@ -202,10 +216,15 @@ void main() {
 
   int menu = 0;
 
-  cout << "=== Create Glass Case ===" << endl;
   // Создаём Витрину
   CCountedPoint leftBottom, // Левый нижний угол витрины
-  rightTop; // Правый верхний угол витрины
+    rightTop; // Правый верхний угол витрины
+  if(DEBUG_MODE){
+    leftBottom = CCountedPoint(-10,-10);
+    rightTop = CCountedPoint(20,20);
+  } else {
+  cout << "=== Create Glass Case ===" << endl;
+  // Создаём Витрину
   inputPoint("glass case left bottom", leftBottom);
   int error; // Признак ошибки
   do {
@@ -215,11 +234,13 @@ void main() {
     if (error)
       cout << "   Error: wrong coordinates " << endl;
   } while (error);
-
+  }
   CServerView view(leftBottom, rightTop);
 
   CList<CClient*> clients;
   do {
+    cout << "View contains: " << view.size() << endl;
+    view.Print();
     cout << endl
          << "=== Main Menu ===" << endl
          << "1. Add Glass to Collection" << endl
@@ -307,7 +328,6 @@ void main() {
         cout << "=== 10. Move Collection ===" << endl;
         double dx = InputFloat("Enter dx");
         double dy = InputFloat("Enter dy");
-
         view.MoveCollection(dx, dy);
         cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
         break;
@@ -341,11 +361,11 @@ void main() {
       case 14: {
         cout << "== 14. Registrate all clients on server ==" << endl;
         for (clients.goFirst();clients.hasNext();clients.goNext()) {
+          cout << "Try to register: " << clients.getValue()->getID() << endl;
           view.Register(clients.getValue());
           assert(view.GetClientByID(clients.getValue()->getID()) ==
                  clients.getValue());
         };
-        assert(clients.size() == view.ClientCount());
         break;
       };
       case 15: {
