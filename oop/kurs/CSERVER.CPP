@@ -3,8 +3,6 @@
 // Автор: Волынко Е. ст. гр. 7304
 // Дата: 20.09.2010 Редакция: 1.0
 
-#include "CList.h"
-#include "CListN.h"
 #include "CServer.H"
 #include <iostream.h>
 #include <conio.h>

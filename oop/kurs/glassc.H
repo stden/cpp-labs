@@ -8,6 +8,7 @@
 
 #include "CoPoint.h"
 #include "CoList.h"
+#include <assert.h>
 
 // "Витрина" имеет форму прямоугольника
 class CGlassCase {
@@ -70,6 +71,38 @@ public:
     m_Width = value;
     m_rightTop.setX(m_leftBottom.getX() + value);
   }
+
+  /*
+  * Проверка инварианта
+  */
+  void checkInv() {
+    assert(m_rightTop.getX() - m_leftBottom.getX() == m_Width);
+    assert(m_rightTop.getX() - m_leftBottom.getX() == getWidth());
+    assert(m_rightTop.getY() - m_leftBottom.getY() == m_Height);
+    assert(m_rightTop.getY() - m_leftBottom.getY() == getHeight());
+  }
+
+  /*
+  * Перемещение левого нижнего угла в точку
+  */
+  virtual void MoveToPoint(const CCountedPoint& point) {
+    CCountedPoint basePoint = m_leftBottom;
+
+    double dx = point.getX() - basePoint.getX();
+    double dy = point.getY() - basePoint.getY();
+
+    MovedXdY(dx, dy);
+  };
+
+  /*
+  * Смещение на dX dY
+  */
+  virtual void MovedXdY(double dX, double dY) {
+    checkInv();
+    m_rightTop.MovedXdY(dX, dY);
+    m_leftBottom.MovedXdY(dX, dY);
+    checkInv();
+  };
 
   /*
   * Вывод параметров витрины в поток

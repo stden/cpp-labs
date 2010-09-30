@@ -13,6 +13,10 @@
 #include "Glass.h"
 
 class CServerView : public CScene, public CServer {
+  int inv() {
+    return 2 == 2;
+  }
+
 public:
   CServerView(const CCountedPoint& leftBottom, const CCountedPoint& rightTop)
       : CScene(leftBottom, rightTop) {}
@@ -35,17 +39,24 @@ public:
     cout << endl << endl;
   }
 
-  int inv() { return 2 == 2; }
-
   void MoveGlassCaseToPoint(CCountedPoint P) {
-
+    CGlassCase :: MoveToPoint(P);
+    inv();
   }
 
-  void MoveCollection(double dx, double dy) {
-
+  void MoveCollection(double dX, double dY) {
+    CGlassList :: MovedXdY(dX, dY);
+    inv();
   }
 
-  void MoveStand(double dx, double dy) {
+  void MoveCollectionToPoint(CCountedPoint P) {
+    CGlassCase :: MoveToPoint(P);
+    inv();
+  }
+
+  void GlassCaseMovedXdY(double dX, double dY) {
+    CGlassCase :: MovedXdY(dX, dY);
+    inv();
   }
 
   CGlassList& GetCollection() {
