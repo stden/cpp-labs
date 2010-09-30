@@ -8,7 +8,6 @@
 #include <conio.h>
 #include <stdio.h>
 
-#include "CPoint.h"
 #include "CoList.h"
 #include "Scene.h"
 #include "CMsg.h"
@@ -21,6 +20,25 @@
 #include "GlassR.h"
 #include "CGlass.h"
 #include "CGlassR.h"
+
+// Input value from "cin" with error checking
+template <class T>
+T input(char *prompt, T min, T max) {
+  T value;
+  do {
+    cout << prompt << " " << min << ".." << max << ": ";
+    while (!(cin >> value) && !cin.eof()) {
+      cerr << "Error: invalid input " << value << ", try again: ";
+      cin.clear();
+      cin.ignore(cin.rdbuf()->in_avail());
+    }
+    if (value < min)
+      cerr << "Error: Required value >= " << min << endl;
+    if (value > max)
+      cerr << "Error: Required value <= " << max << endl;
+  } while (value < min || value > max);
+  return value;
+}
 
 float InputFloat(char *prompt) {
   char buffer[255];
@@ -75,24 +93,21 @@ void inputPoint(const char* s, CCountedPoint& p) {
   p.setY(input_double("    Input y:"));
 }
 
+int inputClientID(char *prompt) {
+  if (CClient::getTotal() < 1) {
+    cout << "Register at least one client at first" << endl;
+    return 0;
+  };
+  return input(prompt, 1, CClient::getTotal());
+}
 
-// Input value from "cin" with error checking
-template <class T>
-T input(char *prompt, T min, T max) {
-  T value;
-  do {
-    cout << prompt << " " << min << ".." << max << ": ";
-    while (!(cin >> value) && !cin.eof()) {
-      cerr << "Error: invalid input " << value << ", try again: ";
-      cin.clear();
-      cin.ignore(cin.rdbuf()->in_avail());
-    }
-    if (value < min)
-      cerr << "Error: Required value >= " << min << endl;
-    if (value > max)
-      cerr << "Error: Required value <= " << max << endl;
-  } while (value < min || value > max);
-  return value;
+CList<CClient*> clients;
+
+CClient* clientByID(int id) {
+  for (clients.goFirst();clients.hasNext();clients.goNext())
+    if (clients.getValue()->getID() == id)
+      return clients.getValue();
+  return NULL;
 }
 
 void addGlass(CServerView* s, int withRing, int client = 0) {
@@ -115,11 +130,11 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
       else
         glass = new CGlass(bottom, top, bottomLength, hBottom, lessSide);
     } else {
-      glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
       if (withRing)
         glass = new CClientGlassR(bottom, top, bottomLength, hBottom, lessSide);
       else
         glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
+      clients.insert((CClient *)glass);
     }
 
     inGlass = s->GlassInGlassCase(glass);
@@ -135,46 +150,46 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
 
 void main() {
   clrscr();
+
   VERBOSE_OUT = 0;
-  CGlassList c;
+
+  CServerView c(CCountedPoint(-10,-10),CCountedPoint(20,20));
   assert(c.size() == 0);
   // Создаём тестовый стакан
-  CGlass* gl = new CGlass(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
-  assert(gl->getID() == 1);
+  CGlass gl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  assert(gl.getID() == 1);
   double minx = MAXDOUBLE, maxx = MINDOUBLE, miny = MAXDOUBLE, maxy = MINDOUBLE;
-  gl->GetBorders(&minx, &maxx, &miny, &maxy);
+  gl.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
   assert(maxx == -1 + 2*2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
-  c.insert(gl);
+  c.insert(&gl);
   assert(c.size() == 1);
-  c.Delete(gl->getID());
+  c.Delete(gl.getID());
   assert(c.size() == 0);
-  delete gl;
 
-  CGlassR* glr = new CGlassR(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
-  assert(glr->getID() == 2);
+  CGlassR glr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  assert(glr.getID() == 2);
   minx = MAXDOUBLE;
   maxx = MINDOUBLE;
   miny = MAXDOUBLE;
   maxy = MINDOUBLE;
-  glr->GetBorders(&minx, &maxx, &miny, &maxy);
+  glr.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
   assert(maxx == -1 + 2*2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
-  c.Delete(glr->getID());
-  delete glr;
+  c.Delete(glr.getID());
 
-  CClientGlass* cgl = new CClientGlass(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
-  c.insert(cgl);
+  CClientGlass cgl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  c.insert(&cgl);
 
-  CClientGlassR* cglr = new CClientGlassR(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
-  c.insert(cglr);
+  CClientGlassR cglr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  c.insert(&cglr);
 
-  c.Delete(cgl->getID());
-  c.Delete(cglr->getID());
+  c.Delete(cgl.getID());
+  c.Delete(cglr.getID());
 
   VERBOSE_OUT = 1;
 
@@ -186,186 +201,170 @@ void main() {
        << "Programmed by: Evgeny Volinko" << endl << endl;
 
   int menu = 0;
-  CServerView *view = NULL;
-  //CServer server;
+
+  cout << "=== Create Glass Case ===" << endl;
+  // Создаём Витрину
+  CCountedPoint leftBottom, // Левый нижний угол витрины
+  rightTop; // Правый верхний угол витрины
+  inputPoint("glass case left bottom", leftBottom);
+  int error; // Признак ошибки
+  do {
+    inputPoint("glass case right top", rightTop);
+    error = (rightTop.getX() <= leftBottom.getX()) ||
+            (rightTop.getY() <= leftBottom.getY());
+    if (error)
+      cout << "   Error: wrong coordinates " << endl;
+  } while (error);
+
+  CServerView view(leftBottom, rightTop);
+
   CList<CClient*> clients;
   do {
     cout << endl
          << "=== Main Menu ===" << endl
-         << "1. Create Glass Case" << endl
-         << "2. Destroy Glass Case" << endl
-         << "3. Add Glass to Collection" << endl
-         << "4. Add Glass with Ring to Collection" << endl
-         << "5. Add Client Glass to Collection" << endl
-         << "6. Add Client Glass with Ring to Collection" << endl
-         << "7. Delete Glass from Collection" << endl
-         << "8. Move Collection and Glass Case" << endl
-         << "9. Place Collection and Glass Case into Point" << endl
-         << "10. Place Collection into Point" << endl
-         << "11. Place Glass Case into Point" << endl
-         << "12. Move Collection" << endl
-         << "13. Move Glass Case" << endl
-         << "14. Print View" << endl
-         << "15. Print Collection" << endl
-         << "16. Exit" << endl;
+         << "1. Add Glass to Collection" << endl
+         << "2. Add Glass with Ring to Collection" << endl
+         << "3. Add Client Glass to Collection" << endl
+         << "4. Add Client Glass with Ring to Collection" << endl
+         << "5. Delete Glass from Collection" << endl
+         << "6. Move Collection and Glass Case" << endl
+         << "7. Place Collection and Glass Case into Point" << endl
+         << "8. Place Collection into Point" << endl
+         << "9. Place Glass Case into Point" << endl
+         << "10. Move Collection" << endl
+         << "11. Move Glass Case" << endl
+         << "12. Print View" << endl
+         << "13. Registrate on server" << endl
+         << "14. Registrate all clients on server" << endl
+         << "15. Unregistrate client from server" << endl
+         << "16. Unregistrate all clients from server" << endl
+         << "17. Exit" << endl;
 
-    menu = input("Your choice", 1, 16);
+    menu = input("Your choice", 1, 17);
     switch (menu) {
-      case 1: {
-        cout << "=== 1. Create Glass Case ===" << endl;
-        // Создаём Витрину
-        CCountedPoint leftBottom, // Левый нижний угол витрины
-        rightTop; // Правый верхний угол витрины
-        inputPoint("glass case left bottom", leftBottom);
-        int error; // Признак ошибки
-        do {
-          inputPoint("glass case right top", rightTop);
-          error = (rightTop.getX() <= leftBottom.getX()) ||
-                  (rightTop.getY() <= leftBottom.getY());
-          if (error)
-            cout << "   Error: wrong coordinates " << endl;
-        } while (error);
-
-        view = new CServerView(leftBottom, rightTop);
-
-        if (view->inv()) {
-          // if (c.GetLength() > 0) v->Add(c);
-          cout << "View is created" << endl;
-        } else cout << "View do not created due to some input errors" << endl;
+      case 1:
+        cout << "=== 1. Add Glass to Collection ===" << endl;
+        addGlass(&view, 0);
         break;
-      }
       case 2:
-        cout << "=== 2. Destroy Glass Case ===" << endl;
-        delete view;
-        view = NULL;
+        cout << "=== 2. Add Glass with Ring to Collection ===" << endl;
+        addGlass(&view, 1);
         break;
       case 3:
-        cout << "=== 3. Add Glass to Collection ===" << endl;
-        addGlass(view, 0);
+        cout << "=== 3. Add Client Glass to Collection ===" << endl;
+        addGlass(&view, 0, 1);
         break;
       case 4:
-        cout << "=== 4. Add Glass with Ring to Collection ===" << endl;
-        addGlass(view, 1);
+        cout << "=== 4. Add Client Glass with Ring to Collection ===" << endl;
+        addGlass(&view, 1, 1);
         break;
-      case 5:
-        cout << "=== 5. Add Client Glass to Collection ===" << endl;
-        addGlass(view, 0, 1);
-        break;
-      case 6:
-        cout << "=== 6. Add Client Glass with Ring to Collection ===" << endl;
-        addGlass(view, 1, 1);
-        break;
-      case 7: {
-        cout << "=== 7. Delete Glass from Collection ===" << endl;
+      case 5: {
+        cout << "=== 5. Delete Glass from Collection ===" << endl;
         int id = input_int("Enter number of element : ");
         c.Delete(id);
-        if (view != NULL) {
-          view->Delete(id);
-          cout << "Element deleted" << endl;
-        }
+        view.Delete(id);
+        cout << "Element deleted" << endl;
+        break;
+      }
+      case 6: {
+        cout << "=== 6. Move Collection and Glass Case ===" << endl;
+        double dx = InputFloat("Enter dx");
+        double dy = InputFloat("Enter dy");
+        view.MovedXdY(dx, dy);
+        cout << "Collection are moved by dx = " << dx << ", dy = " << dy << endl;
+        break;
+      }
+      case 7: {
+        cout << "=== 7. Place Collection and Glass Case into Point ===" << endl;
+        cout << "Enter point" << endl;
+        double x = InputFloat("Enter x");
+        double y = InputFloat("Enter y");
+        view.MoveToPoint(x, y);
+        cout << "Collection and Glass Case are placed to Point(" << x << ";" << y << ")" << endl;
         break;
       }
       case 8: {
-        double
-        dx = InputFloat("Enter dx"),
-             dy = InputFloat("Enter dy");
-        if (view != NULL) {
-          view->MovedXdY(dx, dy);
-          if (view->inv())
-            cout << "Collection are moved by dx = " << dx << ", dy = " << dy << endl;
-        } else {
-          c.MovedXdY(dx, dy);
-          cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
-        }
-        break;
-      }
-      case 9: {
-        double x, y;
-        cout << "Enter P1 " << endl;
-        x = InputFloat("Enter x");
-        y = InputFloat("Enter y");
-        if (view != NULL) {
-          view->MoveToPoint(x, y);
-          if (view->inv()) cout << "Collection and stand are placed to Point(" << x << ";" << y << ")" << endl;
-        } else {
-          c.MoveToPoint(CCountedPoint(x, y));
-          cout << "Collection is placed to Point(" << x << ";" << y << ")" << endl;
-        }
-        break;
-      }
-      case 10: {
+        cout << "=== 8. Place Collection into Point ===" << endl;
         cout << "Enter Point " << endl;
         double x = InputFloat("Enter x");
         double y = InputFloat("Enter y");
 
-        if (view != NULL) {
-          view->MoveGlassCaseToPoint(CCountedPoint(x, y));
-          if (view->inv()) cout << "Stand is placed to Point(" << x << ";" << y << ")" << endl;
-        } else cout << "View is not created" << endl;
-
+        view.MoveCollectionToPoint(CCountedPoint(x, y));
+        cout << "ClassCase is placed to Point(" << x << ";" << y << ")" << endl;
         break;
       }
-      case 11: {
+      case 9: {
+        cout << "=== 9. Place Glass Case into Point ===" << endl;
+        cout << "Enter Point " << endl;
+        double x = InputFloat("Enter x");
+        double y = InputFloat("Enter y");
+
+        view.MoveGlassCaseToPoint(CCountedPoint(x, y));
+        cout << "ClassCase is placed to Point(" << x << ";" << y << ")" << endl;
+        break;
+      }
+      case 10: {
+        cout << "=== 10. Move Collection ===" << endl;
         double dx = InputFloat("Enter dx");
         double dy = InputFloat("Enter dy");
 
-        if (view != NULL) {
-          view->MoveCollection(dx, dy);
-          if (view->inv()) cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
-        } else {
-          c.MovedXdY(dx, dy);
-          cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
-        }
+        view.MoveCollection(dx, dy);
+        cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
+        break;
+      }
+      case 11: {
+        cout << "=== 11. Move Glass Case ===" << endl;
+        double dx = InputFloat("Enter dx");
+        double dy = InputFloat("Enter dy");
+        view.GlassCaseMovedXdY(dx, dy);
+        cout << "Glass Case is moved by dx = " << dx << ", dy = " << dy << endl;
         break;
       }
       case 12: {
-        double
-        dx = InputFloat("Enter dx"),
-             dy = InputFloat("Enter dy");
-
-
-        if (view != NULL) {
-          view->MoveStand(dx, dy);
-          if (view->inv()) cout << "Stand is moved by dx = " << dx << ", dy = " << dy << endl;
-        } else
-          cout << "View is not created" << dy << endl;
+        cout << "=== 12. Print View ===" << endl;
+        view.Print();
         break;
       }
-
       case 13: {
-        double dy, index = 0;
-        index = input_int("Index of element");
-        dy = InputFloat("Enter dy");
-        if (view != NULL) {
-          view->GetCollection().getByID(index)->MovedXdY(dy, 0);
-          if (view->inv()) cout << "Piston of " << index << "'th element is moved by dy = " << dy << endl;
-          else cout << "Piston didn't move" << endl;
-        } else {
-          c.getByID(index)->MovedXdY(dy, 0);
-          cout << "Piston of " << index << "'th element is moved by dy = " << dy << endl;
+        cout << "== 13. Registrate on server ==" << endl;
+        int id = inputClientID("Enter id of client to register");
+        CClient* cl = clientByID(id);
+        if (cl == NULL) {
+          cout << "Client #" << id << " not exists!" << endl;
+          break;
         }
+        view.Register(cl);
+        assert(view.GetClientByID(id) == cl);
+        assert(cl->getServer() != NULL);
         break;
       }
-
       case 14: {
-        if (view != NULL)
-          view->Print();
-        else
-          cout << "View is not created" << endl;
+        cout << "== 14. Registrate all clients on server ==" << endl;
+        for (clients.goFirst();clients.hasNext();clients.goNext()) {
+          view.Register(clients.getValue());
+          assert(view.GetClientByID(clients.getValue()->getID()) ==
+                 clients.getValue());
+        };
+        assert(clients.size() == view.ClientCount());
         break;
-      }
-
+      };
       case 15: {
-        if (view != NULL)
-          view->Print();
-        else
-          cout << c << endl;
+        cout << "== 15. Unregistrate client from server ==" << endl;
+        int id = inputClientID("Enter id of client to unregister");
+        view.Unregister(id);
+        assert(view.GetClientByID(id) == NULL);
         break;
-      }
-
+      };
+      case 16:
+        cout << "== 16. Unregistrate all clients from server ==" << endl;
+        view.UnregisterAll();
+        break;
+      case 17:
+        cout << "== 17. Exit ==" << endl;
+        break;
       default:
         cout << "menu = " << menu << endl;
         break;
     }
-  } while (menu != 16);
+  } while (menu != 17);
 }

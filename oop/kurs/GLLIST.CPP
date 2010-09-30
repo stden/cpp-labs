@@ -7,11 +7,11 @@
 #include <iostream.h>
 #include "GlList.h"
 
-void CGlassList :: CGlassList() {
+CGlassList :: CGlassList() {
   VERBOSE_OUT && cout << "GlassList created" << endl;
 }
 
-void CGlassList :: ~CGlassList() {
+CGlassList :: ~CGlassList() {
   VERBOSE_OUT && cout << "GlassList deleted" << endl;
 }
 

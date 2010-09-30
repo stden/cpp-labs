@@ -12,7 +12,7 @@
 
 class CClientGlassR : public CClient, public CGlassR {
 public:
-  virtual int getID() { return CGlassR::getID(); };
+  virtual int getID() { return CClient::getID(); };
 
   /*
   * Конструктор
@@ -21,7 +21,9 @@ public:
   */
   CClientGlassR(const CCountedPoint& x, const CCountedPoint& y,
                 const double& bottom, const double& hBottom, const double& lessSide) :
-      CGlassR(x, y, bottom, hBottom, lessSide) {};
+      CGlassR(x, y, bottom, hBottom, lessSide) {
+    VERBOSE_OUT && cout << "Client Glass with ring #" << getID() << endl;
+  };
 
   /*
   * Деструктор
@@ -71,7 +73,7 @@ public:
   }
 
   virtual ostream& Write(ostream& s) {
-    s << "    Client Glass with Ring #" << CGlassR::getID() << ": " << endl
+    s << "    Client Glass with Ring #" << CClient::getID() << ": " << endl
     << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
