@@ -18,7 +18,7 @@
 
 class CClientGlass : public CClient, public CGlass {
 public:
-  virtual int getID() { return CClient::getID(); };
+  int getID() const{ return CClient::getID(); };
 
   /*
   * Конструктор
@@ -28,7 +28,7 @@ public:
   CClientGlass(const CCountedPoint& x, const CCountedPoint& y,
                const double& bottom, const double& hBottom, const double& lessSide) :
       CGlass(x, y, bottom, hBottom, lessSide) {
-    VERBOSE_OUT && cout << "Client Glass #" << getID() << endl;
+    VERBOSE_OUT && cout << "Client Glass #" << CClient::getID() << endl;
   };
 
   /*
@@ -41,7 +41,7 @@ public:
   */
   virtual void MoveToPoint(const CCountedPoint& point) {
     CClient :: SendMessage(ACTION_MOVETOPOINT,
-                           CInfo(0, 0, point), CClient::getID());
+                           CInfo(0, 0, point), 1);
   };
 
   /*
@@ -49,10 +49,10 @@ public:
   */
   virtual void MovedXdY(double dX, double dY) {
     CClient :: SendMessage(ACTION_MOVEDXDY,
-                           CInfo(dX, dY), CClient::getID());
+                           CInfo(dX, dY), 1);
   };
 
-  void Action(int _type, const CInfo& info) {
+  virtual void Action(int _type, const CInfo& info) {
     switch (_type) {
       case ACTION_MOVETOPOINT:
         cout << "Client is handling action with code = " << _type << "(Move To Point)" << endl
