@@ -12,7 +12,7 @@
 
 class CClientGlassR : public CClient, public CGlassR {
 public:
-  int getID() const{ return CClient::getID(); };
+  int getID() const { return CClient::getID(); };
 
   /*
   * Конструктор

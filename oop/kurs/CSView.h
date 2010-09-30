@@ -13,8 +13,9 @@
 #include "Glass.h"
 
 class CServerView : public CScene, public CServer {
-  int inv() {
-    return 2 == 2;
+  void inv() {
+    CScene :: inv();
+    CServer :: inv();
   }
 
 public:

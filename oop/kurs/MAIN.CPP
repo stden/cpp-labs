@@ -118,14 +118,14 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
     double bottomLength, hBottom, lessSide;
     CCountedPoint bottom, top;
 
-    if(DEBUG_MODE){
-      bottom = CCountedPoint(1,1);
-      top = CCountedPoint(-1,5);
+    if (DEBUG_MODE) {
+      bottom = CCountedPoint(1, 1);
+      top = CCountedPoint(-1, 5);
       bottomLength = 5;
       hBottom = 1;
       lessSide = 1;
     } else {
-     inputPoint("left bottom", bottom);
+      inputPoint("left bottom", bottom);
       inputPoint("left hight", top);
       bottomLength = input_double("  Input the less foundation length:");
       hBottom = input_double("  Input the less foundation heigth:");
@@ -144,7 +144,7 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
         glass = new CClientGlassR(bottom, top, bottomLength, hBottom, lessSide);
       else
         glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
-      assert( glass->getID() == ((CClient *)glass)->getID() );
+      assert(glass->getID() == ((CClient *)glass)->getID());
       cout << "Glass->getID() " << glass->getID() << endl;
       clients.insert((CClient *)glass);
       cout << "Client->getID() " << ((CClient *)glass)->getID() << endl;
@@ -166,7 +166,7 @@ void main() {
 
   VERBOSE_OUT = 0;
 
-  CServerView c(CCountedPoint(-10,-10),CCountedPoint(20,20));
+  CServerView c(CCountedPoint(-10, -10), CCountedPoint(20, 20));
   assert(c.size() == 0);
   // Создаём тестовый стакан
   CGlass gl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
@@ -196,8 +196,12 @@ void main() {
   c.Delete(glr.getID());
 
   CClientGlass cgl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
-  assert( cgl.getID() == 3 );
+  assert(cgl.getID() == 3);
   c.insert(&cgl);
+  с.Register(&cgl);
+  cgl.MovedXdY(2, 2);
+  assert(cgl.getBottom().getPoint(0).getX() == 3);
+  assert(cgl.getBottom().getPoint(0).getX() == 3);
 
   CClientGlassR cglr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   c.insert(&cglr);
@@ -218,22 +222,22 @@ void main() {
 
   // Создаём Витрину
   CCountedPoint leftBottom, // Левый нижний угол витрины
-    rightTop; // Правый верхний угол витрины
-  if(DEBUG_MODE){
-    leftBottom = CCountedPoint(-10,-10);
-    rightTop = CCountedPoint(20,20);
+  rightTop; // Правый верхний угол витрины
+  if (DEBUG_MODE) {
+    leftBottom = CCountedPoint(-10, -10);
+    rightTop = CCountedPoint(20, 20);
   } else {
-  cout << "=== Create Glass Case ===" << endl;
-  // Создаём Витрину
-  inputPoint("glass case left bottom", leftBottom);
-  int error; // Признак ошибки
-  do {
-    inputPoint("glass case right top", rightTop);
-    error = (rightTop.getX() <= leftBottom.getX()) ||
-            (rightTop.getY() <= leftBottom.getY());
-    if (error)
-      cout << "   Error: wrong coordinates " << endl;
-  } while (error);
+    cout << "=== Create Glass Case ===" << endl;
+    // Создаём Витрину
+    inputPoint("glass case left bottom", leftBottom);
+    int error; // Признак ошибки
+    do {
+      inputPoint("glass case right top", rightTop);
+      error = (rightTop.getX() <= leftBottom.getX()) ||
+              (rightTop.getY() <= leftBottom.getY());
+      if (error)
+        cout << "   Error: wrong coordinates " << endl;
+    } while (error);
   }
   CServerView view(leftBottom, rightTop);
 
