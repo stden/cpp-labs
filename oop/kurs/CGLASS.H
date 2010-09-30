@@ -18,7 +18,7 @@
 
 class CClientGlass : public CClient, public CGlass {
 public:
-  int getID() const{ return CClient::getID(); };
+  int getID() const { return CClient::getID(); };
 
   /*
   * Конструктор
