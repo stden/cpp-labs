@@ -13,10 +13,10 @@
 // bottom - ширина основания
 // hBottom - высота основания
 // lessSide - толщина стенки (меньшая сторона параллелограмма)
-CGlassR::CGlassR(const CCountedPoint& x, const CCountedPoint& y,
+CGlassR::CGlassR(int id, const CCountedPoint& x, const CCountedPoint& y,
                  const double& bottom, const double& hBottom, const double& lessSide):
     // Создаём стакан без кольца
-    CGlass(x, y, bottom, hBottom, lessSide),
+    CGlass(id, x, y, bottom, hBottom, lessSide),
     // И добавляем кольцо
     // Центр "кольца" совпадает с точкой пересечения диагоналей "полости стакана"
     // X-координата центра

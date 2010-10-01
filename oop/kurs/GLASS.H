@@ -15,7 +15,7 @@
 #include <values.h>
 #include "id_obj.h"
 
-class CGlass : public ID_Object {
+class CGlass {
 protected:
   // Дно
   CRectangle m_bottom;
@@ -29,13 +29,18 @@ protected:
   // Правая стенка
   CParallelogram m_rightSide;
 
+  // Идентификатор
+  const int m_id;
+
 public:
+  int getID() const { return m_id; }
+
   /*
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
   * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
-  CGlass(const CCountedPoint& x, const CCountedPoint& y,
+  CGlass(int id, const CCountedPoint& x, const CCountedPoint& y,
          const double& bottom, const double& hBottom, const double& lessSide);
 
   /*

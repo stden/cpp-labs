@@ -8,9 +8,9 @@
 #include "Glass.h"
 #include "debug.h"
 
-CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
+CGlass::CGlass(int id, const CCountedPoint& x, const CCountedPoint& y,
                const double& bottom, const double& hBottom, const double& lessSide):
-    ID_Object() /* Присваиваем стакану очередной идентификатор */,
+    m_id(id), /* Присваиваем стакану очередной идентификатор */
     m_bottom(x, CCountedPoint(x.getX() + bottom, x.getY() + hBottom)),
     m_cage(CCountedPoint(x.getX() + lessSide, x.getY() + hBottom),
            CCountedPoint(y.getX() + lessSide, y.getY()),
@@ -20,7 +20,8 @@ CGlass::CGlass(const CCountedPoint& x, const CCountedPoint& y,
     m_rightSide(CCountedPoint(x.getX() + bottom - lessSide, x.getY() + hBottom),
                 CCountedPoint(y.getX() + bottom + 2 * (x.getX() - y.getX()) - lessSide, y.getY()),
                 lessSide) {
-  VERBOSE_OUT && cout << " Glass #" << getID() << " created" << endl;
+  // VERBOSE_OUT &&
+  cout << " Glass #" << getID() << " created" << endl;
 }
 
 CGlass::~CGlass(void) {

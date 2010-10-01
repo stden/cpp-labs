@@ -19,14 +19,22 @@
 class CServer;
 
 // Класс "Клиент"
-class CClient : public ID_Object {
+class CClient {
 private:
   // сервер на котором зарегестрирован клиент или NULL
   CServer* server;
 
+  // Идентификатор
+  const int m_id;
+
+  // Общее количество созданных когда-либо экземпляров
+  static int total;
+
 public:
-  CClient();
+  CClient(int id);
   ~CClient();
+
+  int getID() const { return m_id; };
 
   CServer* getServer();     // Получить сервер
   void Register(CServer *server); // Зарегестрироваться на сервере
@@ -38,12 +46,14 @@ public:
 
   // Оператор вывода в поток
   friend ostream& operator << (ostream& s, const CClient& c) {
-    s << "Client #" << c.getID() << "  total = " << c.getTotal() <<
+    s << "Client #" << c.getID() << "  " <<
     ((c.server == NULL) ?
      " - Not registered on server" : " - Registered on server")
     << endl << endl;
     return s;
   }
+
+  static int getTotal(){ return total; }
 };
 
 #endif

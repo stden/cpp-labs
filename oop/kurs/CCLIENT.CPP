@@ -9,12 +9,17 @@
 #include <assert.h>
 #include "debug.h"
 
-CClient :: CClient() : ID_Object() {
-  VERBOSE_OUT && cout << "Client #" << getID() << " is created" <<
+int CClient::total = 0;
+
+CClient :: CClient(int id) : m_id(id) {
+  total++;
+  //VERBOSE_OUT &&
+  cout << "Client #" << getID() << " is created" <<
                       " total = " << getTotal() << endl;
 }
 
 CClient :: ~CClient() {
+  total--;
   Unregister();
   VERBOSE_OUT && cout << "Client #" << getID() << " is deleted" <<
                       " total = " << getTotal() << endl;

@@ -15,7 +15,6 @@
 class CServerView : public CScene, public CServer {
   void inv() {
     CScene :: inv();
-    CServer :: inv();
   }
 
 public:

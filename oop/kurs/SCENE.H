@@ -105,6 +105,9 @@ public:
     << (CGlassCase&)r << endl;
     return s;
   }
+
+  void inv(){
+  }
 };
 
 
