@@ -6,44 +6,22 @@
 #ifndef _ID_OBJ_H
 #define _ID_OBJ_H
 
-class ID_Object {
-  // Количество экземпляров класса стакан
-  static int countreal;
+#include "debug.h"
 
+class ID_Object {
   // Общее количество созданных когда-либо экземпляров
   static int countall;
 
-  // Идентификатор
-  int m_id;
+  ID_Object(){};
 
 public:
-  int getID() const { return m_id; };
-
-  /*
-  * Получить количество экземпляров класса
-  */
-  static int getCount() {
-    return countreal;
+  static int GenID(){
+    return ++countall;
   }
 
-  static int getTotal() {
+  static int getTotal(){
     return countall;
   }
-
-  /*
-  * Конструктор
-  */
-  ID_Object() :
-      m_id(++countall) { /* Присваиваем очередной идентификатор */
-    countreal++;
-  };
-
-  /*
-  * Деструктор
-  */
-  ~ID_Object() {
-    countreal--;
-  };
 };
 
 #endif

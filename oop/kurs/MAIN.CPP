@@ -93,15 +93,18 @@ void inputPoint(const char* s, CCountedPoint& p) {
   p.setY(input_double("    Input y:"));
 }
 
+CList<CClient*> clients;
+
 int inputClientID(char *prompt) {
   if (CClient::getTotal() < 1) {
     cout << "Register at least one client at first" << endl;
     return 0;
   };
-  return input(prompt, 1, CClient::getTotal());
+  for(clients.goFirst();clients.hasNext();clients.goNext())
+    cout << " " << clients.getValue()->getID();
+  cout << endl;
+  return input(prompt, 1, ID_Object::getTotal());
 }
-
-CList<CClient*> clients;
 
 CClient* clientByID(int id) {
   for (clients.goFirst();clients.hasNext();clients.goNext())
@@ -110,7 +113,7 @@ CClient* clientByID(int id) {
   return NULL;
 }
 
-const DEBUG_MODE = 1;
+const DEBUG_MODE = 0;
 
 void addGlass(CServerView* s, int withRing, int client = 0) {
   int inGlass;
@@ -136,18 +139,21 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
     CGlass *glass;
     if (!client) {
       if (withRing)
-        glass = new CGlassR(bottom, top, bottomLength, hBottom, lessSide);
+        glass = new CGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
       else
-        glass = new CGlass(bottom, top, bottomLength, hBottom, lessSide);
+        glass = new CGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
     } else {
-      if (withRing)
-        glass = new CClientGlassR(bottom, top, bottomLength, hBottom, lessSide);
-      else
-        glass = new CClientGlass(bottom, top, bottomLength, hBottom, lessSide);
-      assert(glass->getID() == ((CClient *)glass)->getID());
-      cout << "Glass->getID() " << glass->getID() << endl;
-      clients.insert((CClient *)glass);
-      cout << "Client->getID() " << ((CClient *)glass)->getID() << endl;
+      if (withRing){
+        CClientGlassR *g = new CClientGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
+        glass = g;
+        clients.insert(g);
+        assert( glass->getID() == g->getID() );
+      } else {
+        CClientGlass *g = new CClientGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
+        glass = g;
+        clients.insert(g);
+        assert( glass->getID() == g->getID() );
+      }
     }
 
     inGlass = s->GlassInGlassCase(glass);
@@ -166,10 +172,10 @@ void main() {
 
   VERBOSE_OUT = 0;
 
-  CServerView c(CCountedPoint(-10, -10), CCountedPoint(20, 20));
+/*  CServerView c(CCountedPoint(-10, -10), CCountedPoint(20, 20));
   assert(c.size() == 0);
   // Создаём тестовый стакан
-  CGlass gl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  CGlass gl(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(gl.getID() == 1);
   double minx = MAXDOUBLE, maxx = MINDOUBLE, miny = MAXDOUBLE, maxy = MINDOUBLE;
   gl.GetBorders(&minx, &maxx, &miny, &maxy);
@@ -182,7 +188,7 @@ void main() {
   c.Delete(gl.getID());
   assert(c.size() == 0);
 
-  CGlassR glr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  CGlassR glr(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(glr.getID() == 2);
   minx = MAXDOUBLE;
   maxx = MINDOUBLE;
@@ -195,19 +201,19 @@ void main() {
   assert(maxy == 5);
   c.Delete(glr.getID());
 
-  CClientGlass cgl(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  CClientGlass cgl(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(cgl.getID() == 3);
   c.insert(&cgl);
-  с.Register(&cgl);
+//  c.Register(&cgl);
   cgl.MovedXdY(2, 2);
-  assert(cgl.getBottom().getPoint(0).getX() == 3);
-  assert(cgl.getBottom().getPoint(0).getX() == 3);
+//  assert(cgl.getBottom().getPoint(0).getX() == 3);
+//  assert(cgl.getBottom().getPoint(0).getX() == 3);
 
-  CClientGlassR cglr(CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
+  CClientGlassR cglr(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   c.insert(&cglr);
 
   c.Delete(cgl.getID());
-  c.Delete(cglr.getID());
+  c.Delete(cglr.getID()); */
 
   VERBOSE_OUT = 1;
 
@@ -286,7 +292,6 @@ void main() {
       case 5: {
         cout << "=== 5. Delete Glass from Collection ===" << endl;
         int id = input_int("Enter number of element : ");
-        c.Delete(id);
         view.Delete(id);
         cout << "Element deleted" << endl;
         break;

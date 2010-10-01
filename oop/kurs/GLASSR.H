@@ -28,7 +28,7 @@ public:
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
   * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
-  CGlassR(const CCountedPoint& x, const CCountedPoint& y,
+  CGlassR(int id, const CCountedPoint& x, const CCountedPoint& y,
           const double& bottom, const double& hBottom, const double& lessSide);
 
   /*

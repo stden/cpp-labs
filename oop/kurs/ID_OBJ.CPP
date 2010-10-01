@@ -8,5 +8,4 @@
 #include "debug.h"
 #include "id_obj.h"
 
-int ID_Object :: countreal = 0;
 int ID_Object :: countall = 0;

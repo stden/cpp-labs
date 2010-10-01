@@ -19,9 +19,10 @@ public:
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
   * hBottom - высота основания, lessSide - длина меньшего ребра боковой стенки
   */
-  CClientGlassR(const CCountedPoint& x, const CCountedPoint& y,
+  CClientGlassR(int id, const CCountedPoint& x, const CCountedPoint& y,
                 const double& bottom, const double& hBottom, const double& lessSide) :
-      CGlassR(x, y, bottom, hBottom, lessSide) {
+      CGlassR(id, x, y, bottom, hBottom, lessSide),
+      CClient(id) {
     VERBOSE_OUT && cout << "Client Glass with ring #" << CClient::getID() << endl;
   };
 
