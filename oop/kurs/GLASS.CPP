@@ -25,6 +25,6 @@ CGlass::CGlass(int id, const CCountedPoint& x, const CCountedPoint& y,
 }
 
 CGlass::~CGlass(void) {
-  VERBOSE_OUT && cout << " Glass #" << getID() << " destroyed" << endl;
+  cout << " Glass #" << getID() << " destroyed" << endl;
 }
 

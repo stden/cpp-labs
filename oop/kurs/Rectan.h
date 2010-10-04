@@ -27,7 +27,7 @@ public:
     m_list.insert(CCountedPoint(y.getX(), x.getY()));
     assert(m_list.size() == 4);
     m_list.goFirst();
-    VERBOSE_OUT && cout << "      Rectangle created " << *this;
+    cout << "      Rectangle created " << *this;
   };
 
   void MovedXdY(double dx, double dy) {

@@ -12,7 +12,7 @@
 
 CRing::CRing(double x, double y, double R_B, double R_S) :
     m_x(x), m_y(y), m_R_B(R_B), m_R_S(R_S) {
-  VERBOSE_OUT && cout << "          Ring created" << endl;
+  cout << "          Ring created" << endl;
 }
 
 CRing::CRing(const CRing& ring) {
@@ -23,7 +23,7 @@ CRing::CRing(const CRing& ring) {
 }
 
 CRing::~CRing() {
-  VERBOSE_OUT && cout << "          Ring destroyed" << endl;
+  cout << "          Ring destroyed" << endl;
 }
 
 double CRing::getR_B() const {

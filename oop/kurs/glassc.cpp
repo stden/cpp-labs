@@ -12,10 +12,10 @@ CGlassCase::CGlassCase(const CCountedPoint& leftBottom, const CCountedPoint& rig
     m_leftBottom(leftBottom), m_rightTop(rightTop),
     m_Height(rightTop.getY() - leftBottom.getY()), // Вычисление высоты
     m_Width(rightTop.getX() - leftBottom.getX()) { // Вычисление ширины
-  VERBOSE_OUT && cout << " Glass Case created" << endl;
+  cout << " Glass Case created" << endl;
 }
 
 CGlassCase::~CGlassCase(void) {
-  VERBOSE_OUT && cout << " Glass Case destroyed" << endl;
+  cout << " Glass Case destroyed" << endl;
 }
 

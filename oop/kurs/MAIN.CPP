@@ -100,7 +100,7 @@ int inputClientID(char *prompt) {
     cout << "Register at least one client at first" << endl;
     return 0;
   };
-  for(clients.goFirst();clients.hasNext();clients.goNext())
+  for (clients.goFirst();clients.hasNext();clients.goNext())
     cout << " " << clients.getValue()->getID();
   cout << endl;
   return input(prompt, 1, ID_Object::getTotal());
@@ -143,16 +143,16 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
       else
         glass = new CGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
     } else {
-      if (withRing){
+      if (withRing) {
         CClientGlassR *g = new CClientGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
         glass = g;
         clients.insert(g);
-        assert( glass->getID() == g->getID() );
+        assert(glass->getID() == g->getID());
       } else {
         CClientGlass *g = new CClientGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
         glass = g;
         clients.insert(g);
-        assert( glass->getID() == g->getID() );
+        assert(glass->getID() == g->getID());
       }
     }
 
@@ -167,33 +167,29 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
   cout << "Glass added!" << endl;
 }
 
-void main() {
-  clrscr();
-
-  VERBOSE_OUT = 0;
-
-/*  CServerView c(CCountedPoint(-10, -10), CCountedPoint(20, 20));
+void test() {
+  CServerView c(CCountedPoint(-10, -10), CCountedPoint(20, 20));
   assert(c.size() == 0);
   // Создаём тестовый стакан
   CGlass gl(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(gl.getID() == 1);
-  double minx = MAXDOUBLE, maxx = MINDOUBLE, miny = MAXDOUBLE, maxy = MINDOUBLE;
+  double minx, maxx, miny, maxy;
   gl.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
   assert(maxx == -1 + 2*2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
   c.insert(&gl);
+  gl.MovedXdY(2, 2);
+  assert(gl.getBottom().getPoint(0).getX() == 3);
+  assert(gl.getBottom().getPoint(0).getX() == 3);
   assert(c.size() == 1);
   c.Delete(gl.getID());
   assert(c.size() == 0);
 
   CGlassR glr(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(glr.getID() == 2);
-  minx = MAXDOUBLE;
-  maxx = MINDOUBLE;
-  miny = MAXDOUBLE;
-  maxy = MINDOUBLE;
+  minx = 0; maxx = 0; miny = 0; maxy = 0;
   glr.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
   assert(maxx == -1 + 2*2 + 5);
@@ -204,18 +200,27 @@ void main() {
   CClientGlass cgl(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(cgl.getID() == 3);
   c.insert(&cgl);
-//  c.Register(&cgl);
   cgl.MovedXdY(2, 2);
-//  assert(cgl.getBottom().getPoint(0).getX() == 3);
-//  assert(cgl.getBottom().getPoint(0).getX() == 3);
+  assert(cgl.getBottom().getPoint(0).getX() == 1);
+  assert(cgl.getBottom().getPoint(0).getX() == 1);
+  assert(c.GetClientByID(cgl.getID()) == NULL);
+  c.Register(&cgl);
+  assert(c.GetClientByID(cgl.getID()) == NULL);
+  cgl.MovedXdY(2, 2);
+  assert(cgl.getBottom().getPoint(0).getX() == 3);
+  assert(cgl.getBottom().getPoint(0).getX() == 3);
 
   CClientGlassR cglr(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   c.insert(&cglr);
 
   c.Delete(cgl.getID());
-  c.Delete(cglr.getID()); */
+  c.Delete(cglr.getID());
+}
 
-  VERBOSE_OUT = 1;
+void main() {
+  clrscr();
+
+  test();
 
   cout << endl << endl
        << "-----------------------------------------------" << endl;

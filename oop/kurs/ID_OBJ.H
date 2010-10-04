@@ -12,14 +12,14 @@ class ID_Object {
   // Общее количество созданных когда-либо экземпляров
   static int countall;
 
-  ID_Object(){};
+  ID_Object() {};
 
 public:
-  static int GenID(){
+  static int GenID() {
     return ++countall;
   }
 
-  static int getTotal(){
+  static int getTotal() {
     return countall;
   }
 };

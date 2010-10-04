@@ -151,7 +151,7 @@ void CServer :: ReceiveMessage(CMessage *msg) {
       }
     }
   } else {
-    cout << "Server: could not recive message from unknown client"
+    cout << "Server: could not recive " << *msg << " from unknown client "
          << endl << endl;
   }
   assert(msg != NULL);

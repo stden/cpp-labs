@@ -28,15 +28,14 @@ public:
     m_list.insert(CCountedPoint(y.getX() + l, y.getY()));
     m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
     m_list.goFirst();
-    VERBOSE_OUT && cout << "      Parallelogram created" << *this;
-
+    cout << "      Parallelogram created" << *this;
   };
 
   /*
   * Деструктор
   */
   ~CParallelogram(void) {
-    VERBOSE_OUT && cout << "      Parallelogram destroyed " << *this;
+    cout << "      Parallelogram destroyed " << *this;
   };
 
 

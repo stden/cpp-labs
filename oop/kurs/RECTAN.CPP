@@ -8,19 +8,18 @@
 
 
 CRectangle::~CRectangle() {
-  VERBOSE_OUT && cout << "      Rectangle destroyed" << *this;
+  cout << "      Rectangle destroyed" << *this;
 }
 
 void CRectangle :: GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
-  m_list.goFirst();
-  do {
+  for (m_list.goFirst();m_list.hasNext();m_list.goNext()) {
     double x = m_list.getValue().getX();
     double y = m_list.getValue().getY();
     if (x < *minx) *minx = x;
     if (x > *maxx) *maxx = x;
     if (y < *miny) *miny = y;
     if (y > *maxy) *maxy = y;
-  } while (m_list.goNext());
+  };
 }
 
 ostream& operator << (ostream& s, CRectangle& r) {
