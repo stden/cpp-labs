@@ -28,7 +28,7 @@ public:
     m_list.insert(CCountedPoint(x.getX() + l, x.getY()));
     m_list.goFirst();
 
-    VERBOSE_OUT && cout << "      Trapezium created " << *this;
+    cout << "      Trapezium created " << *this;
   };
 
   ~CTrapezium(void);

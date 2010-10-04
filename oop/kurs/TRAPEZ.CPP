@@ -8,7 +8,7 @@
 #include "Trapez.h"
 
 CTrapezium::~CTrapezium(void) {
-  VERBOSE_OUT && cout << "      Trapezium destroyed " << *this;
+  cout << "      Trapezium destroyed " << *this;
 }
 
 void CTrapezium :: MovedXdY(double dx, double dy) {

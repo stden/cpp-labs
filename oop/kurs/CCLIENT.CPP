@@ -9,20 +9,19 @@
 #include <assert.h>
 #include "debug.h"
 
-int CClient::total = 0;
+int CClient :: total = 0;
 
 CClient :: CClient(int id) : m_id(id) {
   total++;
-  //VERBOSE_OUT &&
   cout << "Client #" << getID() << " is created" <<
-                      " total = " << getTotal() << endl;
+       " total = " << getTotal() << endl;
 }
 
 CClient :: ~CClient() {
   total--;
   Unregister();
-  VERBOSE_OUT && cout << "Client #" << getID() << " is deleted" <<
-                      " total = " << getTotal() << endl;
+  cout << "Client #" << getID() << " is deleted" <<
+       " total = " << getTotal() << endl;
 }
 
 CServer* CClient :: getServer() {
@@ -31,16 +30,16 @@ CServer* CClient :: getServer() {
 
 void CClient :: Register(CServer *server) {
   if (server == NULL)  {
-    VERBOSE_OUT && cout << "Client #" << getID() << endl
-                        << "Failed to register on server due to wrong address" << endl;
+    cout << "Client #" << getID() << endl
+         << "Failed to register on server due to wrong address" << endl;
   } else  {
     if (getServer() != NULL) {
-      VERBOSE_OUT && cout << "Client #" << getID() << " already registered on server" << endl;
+      cout << "Client #" << getID() << " already registered on server" << endl;
     } else {
       this->server = server;
       if (server->GetClientByID(getID()) == NULL) {
         server->Register(this);
-        VERBOSE_OUT && cout << "Client #" << getID() << " was registered on server" << endl;
+        cout << "Client #" << getID() << " was registered on server" << endl;
       }
     }
   }
@@ -48,13 +47,13 @@ void CClient :: Register(CServer *server) {
 
 void CClient::Unregister() {
   if (getServer() == NULL) {
-    VERBOSE_OUT && cout << "Client #" << getID() << " can not unregister from server"
-                        << "cause it does not registered on it" << endl;
+    cout << "Client #" << getID() << " can not unregister from server"
+         << "cause it does not registered on it" << endl;
   } else {
     server = NULL;
     if (server->GetClientByID(getID()) != NULL) {
       server->Unregister(getID());
-      VERBOSE_OUT && cout << "Client #" << getID() << " was unregistered from server" << endl;
+      cout << "Client #" << getID() << " was unregistered from server" << endl;
     }
   }
 }

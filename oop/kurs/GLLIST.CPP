@@ -8,11 +8,11 @@
 #include "GlList.h"
 
 CGlassList :: CGlassList() {
-  VERBOSE_OUT && cout << "GlassList created" << endl;
+  cout << "GlassList created" << endl;
 }
 
 CGlassList :: ~CGlassList() {
-  VERBOSE_OUT && cout << "GlassList deleted" << endl;
+  cout << "GlassList deleted" << endl;
 }
 
 
@@ -22,7 +22,7 @@ void CGlassList::MoveToPoint(const CCountedPoint& point) {
 }
 
 void CGlassList::MovedXdY(double x, double y) {
-  VERBOSE_OUT && cout << "CGlassList::MovedXdY(" << x << "," << y << ")" << endl;
+  cout << "CGlassList::MovedXdY(" << x << "," << y << ")" << endl;
   for (List.goFirst();List.hasNext();List.goNext())
     List.getValue()->MovedXdY(x, y);
 }

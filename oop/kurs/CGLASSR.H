@@ -23,7 +23,7 @@ public:
                 const double& bottom, const double& hBottom, const double& lessSide) :
       CGlassR(id, x, y, bottom, hBottom, lessSide),
       CClient(id) {
-    VERBOSE_OUT && cout << "Client Glass with ring #" << CClient::getID() << endl;
+    cout << "Client Glass with ring #" << CClient::getID() << endl;
   };
 
   /*

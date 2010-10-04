@@ -52,6 +52,10 @@ public:
     return m_bottom.getPoint(0);
   }
 
+  CRectangle& getBottom() {
+    return m_bottom;
+  }
+
   /*
   * Перемещение
   */
@@ -96,12 +100,13 @@ public:
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
   void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
+    *minx = MAXDOUBLE; *maxx = MINDOUBLE;
+    *miny = MAXDOUBLE; *maxy = MINDOUBLE;
     m_bottom.GetBorders(minx, maxx, miny, maxy);
     m_cage.GetBorders(minx, maxx, miny, maxy);
     m_leftSide.GetBorders(minx, maxx, miny, maxy);
     m_rightSide.GetBorders(minx, maxx, miny, maxy);
   };
-
 };
 
 #endif

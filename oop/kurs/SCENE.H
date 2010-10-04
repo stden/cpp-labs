@@ -106,7 +106,7 @@ public:
     return s;
   }
 
-  void inv(){
+  void inv() {
   }
 };
 

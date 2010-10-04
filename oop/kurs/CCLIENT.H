@@ -53,7 +53,7 @@ public:
     return s;
   }
 
-  static int getTotal(){ return total; }
+  static int getTotal() { return total; }
 };
 
 #endif
