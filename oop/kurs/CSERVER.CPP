@@ -32,27 +32,25 @@ int CServer :: ClientCount() const {
 }
 
 void CServer :: Register(CClient *client) {
-  if (client == NULL) {
-    cout << "Server: failed to register client due to wrong address" << endl;
+  assert(client != NULL);
+  if (GetClientByID(client->getID()) != NULL) {
+    cout << "Client #" << client->getID() <<
+         " already registered on server" << endl;
   } else {
-    if (GetClientByID(client->getID()) != NULL) {
-      cout << "Client #" << client->getID() <<
-           " already registered on server" << endl;
-    } else {
-      int n = ClientCount();
-      cout << "Server: register client #" << client->getID() << endl;
-      assert(GetClientByID(client->getID()) == NULL);
-      ClientList.insert(client);
-      assert(GetClientByID(client->getID()) != NULL);
-      assert(ClientCount() == n + 1);
-      if (client->getServer() == NULL) {
-        client->Register(this);
-        cout << "Client #" << client->getID()
-             << " was registered on server" << endl;
-      }
-      assert(client->getServer() != NULL);
+    int n = ClientCount();
+    cout << "Server: register client #" << client->getID() << endl;
+    assert(GetClientByID(client->getID()) == NULL);
+    ClientList.insert(client);
+    assert(GetClientByID(client->getID()) != NULL);
+    assert(ClientCount() == n + 1);
+    if (client->getServer() == NULL) {
+      client->Register(this);
+      cout << "Client #" << client->getID()
+           << " was registered on server" << endl;
     }
   }
+  assert(GetClientByID(client->getID()) != NULL);
+  assert(client->getServer() != NULL);
 }
 
 
