@@ -59,7 +59,7 @@ public:
     m_leftSide.GetBorders(minx, maxx, miny, maxy);
     m_rightSide.GetBorders(minx, maxx, miny, maxy);
     m_ring.GetBorders(minx, maxx, miny, maxy);
-    cout << "GlassR borders: x [" << minx << ".." << maxx "] " << "y [" << miny << ".." << maxy "] " << endl;
+    cout << "GlassR borders: x [" << minx << ".." << maxx << "] " << "y [" << miny << ".." << maxy << "] " << endl;
   };
 
   /*
