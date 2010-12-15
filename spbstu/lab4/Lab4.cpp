@@ -10,8 +10,9 @@
 #include <iostream>
 #include <tchar.h>
 #include <assert.h>
-//#include <cstdio>
-//#include <cstdarg>
+#include <cstdio>
+#include <cstdarg>
+#include <conio.h>
 #include "other.h"
 
 #define	  stop __asm nop
@@ -108,6 +109,7 @@ int sum1N(int N){
 
 int _tmain()
 {
+	setlocale(LC_ALL, "Russian");
 	
 	/////////////////////////////////////////////////////////////////////////////
 	// Задание 1. Ссылки.
@@ -270,11 +272,6 @@ int _tmain()
 		  assert( Month == rMonth );
 		}
 	}
-
-//    assert( DayOfYear(01,02,2000,nDayTab) == 31+1 ); // Январь + 1 день
-  //  assert( DayOfMonth(DayOfYear(10,03,2000,nDayTab) == 31+29+10 ); // Январь + Февраль (високосный) + 10 дней
-	//...
-
 	stop
 
 	//Задание 5. Создайте одномерный массив (размерность вычисляется в процессе
@@ -305,13 +302,10 @@ int _tmain()
 	int NN;
 	std::cout << "N = ";
 	std::cin >> NN;
+	//std::cin >> NN;
 	for(int i=1;i<NN;i++)
       std::cout << i << "+";
 	std::cout << NN << " = " << sum1N(NN) << "\n";
-
-
-	char Winter;
-	std::cin >> Winter;
 
 	//Задание 7а. Функции с переменным числом параметров.
 	//Напишите функцию (дана заготовка VarArgs, не использующая
@@ -329,16 +323,35 @@ int _tmain()
 
 	//Задание 7б. Модифицируйте функцию 5а с помощью макросов
 	// va_start, va_arg, va_end
-
-
-
+	VarArgs2(nN1,0);	
+	VarArgs2(nN1,nN2,0);	
+	VarArgs2(nN1,nN2,nN3,nN4,nN5,0);	
+	stop
 
 	//Задание 8. Возвращение адреса.
 	//Напишите функцию, которая находит минимальное значение в массиве,
 	// таким образом, чтобы ее вызов можно было использовать слева от знака 
 	// равенства: *MyMin(параметры) = 0;
-	
-	
+	const int Size = 10;
+	int* arr = new int[Size];
+
+	std::cout << "Заполняем массив случайными числами: ";
+	for(int i=0;i<Size;i++){
+	  arr[i] = rand()%12 + 1;
+	  std::cout << " " << arr[i];
+	}
+    std::cout << "\n";
+
+	std::cout << "Меняем первый из минимальных элементов на ноль\n";
+	*MyMin(arr,Size) = 0;
+
+	std::cout << "Изменённый массив: ";
+	for(int i=0;i<Size;i++)
+	  std::cout << " " << arr[i];
+    std::cout << "\n\n";
+
+    std::cout << "\n\n Нажмите любую клавишу для выхода...";
+	getch();
 
 	return 0;
 }//main
