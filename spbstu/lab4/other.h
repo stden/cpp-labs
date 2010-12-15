@@ -30,3 +30,6 @@ void Swap( int* x, int* y )
   *y = temp;
 }
 
+void VarArgs(int arg1,...){
+
+}
