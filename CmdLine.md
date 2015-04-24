@@ -1,5 +1,5 @@
 ### Простейший пример ###
-```
+``` cpp
 #include <iostream>
 
 using namespace std;
@@ -25,7 +25,7 @@ C:\MinGW\bin>a.exe 3.2 4.5 dsrsdf "C:\Program Files"
 ```
 
 ### Вывод размеров стандартных типов ###
-```
+``` cpp
 #include <iostream>
 #include <strings.h>
 
