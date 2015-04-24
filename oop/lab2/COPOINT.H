@@ -24,7 +24,7 @@ class CCountedPoint {
   //Идентификатор
   int m_id;
 
-public:
+ public:
 
   /*
   * Конструктор

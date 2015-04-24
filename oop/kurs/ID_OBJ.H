@@ -14,7 +14,7 @@ class ID_Object {
 
   ID_Object() {};
 
-public:
+ public:
   static int GenID() {
     return ++countall;
   }

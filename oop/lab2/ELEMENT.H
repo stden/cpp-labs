@@ -26,7 +26,7 @@ class CElem {
   //Идентификатор
   int m_id;
 
-public:
+ public:
   /*
   * Конструтор
   */

@@ -14,7 +14,7 @@
 
 
 class CCover {
-private:
+ private:
   CircleList<CPoint> MainPoints;
   CRectangle Hole;
   CRectangle Cover;
@@ -22,27 +22,27 @@ private:
   static unsigned int total;
   unsigned int id;
   static unsigned int current;
-public:
+ public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CCover(CPoint,double cover_width,double cover_height, double hole_width); // P1 width heigth length
-	CCover(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CCover(CPoint, double cover_width, double cover_height, double hole_width); // P1 width heigth length
+  CCover(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CCover();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CCover();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
+  int inv (); // Инвариант
   void RefreshPoints ();
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint P0); // Задание точки P1
   void Move (double dx, double dy); // Плоскопараллельное перемещение на dx dy
   const CircleList<CPoint>& GetPoints () const;

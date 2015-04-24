@@ -27,9 +27,11 @@ class CList {
   //Идентификатор
   int m_id;
 
-public:
+ public:
 
-  int getID() const { return m_id; }
+  int getID() const {
+    return m_id;
+  }
 
   /*
   * Конструктор
@@ -61,14 +63,17 @@ public:
   void insert(const type& elem) {
     CElem<type>* tmp = new CElem<type>(elem);
 
-    if (m_first == NULL) {
+    if (m_first == NULL)
       m_first = tmp;
-    } else {
+    else {
       CElem<type>* cur = m_first;
+
       while (cur != NULL && cur->getNext() != NULL)
         cur = cur->getNext();
+
       cur->setNext(tmp);
     };
+
     m_current = tmp;
   }
 
@@ -79,6 +84,7 @@ public:
     CElem<type>* new_el = new CElem<type>(elem);
     new_el->setNext(m_first);
     m_first = new_el;
+
     if (m_current == NULL)
       m_current = m_first;
   }
@@ -108,8 +114,10 @@ public:
       // То нам нужен элемент перед текущим (надо изменить у него ссылку)
       // Ищем этот предыдущий элемент начиная с первого
       CElem<type>* prev = m_first;
+
       while (prev->getNext() != m_current)
         prev = prev->getNext();
+
       // Сейчас prev - тот самый предыдущий элемент
       // И теперь он должен ссылаться на тот элемент, на который ссылался
       // удаляемый элемент
@@ -167,8 +175,11 @@ public:
   */
   int goNext() {
     if (m_current == NULL) return 0;
+
     m_current = m_current->getNext();
+
     if (m_current->getNext() == NULL) return 0;
+
     return 1;
   }
 
@@ -197,6 +208,7 @@ public:
   ~CList() {
     countreal--;
     goFirst();
+
     while (dispose()) {}
 
     //cout << "Linear list destroyed... (remain " << countreal << ")" << endl;
@@ -208,10 +220,12 @@ public:
   size_t size() const {
     CElem<type>* tmp = m_first;
     size_t count = 0;
+
     while (tmp != NULL) {
       count++;
       tmp = tmp->getNext();
     }
+
     return count;
   }
 
@@ -220,8 +234,10 @@ public:
   */
   CList& operator=(const CList& list) {
     m_id = list.getID();
+
     for (CElem<type>* c = list.m_first; c != NULL; c = c->getNext())
       insert(c->getValue());
+
     return *this;
   }
 
@@ -231,6 +247,7 @@ public:
   void Print() const {
     for (CElem<type>* c = m_first; c != NULL; c = c->getNext())
       cout << c->getValue() << ", ";
+
     cout << endl;
   }
 };

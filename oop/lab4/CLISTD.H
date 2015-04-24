@@ -10,13 +10,13 @@
 
 template<class ValueType>
 class CircleList {
-private:
-  CLNode<ValueType> *header;
-  CLNode<ValueType> *cur;
-  CLNode<ValueType> *last;
+ private:
+  CLNode<ValueType>* header;
+  CLNode<ValueType>* cur;
+  CLNode<ValueType>* last;
   int _length;
   static int debug;
-public :
+ public :
   CircleList(void);  // Constructor creates NULL list
   ~CircleList(void); // Destructor deletes all elements
   CLNode<ValueType>* GetFirst(); // Setting header as current element

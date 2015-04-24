@@ -14,32 +14,32 @@
 
 
 class CView : public CPistonCollection, public CStand {
-private:
+ private:
 
-public:
+ public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CView(CPoint _P1,double _P1P2,CPoint _P3); // P1 width heigth length
-	CView(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CView(CPoint _P1, double _P1P2, CPoint _P3); // P1 width heigth length
+  CView(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CView();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CView();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
+  int inv (); // Инвариант
 
   //---------------------------------------------------
   void SetCollectionP1(CPoint P0); // Задание точки P1
   void SetStandP1 (CPoint P0);
   void MoveCollection (double dx, double dy); // Плоскопараллельное перемещение на dx dy
   void MoveStand (double dx, double dy); // Плоскопараллельное перемещение на dx dy
-  void MoveCollectionAndStand (double dx, double dy);	 	
+  void MoveCollectionAndStand (double dx, double dy);
   void SetCollectionAndStandP1(CPoint P0); // Задание точки P1
   void Add(CPistonMechanism*) const;
   void Add(const CPistonCollection& C) const;

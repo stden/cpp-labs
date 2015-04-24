@@ -9,9 +9,9 @@
 #include "debug.h"
 
 CGlassCase::CGlassCase(const CCountedPoint& leftBottom, const CCountedPoint& rightTop):
-    m_leftBottom(leftBottom), m_rightTop(rightTop),
-    m_Height(rightTop.getY() - leftBottom.getY()), // Вычисление высоты
-    m_Width(rightTop.getX() - leftBottom.getX()) { // Вычисление ширины
+  m_leftBottom(leftBottom), m_rightTop(rightTop),
+  m_Height(rightTop.getY() - leftBottom.getY()), // Вычисление высоты
+  m_Width(rightTop.getX() - leftBottom.getX()) { // Вычисление ширины
   cout << " Glass Case created" << endl;
 }
 

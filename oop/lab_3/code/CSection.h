@@ -12,37 +12,37 @@
 
 
 class CSection {
-private:
+ private:
   CPoint P1, P2;
   double L;
   static unsigned int debug;
   static unsigned int total;
-  unsigned int id;                      
+  unsigned int id;
   static unsigned int current;
-public:
+ public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------			
-	CSection(double,double,double); // x1 y1 y2
-	CSection(CPoint,double); // p1 y2 
-	CSection();
-	//-------------------------------------------------
-	
-				/*Деструктор*/
-	//-------------------------------------------------				
-	~CSection();
-	//-------------------------------------------------
-	
-	
-	/**/
-	
-  int inv ();	// Инвариант
-	
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CSection(double, double, double); // x1 y1 y2
+  CSection(CPoint, double); // p1 y2
+  CSection();
+  //-------------------------------------------------
+
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CSection();
+  //-------------------------------------------------
+
+
+  /**/
+
+  int inv (); // Инвариант
+
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
   void SetL(double);
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy 
+  void Move (double, double); // Плоскопараллельное перемещение на dx dy
   CPoint GetP1() const;
   CPoint GetP2() const;
   double GetL () const;
@@ -53,7 +53,7 @@ public:
   unsigned int GetID ();
   unsigned int GetCurrent();
   unsigned int GetTotal();
-  
+
   // Point Relations
   double d( CPoint);         // Расстояние от точки до прямой
   double d2( CPoint);        // Квадрат расстояния от точки до прямой
@@ -62,10 +62,10 @@ public:
   int isParallel (const CSection&);
 
   // Операторы
-  
+
   CSection& operator = (CSection&);
   int operator == (CSection&);
- 
+
 };
 
 

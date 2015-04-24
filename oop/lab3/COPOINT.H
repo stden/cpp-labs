@@ -9,14 +9,14 @@
 #include <iostream.h>
 
 class CCountedPoint {
-protected:
+ protected:
   //Абсцисса точки
   double m_x;
 
   //Ордината точки
   double m_y;
 
-public:
+ public:
 
   /*
   * Конструктор

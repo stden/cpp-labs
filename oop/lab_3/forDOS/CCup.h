@@ -14,37 +14,37 @@
 
 
 class CCup {
-private:
+ private:
   CircleList<CPoint> MainPoints;
-  CRectangle RightCupSide,BottomCupSide,LeftCupSide;
+  CRectangle RightCupSide, BottomCupSide, LeftCupSide;
   static unsigned int debug;
   static unsigned int total;
   unsigned int id;
   static unsigned int current;
-public:
+ public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-	CCup(CPoint,double,double,double,double,double);
-      	CCup(double,double,double,double,double,double,double); // x, y, width, heigth, length
-	CCup(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CCup(CPoint, double, double, double, double, double);
+  CCup(double, double, double, double, double, double, double); // x, y, width, heigth, length
+  CCup(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-      	~CCup();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CCup();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-  int inv ();	// Инвариант
+  int inv (); // Инвариант
   void RefreshPoints ();
 
   //---------------------------------------------------
-  void SetP1(double,double);
+  void SetP1(double, double);
   void SetP1(CPoint); // Задание точки P1
-  void Move (double,double); // Плоскопараллельное перемещение на dx dy
+  void Move (double, double); // Плоскопараллельное перемещение на dx dy
   const CircleList<CPoint>& GetPoints () const;
   CRectangle GetLeftSide() const;
   CRectangle GetBottomSide() const;

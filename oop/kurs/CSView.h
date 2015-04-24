@@ -17,9 +17,9 @@ class CServerView : public CScene, public CServer {
     CScene :: inv();
   }
 
-public:
+ public:
   CServerView(const CCountedPoint& leftBottom, const CCountedPoint& rightTop)
-      : CScene(leftBottom, rightTop) {}
+    : CScene(leftBottom, rightTop) {}
 
   CServerView(const CScene& scene) : CScene(scene) { };
 
@@ -27,9 +27,9 @@ public:
 
   void ReciveMessage(CMessage* msg) {
     CServer :: ReceiveMessage(msg);
-    if (msg->getType() > 2) {
+
+    if (msg->getType() > 2)
       CServer :: SendMessage(msg->getType(), msg->getInfo(), msg->getFromID());
-    }
   }
 
   void Print() const {

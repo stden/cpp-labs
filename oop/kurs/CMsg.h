@@ -11,20 +11,20 @@
 
 // Информация в сообщении
 class CInfo {
-public:
+ public:
   double dx;
   double dy;
   CCountedPoint p;
   CInfo(double _dx = 0, double _dy = 0,
         const CCountedPoint& _p = CCountedPoint()) :
-      dx(_dx), dy(_dy), p(_p) {}
+    dx(_dx), dy(_dy), p(_p) {}
 
   /*
   * Оператор вывода в поток
   */
   friend ostream& operator << (ostream& s, const CInfo& Info) {
     s << "(dx = " << Info.dx << ", dy = " << Info.dy
-    << ", Point = " << Info.p << ")" << endl;
+      << ", Point = " << Info.p << ")" << endl;
     return s;
   }
 };
@@ -44,7 +44,7 @@ const int ACTION_MOVETOPOINT = 4;  // Помещение в точку
 
 // Объявление класса Сообщение
 class CMessage {
-private:
+ private:
   const int id; // id сообщения
   int FromID; // id от кого сообщение
   int ToID; // id кому сообщение
@@ -54,49 +54,83 @@ private:
   static int debug;
   static int total;
   static int current;
-public:
+ public:
   CMessage(int _FromID, int _ToID, int _Type, const CInfo& _Info, Direction _dir);
   CMessage(const CMessage& msg);
   ~CMessage();
 
   const char* InterpritateType(int type) const;
 
-  int getID() const { return id; }
-  int getFromID() const { return FromID; }
-  int getToID() const { return ToID; }
-  int getType() const { return Type; }
-  const CInfo& getInfo() const { return Info; }
-  Direction getDirection() const { return direction; }
+  int getID() const {
+    return id;
+  }
+  int getFromID() const {
+    return FromID;
+  }
+  int getToID() const {
+    return ToID;
+  }
+  int getType() const {
+    return Type;
+  }
+  const CInfo& getInfo() const {
+    return Info;
+  }
+  Direction getDirection() const {
+    return direction;
+  }
 
-  void setFromID(int _FromID) { FromID = _FromID; };
-  void setToID(int _ToID) { ToID = _ToID; };
-  void setType(int _Type) { Type = _Type; };
-  void setInfo(CInfo& _Info) { Info = _Info; };
-  void setDirection(Direction _dir) { direction = _dir; }
+  void setFromID(int _FromID) {
+    FromID = _FromID;
+  };
+  void setToID(int _ToID) {
+    ToID = _ToID;
+  };
+  void setType(int _Type) {
+    Type = _Type;
+  };
+  void setInfo(CInfo& _Info) {
+    Info = _Info;
+  };
+  void setDirection(Direction _dir) {
+    direction = _dir;
+  }
 
-  static void setDebug(int d) { debug = d; }
+  static void setDebug(int d) {
+    debug = d;
+  }
 
-  static int getCurrent() { return current; }
-  static int getTotal() { return total; }
-  static int getDebug() { return debug; }
+  static int getCurrent() {
+    return current;
+  }
+  static int getTotal() {
+    return total;
+  }
+  static int getDebug() {
+    return debug;
+  }
 
   /*
   * Оператор вывода в поток
   */
   friend ostream& operator << (ostream& s, CMessage& m) {
     s << " " << m.InterpritateType(m.Type) << "-" << m.Type
-    << " #" << m.id << " ";
+      << " #" << m.id << " ";
+
     switch (m.direction) {
       case Server_to_Client:
         s << "S -> C" << m.ToID;
         break;
+
       case Client_to_Server:
         s << "C" << m.FromID << " -> S";
         break;
+
       case Client_to_Client:
         s << "C" << m.FromID << " -> S -> C" << m.ToID;
         break;
     }
+
     s << " Info=" << m.Info << " ";
     return s;
   }

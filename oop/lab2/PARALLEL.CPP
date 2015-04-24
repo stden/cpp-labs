@@ -45,7 +45,7 @@ void CParallelogram :: MoveToPoint(const CCountedPoint& P) {
 const CCountedPoint& CParallelogram :: getPoint(int index) {
   m_list.goFirst();
 
-  for (index;index > 1;index--)
+  for (index; index > 1; index--)
     m_list.goNext();
 
   return m_list.getElem().getValue();

@@ -52,21 +52,27 @@ CLNode<ValueType>* CircleList<ValueType> :: GetLast() {
 
 template <class ValueType>
 CLNode<ValueType>* CircleList<ValueType> :: GetCur() const {
-  if (_length && cur) return cur; else return 0;
+  if (_length && cur) return cur;
+  else return 0;
 }
 
 template <class ValueType>
 CLNode<ValueType>* CircleList<ValueType> :: GetElemByNum(int N) const {
   if (_length <= 0) return NULL;
+
   if (_length == 1) return header;
 
   if (_length > 1) {
     if (N < 0) return NULL;
+
     if (N >= _length) return NULL;
+
     //         GetFirst();
     CLNode<ValueType>* tmp = header;
+
     for (int i = 0; i < _length; i++) {
       if (i == N) return tmp;
+
       tmp = tmp->GetNext();
 
     }
@@ -115,16 +121,21 @@ void CircleList<ValueType>::RemoveCur() {
       --_length;
       return;
     }
+
     int i = 0;
     CLNode<ValueType>* tcur = header;
+
     while (i < _length + 1) {
       if (tcur->GetNext() == cur) {
         tcur->SetNext(cur->GetNext());
+
         if (cur == last) last = tcur;
+
         --_length;
         delete cur;
         return;
       }
+
       tcur = tcur->GetNext();
     }
   }
@@ -161,14 +172,18 @@ void CircleList<ValueType>::ExcludeCur() {
 
     int i = 0;
     CLNode<ValueType>* tcur = header;
+
     while (i < _length + 1) {
       if (tcur->GetNext() == cur) {
         tcur->SetNext(cur->GetNext());
+
         if (cur == last) last = tcur;
+
         --_length;
         //       delete cur;
         return;
       }
+
       tcur = tcur->GetNext();
     }
   }
@@ -180,6 +195,7 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
     cout << "Empty list, nothing to delete" << endl;
     return;
   }
+
   if (_length == 1) {
     cur = header;
     // delete cur;
@@ -201,14 +217,18 @@ void CircleList<ValueType>::ExcludeByNum(int n) {
 
     int i = 0;
     CLNode<ValueType>* tcur = header;
+
     while (i < _length + 1) {
       if (i == n) {
         tcur->SetNext(cur->GetNext());
+
         if (cur == last) last = tcur;
+
         --_length;
         //       delete cur;
         return;
       }
+
       tcur = tcur->GetNext();
     }
   }
@@ -226,6 +246,7 @@ CLNode<ValueType>* CircleList<ValueType>:: Append(CLNode<ValueType>* node) {
     node->SetNext(header);
     ++_length;
   }
+
   return node;
 }
 
@@ -240,6 +261,7 @@ CLNode<ValueType>* CircleList<ValueType>:: Prepend(CLNode<ValueType>* node) {
     header->SetNext(node);
     ++_length;
   }
+
   return node;
 }
 
@@ -252,7 +274,7 @@ void CircleList<ValueType>:: Print() const {
   }
 
   short i = 0;
-  CLNode <ValueType> * temp = header;
+  CLNode <ValueType>* temp = header;
 
   while (i < _length && temp) {
     cout << "Element " << i << ": " << temp.getValue << endl;

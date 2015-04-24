@@ -5,24 +5,23 @@
 #include <iostream>
 
 
-class String
-{
+class String {
 
-      
-public:
-      String ();// конструктор по умолчанию
-      String( char *);//преобразования
-      
-      operator char * ();
-      String operator= ( String );
-      String operator+ ( String );//прибавляет строчку
-      String operator+= ( String );
-      String operator-(int);//удаляет n символов
-      String operator -=(int);
-private:
-        int len; //длина строки(без 0)
-        char *str; //указатель на начало представления строки
+
+ public:
+  String ();// конструктор по умолчанию
+  String( char*); //преобразования
+
+  operator char* ();
+  String operator= ( String );
+  String operator+ ( String );//прибавляет строчку
+  String operator+= ( String );
+  String operator-(int);//удаляет n символов
+  String operator -=(int);
+ private:
+  int len; //длина строки(без 0)
+  char* str; //указатель на начало представления строки
 }; //конец класса
 
 #endif
-            
+

@@ -28,15 +28,16 @@ CServer* CClient :: getServer() {
   return server;
 }
 
-void CClient :: Register(CServer *server) {
+void CClient :: Register(CServer* server) {
   if (server == NULL)  {
     cout << "Client #" << getID() << endl
          << "Failed to register on server due to wrong address" << endl;
   } else  {
-    if (getServer() != NULL) {
+    if (getServer() != NULL)
       cout << "Client #" << getID() << " already registered on server" << endl;
-    } else {
+    else {
       this->server = server;
+
       if (server->GetClientByID(getID()) == NULL) {
         server->Register(this);
         cout << "Client #" << getID() << " was registered on server" << endl;
@@ -51,6 +52,7 @@ void CClient::Unregister() {
          << "cause it does not registered on it" << endl;
   } else {
     server = NULL;
+
     if (server->GetClientByID(getID()) != NULL) {
       server->Unregister(getID());
       cout << "Client #" << getID() << " was unregistered from server" << endl;
@@ -61,10 +63,11 @@ void CClient::Unregister() {
 // Собственно отправка сообщения клиенту
 // Все остальные варианты SendMessage только подготоваливают
 // сообщения разных видов и вызывают данный метод
-void CClient::SendMessage(CMessage *msg) {
+void CClient::SendMessage(CMessage* msg) {
   assert(msg->getFromID() == getID());
   assert(msg->getDirection() == Client_to_Server ||
          msg->getDirection() == Client_to_Client);
+
   if (server != NULL) {
     if (msg->getDirection() == Client_to_Server)
       cout << "Client #" << getID() << " sent " << *msg << " to server "
@@ -72,6 +75,7 @@ void CClient::SendMessage(CMessage *msg) {
     else
       cout << "Client #" << getID() << " sent " << *msg << " to client #" <<
            msg->getToID() << endl;
+
     server->ReceiveMessage(msg);
   } else {
     cout << "Client #" << getID() << " could not send messages to server "
@@ -88,7 +92,7 @@ void CClient::SendMessage(int _type, const CInfo&  _info, int _id) {
   SendMessage(&msg);
 }
 
-void CClient::ReceiveMessage(CMessage *msg) {
+void CClient::ReceiveMessage(CMessage* msg) {
   // Проверяем кооректность пришедшего сообщения
   assert(msg->getDirection() == Server_to_Client ||
          msg->getDirection() == Client_to_Client);
@@ -101,6 +105,7 @@ void CClient::ReceiveMessage(CMessage *msg) {
     else
       cout << endl << "Client #" << getID() << " recived " << *msg << " from client #"
            << msg->getFromID() << endl << endl;
+
     if (msg->getType() > 1)  {
       // отправка подтверждения о приёме сообщения
       CMessage m1(*msg);
@@ -124,10 +129,12 @@ void CClient::Action(int _code, const CInfo& _info) {
       cout << "Client is handling action with code = " << _code
            << " Info = " << _info << endl << endl;
       break;
+
     case 3:
       cout << "Client is handling action with code = " << _code
            << " Info = " << _info << endl << endl;
       break;
+
     default:
       cout << "Client could not handle action with code = " << _code
            << " case of unknown code " << endl << endl;

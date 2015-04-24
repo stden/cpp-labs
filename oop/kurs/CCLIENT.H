@@ -20,7 +20,7 @@ class CServer;
 
 // Класс "Клиент"
 class CClient {
-private:
+ private:
   // сервер на котором зарегестрирован клиент или NULL
   CServer* server;
 
@@ -30,30 +30,34 @@ private:
   // Общее количество созданных когда-либо экземпляров
   static int total;
 
-public:
+ public:
   CClient(int id);
   ~CClient();
 
-  int getID() const { return m_id; };
+  int getID() const {
+    return m_id;
+  };
 
   CServer* getServer();     // Получить сервер
-  void Register(CServer *server); // Зарегестрироваться на сервере
+  void Register(CServer* server); // Зарегестрироваться на сервере
   void Unregister(); // Сняться с регистрации на сервере
-  void SendMessage(CMessage *msg); // Отправить сообщение серверу
+  void SendMessage(CMessage* msg); // Отправить сообщение серверу
   void SendMessage(int _type, const CInfo& _info, int _id); // Отправить сообщение серверу
-  void ReceiveMessage(CMessage *msg); // Получить сообщение
+  void ReceiveMessage(CMessage* msg); // Получить сообщение
   virtual void Action(int _type, const CInfo& _info);
 
   // Оператор вывода в поток
   friend ostream& operator << (ostream& s, const CClient& c) {
     s << "Client #" << c.getID() << "  " <<
-    ((c.server == NULL) ?
-     " - Not registered on server" : " - Registered on server")
-    << endl << endl;
+      ((c.server == NULL) ?
+       " - Not registered on server" : " - Registered on server")
+      << endl << endl;
     return s;
   }
 
-  static int getTotal() { return total; }
+  static int getTotal() {
+    return total;
+  }
 };
 
 #endif

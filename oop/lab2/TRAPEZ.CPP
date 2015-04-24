@@ -48,7 +48,7 @@ void CTrapezium :: MoveToPoint(const CCountedPoint& P) {
 const CCountedPoint& CTrapezium :: getPoint(int index) {
   m_list.goFirst();
 
-  for (index;index > 1;index--)
+  for (index; index > 1; index--)
     m_list.goNext();
 
   return m_list.getElem().getValue();

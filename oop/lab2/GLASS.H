@@ -25,7 +25,7 @@ class CGlass {
   // Правая стенка
   CParallelogram m_rightSide;
 
-public:
+ public:
   /*
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
@@ -54,9 +54,12 @@ public:
   */
   friend ostream& operator << (ostream& s, CGlass& r) {
     s << "Glass: "
-    << "  Bottom: " << r.m_bottom; getch();
-    s  << "  Cage: " << r.m_cage; getch();
-    s << "  Left side: " << r.m_leftSide; getch();
+      << "  Bottom: " << r.m_bottom;
+    getch();
+    s  << "  Cage: " << r.m_cage;
+    getch();
+    s << "  Left side: " << r.m_leftSide;
+    getch();
     s  << "  Right side: " << r.m_rightSide;
     getch();
 

@@ -10,10 +10,10 @@
 #include "CoList.h"
 
 class cRectangle {
-private :
+ private :
   CList<CCountedPoint> m_list;
 
-//Количество экземпляров класса прямоугольник
+  //Количество экземпляров класса прямоугольник
   static int countreal;
 
   //Общее количество созданных когда-либо экземпляров
@@ -22,7 +22,7 @@ private :
   //Идентификатор
   int m_id;
 
-public:
+ public:
 
   /*
   * Конструктор
@@ -33,12 +33,18 @@ public:
   void MovedXdY(double dx, double dy);
   void MoveToPoint(const CCountedPoint& P);
 
-  const CList<CCountedPoint>& getPoints() { return m_list; }
+  const CList<CCountedPoint>& getPoints() {
+    return m_list;
+  }
   const CCountedPoint& getPoint(int index);
 
-  static int getCount() { return countreal; }
+  static int getCount() {
+    return countreal;
+  }
 
-  int getId() { return m_id; }
+  int getId() {
+    return m_id;
+  }
 
 
 

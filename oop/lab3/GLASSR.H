@@ -20,7 +20,7 @@ class CGlassR : public CGlass { // Используется простое наследование
   // Кольцо - две концентрические окружности в "полости стакана"
   CRing m_ring;
 
-public:
+ public:
   /*
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
@@ -47,7 +47,7 @@ public:
   /*
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy) {
     *minx = MAXDOUBLE;
     *maxx = MINDOUBLE;
     *miny = MAXDOUBLE;
@@ -57,7 +57,7 @@ public:
     m_leftSide.GetBorders(minx, maxx, miny, maxy);
     m_rightSide.GetBorders(minx, maxx, miny, maxy);
     m_ring.GetBorders(minx, maxx, miny, maxy);
-//    cout << "GlassR borders: minx " << minx << " " << " "
+    //    cout << "GlassR borders: minx " << minx << " " << " "
   };
 
   /*
@@ -69,7 +69,7 @@ public:
 
   virtual ostream& Write(ostream& s) {
     s << "    Glass with Ring #" << getID() << ": " << endl
-    << "      Bottom: " << m_bottom;
+      << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
     s << "      Right side: " << m_rightSide;

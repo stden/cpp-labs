@@ -10,10 +10,10 @@
 #include "CoList.h"
 
 class CRectangle {
-private :
+ private :
   CList<CCountedPoint> m_list;
 
-public:
+ public:
 
   /*
   * Конструктор
@@ -23,7 +23,8 @@ public:
 
   void MovedXdY(double dx, double dy) {
     cout << "CRectangle::MovedXdY(" << dx << "," << dy << ")" << endl;
-    for (m_list.goFirst();m_list.hasNext();m_list.goNext())
+
+    for (m_list.goFirst(); m_list.hasNext(); m_list.goNext())
       m_list.getValue().MovedXdY(dx, dy);
   };
 
@@ -36,10 +37,12 @@ public:
     MovedXdY(dx, dy);
   };
 
-  const CList<CCountedPoint>& getPoints() const { return m_list; }
+  const CList<CCountedPoint>& getPoints() const {
+    return m_list;
+  }
   const CCountedPoint& getPoint(int index);
 
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy);
 
   /*
   * Деструктор

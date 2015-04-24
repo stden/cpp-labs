@@ -8,14 +8,14 @@
 
 template <class type>
 class CNode {
-private:
+ private:
   type Value;
-  cNode *Next;
-public:
+  cNode* Next;
+ public:
   CNode(void);
   ~CNode();
-  CNode<type> *GetNext(void);
-  void SetNext(CNode *b);
+  CNode<type>* GetNext(void);
+  void SetNext(CNode* b);
   type GetValue(void);
   void SetValue(type a);
 };

@@ -4,18 +4,18 @@
 #include "Shapes.h"
 #include "MyMVTBase.h"
 
-class MyMVT : public MyMVTBase<MyMVT,Shape> {
-public:
+class MyMVT : public MyMVTBase<MyMVT, Shape> {
+ public:
 
-	Figure figure;
+  Figure figure;
 
-public:
+ public:
 
-    void linkPPP( Point*,Point*,Point* );
-    void linkPP( Point*,Point* );
-    void linkPS( Point*,Segment* );
-    void linkSS( Segment*,Segment* );
-    //void linkSSX( Segment*,Segment* );
+  void linkPPP( Point*, Point*, Point* );
+  void linkPP( Point*, Point* );
+  void linkPS( Point*, Segment* );
+  void linkSS( Segment*, Segment* );
+  //void linkSSX( Segment*,Segment* );
 
 };
 

@@ -1,6 +1,6 @@
 // stdafx.cpp : source file that includes just the standard includes
-//	LAB2.pch will be the pre-compiled header
-//	stdafx.obj will contain the pre-compiled type information
+//  LAB2.pch will be the pre-compiled header
+//  stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"
 

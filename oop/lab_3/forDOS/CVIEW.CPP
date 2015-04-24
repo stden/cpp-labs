@@ -8,14 +8,14 @@
 #include <iostream.h>
 
 
-CView :: CView (CPoint _P1,double _P1P2,CPoint _P3)
- : CStand(_P1,_P1P2,_P3),
-   CPistonCollection() {}
+CView :: CView (CPoint _P1, double _P1P2, CPoint _P3)
+  : CStand(_P1, _P1P2, _P3),
+    CPistonCollection() {}
 
 
 CView :: CView ()
- : CStand(),
-   CPistonCollection()   {}
+  : CStand(),
+    CPistonCollection()   {}
 
 
 
@@ -24,68 +24,69 @@ CView :: ~CView () {}
 
 
 int CView :: inv () {
-return (invColl() && invStand());
+  return (invColl() && invStand());
 }
 
 
 
 void CView :: SetCollectionP1(CPoint P0) {
-      CPistonCollection :: SetP1(P0);
+  CPistonCollection :: SetP1(P0);
 
 }
 
 void CView :: SetStandP1(CPoint P0) {
-      CStand :: SetP(P0);
+  CStand :: SetP(P0);
 
 }
 
 
 void CView :: MoveCollection (double dx, double dy) {
-       CPistonCollection :: Move(dx,dy);
+  CPistonCollection :: Move(dx, dy);
 }
 
 void CView :: MoveStand (double dx, double dy) {
-       CStand :: MoveStand(dx,dy);
+  CStand :: MoveStand(dx, dy);
 }
 
 void CView :: MoveCollectionAndStand (double dx, double dy) {
-	MoveStand(dx,dy);
-	MoveCollection(dx,dy);
+  MoveStand(dx, dy);
+  MoveCollection(dx, dy);
 }
 
-void CView :: SetCollectionAndStandP1(CPoint P0){
-	SetCollectionP1(P0);
-	SetStandP1(P0);
+void CView :: SetCollectionAndStandP1(CPoint P0) {
+  SetCollectionP1(P0);
+  SetStandP1(P0);
 }
 
-void CView :: Add(CPistonMechanism* P) const{
-   CPistonCollection :: Add(P);
+void CView :: Add(CPistonMechanism* P) const {
+  CPistonCollection :: Add(P);
 }
 
-void CView :: Add(const CPistonCollection& C) const{
+void CView :: Add(const CPistonCollection& C) const {
 
-   for (int i =0;i < C.GetCollection().GetSize();i++)
-           CPistonCollection :: Add(C.GetCollection().GetElemByNum(i)->GetValue());
+  for (int i = 0; i < C.GetCollection().GetSize(); i++)
+    CPistonCollection :: Add(C.GetCollection().GetElemByNum(i)->GetValue());
 }
 
 int CView :: isOnStand (CPistonMechanism* P) const {
-        return isIn(P->GetPoints());
+  return isIn(P->GetPoints());
 }
 
 
 void CView :: PrintView () {
-         CStand :: Print ();
-         Collection.GetFirst();
-     for (int i = 0; i < Collection.GetSize();i++,Collection.NextCur())
-        if (isOnStand(Collection.GetCur()->GetValue())){
-		cout << "Element #"<<i<<": ";
-		Collection.GetCur()->GetValue()->Print();
-	}
+  CStand :: Print ();
+  Collection.GetFirst();
+
+  for (int i = 0; i < Collection.GetSize(); i++, Collection.NextCur())
+    if (isOnStand(Collection.GetCur()->GetValue())) {
+      cout << "Element #" << i << ": ";
+      Collection.GetCur()->GetValue()->Print();
+    }
 }
 
 void CView :: Print () {
-        CStand :: Print ();
-        CPistonCollection :: Print();
+  CStand :: Print ();
+  CPistonCollection :: Print();
 }
 
 

@@ -10,15 +10,15 @@
 
 
 class CPoint {
-private:
+ private:
   double x;
   double y;
   static unsigned int debug;
   static unsigned int total;
   unsigned int id;
   static unsigned int current;
-public:
-  CPoint(double,double);
+ public:
+  CPoint(double, double);
   CPoint();
   CPoint(double);
   ~CPoint();
@@ -48,7 +48,7 @@ public:
 
   // одинаковы ли точки ?
 
- // CPoint operator = (CPoint&);
+  // CPoint operator = (CPoint&);
   int operator == (CPoint);
   int operator!= (CPoint&);
   int operator== (double);
@@ -61,10 +61,10 @@ public:
   int operator>= (double);
   int operator>= (CPoint&);
   int operator<= (CPoint&);
-  friend ostream& operator<<( ostream& output,const CPoint& P);
+  friend ostream& operator<<( ostream& output, const CPoint& P);
   friend istream& operator>>( istream&, CPoint&);
 
-  
+
 
 
 };

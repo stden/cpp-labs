@@ -42,8 +42,10 @@ void CCountedPoint::round(const CCountedPoint& point, int angle) {
   tmpY = m_y - tmpY;
   double R = sqrt(tmpX * tmpX + tmpY * tmpY);
   double f = 90;
+
   if (tmpX != 0)
     f = atan2(tmpY, tmpX) * 180 / M_PI;
+
   f = f + angle;
   tmpY = R * sin(f * M_PI / 180);
   tmpX = R * cos(f * M_PI / 180);

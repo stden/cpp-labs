@@ -10,19 +10,19 @@
 template <class ValueType>
 
 class CLNode {
-protected:
-  CLNode* _next;	// связь к последующему узлу
+ protected:
+  CLNode* _next;  // связь к последующему узлу
   ValueType _value;
   static unsigned int debug;
-public:
+ public:
   CLNode (const ValueType& value);
   CLNode ();
- // ~CLNode (void);
+  // ~CLNode (void);
   CLNode* GetNext(void) const;
   void SetNext(CLNode* n);
   ValueType& GetValue();
   void SetValue (ValueType);
- // CLNode* Insert(CLNode*);  // вставить узел после текущего
+  // CLNode* Insert(CLNode*);  // вставить узел после текущего
 };
 
 template <class ValueType>

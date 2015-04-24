@@ -23,66 +23,79 @@
 
 // Input value from "cin" with error checking
 template <class T>
-T input(char *prompt, T min, T max) {
+T input(char* prompt, T min, T max) {
   T value;
+
   do {
     cout << prompt << " " << min << ".." << max << ": ";
+
     while (!(cin >> value) && !cin.eof()) {
       cerr << "Error: invalid input " << value << ", try again: ";
       cin.clear();
       cin.ignore(cin.rdbuf()->in_avail());
     }
+
     if (value < min)
       cerr << "Error: Required value >= " << min << endl;
+
     if (value > max)
       cerr << "Error: Required value <= " << max << endl;
   } while (value < min || value > max);
+
   return value;
 }
 
-float InputFloat(char *prompt) {
+float InputFloat(char* prompt) {
   char buffer[255];
   cout << prompt << ": ";
+
   while (1) {
     cin >> buffer;
+
     if (atoi(buffer) == 0 && buffer[0] != '0') {
       cout << "Invalind input, try again : ";
       continue;
     } else
       break;
   }
+
   return atof(buffer);
 }
 
-void check_input(char *temp, int *k, int *flag) {
+void check_input(char* temp, int* k, int* flag) {
   if ((atoi(temp) > 0) && (atoi(temp) < 100)) {
     *k = atoi(temp);
     *flag = 0;
-  } else {
+  } else
     cout << "Error input\n" << "try again";
-  }
 }
 
-double input_double(char *name) {
+double input_double(char* name) {
   double k;
+
   while (1) {
     cout << name << " ";
     char temp[10];
     cin  >> temp;
+
     if (sscanf(temp, "%lf", &k))
       return k;
+
     cout << "Error input\n" << "try again\n";
   }
 }
 
-int input_int(char *name) {
+int input_int(char* name) {
   int k;
+
   while (1) {
     cout << name << " ";
     char temp[10];
     cin  >> temp;
+
     if (sscanf(temp, "%d", &k))
       return k;
+
     cout << "Error input\n" << "try again\n";
   }
 }
@@ -95,21 +108,24 @@ void inputPoint(const char* s, CCountedPoint& p) {
 
 CList<CClient*> clients;
 
-int inputClientID(char *prompt) {
+int inputClientID(char* prompt) {
   if (CClient::getTotal() < 1) {
     cout << "Register at least one client at first" << endl;
     return 0;
   };
-  for (clients.goFirst();clients.hasNext();clients.goNext())
+
+  for (clients.goFirst(); clients.hasNext(); clients.goNext())
     cout << " " << clients.getValue()->getID();
+
   cout << endl;
   return input(prompt, 1, ID_Object::getTotal());
 }
 
 CClient* clientByID(int id) {
-  for (clients.goFirst();clients.hasNext();clients.goNext())
+  for (clients.goFirst(); clients.hasNext(); clients.goNext())
     if (clients.getValue()->getID() == id)
       return clients.getValue();
+
   return NULL;
 }
 
@@ -117,6 +133,7 @@ const DEBUG_MODE = 0;
 
 void addGlass(CServerView* s, int withRing, int client = 0) {
   int inGlass;
+
   do {
     double bottomLength, hBottom, lessSide;
     CCountedPoint bottom, top;
@@ -134,9 +151,11 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
       hBottom = input_double("  Input the less foundation heigth:");
       lessSide = input_double("  Input the less rib length:");
     }
+
     cout << endl;
 
-    CGlass *glass;
+    CGlass* glass;
+
     if (!client) {
       if (withRing)
         glass = new CGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
@@ -144,12 +163,12 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
         glass = new CGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
     } else {
       if (withRing) {
-        CClientGlassR *g = new CClientGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
+        CClientGlassR* g = new CClientGlassR(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
         glass = g;
         clients.insert(g);
         assert(glass->getID() == g->getID());
       } else {
-        CClientGlass *g = new CClientGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
+        CClientGlass* g = new CClientGlass(ID_Object::GenID(), bottom, top, bottomLength, hBottom, lessSide);
         glass = g;
         clients.insert(g);
         assert(glass->getID() == g->getID());
@@ -157,13 +176,15 @@ void addGlass(CServerView* s, int withRing, int client = 0) {
     }
 
     inGlass = s->GlassInGlassCase(glass);
-    if (inGlass) {
+
+    if (inGlass)
       s->insert(glass);
-    } else {
+    else {
       cout << "  Glass isn't inside Glass Case" << endl;
       delete glass;
     };
   } while (!inGlass);
+
   cout << "Glass added!" << endl;
 }
 
@@ -176,7 +197,7 @@ void test() {
   double minx, maxx, miny, maxy;
   gl.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
-  assert(maxx == -1 + 2*2 + 5);
+  assert(maxx == -1 + 2 * 2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
   c.insert(&gl);
@@ -189,10 +210,13 @@ void test() {
 
   CGlassR glr(ID_Object::GenID(), CCountedPoint(1, 1), CCountedPoint(-1, 5), 5, 1, 1);
   assert(glr.getID() == 2);
-  minx = 0; maxx = 0; miny = 0; maxy = 0;
+  minx = 0;
+  maxx = 0;
+  miny = 0;
+  maxy = 0;
   glr.GetBorders(&minx, &maxx, &miny, &maxy);
   assert(minx == -1);
-  assert(maxx == -1 + 2*2 + 5);
+  assert(maxx == -1 + 2 * 2 + 5);
   assert(miny == 1);
   assert(maxy == 5);
   c.Delete(glr.getID());
@@ -233,7 +257,8 @@ void main() {
 
   // Создаём Витрину
   CCountedPoint leftBottom, // Левый нижний угол витрины
-  rightTop; // Правый верхний угол витрины
+                rightTop; // Правый верхний угол витрины
+
   if (DEBUG_MODE) {
     leftBottom = CCountedPoint(-10, -10);
     rightTop = CCountedPoint(20, 20);
@@ -242,17 +267,21 @@ void main() {
     // Создаём Витрину
     inputPoint("glass case left bottom", leftBottom);
     int error; // Признак ошибки
+
     do {
       inputPoint("glass case right top", rightTop);
       error = (rightTop.getX() <= leftBottom.getX()) ||
               (rightTop.getY() <= leftBottom.getY());
+
       if (error)
         cout << "   Error: wrong coordinates " << endl;
     } while (error);
   }
+
   CServerView view(leftBottom, rightTop);
 
   CList<CClient*> clients;
+
   do {
     cout << "View contains: " << view.size() << endl;
     view.Print();
@@ -277,23 +306,28 @@ void main() {
          << "17. Exit" << endl;
 
     menu = input("Your choice", 1, 17);
+
     switch (menu) {
       case 1:
         cout << "=== 1. Add Glass to Collection ===" << endl;
         addGlass(&view, 0);
         break;
+
       case 2:
         cout << "=== 2. Add Glass with Ring to Collection ===" << endl;
         addGlass(&view, 1);
         break;
+
       case 3:
         cout << "=== 3. Add Client Glass to Collection ===" << endl;
         addGlass(&view, 0, 1);
         break;
+
       case 4:
         cout << "=== 4. Add Client Glass with Ring to Collection ===" << endl;
         addGlass(&view, 1, 1);
         break;
+
       case 5: {
         cout << "=== 5. Delete Glass from Collection ===" << endl;
         int id = input_int("Enter number of element : ");
@@ -301,6 +335,7 @@ void main() {
         cout << "Element deleted" << endl;
         break;
       }
+
       case 6: {
         cout << "=== 6. Move Collection and Glass Case ===" << endl;
         double dx = InputFloat("Enter dx");
@@ -309,6 +344,7 @@ void main() {
         cout << "Collection are moved by dx = " << dx << ", dy = " << dy << endl;
         break;
       }
+
       case 7: {
         cout << "=== 7. Place Collection and Glass Case into Point ===" << endl;
         cout << "Enter point" << endl;
@@ -318,6 +354,7 @@ void main() {
         cout << "Collection and Glass Case are placed to Point(" << x << ";" << y << ")" << endl;
         break;
       }
+
       case 8: {
         cout << "=== 8. Place Collection into Point ===" << endl;
         cout << "Enter Point " << endl;
@@ -328,6 +365,7 @@ void main() {
         cout << "ClassCase is placed to Point(" << x << ";" << y << ")" << endl;
         break;
       }
+
       case 9: {
         cout << "=== 9. Place Glass Case into Point ===" << endl;
         cout << "Enter Point " << endl;
@@ -338,6 +376,7 @@ void main() {
         cout << "ClassCase is placed to Point(" << x << ";" << y << ")" << endl;
         break;
       }
+
       case 10: {
         cout << "=== 10. Move Collection ===" << endl;
         double dx = InputFloat("Enter dx");
@@ -346,6 +385,7 @@ void main() {
         cout << "Collection is moved by dx = " << dx << ", dy = " << dy << endl;
         break;
       }
+
       case 11: {
         cout << "=== 11. Move Glass Case ===" << endl;
         double dx = InputFloat("Enter dx");
@@ -354,34 +394,42 @@ void main() {
         cout << "Glass Case is moved by dx = " << dx << ", dy = " << dy << endl;
         break;
       }
+
       case 12: {
         cout << "=== 12. Print View ===" << endl;
         view.Print();
         break;
       }
+
       case 13: {
         cout << "== 13. Registrate on server ==" << endl;
         int id = inputClientID("Enter id of client to register");
         CClient* cl = clientByID(id);
+
         if (cl == NULL) {
           cout << "Client #" << id << " not exists!" << endl;
           break;
         }
+
         view.Register(cl);
         assert(view.GetClientByID(id) == cl);
         assert(cl->getServer() != NULL);
         break;
       }
+
       case 14: {
         cout << "== 14. Registrate all clients on server ==" << endl;
-        for (clients.goFirst();clients.hasNext();clients.goNext()) {
+
+        for (clients.goFirst(); clients.hasNext(); clients.goNext()) {
           cout << "Try to register: " << clients.getValue()->getID() << endl;
           view.Register(clients.getValue());
           assert(view.GetClientByID(clients.getValue()->getID()) ==
                  clients.getValue());
         };
+
         break;
       };
+
       case 15: {
         cout << "== 15. Unregistrate client from server ==" << endl;
         int id = inputClientID("Enter id of client to unregister");
@@ -389,13 +437,16 @@ void main() {
         assert(view.GetClientByID(id) == NULL);
         break;
       };
+
       case 16:
         cout << "== 16. Unregistrate all clients from server ==" << endl;
         view.UnregisterAll();
         break;
+
       case 17:
         cout << "== 17. Exit ==" << endl;
         break;
+
       default:
         cout << "menu = " << menu << endl;
         break;

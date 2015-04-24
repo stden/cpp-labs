@@ -9,7 +9,7 @@
 #endif // _MSC_VER >= 1000
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+#error include 'stdafx.h' before including this file for PCH
 #endif
 
 #include "resource.h"       // main symbols
@@ -19,24 +19,23 @@
 // See Graph.cpp for the implementation of this class
 //
 
-class CGraphApp : public CWinApp
-{
-public:
-	CGraphApp();
+class CGraphApp : public CWinApp {
+ public:
+  CGraphApp();
 
-// Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CGraphApp)
-	public:
-	virtual BOOL InitInstance();
-	//}}AFX_VIRTUAL
+  // Overrides
+  // ClassWizard generated virtual function overrides
+  //{{AFX_VIRTUAL(CGraphApp)
+ public:
+  virtual BOOL InitInstance();
+  //}}AFX_VIRTUAL
 
-// Implementation
+  // Implementation
 
-	//{{AFX_MSG(CGraphApp)
-	afx_msg void OnAppAbout();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+  //{{AFX_MSG(CGraphApp)
+  afx_msg void OnAppAbout();
+  //}}AFX_MSG
+  DECLARE_MESSAGE_MAP()
 };
 
 

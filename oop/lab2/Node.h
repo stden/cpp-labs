@@ -9,14 +9,14 @@
 //#include "cNode.cpp"
 template <class type>
 class cNode {
-private:
+ private:
   type Value;
-  cNode *Next;
-public:
+  cNode* Next;
+ public:
   cNode(void);
   ~cNode();
-  cNode<type> *GetNext(void);
-  void SetNext(cNode *b);
+  cNode<type>* GetNext(void);
+  void SetNext(cNode* b);
   type GetValue(void);
   void SetValue(type a);
 };

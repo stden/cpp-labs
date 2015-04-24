@@ -14,10 +14,10 @@
  * Параллелограмм лежащий на меньшем ребре
  */
 class CParallelogram {
-private:
+ private:
   CList<CCountedPoint> m_list;
 
-public:
+ public:
   /*
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, l - Длина меньшего ребра
@@ -42,10 +42,12 @@ public:
   void MovedXdY(double dx, double dy);
   void MoveToPoint(const CCountedPoint& P);
 
-  const CList<CCountedPoint>& getPoints() const { return m_list; }
+  const CList<CCountedPoint>& getPoints() const {
+    return m_list;
+  }
   const CCountedPoint& getPoint(int index);
 
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy);
 
   friend ostream& operator << (ostream& s, CParallelogram& r);
 };

@@ -12,14 +12,14 @@
 
 // "Витрина" имеет форму прямоугольника
 class CGlassCase {
-private :
+ private :
   // Нижний левый и верхний правый угол витрины
   CCountedPoint m_leftBottom, m_rightTop;
 
   double m_Height; // Высота витрины
   double m_Width; // Ширина витрины
 
-public:
+ public:
 
   /*
   * Конструктор
@@ -109,7 +109,7 @@ public:
   */
   friend ostream& operator << (ostream& s, CGlassCase& r) {
     s << "  " << "Витрина: " << r.m_leftBottom << " " << r.m_rightTop
-    << " Высота " << r.getHeight() << "  Ширина " << r.getWidth() << endl;
+      << " Высота " << r.getHeight() << "  Ширина " << r.getWidth() << endl;
     return s;
   }
 };

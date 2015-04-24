@@ -13,14 +13,14 @@
 // Набор изображений: витрина и стакан с кольцом внутри неё
 // Используется множественное наследование
 class CScene : public CGlassCase, public CGlassList {
-public:
+ public:
 
   /*
   * Конструктор
   * leftBottom - левая нижняя точка, rightTop - правая верхняя
   */
   CScene(const CCountedPoint& leftBottom, const CCountedPoint& rightTop) :
-      CGlassCase(leftBottom, rightTop) {
+    CGlassCase(leftBottom, rightTop) {
     cout << "Scene created" << endl;
   }
 
@@ -59,21 +59,24 @@ public:
     cout << "CScene::MovedXdY(" << x << "," << y << "," << glassID
          << ")" << endl;
     CGlass* glass = getByID(glassID);
+
     if (glass != NULL) {
       glass->MovedXdY(x, y);
+
       if (!GlassInGlassCase(glass)) {
         cout << "Error: Glass outside Glass Case borders" << endl;
         glass->MovedXdY(-x, -y);
       }
-    } else {
+    } else
       cout << "Glass #" << glassID << " not found!";
-    }
   };
 
   void MovedXdY(double x, double y) {
     cout << "CScene::MovedXdY(" << x << "," << y << ")" << endl;
-    for (List.goFirst();List.hasNext();List.goNext()) {
+
+    for (List.goFirst(); List.hasNext(); List.goNext()) {
       List.getValue()->MovedXdY(x, y);
+
       if (!GlassInGlassCase(List.getValue())) {
         cout << "Error: Glass outside Glass Case borders" << endl;
         List.getValue()->MovedXdY(-x, -y);
@@ -84,7 +87,7 @@ public:
   /*
   * Находится ли стакан внутри витрины?
   */
-  int GlassInGlassCase(CGlass *glass) {
+  int GlassInGlassCase(CGlass* glass) {
     assert(glass != NULL);
     // Получаем координаты "описывающего прямоугольника" для стакана
     double minx, maxx, miny, maxy;
@@ -101,8 +104,8 @@ public:
   */
   friend ostream& operator << (ostream& s, CScene& r) {
     s << endl << "=== SCENE === " << endl
-    << (CGlassList&)r << endl
-    << (CGlassCase&)r << endl;
+      << (CGlassList&)r << endl
+      << (CGlassCase&)r << endl;
     return s;
   }
 

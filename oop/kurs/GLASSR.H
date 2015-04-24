@@ -18,11 +18,11 @@
 
 // "Тонкий стакан с кольцом"
 class CGlassR : public CGlass { // Используется простое наследование
-protected:
+ protected:
   // Кольцо - две концентрические окружности в "полости стакана"
   CRing m_ring;
 
-public:
+ public:
   /*
   * Конструктор
   * x - левая нижняя точка, y - левая верхняя, bottom - Длина основания,
@@ -49,7 +49,7 @@ public:
   /*
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy) {
     *minx = MAXDOUBLE;
     *maxx = MINDOUBLE;
     *miny = MAXDOUBLE;
@@ -71,7 +71,7 @@ public:
 
   virtual ostream& Write(ostream& s) {
     s << "    Glass with Ring #" << getID() << ": " << endl
-    << "      Bottom: " << m_bottom;
+      << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
     s << "      Right side: " << m_rightSide;

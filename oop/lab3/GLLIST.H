@@ -14,18 +14,22 @@
 #include <conio.h>
 
 class CGlassList {
-protected:
+ protected:
   CList<CGlass*> List;
 
-public:
+ public:
   CGlassList();
   ~CGlassList();
 
   /*
   * Добавление в список новых стаканов
   */
-  void insert(CGlass* gl) { List.insert(gl); }
-  void insertBegin(CGlass* gl) { List.insertBegin(gl); }
+  void insert(CGlass* gl) {
+    List.insert(gl);
+  }
+  void insertBegin(CGlass* gl) {
+    List.insertBegin(gl);
+  }
 
   /*
   * Перемещение
@@ -47,11 +51,14 @@ public:
 
   CGlass* getByID(int glassID) {
     List.goFirst();
+
     while (List.getCurrent() != NULL) {
       if (List.getValue()->getID() == glassID)
         return List.getValue();
+
       List.goNext();
     }
+
     return NULL;
   }
 

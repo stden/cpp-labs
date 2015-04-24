@@ -8,35 +8,40 @@
 #include "Scene.h"
 #include "CoList.h"
 
-void check_input(char *temp, int *k, int *flag) {
+void check_input(char* temp, int* k, int* flag) {
   if ((atoi(temp) > 0) && (atoi(temp) < 100)) {
     *k = atoi(temp);
     *flag = 0;
-  } else {
+  } else
     cout << "Error input\n" << "try again";
-  }
 }
 
-double input_double(char *name) {
+double input_double(char* name) {
   double k;
+
   while (1) {
     cout << name << " ";
     char temp[10];
     cin  >> temp;
+
     if (sscanf(temp, "%lf", &k))
       return k;
+
     cout << "Error input\n" << "try again\n";
   }
 }
 
-int input_int(char *name) {
+int input_int(char* name) {
   int k;
+
   while (1) {
     cout << name << " ";
     char temp[10];
     cin  >> temp;
+
     if (sscanf(temp, "%d", &k))
       return k;
+
     cout << "Error input\n" << "try again\n";
   }
 }
@@ -48,6 +53,7 @@ void inputPoint(CCountedPoint& p) {
 
 void addGlass(CScene& s, int withRing) {
   int inGlass;
+
   do {
     double bottomLength, hBottom, lessSide;
     CCountedPoint bottom, top;
@@ -61,28 +67,31 @@ void addGlass(CScene& s, int withRing) {
     lessSide = input_double("  Input the less rib length:");
     cout << endl;
 
-    CGlass *glass;
+    CGlass* glass;
+
     if (withRing)
       glass = new CGlassR(bottom, top, bottomLength, hBottom, lessSide);
     else
       glass = new CGlass(bottom, top, bottomLength, hBottom, lessSide);
 
     inGlass = s.GlassInGlassCase(glass);
-    if (inGlass) {
+
+    if (inGlass)
       s.insert(glass);
-    } else {
+    else {
       cout << "  Glass isn't inside Glass Case" << endl;
       delete glass;
     };
   } while (!inGlass);
+
   cout << "Glass added!" << endl;
 }
 
 void main() {
-//  CList<int> l;
+  //  CList<int> l;
   //l.size();
 
-  char *temp = new char[5];
+  char* temp = new char[5];
 
   cout << "Project of service" << endl;
   cout << "Author: Volinko Evgeniy" << endl << "Group:7304";
@@ -90,15 +99,17 @@ void main() {
 
   // Создаём Витрину
   CCountedPoint leftBottom, // Левый нижний угол витрины
-  rightTop; // Правый верхний угол витрины
+                rightTop; // Правый верхний угол витрины
   cout << "  Input glass case left bottom point:" << endl;
   inputPoint(leftBottom);
   int error; // Признак ошибки
+
   do {
     cout << "  Input glass case right top point:" << endl;
     inputPoint(rightTop);
     error = (rightTop.getX() <= leftBottom.getX()) ||
             (rightTop.getY() <= leftBottom.getY());
+
     if (error)
       cout << "   Error: wrong coordinates " << endl;
   } while (error);
@@ -107,6 +118,7 @@ void main() {
   cout << endl << endl;
 
   int menu, glassID;
+
   do {
     cout << scene << endl;
     cout << "\n\n===========MAIN MENU===========";
@@ -122,43 +134,53 @@ void main() {
     cin >> menu;
 
     double dx, dy, x, y;
+
     switch (menu) {
       case 1:
         addGlass(scene, 0);
         break;
+
       case 2:
         addGlass(scene, 1);
         break;
+
       case 3:
         glassID = input_int("Glass id:");
         dx = input_double("Enter dx:"),
-             dy = input_double("Enter dy:");
+        dy = input_double("Enter dy:");
         scene.MovedXdY(dx, dy, glassID);
         break;
+
       case 4:
         glassID = input_int("Glass id:");
         x = input_double("Enter x:"),
-            y = input_double("Enter y:");
+        y = input_double("Enter y:");
         scene.MoveToPoint(CCountedPoint(x, y), glassID);
         break;
+
       case 5:
         dx = input_double("Enter dx:"),
-             dy = input_double("Enter dy:");
+        dy = input_double("Enter dy:");
         scene.MovedXdY(dx, dy);
         break;
+
       case 6:
         x = input_double("Enter x:"),
-            y = input_double("Enter y:");
+        y = input_double("Enter y:");
         scene.MoveToPoint(CCountedPoint(x, y));
         break;
+
       case 7:
         cout << scene << endl;
         break;
+
       case 0:
         break;
+
       default:
         cout << "Out of menu :)" << endl;
     }
   } while (menu != 0);
+
   delete[] temp;
 }

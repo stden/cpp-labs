@@ -13,7 +13,7 @@
 
 template<class T>
 class CPointSet {
-protected:
+ protected:
   //Список точек, образующих прямоугольник
   CList<CCountedPoint> m_list;
 
@@ -28,7 +28,7 @@ protected:
 
   //Имя набора точек
   char* m_name;
-public:
+ public:
 
   CPointSet(): m_id(countall++) {
     countreal++;
@@ -84,7 +84,7 @@ public:
   CCountedPoint& getPoint(int num) {
     m_list.goFirst();
 
-    for (num;num > 1;num--)
+    for (num; num > 1; num--)
       m_list.goNext();
 
     return m_list.getElem().getValue();
@@ -93,7 +93,7 @@ public:
   /*
   * Оператор вывода в поток
   */
-//  template<class C>
+  //  template<class C>
   friend ostream& operator<< (ostream& s, CPointSet<T>& P);
 };
 

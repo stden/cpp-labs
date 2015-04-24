@@ -16,7 +16,7 @@
 #include "id_obj.h"
 
 class CGlass {
-protected:
+ protected:
   // Дно
   CRectangle m_bottom;
 
@@ -32,8 +32,10 @@ protected:
   // Идентификатор
   const int m_id;
 
-public:
-  int getID() const { return m_id; }
+ public:
+  int getID() const {
+    return m_id;
+  }
 
   /*
   * Конструктор
@@ -88,7 +90,7 @@ public:
 
   virtual ostream& Write(ostream& s) {
     s << "    Glass #" << getID() << ": " << endl
-    << "      Bottom: " << m_bottom;
+      << "      Bottom: " << m_bottom;
     s << "      Cage: " << m_cage;
     s << "      Left side: " << m_leftSide;
     s << "      Right side: " << m_rightSide;
@@ -99,9 +101,11 @@ public:
   /*
   * Получение границ (прямоугольника, описывающего всю фигуру)
   */
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy) {
-    *minx = MAXDOUBLE; *maxx = MINDOUBLE;
-    *miny = MAXDOUBLE; *maxy = MINDOUBLE;
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy) {
+    *minx = MAXDOUBLE;
+    *maxx = MINDOUBLE;
+    *miny = MAXDOUBLE;
+    *maxy = MINDOUBLE;
     m_bottom.GetBorders(minx, maxx, miny, maxy);
     m_cage.GetBorders(minx, maxx, miny, maxy);
     m_leftSide.GetBorders(minx, maxx, miny, maxy);

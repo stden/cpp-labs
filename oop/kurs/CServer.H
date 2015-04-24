@@ -19,25 +19,25 @@ class CClient;
 
 // Описание класса Сервер
 class CServer {
-private:
+ private:
   CList<CClient*> ClientList;
 
-public:
+ public:
   CServer();
   ~CServer();
 
   CClient* GetClientByID(int _id);
   int ClientCount() const;
-  void Register(CClient *client);
+  void Register(CClient* client);
   void Unregister(int _id);
   void UnregisterAll();
-  void SendMessage(CMessage *msg);
+  void SendMessage(CMessage* msg);
   void SendMessage(int _type, const CInfo& _info, int _id) {
     SendMessage(&CMessage(1, _id, _type, _info, Server_to_Client));
   }
 
-  void SendMessageToAll(CMessage *msg);
-  void ReceiveMessage(CMessage *msg);
+  void SendMessageToAll(CMessage* msg);
+  void ReceiveMessage(CMessage* msg);
   void Print() const;
 
   void SendMessageToAll(int _type, const CInfo& _info) {

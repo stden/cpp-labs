@@ -22,7 +22,7 @@ class CRing {
   //Ордината точки
   double m_y;
 
-public:
+ public:
   /*
   * Конструктор
   */
@@ -50,7 +50,7 @@ public:
   void setR_B(const double& value);
   void setR_S(const double& value);
 
-  void GetBorders(double *minx, double *maxx, double *miny, double *maxy);
+  void GetBorders(double* minx, double* maxx, double* miny, double* maxy);
 
 
   /*
@@ -63,10 +63,18 @@ public:
   */
   void MoveToPoint(double x, double y);
 
-  double getX() const { return m_x; };
-  double getY() const { return m_y; };
-  void setX(double value) { m_x = value; };
-  void setY(double value) { m_y = value; };
+  double getX() const {
+    return m_x;
+  };
+  double getY() const {
+    return m_y;
+  };
+  void setX(double value) {
+    m_x = value;
+  };
+  void setY(double value) {
+    m_y = value;
+  };
 
 };
 

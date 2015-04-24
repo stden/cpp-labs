@@ -14,30 +14,29 @@
 #include <vcl\ExtCtrls.hpp>
 #include <jpeg.hpp>
 //----------------------------------------------------------------------------
-class TAboutBox : public TForm
-{
-__published:
-	TButton *OKButton;
-        TGroupBox *AboutGroup;
-        TImage *ProgramIcon;
-        TLabel *ProductNameLabel;
-        TLabel *VersionLabel;
-        TLabel *MainAuthorLabel;
-        TLabel *LogoCreationLabel;
-        TLabel *LogoAuthorLabel;
-        TLabel *WarrantyLabel;
-        TLabel *HomePageLabel;
-        TLabel *MailLabel;
-        void __fastcall HomePageLabelClick(TObject *Sender);
-        void __fastcall MailLabelClick(TObject *Sender);
-        void __fastcall OKButtonClick(TObject *Sender);
-        void __fastcall LogoAuthorLabelClick(TObject *Sender);
-        void __fastcall FormCreate(TObject *Sender);
-private:
-public:
-	virtual __fastcall TAboutBox(TComponent* AOwner);
+class TAboutBox : public TForm {
+ __published:
+  TButton* OKButton;
+  TGroupBox* AboutGroup;
+  TImage* ProgramIcon;
+  TLabel* ProductNameLabel;
+  TLabel* VersionLabel;
+  TLabel* MainAuthorLabel;
+  TLabel* LogoCreationLabel;
+  TLabel* LogoAuthorLabel;
+  TLabel* WarrantyLabel;
+  TLabel* HomePageLabel;
+  TLabel* MailLabel;
+  void __fastcall HomePageLabelClick(TObject* Sender);
+  void __fastcall MailLabelClick(TObject* Sender);
+  void __fastcall OKButtonClick(TObject* Sender);
+  void __fastcall LogoAuthorLabelClick(TObject* Sender);
+  void __fastcall FormCreate(TObject* Sender);
+ private:
+ public:
+  virtual __fastcall TAboutBox(TComponent* AOwner);
 };
 //----------------------------------------------------------------------------
-extern PACKAGE TAboutBox *AboutBox;
+extern PACKAGE TAboutBox* AboutBox;
 //----------------------------------------------------------------------------
-#endif    
+#endif

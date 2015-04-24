@@ -26,7 +26,7 @@ class CList {
   //Идентификатор
   int m_id;
 
-public:
+ public:
   /*
   * Конструктор
   */
@@ -67,6 +67,7 @@ public:
       m_current->setNext(tmp);
     else
       m_first = tmp;
+
     m_current = tmp;
   }
 
@@ -134,6 +135,7 @@ public:
         return 0;
     } else
       return 0;
+
     return 1;
   }
 
@@ -156,6 +158,7 @@ public:
   ~CList() {
     countreal--;
     goFirst();
+
     while (dispose()) {}
 
     //cout << "Linear list destroyed... (remain " << countreal << ")" << endl;
@@ -189,6 +192,7 @@ public:
       insert(cur->getValue());
       cur = cur->getNext();
     }
+
     return *this;
   }
 

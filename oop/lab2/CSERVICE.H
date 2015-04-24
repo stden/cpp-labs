@@ -14,18 +14,24 @@
 #include <conio.h>
 
 class CService {
-private:
+ private:
   CList<CGlass> GlassList;
 
-public:
+ public:
   CService();
   ~CService();
 
 
 
-  void insert(const CGlass& gl) {GlassList.insert(gl);}
-  void insertBegin(const CGlass& gl) {GlassList.insert(gl);}
-  void print() {GlassList.print();}
+  void insert(const CGlass& gl) {
+    GlassList.insert(gl);
+  }
+  void insertBegin(const CGlass& gl) {
+    GlassList.insert(gl);
+  }
+  void print() {
+    GlassList.print();
+  }
 
   /*
   * Перемещение

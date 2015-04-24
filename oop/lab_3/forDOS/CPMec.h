@@ -15,7 +15,7 @@
 
 
 class CPistonMechanism {
-protected:
+ protected:
   CircleList<CPoint> MainPoints;
   CPiston Piston;
   CCup Cup;
@@ -24,45 +24,45 @@ protected:
   unsigned int id;
   static unsigned int current;
   void  AddPoints ();
-public:
+ public:
 
-				/*Конструкторы*/
-	//-------------------------------------------------
-     	CPistonMechanism(CPoint,double,double,double,double,double,double,double,double);
-        CPistonMechanism(double,double,double,double,double,double,double,double,double,double);
-       	CPistonMechanism(const CCup& _cup, const CPiston& _piston);
-      	CPistonMechanism(); // Constructor without parametrs
-	//-------------------------------------------------
+  /*Конструкторы*/
+  //-------------------------------------------------
+  CPistonMechanism(CPoint, double, double, double, double, double, double, double, double);
+  CPistonMechanism(double, double, double, double, double, double, double, double, double, double);
+  CPistonMechanism(const CCup& _cup, const CPiston& _piston);
+  CPistonMechanism(); // Constructor without parametrs
+  //-------------------------------------------------
 
-				/*Деструктор*/
-	//-------------------------------------------------
-       	~CPistonMechanism();
-	//-------------------------------------------------
+  /*Деструктор*/
+  //-------------------------------------------------
+  ~CPistonMechanism();
+  //-------------------------------------------------
 
 
-	/**/
+  /**/
 
-    virtual int inv ();	// Инвариант
-   virtual  void RefreshPoints ();
+  virtual int inv (); // Инвариант
+  virtual  void RefreshPoints ();
 
   //---------------------------------------------------
-   virtual  void SetP1(double,double);
+  virtual  void SetP1(double, double);
   virtual   void SetP1(CPoint); // Задание точки P1
-  virtual   void Move (double,double); // Плоскопараллельное перемещение на dx dy
+  virtual   void Move (double, double); // Плоскопараллельное перемещение на dx dy
   int MovePiston (double); // Перемещение поршня внутри механизма
-   virtual  const CircleList<CPoint>& GetPoints () const;
+  virtual  const CircleList<CPoint>& GetPoints () const;
   const CCup& GetCup() const;
   const CPiston& GetPiston() const;
 
   //---------------------------------------------------
 
-   virtual void Print ();
-   virtual void SetDebug (unsigned int);
-   virtual  unsigned int GetID ();
-   virtual  unsigned int GetCurrent();
-   virtual  unsigned int GetTotal();
+  virtual void Print ();
+  virtual void SetDebug (unsigned int);
+  virtual  unsigned int GetID ();
+  virtual  unsigned int GetCurrent();
+  virtual  unsigned int GetTotal();
 
-  friend ostream& operator<<( ostream& output,const CPistonMechanism&);
+  friend ostream& operator<<( ostream& output, const CPistonMechanism&);
 
 };
 

@@ -32,11 +32,12 @@ void CService::MovedXdY(double x, double y) {
   cout << "CService::MovedXdY(" << x << "," << y << ")" << endl;
 
   GlassList.goFirst();
+
   do {
     //  cout << "!1!" << endl;
     GlassList.getElem().getValue().MovedXdY(x, y);
   } while (GlassList.goNext());
 
-//  cout << "!2!" << endl;
-//  GlassList.getElem().getValue().MovedXdY(x, y);
+  //  cout << "!2!" << endl;
+  //  GlassList.getElem().getValue().MovedXdY(x, y);
 }
