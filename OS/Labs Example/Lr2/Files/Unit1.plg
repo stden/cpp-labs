@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Unit1 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Nastya\LOCALS~1\Temp\RSPAB.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Unit1.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"G:\Lab\Lr2\Files\Unit1.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Nastya\LOCALS~1\Temp\RSPAB.tmp" 
+Creating temporary file "C:\DOCUME~1\Nastya\LOCALS~1\Temp\RSPAC.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Unit1.pdb" /debug /machine:I386 /out:"Debug/Unit1.exe" /pdbtype:sept 
+.\Debug\Unit1.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\Nastya\LOCALS~1\Temp\RSPAC.tmp"
+<h3>Output Window</h3>
+Compiling...
+Unit1.cpp
+g:\lab\lr2\files\unit1.cpp(1) : fatal error C1083: Cannot open include file: 'vcl.h': No such file or directory
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+Unit1.exe - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

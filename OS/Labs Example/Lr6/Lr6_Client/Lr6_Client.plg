@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Lr6_Client - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "D:\WINDOWS\TEMP\RSPE9.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Lr6_Client.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Универ\5 semestr\OS\Lab\Lr6\Lr6_Client\Lr6-Client.cpp"
+]
+Creating command line "cl.exe @D:\WINDOWS\TEMP\RSPE9.tmp" 
+Creating temporary file "D:\WINDOWS\TEMP\RSPEA.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Lr6_Client.pdb" /debug /machine:I386 /out:"Debug/Lr6_Client.exe" /pdbtype:sept 
+".\Debug\Lr6-Client.obj"
+]
+Creating command line "link.exe @D:\WINDOWS\TEMP\RSPEA.tmp"
+<h3>Output Window</h3>
+Compiling...
+Lr6-Client.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+Lr6_Client.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

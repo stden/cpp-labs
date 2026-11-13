@@ -1,0 +1,315 @@
+//--------------------------------------------------------------------------------
+//Russian language file 1.6 by Saprikin Alexander                   
+//Переведите все после символа "="                                        
+//НЕ ПЕРЕВОДИТЕ ПОСЛЕ "//" И МЕЖДУ "[  ]"                 
+ //Отошлите новый файл языка на xelfium@mail.ru               
+//--------------------------------------------------------------------------------
+
+[LangName]
+MAIN_LANGUAGE_NATIVE=Русский  //имя языка на данном языке
+MAIN_LANGUAGE_ENGLISH=Russian  //имя языка на английском
+
+[Language]  //НЕ ПЕРЕВОДИТЕ ЭТУ СТРОКУ
+//главное меню вверху //
+MAIN_MENU_FILE=&Файл
+MAIN_MENU_EDIT=&Правка
+MAIN_MENU_VIEW=&Вид
+MAIN_MENU_FORMAT=Фо&рмат
+MAIN_MENU_LANGUAGE=Язы&к
+MAIN_MENU_TOOLS=&Сервис
+MAIN_MENU_HELP=По&мощь
+
+MAIN_MENU_NEW=&Создать
+MAIN_MENU_OPEN=&Открыть...
+MAIN_MENU_SAVE_AS=Со&хранить как...
+MAIN_MENU_PRINT=&Печать
+MAIN_MENU_EXIT=&Выход
+MAIN_MENU_UNDO=&Отменить
+MAIN_MENU_REDO=Повто&рить
+MAIN_MENU_CUT=&Вырезать
+MAIN_MENU_COPY=&Копировать
+MAIN_MENU_PASTE=Встав&ить
+MAIN_MENU_PASTE_TEXT=Вс&тавить (только текст)
+MAIN_MENU_SELECT_ALL=Вы&делить все
+MAIN_MENU_FIND=&Найти...
+MAIN_MENU_REPLACE=&Заменить
+MAIN_MENU_PASTE_SPECIAL=Спе&циальная вставка
+MAIN_MENU_INSERT_OBJECT=Вставить &объект
+MAIN_MENU_INSERT_IMAGE=Вставить и&зображение
+MAIN_MENU_TOOLBARS=Пан&ели инструментов
+MAIN_MENU_FORMAT_BAR=Панель &форматирования
+MAIN_MENU_SERVICE_BAR=Панель &сервиса
+MAIN_MENU_MENU_BAR=Главное &меню
+MAIN_MENU_WORD_WRAP=&Переносить по словам
+MAIN_MENU_ON_TOP=По&верх всех окон
+MAIN_MENU_LEFT_MARGIN=Поле &слева
+MAIN_MENU_FONT=&Шрифт
+MAIN_MENU_COLOR=Ц&вет фона
+MAIN_MENU_CALC=&Калькулятор
+MAIN_MENU_PREFERENCES=&Настройки
+MAIN_MENU_BACKUP=&Резервное копирование
+MAIN_MENU_RESTORE=&Восстановление
+MAIN_MENU_ABOUT=О &программе...
+MAIN_MENU_HOME_PAGE=&Домашняя web-страница
+MAIN_MENU_TO_AUTHOR=Письмо &автору
+MAIN_MENU_RTF_FORMAT=rtf-формат
+MAIN_MENU_TXT_FORMAT=txt-формат
+
+MAIN_TOOLBUTTON_FONT_COLOR_AUTO=&Авто
+MAIN_TOOLBUTTON_FONT_COLOR_OTHER=&Другие...
+
+//контекстное меню страниц - правый клик по заголовку страницы
+MAIN_PAGE_POPUP_NEW=Создать страницу
+MAIN_PAGE_POPUP_DELETE=Удалить страницу
+MAIN_PAGE_POPUP_RENAME=Переименовать страницу
+
+//контекстное меню системного трея
+TRAY_POPUP_CALC=Калькулятор
+TRAY_POPUP_RESTORE=Восстановить
+TRAY_POPUP_EXIT=Выход
+TRAY_POPUP_HOME_PAGE=Домашняя web-страница
+TRAY_POPUP_TO_AUTHOR=Письмо автору
+
+//контекстное меню основного редактора
+MAIN_EDITOR_POPUP_FORMAT=Формат шрифта
+MAIN_EDITOR_POPUP_FORMAT_BOLD=Жирный
+MAIN_EDITOR_POPUP_FORMAT_ITALIC=Курсив
+MAIN_EDITOR_POPUP_FORMAT_UNDERLINE=Почеркнутый
+MAIN_EDITOR_POPUP_FORMAT_STRIKEOUT=Зачеркнутый
+MAIN_EDITOR_POPUP_FORMAT_MARKERS=Маркеры
+MAIN_EDITOR_POPUP_FORMAT_UP_LETTERS=Все прописные
+MAIN_EDITOR_POPUP_FORMAT_LOW_LETTERS=Все строчные
+MAIN_EDITOR_POPUP_FORMAT_INDENT=Отступ
+MAIN_EDITOR_POPUP_FORMAT_UNINDENT=Выступ
+MAIN_EDITOR_POPUP_COLOR=Цвет шрифта
+MAIN_EDITOR_POPUP_COLOR_BLACK=Черный
+MAIN_EDITOR_POPUP_COLOR_WHITE=Белый
+MAIN_EDITOR_POPUP_COLOR_RED=Красный
+MAIN_EDITOR_POPUP_COLOR_GREEN=Зеленый
+MAIN_EDITOR_POPUP_COLOR_BLUE=Синий
+MAIN_EDITOR_POPUP_COLOR_YELLOW=Желтый
+MAIN_EDITOR_POPUP_COLOR_PINK=Розовый
+MAIN_EDITOR_POPUP_COLOR_DARK_RED=Темно-бордовый
+MAIN_EDITOR_POPUP_COLOR_DARK_BLUE=Темно-синий
+MAIN_EDITOR_POPUP_COLOR_AQUA=Голубой
+MAIN_EDITOR_POPUP_COLOR_LIME=Салатовый
+MAIN_EDITOR_POPUP_COLOR_PURPLE=Пурпурный
+MAIN_EDITOR_POPUP_COLOR_GRAY=Серый
+MAIN_EDITOR_POPUP_FONT=Шрифт
+MAIN_EDITOR_POPUP_UNDO=Отменить
+MAIN_EDITOR_POPUP_REDO=Повторить
+MAIN_EDITOR_POPUP_CUT=Вырезать
+MAIN_EDITOR_POPUP_COPY=Копировать
+MAIN_EDITOR_POPUP_PASTE=Вставить
+MAIN_EDITOR_POPUP_PASTE_TEXT=Вставить (только текст)
+MAIN_EDITOR_POPUP_SELECT_ALL=Выделить все
+MAIN_EDITOR_POPUP_FIND=Найти...
+MAIN_EDITOR_POPUP_REPLACE=Заменить
+MAIN_EDITOR_POPUP_INSERT_DATE=Вставить дату
+MAIN_EDITOR_POPUP_COPY_LINK=Копировать ссылку
+
+//всплывающие подсказки
+MAIN_TOOLBUTTON_NEW_HINT=Создать страницу (Ctrl+N)
+MAIN_TOOLBUTTON_DELETE_HINT=Удалить страницу (Ctrl+D)
+MAIN_TOOLBUTTON_SAVE_AS_HINT=Сохранить как... (Ctrl+S)
+MAIN_TOOLBUTTON_PRINT_HINT=Печать (Ctrl+P)
+MAIN_TOOLBUTTON_FIND_HINT=Найти (Ctrl+F)
+MAIN_TOOLBUTTON_CALC_HINT=Калькулятор (F3)
+MAIN_TOOLBUTTON_ALIGN_LEFT_HINT=Выравнивание слева (Ctrl+L)
+MAIN_TOOLBUTTON_ALIGN_CENTER_HINT=Выравнивание по центру (Ctrl+E)
+MAIN_TOOLBUTTON_ALIGN_RIGHT_HINT=Выравнивание справа (Ctrl+R)
+MAIN_TOOLBUTTON_BACKUP_HINT=Резервное копирование (F4)
+MAIN_TOOLBUTTON_PREFERENCES_HINT=Настройки (F2)
+MAIN_TOOLBUTTON_INSERT_IMAGE_HINT=Вставить изображение
+MAIN_TOOLBUTTON_FONT_COLOR_HINT=Цвет шрифта
+
+//окно "Настройки"
+OPTIONS_WINDOW_TITLE=Настройки
+OPTIONS_PAGE_GENERAL=Общие
+OPTIONS_PAGE_VIEW=Вид
+OPTIONS_PAGE_OPTIMIZATION=Оптимизация
+OPTIONS_PAGE_HOTKEY=Горячая клавиша
+OPTIONS_PAGE_DEFAULT=По умолчанию
+OPTIONS_OK_BUTTON=ОК
+OPTIONS_CANCEL_BUTTON=Отмена
+OPTIONS_APPLY_BUTTON=Применить
+OPTIONS_GENERAL_LABEL=Общие настройки
+OPTIONS_CLOSE_AS_MIN_CHECKBOX=ЗАКРЫТЬ работает как СВЕРНУТЬ
+OPTIONS_AUTORUN_CHECKBOX=Запускаться с Windows
+OPTIONS_STORE_PAGES_LABEL=Располагать названия страниц
+OPTIONS_ON_TOP_RADIO=Вверху
+OPTIONS_BOTTOM_RADIO=Внизу
+OPTIONS_BACKUP_FOLDER_LABEL=Выберите папку для резервного копирования:
+OPTIONS_TRAY_ICON_CHECKBOX=Значок в системном трее
+OPTIONS_TASKBAR_ICON_CHECKBOX=Значок в панели задач (перезапустите программу)
+OPTIONS_HIDE_WINDOW_CHECKBOX=Скрывать окно, если оно неактивно
+OPTIONS_SECONDS_LABEL=сек.
+//"сек" в значении "секунд"
+OPTIONS_VIEW_LABEL=Вид
+OPTIONS_TRANS_CHECKBOX=Эффект полупрозрачности (WinXP/2K/2003)
+OPTIONS_MULTILINE_CHECKBOX=Многострочные закладки
+OPTIONS_AUTO_URL_CHECKBOX=Автоопределение ссылок (перезапустите программу)
+OPTIONS_FADE_SHOW_CHECKBOX=Плавное появление
+OPTIONS_SPEED_LABEL=Скорость
+OPTIONS_STYLE_LABEL=Стиль:
+OPTIONS_DEFAULT_STYLE=Стандартный
+OPTIONS_XP_EFECTS_CHECKBOX=Включить оформление XP
+OPTIONS_PROGRAM_MODE_LABEL=Выберите режим работы программы
+OPTIONS_NORMAL_RADIO=Обычный
+OPTIONS_SECURITY_RADIO=Надежный
+OPTIONS_NORMAL_MODE_LABEL=Программа сохраняет текст при смене страниц, сворачивании и закрытии. Работает быстро даже на слабых машинах.
+OPTIONS_SECURITY_MODE_LABEL=Программа сохраняет каждый введенный символ. Занимает меньше места в RAM на 0.5 Мб, но работает медленно при высокой загрузке процессора.
+OPTIONS_SEY_HOTKEY_LABEL=Установите горячую клавишу
+OPTIONS_HOTKEY_LABEL=Горячая клавиша для свертывания/восстановления SimpleNotes
+OPTIONS_SET_HOTKEY_BUTTON=Задействовать!
+OPTIONS_FADE_HIDE_CHECKBOX=Плавное исчезновение при нажатии
+OPTIONS_DEFAULT_LABEL=Настройки по умолчанию
+OPTIONS_DEFAULT_FONT_LABEL=Шрифт по умолчанию:
+OPTIONS_DEFAULT_COLOR_LABEL=Цвет фона страницы по умолчанию:
+OPTIONS_DEFAULT_FONT_SIZE_LABEL=Размер шрифта по умолчанию:
+OPTIONS_DEFAULT_FORMAT_LABEL=Формат страницы при создании:
+OPTIONS_DEFAULT_RTF_FORMAT=rtf-формат
+OPTIONS_DEFAULT_TXT_FORMAT=txt-формат
+OPTIONS_FORMAT_WARNING_LABEL=Внимание!!! В txt-формате Вы НЕ сможете вставлять объекты и изображения, менять фоматирование отдельных частей текста, менять цвет текста и т.д.
+OPTIONS_CONFIRM_FORMAT_CHANGE_CHECKBOX=Подтверждать смену формата страницы из rtf в txt
+
+//окно "О программе..." и другие диалоговые окна
+MAIN_NEW_PAGE_DIALOG_TITLE=Создание страницы
+MAIN_NEW_PAGE_DIALOG_LABEL=Введите имя новой страницы:
+MAIN_SAVE_PAGE_DIALOG_TITLE=Сохранение страницы
+MAIN_RENAME_PAGE_DIALOG_TITLE=Переименование страницы
+MAIN_RENAME_PAGE_DIALOG_LABEL=Введите новое имя страницы:
+MAIN_INSERT_IMAGE_DIALOG_TITLE=Выберите изображение для вставки
+MAIN_OPEN_FILE_DIALOG_TITLE=Выберите файл для открытия
+MAIN_OPEN_TEMP_FOLDER_DIALOG_TITLE=Выберите папку для сохранения страницы:
+ABOUT_WINDOW_TITLE=О программе...
+ABOUT_LOGO_LABEL=Создание логотипа:
+ABOUT_YEARS_LABEL=года
+ABOUT_WARRANTY_LABEL=Эта программа распространяется по принципу freeware без всяких гарантий.
+OPTIONS_SELECT_FOLDER_DIALOG_LABEL=Выберите папку для резервного копирования:
+BACKUP_WINDOW_TITLE=Резервное копирование
+BACKUP_FILES_COPIED_LABEL=Файлов скопировано:
+BACKUP_COPYING_LABEL=Копирование:
+BACKUP_COMPLETE_LABEL=Резервное копирование завершено!
+RESTORE_WINDOW_TITLE=Восстановление
+RESTORE_FILES_COPIED_LABEL=Файлов восстановлено:
+RESTORE_COPYING_LABEL=Восстановление:
+RESTORE_COMPLETE_LABEL=Восстановление данных завершено!
+
+//различные сообщения
+MAIN_MESSAGE_ERROR=Ошибка
+MAIN_MESSAGE_ERROR_PAGE_NOT_FOUND=Отсутствует файл с содержимым данной страницы:
+MAIN_MESSAGE_PRINT_PAGE=Страница
+MAIN_MESSAGE_ERROR_HOTKEY_ALREADY_USING=Сторонняя программа использует горячую клавишу SimpleNotes!
+MAIN_MESSAGE_ERROR_EMPTY=Пусто
+MAIN_MESSAGE_ERROR_IN_PREFERENCES=Ошибка в файле настроек
+MAIN_MESSAGE_ERROR_PAGE_EXISTS=Страница с таким именем уже существует!
+MAIN_MESSAGE_ERROR_PAGE_EXISTS_TITLE=Ошибка при создании страницы
+MAIN_MESSAGE_PAGE_DELETE=Вы действительно хотите удалить текущую страницу? Информация будет утеряна.
+MAIN_MESSAGE_PAGE_DELETE_TITLE=Подтвердите удаление
+MAIN_MESSAGE_ERROR_ONE_PAGE=Должна остаться хотя бы одна страница!
+MAIN_MESSAGE_ERROR_ONE_PAGE_TITLE=Ошибка при удалении
+MAIN_MESSAGE_ERROR_SELECT_BACKUP_FOLDER=Задайте папку для резервного копирования в Настройках!
+MAIN_MESSAGE_ERROR_SELECT_BACKUP_FOLDER_TITLE=Не задана папка для резервного копирования
+MAIN_MESSAGE_SIMPLE_MESSAGE=Сообщение
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_TITLE=Неверная папка
+MAIN_MESSAGE_CONFIRM_SAVE_TO_TEMP=Сохранить страницу в другую папку?
+MAIN_MESSAGE_CONFIRM_READONLY_OFF=Снять атрибут 'Только чтение' с файла?
+MAIN_MESSAGE_REMOVE_READONLY_FAIL=Изменить атрибуты файла не удалось!
+MAIN_MESSAGE_CREATE_FOLDER_FAIL=Не удалось создать папку для резервного копирования!
+MAIN_MESSAGE_ERROR_RESTORE_NO_FOLDER=Укажите в Настройках папку с резервной копией.
+MAIN_MESSAGE_ERROR_COPY_FILE=Невозможно скопировать файл:
+MAIN_MESSAGE_ERROR_NO_PRINTER=Нет установленного по умолчанию принтера. Печать невозможна.
+//начало сообщения//
+MAIN_MESSAGE_ERROR_RESTORE_EMPTY_FOLDER_1=Резервная копия не найдена! Проверьте папку
+MAIN_MESSAGE_ERROR_RESTORE_EMPTY_FOLDER_2=или укажите другую папку с резервной копией в Настройках.
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_CONFIRM_RESTORE_1=Вы действительно хотите восстановить информацию из
+MAIN_MESSAGE_CONFIRM_RESTORE_2=Вся информация новее будет удалена!
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_CONFIRM_RESTORE_BROKEN_1=Возможно, в резервной копии не хватает нескольких файлов.
+MAIN_MESSAGE_CONFIRM_RESTORE_BROKEN_2=Все равно продолжить восстановление?
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_1=Указанная Вами в Настройках папка для резервного копирования не существует!
+MAIN_MESSAGE_ERROR_FOLDER_NOT_EXISTS_2=Создать эту папку:
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_CONFIRM_FORMAT_CHANGE_1=Вы действительно хотите сменить формат страницы на txt?
+MAIN_MESSAGE_CONFIRM_FORMAT_CHANGE_2=Форматирование текста станет невозможным.
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_PREFERENCES_NOT_FOUND_1=Файл с настройками
+MAIN_MESSAGE_ERROR_PREFERENCES_NOT_FOUND_2=не найден и не может быть создан. Проверьте Ваши права на запись.
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_1=Ошибка при записи в файл настроек
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_2=Возможные причины: файл блокирован другим приложением и невозможно получить к нему доступ,
+MAIN_MESSAGE_ERROR_WRITE_PREFERENCES_3= файл/диск защищен (переполнен) от записи, другой пользователь производит запись в этот файл.
+//конец сообщения//
+//-------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_1=Ошибка при чтении файла настроек
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_2=Возможные причины: файл блокирован другим приложением и невозможно прочитать его. Найдите
+MAIN_MESSAGE_ERROR_READ_PREFERENCES_3=это приложение и отключите блокировку. Либо данные, записанные в этом файле, некорректны. 
+//конец сообщения//
+//-------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_1=Ошибка при загрузке страницы. Файл
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_2=с содержимым данной страницы блокирован другим процессом и не может быть прочитан. SimpleNotes
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_3=никогда не блокирует файлы, поэтому это сделало другое приложение. Переключитесь на другую
+MAIN_MESSAGE_ERROR_LOAD_LOCKED_4=страницу SimpleNotes, отключите блокировку и попытайтесь снова.
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_1=Ошибка при сохранении страницы. Файл
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_2=с содержимым данной страницы блокирован другим процессом и не может быть прочитан. SimpleNotes
+MAIN_MESSAGE_ERROR_SAVE_LOCKED_3=никогда не блокирует файлы, поэтому это сделало другое приложение. Найдите его и отключите блокировку.
+//конец сообщения//
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_1=Ошибка при сохранении страницы. Файл
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_2= с содержимым данной страницы защищен от записи. Или другой пользователь
+MAIN_MESSAGE_ERROR_SAVE_WRITE_PROTECTED_3=производит в него запись.
+//конец сообщения//
+//-------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_SAVE_DISK_FULL_1=Ошибка при сохранении страницы
+MAIN_MESSAGE_ERROR_SAVE_DISK_FULL_2=Диск может быть защищен от записи или переполнен. Либо у Вас нет прав для записи файлов на данный диск.
+//--------------------------//
+//начало сообщения//
+MAIN_MESSAGE_ERROR_INSERT_IMAGE_1=Ошибка при вставке изображения. Возможно, у файла неверный формат.
+MAIN_MESSAGE_ERROR_INSERT_IMAGE_2=SimpleNotes работает с изображениями форматов BMP, JPG, JPEG и GIF.
+//конец сообщения//
+//--------------------------//
+MAIN_MESSAGE_TEMP_COPY_OK=Страница успешно сохранена во временную папку:
+MAIN_MESSAGE_TEMP_COPY_FAIL=Сохранение во временную папку не удалось!
+
+OPTIONS_MESSAGE_ERROR_HOTKEY_ALREADY_REGISTERED=Эта клавиша уже зарегистрирована!
+TRAY_MESSAGE_BACKUP_RECOMMEND=Рекомендуется делать резервную копию Вашей информации хотя бы раз в неделю.
+TRAY_MESSAGE_BACKUP_RECOMMEND_TITLE=Не забывайте делать резервные копии!
+
+//начало сообщения//
+BACKUP_MESSAGE_ERROR_BACKUP_1=Не все файлы были скопированы! Возможно, некоторые файлы блокированы другим процессом. Либо
+BACKUP_MESSAGE_ERROR_BACKUP_2=папка назначения переполнена или диск защищен от записи. Также проверьте сетевое соединение. 
+//конец сообщения//
+//-------------------------//
+
+//начало сообщения//
+RESTORE_MESSAGE_ERROR_RESTORE_1=Не все файлы были восстановлены! Возможно, некоторые файлы блокированы другим процессом. Либо
+RESTORE_MESSAGE_ERROR_RESTORE_2=папка назначения переполнена или диск защищен от записи. Также проверьте сетевое соединение. 
+//конец сообщения//
+//-------------------------//
+
+//заголовки панелей инструментов
+MAIN_MENU_BAR_CAPTION=Главное меню
+MAIN_FORMAT_BAR_CAPTION=Панель форматирования
+MAIN_SERVICE_BAR_CAPTION=Панель севиса

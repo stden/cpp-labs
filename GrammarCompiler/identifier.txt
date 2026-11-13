@@ -1,0 +1,14 @@
+// identifier fsm   (debug)
+
+<aliases
+	<letter  'a'-'z','A'-'Z' >
+	<digit	 '0'-'9' >
+	<word    it_is_the_word>
+>
+
+<states		  empty,  number,  id, unknown>
+<transfers
+	<letter;  id,     unknown, id, unknown>
+	<word;    number, number,  id, unknown>
+	<'a','0'; number, number,  id, unknown>
+>
